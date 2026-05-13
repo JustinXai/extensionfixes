@@ -1,65 +1,368 @@
-import Image from "next/image";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Hero } from '@/components/Hero';
+import { ExtensionCard } from '@/components/ExtensionCard';
+import { FAQ } from '@/components/FAQ';
+import { JsonLd } from '@/components/JsonLd';
+import { Container } from '@/components/Container';
+import { getPopularExtensions } from '@/data/extensions';
+import { createWebsiteSchema, createFAQSchema } from '@/lib/seo';
+import type { FAQItem } from '@/lib/types';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'Extension Fixes - Fix Unsupported Chrome Extensions',
+  description:
+    'Find safe MV3 alternatives for Chrome extensions that are disabled, unsupported, removed, or no longer maintained. No login, no tracking.',
+  keywords: [
+    'chrome extension not working',
+    'chrome extension disabled',
+    'mv3 alternatives',
+    'manifest v2 deprecated',
+    'chrome extension replacement',
+    'switchyomega alternative',
+    'ublock origin alternative',
+    'great suspender alternative',
+  ],
+};
+
+const homeFaqs: FAQItem[] = [
+  {
+    question: 'Why are my Chrome extensions no longer working?',
+    answer:
+      'Chrome has been phasing out Manifest V2 (MV2) extensions since 2023, and fully disabled MV2 for all users starting with Chrome 138. Extensions that have not been updated to Manifest V3 (MV3) will stop working or show "no longer supported" messages.',
+  },
+  {
+    question: 'Are the alternatives on this site safe?',
+    answer:
+      'We recommend extensions from official sources like the Chrome Web Store and well-known developers. We include source links so you can verify information independently. Always review extension permissions before installing.',
+  },
+  {
+    question: 'Do I need to create an account to use this site?',
+    answer:
+      'No. Extension Fixes is a read-only resource that does not require login, tracking, or any personal information.',
+  },
+  {
+    question: 'Can I use these extensions on other browsers?',
+    answer:
+      'Some extensions work on other Chromium-based browsers (Edge, Brave) or Firefox. Firefox still supports Manifest V2 extensions, which may be useful if you need legacy extension functionality.',
+  },
+  {
+    question: 'What is the difference between MV2 and MV3?',
+    answer:
+      'Manifest V3 (MV3) is the newer Chrome extension platform with improved security, privacy, and performance features. Key changes include the declarativeNetRequest API replacing the webRequest API and modifications to background script handling.',
+  },
+];
+
+export default function HomePage() {
+  const popularExtensions = getPopularExtensions();
+  const websiteSchema = createWebsiteSchema();
+  const faqSchema = createFAQSchema(homeFaqs);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <JsonLd data={websiteSchema} />
+      <JsonLd data={faqSchema} />
+
+      <Hero />
+
+      <Container>
+        {/* AI-Readable Section */}
+        <section className="py-12 border-b border-gray-200">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-3">
+              Built for AI-readable answers
+            </h2>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              Extension Fixes pages are structured with quick answers, comparison tables, safety notes, and source links so users and AI browsing tools can understand extension issues faster.
+            </p>
+          </div>
+        </section>
+
+        <section id="alternatives" className="py-16">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Popular Extension Alternatives</h2>
+            <p className="mt-2 text-slate-600">
+              Find MV3-compatible replacements for commonly affected Chrome extensions.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {popularExtensions.map((extension) => (
+              <ExtensionCard key={extension.slug} extension={extension} />
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/alternatives"
+              className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-gray-50"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Browse all alternatives
+              <svg
+                className="ml-2 h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-gray-200">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Start with the Chrome message you see</h2>
+            <p className="mt-2 text-slate-600">
+              Select the error message or warning you received to find solutions.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            <Link
+              href="/fix/this-extension-is-no-longer-supported"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              <h3 className="font-semibold text-slate-900">
+                &quot;This extension is no longer supported&quot;
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                What to do when Chrome shows your extension is no longer supported.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read guide
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/this-extension-may-soon-no-longer-be-supported"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">
+                &quot;This extension may soon no longer be supported&quot;
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Prepare for upcoming changes and find alternatives before they stop working.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read guide
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/fix/manifest-v2-disabled"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">&quot;Manifest V2 disabled&quot;</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Understand why Chrome disabled older extension formats and what it means for you.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read guide
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-gray-200">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">
+              Why Chrome Disabled Old Extensions
+            </h2>
+            <div className="prose prose-slate max-w-none">
+              <p className="text-slate-600">
+                Many older Chrome extensions were built for Manifest V2. Current Chrome versions now
+                rely on Manifest V3 for supported extension workflows, so some older extensions may stop
+                working unless the developer ships a compatible version.
+              </p>
+              <div className="mt-8 grid gap-6 sm:grid-cols-3">
+                <div className="rounded-lg bg-blue-50 p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="mt-4 font-semibold text-slate-900">Better Security</h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    MV3 limits extension capabilities to reduce attack surfaces and prevent misuse.
+                  </p>
+                </div>
+                <div className="rounded-lg bg-green-50 p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="mt-4 font-semibold text-slate-900">Improved Privacy</h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    Users have more control over permissions and what data extensions can access.
+                  </p>
+                </div>
+                <div className="rounded-lg bg-purple-50 p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="mt-4 font-semibold text-slate-900">Better Performance</h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    MV3 extensions use fewer system resources and have less impact on browser speed.
+                  </p>
+                </div>
+              </div>
+              <p className="mt-8 text-center text-sm text-slate-500">
+                Learn more:{' '}
+                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:underline">
+                  Manifest V2 Disabled in Chrome: What You Can Do
+                </Link>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-gray-200">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">
+              How Extension Fixes Works
+            </h2>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-600">
+                  1
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-900">Search the extension or error message</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Enter the extension name, error message, or Chrome Web Store URL in the search box.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-600">
+                  2
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-900">Read what changed and what to avoid</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Learn why the extension stopped working and what safe steps you can take next.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-600">
+                  3
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-900">Choose a maintained replacement or migration path</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Select from verified alternatives and follow migration guides to continue your workflow.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="guides" className="py-16 border-t border-gray-200">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Common Fix Guides</h2>
+            <p className="mt-2 text-slate-600">
+              Understand and resolve common Chrome extension issues.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            <Link
+              href="/fix/this-extension-is-no-longer-supported"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">
+                Fix &quot;This Extension Is No Longer Supported&quot;
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                What to do when Chrome shows your extension is no longer supported.
+              </p>
+            </Link>
+            <Link
+              href="/fix/manifest-v2-disabled"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">Manifest V2 Disabled</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Understand Chrome MV2 deprecation and what it means for your extensions.
+              </p>
+            </Link>
+            <Link
+              href="/fix/chrome-disabled-extension"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">Chrome Disabled My Extension</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Common reasons Chrome disables extensions and safe ways to resolve issues.
+              </p>
+            </Link>
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/guides"
+              className="inline-flex items-center justify-center text-sm font-medium text-blue-600 hover:text-blue-800"
+            >
+              View all guides
+              <svg
+                className="ml-1 h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-gray-200">
+          <div className="mx-auto max-w-3xl">
+            <FAQ faqs={homeFaqs} />
+          </div>
+        </section>
+
+        <p className="py-8 text-center text-sm text-slate-500">
+          Last updated: May 2026
+        </p>
+      </Container>
+    </>
   );
 }
