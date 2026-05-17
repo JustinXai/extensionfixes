@@ -254,16 +254,20 @@ export const landingPages: LandingPageRecord[] = [
     slug: 'ublock-origin-no-longer-supported',
     title: 'uBlock Origin No Longer Supported in Chrome: What Changed?',
     description:
-      "Chrome says uBlock Origin is no longer supported? Learn what changed, how uBlock Origin Lite differs, and what options Chrome users have.",
+      "Chrome says uBlock Origin is no longer supported? Learn what changed, how uBlock Origin Lite differs, and what options Chrome users have for ad blocking.",
     h1: 'uBlock Origin No Longer Supported in Chrome: What Changed?',
     shortAnswer:
-      'Classic uBlock Origin stopped working in Chrome 138 because it uses Manifest V2. The MV3-compatible version developed by the same author is uBlock Origin Lite, available in the Chrome Web Store. While not a complete one-to-one replacement due to MV3 limitations, uBlock Origin Lite provides strong ad blocking for most users who rely on filter lists.',
+      'Classic uBlock Origin stopped working in Chrome 138 because it uses Manifest V2. The MV3-compatible version developed by the same author is uBlock Origin Lite, available as a free Chrome uBlock Origin Lite extension in the Chrome Web Store. While not a complete one-to-one replacement due to MV3 limitations, uBlock Origin Lite provides strong ad blocking for most users who rely on filter lists.',
     aliases: [
       'ublock origin no longer supported',
       'ublock origin chrome 138',
       'ublock origin disabled',
       'ublock origin not working',
       'ad blocker chrome not working',
+      'chrome ublock origin lite',
+      'ublock origin lite for chrome',
+      'ublock origin alternative',
+      'ublock origin alternative for chrome',
     ],
     sections: [
       {
@@ -287,7 +291,7 @@ export const landingPages: LandingPageRecord[] = [
         type: 'text',
         title: 'What Is uBlock Origin Lite',
         content:
-          'uBlock Origin Lite is the Manifest V3-compatible version developed by Raymond Hill, the same developer as classic uBlock Origin. It is available in the Chrome Web Store and provides core ad blocking functionality with MV3 compatibility.',
+          'uBlock Origin Lite (also referred to as Chrome uBlock Origin Lite) is the Manifest V3-compatible version developed by Raymond Hill, the same developer as classic uBlock Origin. It is available in the Chrome Web Store and provides core ad blocking functionality with MV3 compatibility. As an MV3-based content blocker by the same developer, uBlock Origin Lite offers a trusted path forward for Chrome users.',
       },
       {
         type: 'callout',
@@ -380,6 +384,8 @@ export const landingPages: LandingPageRecord[] = [
       'uBlock Origin Lite is the Manifest V3 version with some feature differences. Both are developed by Raymond Hill. Static filter lists work the same in both versions. Dynamic filtering rules are restricted in uBlock Origin Lite due to MV3 limitations. Most users who rely on filter lists will find uBlock Origin Lite equivalent.',
     aliases: [
       'ublock origin lite vs ublock origin',
+      'ublock origin lite',
+      'chrome ublock origin lite',
       'ublock origin lite difference',
       'ublock origin mv3 vs mv2',
       'ublock lite feature differences',
@@ -415,7 +421,7 @@ export const landingPages: LandingPageRecord[] = [
         type: 'text',
         title: 'Who Should Use uBlock Origin Lite',
         content:
-          'If you use Chrome 138 or later and primarily rely on pre-made filter lists, uBlock Origin Lite provides equivalent blocking. Most users will not notice a difference. The reduced permissions in Lite are actually a privacy improvement.',
+          'If you use Chrome 138 or later and primarily rely on pre-made filter lists, uBlock Origin Lite provides equivalent blocking. As an MV3-based content blocker by the same developer, it offers the same trusted filter lists. Most users will not notice a difference. The reduced permissions in Lite are actually a privacy improvement.',
       },
       {
         type: 'text',
@@ -610,6 +616,383 @@ export const landingPages: LandingPageRecord[] = [
       { label: 'Check first:', description: 'Official Chrome Web Store for MV3 updates' },
       { label: 'Search:', description: 'Extension Fixes for known alternatives' },
       { label: 'Export:', description: 'Settings before removing the old extension' },
+    ],
+  },
+  {
+    slug: 'this-extension-was-turned-off-because-it-is-no-longer-supported',
+    title: 'Fix "This Extension Was Turned Off Because It Is No Longer Supported"',
+    description:
+      'Chrome turned off an extension because it is no longer supported? Learn what the warning means, whether you can re-enable it, and how to find a maintained replacement.',
+    h1: 'Fix "This Extension Was Turned Off Because It Is No Longer Supported"',
+    shortAnswer:
+      'Chrome shows this message when an extension has been turned off because it is no longer supported. This typically happens when the extension uses deprecated APIs or has been removed from the Chrome Web Store. You cannot re-enable the disabled extension, but you can check for MV3 updates, export your settings if possible, and find maintained alternatives from the Chrome Web Store.',
+    aliases: [
+      'this extension was turned off because it is no longer supported',
+      'extension was turned off',
+      'chrome turned off extension',
+      'extension turned off no longer supported',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'What This Chrome Message Means',
+        content:
+          'The message "This extension was turned off because it is no longer supported" appears when Chrome has automatically disabled an extension. This can happen for several reasons: the extension was removed from the Chrome Web Store, the extension uses deprecated Manifest V2 APIs, or Chrome has detected security concerns with the extension.',
+      },
+      {
+        type: 'text',
+        title: 'Why Chrome Turned Off the Extension',
+        content:
+          'Chrome may turn off extensions for different reasons. Understanding why helps you decide on next steps. Common causes include Manifest V2 deprecation (where Chrome 138+ disables all MV2 extensions), removal from the Chrome Web Store (due to policy violations or developer request), and security concerns (where Google proactively disables extensions that may pose risks).',
+      },
+      {
+        type: 'callout',
+        title: 'Can You Turn It Back On?',
+        content:
+          'Generally, no. When Chrome turns off an extension due to deprecation or removal, you cannot re-enable it through Chrome settings. Enterprise administrators on managed devices may have policies to extend support, but this is not available to individual users.',
+        variant: 'info',
+      },
+      {
+        type: 'list',
+        title: 'What to Do First',
+        items: [
+          'Check the Chrome Web Store to see if there is an updated MV3 version of the extension',
+          'Export your extension settings if the option is still available before removing it',
+          'Search Extension Fixes for your extension name to find verified alternatives',
+          'Note what the extension did so you can verify alternatives meet your needs',
+          'Review the extension permissions to understand what data it had access to',
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Proxy Extensions',
+        items: [
+          'SwitchyOmega users: ZeroOmega is a community-maintained MV3 fork with direct profile import support',
+          'Other proxy extensions: Check the Chrome Web Store for MV3-compatible alternatives',
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Ad Blockers',
+        items: [
+          'uBlock Origin users: uBlock Origin Lite is the MV3 version by the same developer',
+          'Other ad blockers: AdGuard and AdBlock have MV3 versions available',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why was my extension turned off by Chrome?',
+        answer:
+          'Chrome may turn off extensions for several reasons. The most common in recent years is Manifest V2 deprecation, where Chrome 138 disabled all MV2 extensions. Other reasons include removal from the Chrome Web Store for policy violations or developer request, and security concerns where Google proactively disables potentially risky extensions.',
+      },
+      {
+        question: 'Can I re-enable the extension that was turned off?',
+        answer:
+          'Generally no. If the extension was disabled due to MV2 deprecation, Chrome 138 and later do not support re-enabling MV2 extensions. If it was removed from the Chrome Web Store, you should not attempt to install unofficial copies. Your best path is to find an MV3-compatible alternative.',
+      },
+      {
+        question: 'Is it safe to download the extension as a CRX file from the internet?',
+        answer:
+          'No. Downloading extensions from unofficial sources is risky. These files may contain malware, outdated security patches, or modified functionality. Only install extensions from the official Chrome Web Store or verified developer sources.',
+      },
+      {
+        question: 'How do I find a replacement for a turned-off extension?',
+        answer:
+          'Check the Chrome Web Store for updated MV3 versions from the same developer. Search Extension Fixes for your extension name. Verify alternative developers, permissions, and reviews before installing any new extension.',
+      },
+      {
+        question: 'What if there is no MV3 alternative for my extension?',
+        answer:
+          'If no MV3 alternative exists, you may need to use browser-native features, consider alternative browsers that still support MV2 (like Firefox), or adjust your workflow. Some extensions may have community-maintained forks worth checking.',
+      },
+      {
+        question: 'Will my extension settings be lost?',
+        answer:
+          'If the extension still opens partially, export your settings first. Many extensions allow you to export profiles or configuration files. After finding a replacement, check if the new extension supports importing your exported settings.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+      },
+      {
+        title: 'Chrome Web Store Developer Policies',
+        url: 'https://developer.chrome.com/docs/webstore/program-policies/',
+        publisher: 'Google Chrome Developers',
+      },
+      {
+        title: 'Extension Fixes Search Tool',
+        url: 'https://extensionfixes.com/tools/extension-search',
+        publisher: 'Extension Fixes',
+      },
+    ],
+    lastUpdated: '2026-05-17',
+    relatedLinks: [
+      { label: 'Extension No Longer Supported', href: '/fix/this-extension-is-no-longer-supported' },
+      { label: 'Manifest V2 Disabled Guide', href: '/fix/manifest-v2-disabled' },
+      { label: 'Extension May Soon Be Unsupported', href: '/this-extension-may-soon-no-longer-be-supported' },
+      { label: 'Extension Search', href: '/tools/extension-search' },
+    ],
+    primaryCta: { label: 'Search Extension Alternatives', href: '/tools/extension-search' },
+    secondaryCta: { label: 'View All Guides', href: '/guides' },
+    bestOptions: [
+      { label: 'Check first:', description: 'Chrome Web Store for MV3 updates' },
+      { label: 'Search:', description: 'Extension Fixes for your extension' },
+      { label: 'Export:', description: 'Settings before removing the extension' },
+    ],
+  },
+  {
+    slug: 'foxyproxy-alternative-for-chrome',
+    title: 'Best FoxyProxy Alternatives for Chrome Proxy Switching',
+    description:
+      'Looking for a FoxyProxy alternative for Chrome? Compare FoxyProxy, ZeroOmega, Proxy Switcher and Manager, and other proxy switching workflows.',
+    h1: 'Best FoxyProxy Alternatives for Chrome Proxy Switching',
+    shortAnswer:
+      'FoxyProxy Standard remains available in the Chrome Web Store with MV3 support. If you need alternatives, ZeroOmega is best for SwitchyOmega users who want direct profile import, while Proxy Switcher and Manager offers simpler proxy switching. Browser native proxy settings work for basic single-proxy setups.',
+    aliases: [
+      'foxyproxy alternative for chrome',
+      'foxyproxy chrome',
+      'foxyproxy alternative',
+      'best foxyproxy alternative',
+      'proxy switcher chrome',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'Is FoxyProxy Still Available for Chrome?',
+        content:
+          'Yes. FoxyProxy Standard is available in the Chrome Web Store with full Manifest V3 support. It works with Chrome 138 and later versions. FoxyProxy is a well-established proxy switching extension used by many users for managing complex proxy configurations.',
+      },
+      {
+        type: 'text',
+        title: 'When to Choose FoxyProxy',
+        content:
+          'FoxyProxy is a solid choice if you need advanced proxy management with pattern-based switching rules, multiple proxy configurations, and established reliability. It has been available for years with a consistent track record.',
+      },
+      {
+        type: 'text',
+        title: 'When to Choose ZeroOmega',
+        content:
+          'ZeroOmega is ideal if you are migrating from SwitchyOmega and want to import your existing proxy profiles directly. It was created specifically as a SwitchyOmega successor and maintains similar functionality with MV3 compatibility.',
+      },
+      {
+        type: 'comparison',
+        title: 'Proxy Extension Comparison',
+        columns: ['Extension', 'Best For', 'MV3', 'Profile Import', 'Complexity'],
+        rows: [
+          ['FoxyProxy Standard', 'Advanced proxy users', 'Yes', 'Limited', 'Medium'],
+          ['ZeroOmega', 'SwitchyOmega migrants', 'Yes', 'Yes (direct)', 'Low'],
+          ['Proxy Switcher', 'Basic switching', 'Yes', 'No', 'Low'],
+          ['Browser Settings', 'Single proxy use', 'N/A', 'No', 'Very Low'],
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Proxy Switching Checklist',
+        items: [
+          'Export your current proxy profiles if available (FoxyProxy or SwitchyOmega)',
+          'Identify which proxy protocols you use (HTTP, HTTPS, SOCKS4, SOCKS5)',
+          'Note any authentication requirements for each proxy server',
+          'Check if you use auto-switch rules based on URL patterns',
+          'Verify the new extension supports all your required features',
+          'Test each profile thoroughly after migration',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is FoxyProxy safe to use?',
+        answer:
+          'Yes. FoxyProxy Standard is available in the official Chrome Web Store with MV3 support. It has been available for years with a solid reputation. As with any proxy extension, review the permissions and only install from the official Chrome Web Store.',
+      },
+      {
+        question: 'Can I import my SwitchyOmega profiles into FoxyProxy?',
+        answer:
+          'FoxyProxy has limited SwitchyOmega profile import support. If you are migrating from SwitchyOmega and want direct profile import, ZeroOmega is specifically designed for this purpose.',
+      },
+      {
+        question: 'What is the difference between FoxyProxy Standard and FoxyProxy Plus?',
+        answer:
+          'FoxyProxy Standard provides core proxy switching functionality with pattern-based rules. Plus adds additional features like sync across devices and more advanced options. Standard is sufficient for most users.',
+      },
+      {
+        question: 'Do I need a proxy extension, or can I use browser proxy settings?',
+        answer:
+          'Browser proxy settings work for basic single-proxy setups but offer less flexibility for switching between multiple profiles or using auto-switch rules. If you manage multiple proxy configurations regularly, an extension is more convenient.',
+      },
+      {
+        question: 'How do I export my FoxyProxy settings?',
+        answer:
+          'In FoxyProxy, go to Options, select the proxy profiles you want to export, and use the export function. Save the file securely for importing into your chosen replacement extension.',
+      },
+      {
+        question: 'Are there free alternatives to FoxyProxy?',
+        answer:
+          'Yes. ZeroOmega is free and open source. Browser native proxy settings are free. Proxy Switcher and Manager has both free and paid versions. FoxyProxy Standard itself has a free version with basic features.',
+      },
+    ],
+    sources: [
+      {
+        title: 'FoxyProxy Standard Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'ZeroOmega Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/proxy-switchyomega-3-zero/pfnededegaaopdmhkdmcofjmoldfiped',
+        publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+      },
+    ],
+    lastUpdated: '2026-05-17',
+    relatedLinks: [
+      { label: 'SwitchyOmega Alternatives', href: '/alternatives/switchyomega' },
+      { label: 'SwitchyOmega Not Working', href: '/switchyomega-not-working' },
+      { label: 'SwitchyOmega Alternative', href: '/switchyomega-alternative' },
+      { label: 'Extension Search', href: '/tools/extension-search' },
+    ],
+    primaryCta: { label: 'View Proxy Extensions', href: '/tools/extension-search' },
+    secondaryCta: { label: 'SwitchyOmega Alternatives', href: '/alternatives/switchyomega' },
+    bestOptions: [
+      { label: 'For existing FoxyProxy users:', description: 'FoxyProxy Standard (MV3, current)' },
+      { label: 'For SwitchyOmega migrants:', description: 'ZeroOmega (direct import)' },
+      { label: 'For basic needs:', description: 'Browser native proxy settings' },
+    ],
+  },
+  {
+    slug: 'the-great-suspender-malware',
+    title: 'The Great Suspender Malware History and Safer Alternatives',
+    description:
+      'Learn why the original Great Suspender was removed from the Chrome Web Store, what happened in 2021, and which maintained tab management alternatives to consider.',
+    h1: 'The Great Suspender Malware History and Safer Alternatives',
+    shortAnswer:
+      'The original Great Suspender was removed from the Chrome Web Store and disabled by Google in early 2021 after public reports of malware-related concerns. The original extension was transferred to a new owner who introduced code that security researchers flagged as problematic. Chrome Memory Saver is the official built-in solution, while Auto Tab Discard is a well-maintained MV3 alternative.',
+    aliases: [
+      'the great suspender malware',
+      'great suspender malware chrome',
+      'the great suspender alternative',
+      'great suspender chrome',
+      'great suspender removed',
+      'great suspender disabled',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'What Happened to The Great Suspender?',
+        content:
+          'The original extension was removed from the Chrome Web Store and disabled after public malware-related reports in 2021. The extension was originally developed by one developer and later transferred to a new owner. The new owner introduced code changes that security researchers flagged as problematic. Google proactively disabled the extension to protect users from potential harm.',
+      },
+      {
+        type: 'text',
+        title: 'Malware-Related History',
+        content:
+          'In late 2020, The Great Suspender extension was sold to a new developer. In early 2021, security researchers discovered that the new version contained code that could potentially access user data or perform unwanted actions. Google removed the extension from the Chrome Web Store and disabled it for users who had already installed it. This is why you may see messages about The Great Suspender being disabled in Chrome.',
+      },
+      {
+        type: 'callout',
+        title: 'Important Safety Notice',
+        content:
+          'Do not install any version of The Great Suspender from unofficial sources. CRX files from download sites may contain modified code, malware, or security vulnerabilities. Only use established alternatives from the official Chrome Web Store.',
+        variant: 'warning',
+      },
+      {
+        type: 'text',
+        title: 'Can You Install Old CRX Copies?',
+        content:
+          'No. Installing old CRX copies of The Great Suspender is not recommended. These files may contain the problematic code, lack security updates, or include malware. Additionally, Chrome may block loading of extensions from unofficial sources.',
+      },
+      {
+        type: 'text',
+        title: 'Safer Alternatives',
+        content:
+          'Chrome Memory Saver is the official built-in solution for managing memory with inactive tabs. Auto Tab Discard is a well-maintained MV3 extension available in the Chrome Web Store. Both options are safe, actively maintained, and provide similar tab suspension functionality.',
+      },
+      {
+        type: 'comparison',
+        title: 'Tab Management Options',
+        columns: ['Option', 'Type', 'MV3', 'Best For'],
+        rows: [
+          ['Chrome Memory Saver', 'Built-in', 'N/A', 'Most Chrome users'],
+          ['Auto Tab Discard', 'Extension', 'Yes', 'Customizable tab management'],
+          ['Workona', 'Extension', 'Yes', 'Workspace organization'],
+          ['OneTab', 'Extension', 'Yes', 'Simple tab consolidation'],
+        ],
+      },
+      {
+        type: 'text',
+        title: 'How to Recover Old Suspended Tabs If Possible',
+        content:
+          'If you had suspended tabs when the extension was disabled, some may have been recoverable from Chrome session data. Check chrome://discards/ for information about suspended tabs. Chrome session restoration may have recovered some tabs when the extension was disabled. However, many suspended tabs were likely lost in the process.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Was The Great Suspender actually malware?',
+        answer:
+          'The original Great Suspender was a legitimate extension. However, after ownership changed in late 2020, the new version introduced code that security researchers flagged as potentially harmful. Google disabled the extension proactively to protect users. We recommend using established alternatives instead.',
+      },
+      {
+        question: 'Is it safe to use The Great Suspender if I find it online?',
+        answer:
+          'No. The original extension was removed and disabled. Unofficial copies from download sites may contain the problematic code or additional malware. Only use established alternatives from the official Chrome Web Store.',
+      },
+      {
+        question: 'What is the best alternative to The Great Suspender?',
+        answer:
+          'Chrome Memory Saver is the official built-in solution and works well for most users. If you need more customization, Auto Tab Discard is a well-maintained MV3 extension with customizable discard rules.',
+      },
+      {
+        question: 'Can I recover my suspended tabs?',
+        answer:
+          'Some tabs may have been recoverable from Chrome session data when the extension was disabled. Check chrome://discards/ for information. However, most suspended tabs were likely lost when the extension was disabled. Chrome session restoration may have recovered some tabs.',
+      },
+      {
+        question: 'Are there any legitimate forks of The Great Suspender?',
+        answer:
+          'Several community projects have attempted to create forks, but we recommend using established alternatives like Chrome Memory Saver or Auto Tab Discard instead. These are actively maintained, available in the official Chrome Web Store, and have transparent development.',
+      },
+      {
+        question: 'Why was The Great Suspender sold in the first place?',
+        answer:
+          'The original developer chose to transfer ownership. This is common in the Chrome extension ecosystem. However, the new owner introduced code that raised security concerns, leading to the removal and disablement.',
+      },
+    ],
+    sources: [
+      {
+        title: '9to5Google - The Great Suspender removed from Chrome Web Store for malware',
+        url: 'https://9to5google.com/2021/02/04/the-great-suspender-extension-has-been-removed-from-chrome-web-store-for-containing-malware/',
+        publisher: '9to5Google',
+      },
+      {
+        title: 'The Verge - Chrome blocks The Great Suspender extension',
+        url: 'https://www.theverge.com/2021/2/4/22266798/chrome-blocks-the-great-suspender-disabled-malware-tab-recovery',
+        publisher: 'The Verge',
+      },
+      {
+        title: 'Auto Tab Discard Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/auto-tab-discard-suspend/jhnleheckmknfcgijgkadoemagpecfol',
+        publisher: 'Chrome Web Store',
+      },
+    ],
+    lastUpdated: '2026-05-17',
+    relatedLinks: [
+      { label: 'Great Suspender Alternatives', href: '/alternatives/great-suspender' },
+      { label: 'Chrome Disabled Extension', href: '/fix/chrome-disabled-extension' },
+      { label: 'Extension Search', href: '/tools/extension-search' },
+    ],
+    primaryCta: { label: 'View Tab Management Options', href: '/alternatives/great-suspender' },
+    secondaryCta: { label: 'Search Extensions', href: '/tools/extension-search' },
+    bestOptions: [
+      { label: 'Easiest:', description: 'Chrome Memory Saver (built-in)' },
+      { label: 'Most customizable:', description: 'Auto Tab Discard (MV3)' },
+      { label: 'For workspaces:', description: 'Workona (MV3)' },
     ],
   },
 ];

@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     'switchyomega alternative',
     'ublock origin alternative',
     'great suspender alternative',
+    'foxyproxy alternative',
+    'chrome ublock origin lite',
+    'the great suspender malware',
+    'extension was turned off',
   ],
 };
 
@@ -301,7 +305,7 @@ export default function HomePage() {
               Understand and resolve common Chrome extension issues.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Link
               href="/fix/this-extension-is-no-longer-supported"
               className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
@@ -311,6 +315,17 @@ export default function HomePage() {
               </h3>
               <p className="mt-2 text-sm text-slate-600">
                 What to do when Chrome shows your extension is no longer supported.
+              </p>
+            </Link>
+            <Link
+              href="/this-extension-was-turned-off-because-it-is-no-longer-supported"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">
+                Fix &quot;This Extension Was Turned Off&quot;
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Learn why Chrome turned off an extension and what to do next.
               </p>
             </Link>
             <Link
@@ -329,6 +344,24 @@ export default function HomePage() {
               <h3 className="font-semibold text-slate-900">Chrome Disabled My Extension</h3>
               <p className="mt-2 text-sm text-slate-600">
                 Common reasons Chrome disables extensions and safe ways to resolve issues.
+              </p>
+            </Link>
+            <Link
+              href="/foxyproxy-alternative-for-chrome"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">FoxyProxy Alternatives</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Compare FoxyProxy, ZeroOmega, and other proxy switching options.
+              </p>
+            </Link>
+            <Link
+              href="/the-great-suspender-malware"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">The Great Suspender History</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Learn what happened and find safer tab management alternatives.
               </p>
             </Link>
           </div>
