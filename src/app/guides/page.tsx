@@ -21,6 +21,7 @@ function getRelatedExtensions(slugs: string[]) {
 export default function GuidesPage() {
   const additionalGuides = landingPages.filter((page) =>
     [
+      'chrome-extension-error-messages',
       'this-extension-was-turned-off-because-it-is-no-longer-supported',
       'foxyproxy-alternative-for-chrome',
       'the-great-suspender-malware',

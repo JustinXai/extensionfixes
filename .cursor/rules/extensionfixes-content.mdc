@@ -1,0 +1,37 @@
+---
+description: Content and claim rules for ExtensionFixes
+globs:
+  - "src/**/*.ts"
+  - "src/**/*.tsx"
+  - "src/**/*.md"
+  - "src/**/*.mdx"
+alwaysApply: true
+---
+
+# ExtensionFixes Content Rules
+
+MUST:
+- Core pages should include Quick Answer, What to check first, What not to do, FAQ, Sources, Related links, Last updated.
+- Use conservative claims.
+- Use Source Tier + Claim Type rules.
+- Keep wording neutral and practical.
+
+SHOULD:
+- Use comparison tables for alternatives.
+- Use exact Chrome warning messages when available.
+- Cite official or primary sources for factual claims.
+
+NEVER:
+- Do not write "official successor".
+- Do not write "safest", "100% safe", or "guaranteed safe".
+- Do not write "The Great Suspender is malware".
+- Do not recommend unknown CRX downloads.
+- Do not claim all MV2 extensions are malware.
+
+Approved wording:
+- maintained alternative
+- MV3-compatible option
+- by the same developer
+- community-maintained fork
+- removed after public malware-related reports
+- verify the developer before installing

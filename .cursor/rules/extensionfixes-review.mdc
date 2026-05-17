@@ -1,0 +1,23 @@
+---
+description: Required review report format for ExtensionFixes tasks
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# ExtensionFixes Review Rules
+
+After every task, output:
+
+1. Modified files
+2. Added URLs
+3. Architecture compliance
+4. SEO compliance
+5. Content safety check
+6. Search/sitemap check
+7. npm run lint result
+8. npm run build result
+9. npm run review result
+10. Deploy recommendation
+
+If any rule conflicts with the task, stop and explain the conflict.

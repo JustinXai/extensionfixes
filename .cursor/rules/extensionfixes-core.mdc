@@ -1,0 +1,31 @@
+---
+description: Core rules for ExtensionFixes
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# ExtensionFixes Core Rules
+
+ExtensionFixes is a Chrome extension warning lookup + alternatives guide + migration safety knowledge base.
+
+MUST:
+- Keep the site static-first.
+- Use Next.js App Router, TypeScript, and Tailwind.
+- Use local data files under src/data.
+- Preserve extensionfixes.com canonical URLs.
+- Run npm run verify after meaningful changes.
+
+SHOULD:
+- Prefer GSC-query-driven content.
+- Add at most 1-3 pages per batch.
+- Avoid near-duplicate pages.
+- Update internal links when adding pages.
+
+NEVER:
+- Do not add API routes.
+- Do not add database, auth, or login.
+- Do not add affiliate links.
+- Do not add dark mode.
+- Do not add Chrome Scanner without a separate RFC.
+- Do not delete existing pages without approval.

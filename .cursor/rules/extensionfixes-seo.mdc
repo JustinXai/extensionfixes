@@ -1,0 +1,31 @@
+---
+description: SEO and AI-readable rules for ExtensionFixes
+globs:
+  - "src/app/**/*.tsx"
+  - "src/app/sitemap.ts"
+  - "src/lib/search.ts"
+  - "src/lib/seo.ts"
+  - "src/data/**/*.ts"
+alwaysApply: true
+---
+
+# ExtensionFixes SEO Rules
+
+MUST:
+- Every new page needs title, description, canonical, OpenGraph, and Twitter metadata.
+- Every new page must be included in sitemap.
+- Every relevant new page must be searchable through searchAll.
+- Every new page must have homepage, hub, or contextual internal links.
+- Core pages should include BreadcrumbList JSON-LD.
+- FAQPage JSON-LD is optional, but if used it must match visible FAQ.
+
+SHOULD:
+- Use GSC queries to choose new pages.
+- Optimize existing pages before creating near-duplicate pages.
+- Keep titles natural and query-aligned.
+
+NEVER:
+- Do not create orphan pages.
+- Do not rely on FAQ rich results.
+- Do not use localhost in canonical.
+- Do not keyword stuff titles.

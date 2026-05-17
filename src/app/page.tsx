@@ -82,6 +82,77 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="py-16">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Start with what you see in Chrome</h2>
+            <p className="mt-2 text-slate-600">
+              Choose the scenario that matches your situation.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+            <Link
+              href="/chrome-extension-error-messages"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-slate-900">I see a Chrome warning</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Match the exact warning message and find the safest next step.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Look up warning messages
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/alternatives"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-slate-900">I need an extension alternative</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Compare maintained replacements for unsupported or removed extensions.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Browse alternatives
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/tools/extension-search"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-slate-900">I know the extension name</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Search by extension name, Web Store URL, or extension ID.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Search extensions
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+          </div>
+        </section>
+
         <section id="alternatives" className="py-16">
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-slate-900">Popular Extension Alternatives</h2>

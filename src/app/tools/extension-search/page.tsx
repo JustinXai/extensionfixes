@@ -7,6 +7,17 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { searchAll } from '@/lib/search';
 import type { SearchResults } from '@/lib/types';
 
+const popularWarnings = [
+  { label: 'This extension was turned off because it is no longer supported', href: '/this-extension-was-turned-off-because-it-is-no-longer-supported' },
+  { label: 'This extension may soon no longer be supported', href: '/this-extension-may-soon-no-longer-be-supported' },
+  { label: 'Manifest V2 disabled', href: '/fix/manifest-v2-disabled' },
+  { label: 'Chrome disabled my extension', href: '/fix/chrome-disabled-extension' },
+  { label: 'Cannot install extension unsupported manifest', href: '/fix/manifest-v2-disabled' },
+  { label: 'FoxyProxy alternative for Chrome', href: '/foxyproxy-alternative-for-chrome' },
+  { label: 'The Great Suspender malware', href: '/the-great-suspender-malware' },
+  { label: 'uBlock Origin Lite', href: '/ublock-origin-no-longer-supported' },
+];
+
 function SearchResults({ query }: { query: string }) {
   const results = useMemo(() => searchAll(query), [query]);
 
@@ -31,26 +42,20 @@ function SearchResults({ query }: { query: string }) {
           </div>
           <h3 className="mt-4 text-lg font-medium text-gray-900">No exact match yet</h3>
           <p className="mt-2 text-gray-600">
-            Try searching by extension name, Chrome Web Store URL, or error message.
+            Try searching by extension name, Chrome Web Store URL, extension ID, or the warning message shown in Chrome.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              href="/alternatives/switchyomega"
+              href="/chrome-extension-error-messages"
               className="text-sm text-blue-600 hover:text-blue-800"
             >
-              SwitchyOmega Alternatives
+              Browse error messages
             </Link>
             <Link
-              href="/alternatives/ublock-origin"
+              href="/alternatives"
               className="text-sm text-blue-600 hover:text-blue-800"
             >
-              uBlock Origin Alternatives
-            </Link>
-            <Link
-              href="/fix/this-extension-is-no-longer-supported"
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              Extension No Longer Supported
+              Browse alternatives
             </Link>
           </div>
         </div>
@@ -135,6 +140,31 @@ function SearchResults({ query }: { query: string }) {
   );
 }
 
+function PopularWarnings({ onSearch }: { onSearch: (query: string) => void }) {
+  return (
+    <div className="mt-12">
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Popular Warning Messages</h2>
+      <div className="flex flex-wrap gap-2">
+        {popularWarnings.map((warning) => (
+          <button
+            key={warning.href}
+            onClick={() => onSearch(warning.label)}
+            className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+          >
+            {warning.label}
+          </button>
+        ))}
+      </div>
+      <p className="mt-4 text-sm text-gray-500">
+        Or{' '}
+        <Link href="/chrome-extension-error-messages" className="text-blue-600 hover:text-blue-800">
+          browse all warning messages
+        </Link>
+      </p>
+    </div>
+  );
+}
+
 function PopularExtensions() {
   return (
     <div className="mt-12">
@@ -194,13 +224,18 @@ function SearchPageContent() {
     }
   };
 
+  const handleWarningClick = (warningLabel: string) => {
+    setInputValue(warningLabel);
+    router.push(`/tools/extension-search?q=${encodeURIComponent(warningLabel)}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Extension Search</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Chrome Extension Search and Warning Lookup</h1>
           <p className="mt-3 text-gray-600">
-            Search for an extension, error message, or Chrome Web Store URL
+            Search an extension name, Chrome Web Store URL, extension ID, or warning message.
           </p>
         </div>
 
@@ -220,7 +255,7 @@ function SearchPageContent() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Search an extension, error message, or Chrome Web Store URL"
+                placeholder="Paste a Chrome warning message, extension name, Web Store URL, or extension ID"
                 className="block w-full rounded-xl border border-gray-300 bg-white py-4 pl-12 pr-4 text-gray-900 placeholder-gray-500 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base"
               />
               <button
@@ -233,7 +268,14 @@ function SearchPageContent() {
           </form>
         </div>
 
-        {query ? <SearchResults query={query} /> : <PopularExtensions />}
+        {query ? (
+          <SearchResults query={query} />
+        ) : (
+          <>
+            <PopularWarnings onSearch={handleWarningClick} />
+            <PopularExtensions />
+          </>
+        )}
       </div>
     </div>
   );

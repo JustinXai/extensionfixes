@@ -995,6 +995,38 @@ export const landingPages: LandingPageRecord[] = [
       { label: 'For workspaces:', description: 'Workona (MV3)' },
     ],
   },
+  {
+    slug: 'chrome-extension-error-messages',
+    title: 'Chrome Extension Error Messages: What They Mean and How to Fix Them',
+    description:
+      'Look up common Chrome extension warning messages, including unsupported extensions, Manifest V2 issues, disabled extensions, and removed extensions.',
+    h1: 'Chrome Extension Error Messages: What They Mean and How to Fix Them',
+    shortAnswer:
+      'Chrome extension warnings usually mean the extension is unsupported, disabled, removed, policy-blocked, or affected by Manifest V2 changes. The practical next step is to identify the exact message, check the extension name, avoid unknown CRX downloads, and move to a maintained replacement when needed.',
+    aliases: [
+      'chrome extension error messages',
+      'chrome extension warning',
+      'extension error message',
+      'chrome extension not working',
+      'extension was turned off',
+      'chrome disabled my extension',
+      'manifest v2',
+      'unsupported manifest',
+      'cannot install extension',
+    ],
+    sections: [],
+    faqs: [],
+    sources: [],
+    lastUpdated: '2026-05-17',
+    relatedLinks: [
+      { label: 'Extension Search', href: '/tools/extension-search' },
+      { label: 'Extension Was Turned Off', href: '/this-extension-was-turned-off-because-it-is-no-longer-supported' },
+      { label: 'Extension May Soon Be Unsupported', href: '/this-extension-may-soon-no-longer-be-supported' },
+    ],
+    primaryCta: { label: 'Search Extensions', href: '/tools/extension-search' },
+    secondaryCta: { label: 'Browse Alternatives', href: '/alternatives' },
+    bestOptions: [],
+  },
 ];
 
 export function getLandingPageBySlug(slug: string): LandingPageRecord | undefined {

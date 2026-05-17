@@ -30,6 +30,7 @@ export const navigationLinks = [
   { label: 'Search', href: '/tools/extension-search' },
   { label: 'Alternatives', href: '/alternatives' },
   { label: 'Guides', href: '/guides' },
+  { label: 'Error Messages', href: '/chrome-extension-error-messages' },
 ];
 
 export const footerLinks = [
@@ -55,6 +56,7 @@ export const footerLinks = [
     title: 'Resources',
     links: [
       { label: 'Extension Search Tool', href: '/tools/extension-search' },
+      { label: 'Chrome Extension Error Messages', href: '/chrome-extension-error-messages' },
       { label: 'All Alternatives', href: '/alternatives' },
       { label: 'All Guides', href: '/guides' },
       { label: 'Sitemap', href: '/sitemap.xml' },
