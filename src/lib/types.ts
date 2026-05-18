@@ -37,6 +37,38 @@ export interface AlternativeRecord {
   note: string;
 }
 
+// At a Glance — summary fields for Top 5 pages
+export interface AtAGlance {
+  originalExtension: string;
+  currentStatus: string;
+  bestPracticalOption: string;
+  bestForAdvancedUsers?: string;
+  mainCaution: string;
+}
+
+// Decision Guide entry
+export interface DecisionGuideItem {
+  choose: string;
+  when: string;
+}
+
+// Comparison Table Row
+export interface ComparisonRow {
+  option: string;
+  bestFor: string;
+  mv3Support: string;
+  cost: string;
+  openSource: string;
+  setupDifficulty: string;
+  mainTradeoff: string;
+}
+
+// Common Mistake
+export interface CommonMistake {
+  doNot: string;
+  instead: string;
+}
+
 // Extension Record
 export interface ExtensionRecord {
   slug: string;
@@ -60,6 +92,11 @@ export interface ExtensionRecord {
   faqs: FAQItem[];
   sources: SourceItem[];
   lastUpdated: string;
+  // Top-5 enhanced fields (optional)
+  atAGlance?: AtAGlance;
+  decisionGuide?: DecisionGuideItem[];
+  comparisonTable?: ComparisonRow[];
+  commonMistakes?: CommonMistake[];
 }
 
 // Error Record
@@ -75,6 +112,11 @@ export interface ErrorRecord {
   faqs: FAQItem[];
   sources: SourceItem[];
   lastUpdated: string;
+  // Top-5 enhanced fields (optional)
+  atAGlance?: AtAGlance;
+  decisionGuide?: DecisionGuideItem[];
+  comparisonTable?: ComparisonRow[];
+  commonMistakes?: CommonMistake[];
 }
 
 // Search Result Types

@@ -58,6 +58,111 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
     quickAnswer:
       'DownThemAll remains active in Chrome. If you need alternatives, Chrono Download Manager and native browser download features offer similar capabilities for managing multiple file downloads.',
   },
+  tampermonkey: {
+    title: 'Tampermonkey Alternatives for Chrome',
+    description:
+      'Tampermonkey is actively maintained in Chrome. Compare alternatives like Violentmonkey for userscript management needs.',
+    quickAnswer:
+      'Tampermonkey is actively maintained as an MV3-compatible extension for Chrome. Violentmonkey is a lightweight open-source alternative that supports Tampermonkey-compatible scripts.',
+  },
+  violentmonkey: {
+    title: 'Violentmonkey Alternatives for Chrome',
+    description:
+      'Violentmonkey is actively maintained in Chrome. Compare alternatives like Tampermonkey for userscript management.',
+    quickAnswer:
+      'Violentmonkey is an actively maintained open-source userscript manager. Tampermonkey is the most widely-used option with more built-in features and a larger script library.',
+  },
+  'auto-tab-discard': {
+    title: 'Auto Tab Discard Alternatives for Chrome',
+    description:
+      'Auto Tab Discard is actively maintained in Chrome. Compare alternatives like Chrome Memory Saver and OneTab for tab management.',
+    quickAnswer:
+      'Auto Tab Discard is an actively maintained MV3 extension for suspending inactive tabs. Chrome Memory Saver is the built-in alternative. OneTab offers manual tab consolidation.',
+  },
+  foxyproxy: {
+    title: 'FoxyProxy Alternatives for Chrome',
+    description:
+      'FoxyProxy is actively maintained in Chrome. Compare alternatives like ZeroOmega for proxy management.',
+    quickAnswer:
+      'FoxyProxy is an actively maintained MV3 proxy manager for Chrome with advanced features. ZeroOmega and Proxy Switcher are alternatives with different interfaces and feature sets.',
+  },
+  'session-buddy': {
+    title: 'Session Buddy Alternatives for Chrome',
+    description:
+      'Session Buddy is actively maintained in Chrome. Compare alternatives like Workona and OneTab for session and tab management.',
+    quickAnswer:
+      'Session Buddy is an actively maintained session manager for Chrome. Workona offers workspace-based organization. OneTab provides simple manual tab consolidation.',
+  },
+  stylus: {
+    title: 'Stylus Alternatives for Chrome',
+    description:
+      'Stylus is actively maintained in Chrome. Compare alternatives for custom CSS style management and website theming.',
+    quickAnswer:
+      'Stylus is an actively maintained open-source style manager that replaced the deprecated Stylish extension. It lets you install custom CSS themes to modify website appearance.',
+  },
+  'dark-reader': {
+    title: 'Dark Reader Alternatives for Chrome',
+    description:
+      'Dark Reader is actively maintained in Chrome. Compare alternatives like Night Eye for dark mode and accessibility needs.',
+    quickAnswer:
+      'Dark Reader is an actively maintained MV3 extension for applying dark themes to websites. Night Eye offers multiple dark mode algorithms alongside additional features.',
+  },
+  onetab: {
+    title: 'OneTab Alternatives for Chrome',
+    description:
+      'OneTab is actively maintained in Chrome. Compare alternatives like Auto Tab Discard and Session Buddy for tab management.',
+    quickAnswer:
+      'OneTab is an actively maintained MV3 extension for consolidating open tabs into a list. Auto Tab Discard offers automatic tab suspension. Session Buddy provides session management.',
+  },
+  'video-downloadhelper': {
+    title: 'Video DownloadHelper Alternatives for Chrome',
+    description:
+      'Video DownloadHelper may be affected by Chrome MV2 deprecation. Learn about MV3-compatible versions and alternatives.',
+    quickAnswer:
+      'Video DownloadHelper is being updated for MV3 compatibility. The latest version from the Chrome Web Store should work in Chrome 138+. Chrono Download Manager is an alternative download manager.',
+  },
+  'user-agent-switcher': {
+    title: 'User-Agent Switcher Alternatives for Chrome',
+    description:
+      'User-Agent Switcher and alternatives for Chrome. Compare Chrome DevTools and Requestly for developer testing needs.',
+    quickAnswer:
+      'User-Agent Switcher is available as an MV3 extension in the Chrome Web Store. Chrome DevTools includes built-in device emulation for user-agent testing without an extension.',
+  },
+  grammarly: {
+    title: 'Grammarly Alternatives for Chrome',
+    description:
+      'Grammarly is actively maintained in Chrome. Compare alternatives like LanguageTool and Ginger for writing assistance.',
+    quickAnswer:
+      'Grammarly is an actively maintained MV3 writing assistant for Chrome. LanguageTool is an open-source alternative with a privacy-friendly option. Ginger offers translation features alongside grammar checking.',
+  },
+  lastpass: {
+    title: 'LastPass Alternatives for Chrome',
+    description:
+      'LastPass is actively maintained in Chrome. Compare alternatives like Bitwarden and 1Password for password management.',
+    quickAnswer:
+      'LastPass is an actively maintained MV3 password manager for Chrome. Bitwarden is a popular open-source alternative. 1Password is a premium option with a polished interface.',
+  },
+  bitwarden: {
+    title: 'Bitwarden Alternatives for Chrome',
+    description:
+      'Bitwarden is actively maintained in Chrome. Compare alternatives like LastPass and 1Password for password management.',
+    quickAnswer:
+      'Bitwarden is an actively maintained open-source password manager for Chrome. It offers both cloud-hosted and self-hosted options. LastPass and 1Password are alternative options with different approaches.',
+  },
+  honey: {
+    title: 'Honey Alternatives for Chrome',
+    description:
+      'Honey is actively maintained in Chrome. Compare alternatives like Capital One Shopping for coupon and price tracking.',
+    quickAnswer:
+      'Honey is an actively maintained shopping utility for Chrome that finds coupon codes and tracks prices. Capital One Shopping is a free alternative with automatic coupons and price comparisons.',
+  },
+  'google-translate': {
+    title: 'Google Translate Alternatives for Chrome',
+    description:
+      'Google Translate is actively maintained in Chrome. Compare alternatives like DeepL and Microsoft Translator for web page translation.',
+    quickAnswer:
+      'Google Translate is the official Google extension for web page and text translation. DeepL offers an alternative translation engine known for natural translations. Microsoft Translator is another option.',
+  },
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -277,6 +382,111 @@ export default async function AlternativePage({ params }: PageProps) {
             <WhatNotToDo items={defaultWhatNotToDo} />
           </section>
 
+          {/* ── Top 5 Enhanced Sections ─────────────────────────────── */}
+          {extension.atAGlance && (
+            <section className="mb-10" aria-labelledby="at-a-glance-heading">
+              <h2 id="at-a-glance-heading" className="text-xl font-semibold text-slate-900 mb-4">At a Glance</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  { label: 'Original extension', value: extension.atAGlance.originalExtension },
+                  { label: 'Current Chrome status', value: extension.atAGlance.currentStatus },
+                  { label: 'Best practical option', value: extension.atAGlance.bestPracticalOption },
+                  ...(extension.atAGlance.bestForAdvancedUsers
+                    ? [{ label: 'Best for advanced users', value: extension.atAGlance.bestForAdvancedUsers }]
+                    : []),
+                  { label: 'Main caution', value: extension.atAGlance.mainCaution },
+                ].map((item) => (
+                  <div key={item.label} className="flex flex-col gap-1 rounded-xl border border-gray-200 bg-white p-4">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">{item.label}</span>
+                    <span className="text-sm text-slate-700">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {extension.comparisonTable && extension.comparisonTable.length > 0 && (
+            <section className="mb-10" aria-labelledby="comparison-heading">
+              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Comparison Table</h2>
+              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {['Option', 'Best For', 'MV3', 'Cost', 'Open Source', 'Setup', 'Main Trade-off'].map((h) => (
+                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {extension.comparisonTable.map((row, i) => (
+                      <tr key={i} className="hover:bg-gray-50">
+                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
+                        <td className="px-4 py-4 text-sm sm:px-6">
+                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
+                            row.mv3Support === 'Yes (official)' || row.mv3Support === 'Yes'
+                              ? 'bg-green-50 text-green-700'
+                              : row.mv3Support.includes('MV2')
+                              ? 'bg-amber-50 text-amber-700'
+                              : 'bg-gray-50 text-gray-600'
+                          }`}>{row.mv3Support}</span>
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
+                        <td className="px-4 py-4 text-sm sm:px-6">
+                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${row.openSource === 'Yes' ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-600'}`}>{row.openSource}</span>
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.setupDifficulty}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {extension.decisionGuide && extension.decisionGuide.length > 0 && (
+            <section className="mb-10" aria-labelledby="decision-guide-heading">
+              <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Which Option Should You Choose?</h2>
+              <div className="space-y-4">
+                {extension.decisionGuide.map((item, i) => (
+                  <div key={i} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-900">{item.choose}</p>
+                      <p className="mt-1 text-sm text-slate-600">{item.when}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {extension.commonMistakes && extension.commonMistakes.length > 0 && (
+            <section className="mb-10" aria-labelledby="common-mistakes-heading">
+              <h2 id="common-mistakes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Mistakes to Avoid</h2>
+              <div className="space-y-3">
+                {extension.commonMistakes.map((item, i) => (
+                  <div key={i} className="flex gap-3 rounded-xl border border-red-100 bg-red-50 p-4">
+                    <svg className="h-5 w-5 flex-shrink-0 text-red-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-red-800">Do not: {item.doNot}</p>
+                      {item.instead && (
+                        <p className="mt-1 text-sm text-green-700">
+                          <span className="font-medium">Instead:</span> {item.instead}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {slug === 'switchyomega' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
               <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
@@ -324,6 +534,213 @@ export default async function AlternativePage({ params }: PageProps) {
                 <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Chrome Disabled Extension Guide
                 </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'tampermonkey' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/violentmonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Violentmonkey Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'violentmonkey' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/tampermonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Tampermonkey Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'auto-tab-discard' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/great-suspender" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Great Suspender Alternatives
+                </Link>
+                <Link href="/onetab" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  OneTab Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'foxyproxy' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/switchyomega" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  SwitchyOmega Alternatives
+                </Link>
+                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Chrome Disabled Extension Guide
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'onetab' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/auto-tab-discard" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Auto Tab Discard Alternatives
+                </Link>
+                <Link href="/session-buddy" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Session Buddy Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'session-buddy' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/onetab" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  OneTab Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'stylus' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'dark-reader' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'video-downloadhelper' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/downthemall" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  DownThemAll Alternatives
+                </Link>
+                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Chrome Disabled Extension Guide
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'user-agent-switcher' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/modheader" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  ModHeader Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'grammarly' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'lastpass' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/bitwarden" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Bitwarden Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'bitwarden' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/lastpass" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  LastPass Alternatives
+                </Link>
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'honey' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Search More Extensions
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'google-translate' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
+              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
                 <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Search More Extensions
                 </Link>

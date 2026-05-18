@@ -214,6 +214,111 @@ export default async function FixPage({ params }: PageProps) {
             </div>
           </section>
 
+          {/* ── Top 5 Enhanced Sections ─────────────────────────────── */}
+          {error.atAGlance && (
+            <section className="mb-10" aria-labelledby="at-a-glance-heading">
+              <h2 id="at-a-glance-heading" className="text-xl font-semibold text-slate-900 mb-4">At a Glance</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  { label: 'Original issue', value: error.atAGlance.originalExtension },
+                  { label: 'Current Chrome status', value: error.atAGlance.currentStatus },
+                  { label: 'Best practical option', value: error.atAGlance.bestPracticalOption },
+                  ...(error.atAGlance.bestForAdvancedUsers
+                    ? [{ label: 'Best for advanced users', value: error.atAGlance.bestForAdvancedUsers }]
+                    : []),
+                  { label: 'Main caution', value: error.atAGlance.mainCaution },
+                ].map((item) => (
+                  <div key={item.label} className="flex flex-col gap-1 rounded-xl border border-gray-200 bg-white p-4">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">{item.label}</span>
+                    <span className="text-sm text-slate-700">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {error.comparisonTable && error.comparisonTable.length > 0 && (
+            <section className="mb-10" aria-labelledby="comparison-heading">
+              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Comparison Table</h2>
+              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {['Option', 'Best For', 'MV3', 'Cost', 'Open Source', 'Setup', 'Main Trade-off'].map((h) => (
+                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {error.comparisonTable.map((row, i) => (
+                      <tr key={i} className="hover:bg-gray-50">
+                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
+                        <td className="px-4 py-4 text-sm sm:px-6">
+                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
+                            row.mv3Support === 'Yes (official)' || row.mv3Support === 'Yes'
+                              ? 'bg-green-50 text-green-700'
+                              : row.mv3Support.includes('MV2')
+                              ? 'bg-amber-50 text-amber-700'
+                              : 'bg-gray-50 text-gray-600'
+                          }`}>{row.mv3Support}</span>
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
+                        <td className="px-4 py-4 text-sm sm:px-6">
+                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${row.openSource === 'Yes' ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-600'}`}>{row.openSource}</span>
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.setupDifficulty}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {error.decisionGuide && error.decisionGuide.length > 0 && (
+            <section className="mb-10" aria-labelledby="decision-guide-heading">
+              <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Which Option Should You Choose?</h2>
+              <div className="space-y-4">
+                {error.decisionGuide.map((item, i) => (
+                  <div key={i} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-900">{item.choose}</p>
+                      <p className="mt-1 text-sm text-slate-600">{item.when}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {error.commonMistakes && error.commonMistakes.length > 0 && (
+            <section className="mb-10" aria-labelledby="common-mistakes-heading">
+              <h2 id="common-mistakes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Mistakes to Avoid</h2>
+              <div className="space-y-3">
+                {error.commonMistakes.map((item, i) => (
+                  <div key={i} className="flex gap-3 rounded-xl border border-red-100 bg-red-50 p-4">
+                    <svg className="h-5 w-5 flex-shrink-0 text-red-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-red-800">Do not: {item.doNot}</p>
+                      {item.instead && (
+                        <p className="mt-1 text-sm text-green-700">
+                          <span className="font-medium">Instead:</span> {item.instead}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {slug === 'manifest-v2-disabled' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
               <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>

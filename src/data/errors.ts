@@ -153,7 +153,84 @@ export const errors: ErrorRecord[] = [
         publisher: 'Google Chrome Developers',
       },
     ],
-    lastUpdated: '2026-05-13',
+    lastUpdated: '2026-05-18',
+    atAGlance: {
+      originalExtension: 'Manifest V2 (Chrome Extension Platform)',
+      currentStatus: 'Disabled by default in Chrome 138 and later for all users',
+      bestPracticalOption: 'Find MV3-compatible alternatives for your affected extensions',
+      bestForAdvancedUsers: 'Use Firefox which still supports MV2 extensions',
+      mainCaution: 'Enterprise policies can extend MV2 support on managed devices — contact your IT administrator if on a work device',
+    },
+    decisionGuide: [
+      {
+        choose: 'Find MV3-compatible alternatives',
+        when: 'Your extension has a known MV3-compatible version or alternative. Most popular extensions have been updated.',
+      },
+      {
+        choose: 'Check for official developer updates',
+        when: 'The original developer may have released an official MV3 update. Check the Chrome Web Store listing.',
+      },
+      {
+        choose: 'Look for community-maintained forks',
+        when: 'The original developer abandoned the extension. Community forks may provide continued functionality.',
+      },
+      {
+        choose: 'Switch to Firefox',
+        when: 'You rely on MV2-only extensions and cannot find suitable MV3 alternatives. Firefox still supports MV2.',
+      },
+    ],
+    comparisonTable: [
+      {
+        option: 'MV3-compatible extension',
+        bestFor: 'Users of popular extensions that have been updated',
+        mv3Support: 'Yes',
+        cost: 'Varies',
+        openSource: 'Varies',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'May have reduced features compared to MV2 original',
+      },
+      {
+        option: 'Community fork (open source)',
+        bestFor: 'Users of abandoned extensions with active community support',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Newer project; verify developer identity and code before installing',
+      },
+      {
+        option: 'Browser-native feature',
+        bestFor: 'Users whose extension functionality has been absorbed into Chrome itself',
+        mv3Support: 'N/A (built-in)',
+        cost: 'Free',
+        openSource: 'No (Chrome)',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Limited to features Chrome chooses to implement',
+      },
+      {
+        option: 'Firefox with MV2 extension',
+        bestFor: 'Advanced users needing exact MV2 extension feature parity',
+        mv3Support: 'MV2 (Firefox)',
+        cost: 'Free',
+        openSource: 'Varies',
+        setupDifficulty: 'Medium',
+        mainTradeoff: 'Requires switching browsers; different ecosystem and workflow',
+      },
+    ],
+    commonMistakes: [
+      {
+        doNot: 'Try to re-enable MV2 through Chrome flags or developer settings',
+        instead: 'Chrome flags may be removed or blocked. Instead, find MV3-compatible alternatives or use Firefox.',
+      },
+      {
+        doNot: 'Download bypass tools or "MV2 enablers" from untrusted sources',
+        instead: 'These tools may contain malware, compromise security, or stop working. Use official alternatives instead.',
+      },
+      {
+        doNot: 'Assume all MV2 extensions are unsafe — many are safe but simply need updating',
+        instead: 'Research whether your extension has been updated or has a recognized alternative before assuming it is problematic.',
+      },
+    ],
   },
   {
     slug: 'chrome-disabled-extension',

@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "violentmonkey",
+    "name": "Violentmonkey",
+    "aliases": [
+      "Violentmonkey",
+      "violent monkey",
+      "userscript manager"
+    ],
+    "category": "Script Manager",
+    "summary": "An open-source userscript manager for Chrome and Firefox with MV3 support.",
+    "status": "active_mv3",
+    "riskLevel": "low",
+    "issueSummary": "Violentmonkey is actively maintained as an open-source MV3-compatible userscript manager. Users may search for it when looking for a Tampermonkey alternative.",
+    "shortAnswer": "Violentmonkey is an actively maintained, open-source userscript manager with full MV3 support. It offers strong script compatibility and is a practical alternative to Tampermonkey for users who prefer open-source tools.",
+    "whatHappened": [
+      "Violentmonkey has been updated to support Manifest V3 in Chrome.",
+      "It has gained popularity as an open-source alternative to Tampermonkey.",
+      "The project is community-maintained and transparent."
+    ],
+    "migrationSteps": [
+      "Install Violentmonkey from the Chrome Web Store.",
+      "Export scripts from Tampermonkey if available.",
+      "Import scripts into Violentmonkey using the dashboard.",
+      "Test scripts on commonly visited sites.",
+      "Update scripts from their original sources."
+    ],
+    "safetyNotes": [
+      "Violentmonkey is open source and can be audited on GitHub.",
+      "Only install scripts from sources you trust.",
+      "Userscripts can access page content - review permissions before installing."
+    ],
+    "alternatives": [
+      {
+        "name": "Tampermonkey",
+        "slug": "tampermonkey",
+        "bestFor": "Users who need the most established userscript manager",
+        "status": "active_mv3",
+        "chromeStoreUrl": "https://chromewebstore.google.com/detail/tampermonkey/dhdgledegpcfplegcpfaepegfpmljc",
+        "pros": [
+          "Most established",
+          "Largest script library"
+        ],
+        "cons": [
+          "Larger permission scope",
+          "Closed source"
+        ],
+        "note": "Tampermonkey is the most widely-used userscript manager."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is Violentmonkey open source?",
+        "answer": "Yes. Violentmonkey is fully open source, and its code is available on GitHub."
+      },
+      {
+        "question": "Can Violentmonkey run Tampermonkey scripts?",
+        "answer": "Yes. Violentmonkey is compatible with most Tampermonkey and Greasemonkey scripts."
+      },
+      {
+        "question": "Is Violentmonkey safe?",
+        "answer": "Violentmonkey is open source and reputable. Safety depends on the scripts you install."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Violentmonkey GitHub",
+        "url": "https://github.com/violentmonkey/violentmonkey",
+        "publisher": "Violentmonkey Contributors"
+      },
+      {
+        "title": "Violentmonkey Chrome Web Store",
+        "url": "https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag",
+        "publisher": "Chrome Web Store"
+      }
+    ],
+    "lastUpdated": "2026-05-18"
+  },
+  {
+    "slug": "session-buddy",
+    "name": "Session Buddy",
+    "aliases": [
+      "Session Buddy",
+      "session manager",
+      "save browser sessions",
+      "restore tabs"
+    ],
+    "category": "Tab Management",
+    "summary": "A session management extension that saves, organizes, and restores browser tab collections.",
+    "status": "active_mv3",
+    "riskLevel": "low",
+    "issueSummary": "Session Buddy is actively maintained with MV3 support. Users may search for it when looking for session and tab management functionality.",
+    "shortAnswer": "Session Buddy is an actively maintained session and tab management extension with MV3 support. It lets you save, name, and restore collections of tabs, making it useful for organizing workflows and recovering from browser crashes.",
+    "whatHappened": [
+      "Session Buddy has been updated to support Manifest V3.",
+      "The extension remains actively maintained by its developer.",
+      "Session management has become more important as browsers handle more tabs."
+    ],
+    "migrationSteps": [
+      "Install Session Buddy from the Chrome Web Store.",
+      "Open the Session Buddy sidebar to see current tabs.",
+      "Save your current session as a named collection.",
+      "Organize tabs into named sessions for different projects.",
+      "Use the Session Buddy popup to switch between saved sessions."
+    ],
+    "safetyNotes": [
+      "Session Buddy stores tab data locally on your device.",
+      "Review the permissions - it needs access to tabs and browsing data.",
+      "Only install from the official Chrome Web Store."
+    ],
+    "alternatives": [
+      {
+        "name": "Workona",
+        "slug": "workona",
+        "bestFor": "Users wanting comprehensive workspace management with cloud sync",
+        "status": "active_mv3",
+        "chromeStoreUrl": "https://chromewebstore.google.com/detail/workona/ailiggmclmgkjkkkjpdagfknmgogfopb",
+        "pros": [
+          "Cloud sync",
+          "Workspace organization",
+          "Cross-device support"
+        ],
+        "cons": [
+          "May require account for full features"
+        ],
+        "note": "Workona offers comprehensive workspace management."
+      },
+      {
+        "name": "Tab Session Manager",
+        "slug": "tab-session-manager",
+        "bestFor": "Users wanting a lightweight session manager",
+        "status": "active_mv3",
+        "chromeStoreUrl": "https://chromewebstore.google.com/detail/tab-session-manager/lnhpbjmcfgghkjgnfmcgofkgcafbjdam",
+        "pros": [
+          "Lightweight",
+          "Simple interface"
+        ],
+        "cons": [
+          "Fewer features than Session Buddy"
+        ],
+        "note": "Tab Session Manager provides straightforward session saving."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is Session Buddy free to use?",
+        "answer": "Session Buddy offers a free tier with core features. Some advanced features may require a subscription."
+      },
+      {
+        "question": "Does Session Buddy work across devices?",
+        "answer": "Session data is stored locally by default. Cloud sync requires a premium subscription."
+      },
+      {
+        "question": "Can Session Buddy recover tabs after a crash?",
+        "answer": "Yes. Session Buddy saves your tab sessions, and you can restore them from the popup or sidebar."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Session Buddy Chrome Web Store",
+        "url": "https://chromewebstore.google.com/detail/session-buddy/ginncbdhcffgkpajdhmnk南海kgpgfpcb",
+        "publisher": "Chrome Web Store"
+      },
+      {
+        "title": "Session Buddy Official Website",
+        "url": "https://sessionbuddy.com/",
+        "publisher": "Session Buddy"
+      }
+    ],
+    "lastUpdated": "2026-05-18"
+  }
+]

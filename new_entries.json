@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "tampermonkey",
+    "name": "Tampermonkey",
+    "aliases": [
+      "Tampermonkey",
+      "TaMperMonkey",
+      "tampermonkey"
+    ],
+    "category": "Script Manager",
+    "summary": "A tampermonkey extension for Chrome that helps with browser automation and customization.",
+    "status": "active_mv3",
+    "riskLevel": "low",
+    "issueSummary": "Tampermonkey has updated to support Manifest V3. Users may search for guidance when scripts stop working or when migrating between browsers.",
+    "shortAnswer": "Tampermonkey is actively maintained with MV3 support in modern Chrome. If a specific script stops working, it may be incompatible with the current browser or Tampermonkey version. Check for script updates, try alternative sources, or use the browser developer console for debugging.",
+    "whatHappened": [
+      "Tampermonkey has been updated to support Manifest V3 in Chrome.",
+      "Some older userscripts may be incompatible with newer Tampermonkey versions.",
+      "Scripts from unmaintained sources may stop working without notice.",
+      "Browser permission changes can affect script behavior."
+    ],
+    "migrationSteps": [
+      "Update Tampermonkey to the latest version from the Chrome Web Store.",
+      "Check for script updates in the Tampermonkey dashboard.",
+      "If a script is broken, search for an updated version or alternative script.",
+      "Verify the script source before reinstalling.",
+      "Test scripts in incognito mode to check for conflicts.",
+      "Consider Violentmonkey as an alternative if Tampermonkey continues to have issues."
+    ],
+    "safetyNotes": [
+      "Only install scripts from sources you trust.",
+      "Userscripts can access all page content and make network requests.",
+      "Review the script code before installing if the source allows it.",
+      "Avoid scripts that request excessive permissions beyond their stated purpose."
+    ],
+    "alternatives": [
+      {
+        "name": "Violentmonkey",
+        "slug": "violentmonkey",
+        "bestFor": "Users seeking an open-source MV3-compatible userscript manager",
+        "status": "active_mv3",
+        "chromeStoreUrl": "https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag",
+        "pros": [
+          "Open source",
+          "MV3 compatible",
+          "Lightweight",
+          "Good script compatibility"
+        ],
+        "cons": [
+          "Fewer features than Tampermonkey",
+          "Smaller user community"
+        ],
+        "note": "Violentmonkey is a practical MV3-compatible alternative with open-source transparency."
+      },
+      {
+        "name": "Greasemonkey",
+        "slug": "greasemonkey",
+        "bestFor": "Firefox users wanting the original userscript manager",
+        "status": "active_mv3",
+        "url": "https://www.greasespot.net/",
+        "pros": [
+          "Original userscript manager",
+          "Well-established community"
+        ],
+        "cons": [
+          "Firefox-focused",
+          "Limited Chrome support"
+        ],
+        "note": "Greasemonkey is best known for Firefox. Chrome users should consider Violentmonkey."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is Tampermonkey safe to use?",
+        "answer": "Tampermonkey itself is a well-established and reputable script manager. Safety depends on the scripts you install. Only install scripts from sources you trust, and review their permissions. Userscripts can access all content on pages where they run."
+      },
+      {
+        "question": "Why did my userscript stop working?",
+        "answer": "Scripts may stop working due to website changes, Tampermonkey updates, browser updates, or script incompatibility. Check for script updates, update Tampermonkey, or search for alternative scripts that serve the same purpose."
+      },
+      {
+        "question": "Can I use Tampermonkey on Firefox?",
+        "answer": "Yes, Tampermonkey is available for Firefox as well. Your scripts may be compatible across browsers, though some browser-specific scripts may not work identically."
+      },
+      {
+        "question": "What is the best alternative to Tampermonkey?",
+        "answer": "Violentmonkey is a practical open-source alternative with good MV3 support. For Firefox users, Greasemonkey remains the original and well-established option."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Tampermonkey Official Website",
+        "url": "https://www.tampermonkey.net/",
+        "publisher": "Tampermonkey"
+      },
+      {
+        "title": "Tampermonkey Chrome Web Store",
+        "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgledegpcfplegcpfaepegfpmljc",
+        "publisher": "Chrome Web Store"
+      }
+    ],
+    "lastUpdated": "2026-05-18"
+  },
+  {
+    "slug": "violentmonkey",
+    "name": "Violentmonkey",
+    "aliases": [
+      "Violentmonkey",
+      "ViolenTMonkey",
+      "violentmonkey"
+    ],
+    "category": "Script Manager",
+    "summary": "A violentmonkey extension for Chrome that helps with browser automation and customization.",
+    "status": "active_mv3",
+    "riskLevel": "low",
+    "issueSummary": "Violentmonkey is actively maintained as an open-source MV3-compatible userscript manager. Users may search for it when looking for a Tampermonkey alternative.",
+    "shortAnswer": "Violentmonkey is an actively maintained, open-source userscript manager with full MV3 support. It offers strong script compatibility and is a practical alternative to Tampermonkey for users who prefer open-source tools.",
+    "whatHappened": [
+      "Violentmonkey has been updated to support Manifest V3 in Chrome.",
+      "It has gained popularity as an open-source alternative to Tampermonkey.",
+      "The project is community-maintained and transparent."
+    ],
+    "migrationSteps": [
+      "Install Violentmonkey from the Chrome Web Store.",
+      "Export scripts from Tampermonkey if available (check Tampermonkey backup options).",
+      "Import scripts into Violentmonkey using the dashboard.",
+      "Test scripts on commonly visited sites.",
+      "Update scripts from their original sources."
+    ],
+    "safetyNotes": [
+      "Violentmonkey is open source and can be audited on GitHub.",
+      "Only install scripts from sources you trust.",
+      "Userscripts can access page content - review permissions before installing."
+    ],
+    "alternatives": [
+      {
+        "name": "Tampermonkey",
+        "slug": "tampermonkey",
+        "bestFor": "Users who need the most established userscript manager",
+        "status": "active_mv3",
+        "chromeStoreUrl": "https://chromewebstore.google.com/detail/tampermonkey/dhdgledegpcfplegcpfaepegfpmljc",
+        "pros": [
+          "Most established",
+          "Largest script library",
+          "Most features"
+        ],
+        "cons": [
+          "Larger permission scope",
+          "Closed source"
+        ],
+        "note": "Tampermonkey is the most widely-used userscript manager with the largest script ecosystem."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is Violentmonkey open source?",
+        "answer": "Yes. Violentmonkey is fully open source, and its code is available on GitHub. This means the community can audit the code for transparency and security."
+      },
+      {
+        "question": "Can Violentmonkey run Tampermonkey scripts?",
+        "answer": "Yes. Violentmonkey is compatible with most Tampermonkey and Greasemonkey scripts. The script syntax is standardized, so scripts written for other managers generally work in Violentmonkey."
+      },
+      {
+        "question": "Is Violentmonkey safe?",
+        "answer": "Violentmonkey is open source and reputable. As with any script manager, safety depends on the scripts you install. Only install scripts from sources you trust, and review their requested permissions."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Violentmonkey GitHub",
+        "url": "https://github.com/violentmonkey/violentmonkey",
+        "publisher": "Violentmonkey Contributors"
+      },
+      {
+        "title": "Violentmonkey Chrome Web Store",
+        "url": "https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag",
+        "publisher": "Chrome Web Store"
+      }
+    ],
+    "lastUpdated": "2026-05-18"
+  }
+]

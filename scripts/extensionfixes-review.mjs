@@ -210,6 +210,26 @@ for (const { file, matches } of undefinedFindings) {
   warnings.push(`Potential undefined literal in ${rel(file)}: ${matches[0]}`);
 }
 
+// ── 8. Top-5 enhanced content checks (lightweight text scan) ─────────────────
+const altPagePath = path.join(ROOT, 'src', 'app', 'alternatives', '[slug]', 'page.tsx');
+const fixPagePath = path.join(ROOT, 'src', 'app', 'fix', '[slug]', 'page.tsx');
+
+for (const p of [altPagePath, fixPagePath]) {
+  if (!fs.existsSync(p)) continue;
+  const content = fs.readFileSync(p, 'utf8');
+  const checks = [
+    { label: 'Quick Answer', pattern: /Quick Answer/i },
+    { label: 'At a Glance', pattern: /At a Glance|at-a-glance-heading/i },
+    { label: 'Comparison Table', pattern: /Comparison Table|comparison-heading/i },
+    { label: 'Decision Guide', pattern: /Which Option Should You Choose|decision-guide-heading/i },
+    { label: 'Sources', pattern: /Sources|sources-heading/i },
+  ];
+  const missing = checks.filter((c) => !c.pattern.test(content));
+  if (missing.length > 0) {
+    warnings.push(`Template ${rel(p)} may be missing: ${missing.map((m) => m.label).join(', ')}`);
+  }
+}
+
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');
 console.log('====================');

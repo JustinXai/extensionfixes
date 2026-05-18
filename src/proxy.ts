@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const REDIRECTS: ReadonlyArray<{ source: string; destination: string }> = [
   {
     source: '/fix/chrome-extension-disabled',
-    destination: '/fix/chrome-disabled-extension',
+    destination: '/fix/chrome-disabled-extension/',
   },
 ];
 
@@ -25,5 +25,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/fix/chrome-extension-disabled', '/fix/chrome-extension-disabled/'],
+  matcher: ['/fix/chrome-extension-disabled/:path*'],
 };

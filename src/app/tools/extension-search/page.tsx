@@ -5,22 +5,154 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/StatusBadge';
 import { searchAll } from '@/lib/search';
-import type { SearchResults } from '@/lib/types';
+import type { SearchResultItem } from '@/lib/types';
+import { extensions } from '@/data/extensions';
+import { errors } from '@/data/errors';
 
-const popularWarnings = [
-  { label: 'This extension was turned off because it is no longer supported', href: '/this-extension-was-turned-off-because-it-is-no-longer-supported' },
-  { label: 'This extension may soon no longer be supported', href: '/this-extension-may-soon-no-longer-be-supported' },
-  { label: 'Manifest V2 disabled', href: '/fix/manifest-v2-disabled' },
-  { label: 'Chrome disabled my extension', href: '/fix/chrome-disabled-extension' },
-  { label: 'Cannot install extension unsupported manifest', href: '/fix/manifest-v2-disabled' },
-  { label: 'FoxyProxy alternative for Chrome', href: '/foxyproxy-alternative-for-chrome' },
-  { label: 'The Great Suspender malware', href: '/the-great-suspender-malware' },
-  { label: 'uBlock Origin Lite', href: '/ublock-origin-no-longer-supported' },
+const HOT_SEARCHES = [
+  'uBlock Origin',
+  'Proxy SwitchyOmega',
+  'Tampermonkey',
+  'FoxyProxy',
+  'Video DownloadHelper',
+  'This extension is no longer supported',
+  'Chrome extension disabled',
 ];
 
-function SearchResults({ query }: { query: string }) {
-  const results = useMemo(() => searchAll(query), [query]);
+const COMMON_PROBLEMS = [
+  { label: 'This extension was turned off', href: '/fix/this-extension-is-no-longer-supported' },
+  { label: 'Manifest V2 disabled', href: '/fix/manifest-v2-disabled' },
+  { label: 'Extension removed from Web Store', href: '/fix/extension-removed-from-chrome-web-store' },
+  { label: 'Chrome disabled my extension', href: '/fix/chrome-disabled-extension' },
+];
 
+const RECENTLY_REVIEWED = extensions.slice(0, 6).map((ext) => ({
+  name: ext.name,
+  slug: ext.slug,
+  category: ext.category,
+  status: ext.status,
+  lastUpdated: ext.lastUpdated,
+  shortAnswer: ext.shortAnswer,
+  type: 'extension' as const,
+}));
+
+const POPULAR_ALTERNATIVES = [
+  { name: 'uBlock Origin', slug: 'ublock-origin', category: 'Content Blocker', status: 'affected_by_mv2' as const },
+  { name: 'Proxy SwitchyOmega', slug: 'proxy-switchyomega', category: 'Proxy Manager', status: 'affected_by_mv2' as const },
+  { name: 'Tampermonkey', slug: 'tampermonkey', category: 'Script Manager', status: 'active_mv3' as const },
+  { name: 'FoxyProxy', slug: 'foxyproxy', category: 'Proxy Manager', status: 'active_mv3' as const },
+  { name: 'Auto Tab Discard', slug: 'auto-tab-discard', category: 'Tab Management', status: 'active_mv3' as const },
+  { name: 'OneTab', slug: 'onetab', category: 'Tab Management', status: 'active_mv3' as const },
+];
+
+function getRecommendedAction(item: SearchResultItem): string {
+  if (item.type === 'extension') {
+    if (item.status === 'removed') return 'Do not install — use alternatives';
+    if (item.status === 'affected_by_mv2') return 'Affected by Chrome 138 MV2 disable — check for MV3 update or alternatives';
+    if (item.status === 'active_mv3') return 'Active and MV3-compatible — safe to install from Chrome Web Store';
+    return 'Review current Chrome status before installing';
+  }
+  if (item.type === 'error') return 'Follow the guide to identify and resolve the issue';
+  return 'Read the guide for practical steps';
+}
+
+function getRelatedFixSlug(item: SearchResultItem): { label: string; href: string } | null {
+  if (item.type === 'extension') {
+    const ext = extensions.find((e) => e.slug === item.slug);
+    if (ext?.status === 'affected_by_mv2') return { label: 'Fix Guide', href: '/fix/manifest-v2-disabled' };
+    if (ext?.status === 'removed') return { label: 'Why Removed?', href: '/fix/extension-removed-from-chrome-web-store' };
+  }
+  return null;
+}
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+
+function ResultCard({ result, index }: { result: SearchResultItem; index: number }) {
+  const recommended = getRecommendedAction(result);
+  const relatedFix = getRelatedFixSlug(result);
+
+  return (
+    <Link
+      key={`${result.type}-${result.slug}-${index}`}
+      href={result.url}
+      className="block rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-blue-300 hover:shadow-md hover:shadow-blue-100"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
+              result.type === 'extension'
+                ? 'bg-blue-50 text-blue-700'
+                : result.type === 'error'
+                ? 'bg-amber-50 text-amber-700'
+                : 'bg-slate-50 text-slate-700'
+            }`}>
+              {result.type === 'extension' ? 'Extension' : result.type === 'landing' ? 'Guide' : 'Fix Guide'}
+            </span>
+            {result.status && <StatusBadge status={result.status} />}
+            <span className="text-xs text-gray-400">{result.subtitle}</span>
+          </div>
+
+          <h3 className="mt-2 font-semibold text-gray-900 text-base">{result.title}</h3>
+
+          <p className="mt-1 text-sm text-gray-600 line-clamp-2">{result.shortAnswer}</p>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
+              recommended.includes('Do not install')
+                ? 'bg-red-50 text-red-700'
+                : recommended.includes('Affected')
+                ? 'bg-amber-50 text-amber-700'
+                : 'bg-green-50 text-green-700'
+            }`}>
+              {recommended.includes('Do not install') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0a6 6 0 100 12A6 6 0 006 0zM5.25 3.5h1.5v3.75h-1.5V3.5zm0 5h1.5v1.5h-1.5V8.5z"/></svg>
+              )}
+              {recommended.includes('Affected') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0a6 6 0 100 12A6 6 0 006 0zm.75 9H5.25V5.25h1.5V9zm0-5.5H5.25v-1.5h1.5v1.5z"/></svg>
+              )}
+              {recommended.includes('Active') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 10a4 4 0 100-8 4 4 0 000 8zm.75-5.5H5.25v-1.5h1.5v1.5z"/></svg>
+              )}
+              {recommended.includes('Review') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0a6 6 0 100 12A6 6 0 006 0zm.75 9H5.25V5.25h1.5V9zm0-5.5H5.25v-1.5h1.5v1.5z"/></svg>
+              )}
+              {recommended.includes('Follow') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 10a4 4 0 100-8 4 4 0 000 8zm.75-5.5H5.25V5.25h1.5v1.5z"/></svg>
+              )}
+              {recommended.includes('Read') && (
+                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 10a4 4 0 100-8 4 4 0 000 8zm.75-5.5H5.25V5.25h1.5v1.5z"/></svg>
+              )}
+              {recommended}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-end gap-2 flex-shrink-0">
+          <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
+          {relatedFix && (
+            <span className="text-xs text-blue-600">{relatedFix.label}</span>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-4 border-t border-gray-100 pt-3 text-xs text-gray-400">
+        <span>Last reviewed: {result.url.includes('/alternatives/') || result.url.includes('/fix/') ? formatDate(extensions.find(e => e.slug === result.slug)?.lastUpdated || errors.find(e => e.slug === result.slug)?.lastUpdated || '2026-05-01') : '—'}</span>
+        <Link href={result.url} className="ml-auto font-medium text-blue-600 hover:text-blue-800">
+          View page →
+        </Link>
+      </div>
+    </Link>
+  );
+}
+
+function SearchResultsSection({ query }: { query: string }) {
+  const results = useMemo(() => searchAll(query), [query]);
   const hasResults = results.exactMatches.length > 0 || results.fuzzyMatches.length > 0;
 
   if (!hasResults) {
@@ -28,34 +160,31 @@ function SearchResults({ query }: { query: string }) {
       <div className="mt-12">
         <div className="rounded-xl border border-gray-200 bg-white p-8 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
-            <svg
-              className="h-6 w-6 text-gray-400"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clipRule="evenodd"
-              />
+            <svg className="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
             </svg>
           </div>
           <h3 className="mt-4 text-lg font-medium text-gray-900">No exact match yet</h3>
-          <p className="mt-2 text-gray-600">
-            Try searching by extension name, Chrome Web Store URL, extension ID, or the warning message shown in Chrome.
+          <p className="mt-2 text-gray-600 max-w-md mx-auto">
+            Try searching the extension name, the warning message, or a broader category such as proxy, ad blocker, tabs, password manager, or translate.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/chrome-extension-error-messages"
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              Browse error messages
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {HOT_SEARCHES.map((s) => (
+              <button
+                key={s}
+                onClick={() => { window.location.href = `/tools/extension-search?q=${encodeURIComponent(s)}`; }}
+                className="rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+            <Link href="/alternatives" className="text-blue-600 hover:text-blue-800">
+              Browse all alternatives →
             </Link>
-            <Link
-              href="/alternatives"
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              Browse alternatives
+            <Link href="/chrome-extension-error-messages" className="text-blue-600 hover:text-blue-800">
+              Browse error messages →
             </Link>
           </div>
         </div>
@@ -64,38 +193,15 @@ function SearchResults({ query }: { query: string }) {
   }
 
   return (
-    <div className="mt-12 space-y-8">
+    <div className="mt-10 space-y-10">
       {results.exactMatches.length > 0 && (
         <div>
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">Exact Matches</h2>
-          <div className="space-y-4">
-            {results.exactMatches.map((result, index) => (
-              <Link
-                key={`${result.type}-${result.slug}-${index}`}
-                href={result.url}
-                className="block rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
-                        {result.type === 'extension' ? 'Extension' : result.type === 'landing' ? 'Guide' : 'Fix Guide'}
-                      </span>
-                      {result.status && <StatusBadge status={result.status} />}
-                    </div>
-                    <h3 className="mt-2 font-semibold text-gray-900">{result.title}</h3>
-                    <p className="mt-1 text-sm text-gray-600">{result.subtitle}</p>
-                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">{result.shortAnswer}</p>
-                  </div>
-                  <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </Link>
+          <h2 className="mb-1 text-sm font-semibold text-gray-500 uppercase tracking-wide">
+            Exact Matches ({results.exactMatches.length})
+          </h2>
+          <div className="mt-4 space-y-4">
+            {results.exactMatches.map((result, i) => (
+              <ResultCard key={`exact-${i}`} result={result} index={i} />
             ))}
           </div>
         </div>
@@ -103,35 +209,12 @@ function SearchResults({ query }: { query: string }) {
 
       {results.fuzzyMatches.length > 0 && (
         <div>
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">Related Results</h2>
-          <div className="space-y-4">
-            {results.fuzzyMatches.map((result, index) => (
-              <Link
-                key={`${result.type}-${result.slug}-fuzzy-${index}`}
-                href={result.url}
-                className="block rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600">
-                        {result.type === 'extension' ? 'Extension' : result.type === 'landing' ? 'Guide' : 'Fix Guide'}
-                      </span>
-                      {result.status && <StatusBadge status={result.status} />}
-                    </div>
-                    <h3 className="mt-2 font-semibold text-gray-900">{result.title}</h3>
-                    <p className="mt-1 text-sm text-gray-600">{result.subtitle}</p>
-                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">{result.shortAnswer}</p>
-                  </div>
-                  <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </Link>
+          <h2 className="mb-1 text-sm font-semibold text-gray-500 uppercase tracking-wide">
+            Related Results ({results.fuzzyMatches.length})
+          </h2>
+          <div className="mt-4 space-y-4">
+            {results.fuzzyMatches.map((result, i) => (
+              <ResultCard key={`fuzzy-${i}`} result={result} index={i} />
             ))}
           </div>
         </div>
@@ -140,74 +223,78 @@ function SearchResults({ query }: { query: string }) {
   );
 }
 
-function PopularWarnings({ onSearch }: { onSearch: (query: string) => void }) {
+function PopularAlternativesSection() {
   return (
-    <div className="mt-12">
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">Popular Warning Messages</h2>
-      <div className="flex flex-wrap gap-2">
-        {popularWarnings.map((warning) => (
-          <button
-            key={warning.href}
-            onClick={() => onSearch(warning.label)}
-            className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+    <section className="mt-16">
+      <h2 className="mb-5 text-xl font-semibold text-gray-900">Popular Extension Alternatives</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {POPULAR_ALTERNATIVES.map((alt) => (
+          <Link
+            key={alt.slug}
+            href={`/alternatives/${alt.slug}`}
+            className="group flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md"
           >
-            {warning.label}
-          </button>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <h3 className="font-medium text-gray-900 text-sm truncate">{alt.name}</h3>
+                <StatusBadge status={alt.status} />
+              </div>
+              <p className="mt-0.5 text-xs text-gray-500">{alt.category}</p>
+            </div>
+            <svg className="h-4 w-4 flex-shrink-0 text-gray-400 mt-0.5 group-hover:text-blue-600 transition-colors" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          </Link>
         ))}
       </div>
-      <p className="mt-4 text-sm text-gray-500">
-        Or{' '}
-        <Link href="/chrome-extension-error-messages" className="text-blue-600 hover:text-blue-800">
-          browse all warning messages
-        </Link>
-      </p>
-    </div>
+    </section>
   );
 }
 
-function PopularExtensions() {
+function CommonProblemsSection() {
   return (
-    <div className="mt-12">
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">Popular Extensions</h2>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Link
-          href="/alternatives/switchyomega"
-          className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-        >
-          <h3 className="font-semibold text-gray-900">Proxy SwitchyOmega</h3>
-          <p className="mt-1 text-sm text-gray-600">
-            Affected by MV2 deprecation. Find ZeroOmega and FoxyProxy alternatives.
-          </p>
-        </Link>
-        <Link
-          href="/alternatives/ublock-origin"
-          className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-        >
-          <h3 className="font-semibold text-gray-900">uBlock Origin</h3>
-          <p className="mt-1 text-sm text-gray-600">
-            MV2 affected. Try uBlock Origin Lite or other MV3-compatible ad blockers.
-          </p>
-        </Link>
-        <Link
-          href="/alternatives/great-suspender"
-          className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-        >
-          <h3 className="font-semibold text-gray-900">The Great Suspender</h3>
-          <p className="mt-1 text-sm text-gray-600">
-            Removed from Chrome Web Store. Use Chrome Memory Saver or Auto Tab Discard.
-          </p>
-        </Link>
-        <Link
-          href="/alternatives/modheader"
-          className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-md"
-        >
-          <h3 className="font-semibold text-gray-900">ModHeader</h3>
-          <p className="mt-1 text-sm text-gray-600">
-            Active MV3 extension. Explore Requestly or Header Editor alternatives.
-          </p>
-        </Link>
+    <section className="mt-12">
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Common Chrome Extension Problems</h2>
+      <div className="flex flex-wrap gap-2">
+        {COMMON_PROBLEMS.map((prob) => (
+          <Link
+            key={prob.href}
+            href={prob.href}
+            className="rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800 transition-colors hover:border-amber-400 hover:bg-amber-100"
+          >
+            {prob.label}
+          </Link>
+        ))}
       </div>
-    </div>
+    </section>
+  );
+}
+
+function RecentlyReviewedSection() {
+  return (
+    <section className="mt-12">
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Recently Reviewed</h2>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {RECENTLY_REVIEWED.map((ext) => (
+          <Link
+            key={ext.slug}
+            href={`/alternatives/${ext.slug}`}
+            className="group flex items-center justify-between rounded-lg border border-gray-100 bg-white px-4 py-3 text-sm transition-colors hover:border-gray-200 hover:bg-gray-50"
+          >
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-gray-900 truncate">{ext.name}</span>
+                <StatusBadge status={ext.status} />
+              </div>
+              <span className="text-xs text-gray-400">{ext.category} · {formatDate(ext.lastUpdated)}</span>
+            </div>
+            <svg className="h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -224,56 +311,74 @@ function SearchPageContent() {
     }
   };
 
-  const handleWarningClick = (warningLabel: string) => {
-    setInputValue(warningLabel);
-    router.push(`/tools/extension-search?q=${encodeURIComponent(warningLabel)}`);
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        {/* Hero */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Chrome Extension Search and Warning Lookup</h1>
-          <p className="mt-3 text-gray-600">
-            Search an extension name, Chrome Web Store URL, extension ID, or warning message.
+          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+            Find Chrome Extension Fixes and MV3 Alternatives
+          </h1>
+          <p className="mt-3 text-lg text-gray-600">
+            Search an extension name, warning message, or Chrome extension problem.
           </p>
         </div>
 
+        {/* Search box — prominent */}
         <div className="mt-8">
           <form onSubmit={handleSearch} className="relative">
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                    clipRule="evenodd"
-                  />
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
+                <svg className="h-6 w-6 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
                 </svg>
               </div>
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Paste a Chrome warning message, extension name, Web Store URL, or extension ID"
-                className="block w-full rounded-xl border border-gray-300 bg-white py-4 pl-12 pr-4 text-gray-900 placeholder-gray-500 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base"
+                placeholder="Paste a Chrome warning message, extension name, or problem..."
+                className="block w-full rounded-2xl border-2 border-gray-200 bg-white py-5 pl-14 pr-36 text-lg text-gray-900 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100"
+                autoFocus={!query}
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               >
                 Search
               </button>
             </div>
           </form>
+
+          {/* Hot search chips */}
+          {query ? null : (
+            <div className="mt-4 flex flex-wrap items-center gap-2 px-1">
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">Popular:</span>
+              {HOT_SEARCHES.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => {
+                    setInputValue(s);
+                    router.push(`/tools/extension-search?q=${encodeURIComponent(s)}`);
+                  }}
+                  className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-600 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
+        {/* Content */}
         {query ? (
-          <SearchResults query={query} />
+          <SearchResultsSection query={query} />
         ) : (
           <>
-            <PopularWarnings onSearch={handleWarningClick} />
-            <PopularExtensions />
+            <PopularAlternativesSection />
+            <CommonProblemsSection />
+            <RecentlyReviewedSection />
           </>
         )}
       </div>
@@ -285,11 +390,11 @@ export default function ExtensionSearchPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 py-12">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 text-gray-600">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <div className="inline-flex items-center gap-2 text-gray-500">
             <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
             Loading...
           </div>
