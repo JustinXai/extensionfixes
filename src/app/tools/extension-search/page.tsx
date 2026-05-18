@@ -151,77 +151,142 @@ function ResultCard({ result, index }: { result: SearchResultItem; index: number
   );
 }
 
-function SearchResultsSection({ query }: { query: string }) {
-  const results = useMemo(() => searchAll(query), [query]);
-  const hasResults = results.exactMatches.length > 0 || results.fuzzyMatches.length > 0;
+// ── Static hero (no hooks — renders in static HTML) ────────────────────────────
 
-  if (!hasResults) {
+function ExtensionSearchHero() {
+  return (
+    <>
+      {/* Hero */}
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+          Find Chrome Extension Fixes and MV3 Alternatives
+        </h1>
+        <p className="mt-3 text-lg text-gray-600">
+          Search an extension name, warning message, or Chrome extension problem.
+        </p>
+      </div>
+
+      {/* Search box — prominent */}
+      <div className="mt-8">
+        <SearchBox />
+      </div>
+    </>
+  );
+}
+
+function SearchBox() {
+  const router = useRouter();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      router.push(`/tools/extension-search?q=${encodeURIComponent(inputValue.trim())}`);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSearch} className="relative">
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
+          <svg className="h-6 w-6 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Paste a Chrome warning message, extension name, or problem..."
+          className="block w-full rounded-2xl border-2 border-gray-200 bg-white py-5 pl-14 pr-36 text-lg text-gray-900 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100"
+          autoFocus={false}
+        />
+        <button
+          type="submit"
+          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        >
+          Search
+        </button>
+      </div>
+
+      {/* Hot search chips */}
+      <div className="mt-4 flex flex-wrap items-center gap-2 px-1">
+        <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">Popular:</span>
+        {HOT_SEARCHES.map((s) => (
+          <button
+            key={s}
+            onClick={() => {
+              setInputValue(s);
+              router.push(`/tools/extension-search?q=${encodeURIComponent(s)}`);
+            }}
+            className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-600 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+    </form>
+  );
+}
+
+// ── Dynamic results (uses useSearchParams — must be inside Suspense) ───────────
+
+// ── Dynamic results (uses useSearchParams — must be inside Suspense) ───────────
+
+function SearchResultsSection() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
+
+  const queryResults = useMemo(() => {
+    if (!query) return null;
+    return searchAll(query);
+  }, [query]);
+
+  const totalResults = (queryResults?.exactMatches.length ?? 0) + (queryResults?.fuzzyMatches.length ?? 0);
+
+  if (query) {
     return (
-      <div className="mt-12">
-        <div className="rounded-xl border border-gray-200 bg-white p-8 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
-            <svg className="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-            </svg>
-          </div>
-          <h3 className="mt-4 text-lg font-medium text-gray-900">No exact match yet</h3>
-          <p className="mt-2 text-gray-600 max-w-md mx-auto">
-            Try searching the extension name, the warning message, or a broader category such as proxy, ad blocker, tabs, password manager, or translate.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
-            {HOT_SEARCHES.map((s) => (
-              <button
-                key={s}
-                onClick={() => { window.location.href = `/tools/extension-search?q=${encodeURIComponent(s)}`; }}
-                className="rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
-              >
-                {s}
-              </button>
+      <div className="mt-10">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {totalResults > 0
+              ? `${totalResults} result${totalResults !== 1 ? 's' : ''} for "${query}"`
+              : `No results for "${query}"`}
+          </h2>
+          <button
+            onClick={() => router.push('/tools/extension-search')}
+            className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+          >
+            Clear search
+          </button>
+        </div>
+        {totalResults > 0 ? (
+          <div className="space-y-4">
+            {[...(queryResults?.exactMatches ?? []), ...(queryResults?.fuzzyMatches ?? [])].map((result, i) => (
+              <ResultCard key={`${result.type}-${result.slug}-${i}`} result={result} index={i} />
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
-            <Link href="/alternatives" className="text-blue-600 hover:text-blue-800">
-              Browse all alternatives →
-            </Link>
-            <Link href="/chrome-extension-error-messages" className="text-blue-600 hover:text-blue-800">
-              Browse error messages →
-            </Link>
+        ) : (
+          <div className="rounded-xl border border-gray-200 bg-white p-8 text-center">
+            <p className="text-gray-500">Try searching for an extension name or error message.</p>
           </div>
-        </div>
+        )}
       </div>
     );
   }
 
   return (
-    <div className="mt-10 space-y-10">
-      {results.exactMatches.length > 0 && (
-        <div>
-          <h2 className="mb-1 text-sm font-semibold text-gray-500 uppercase tracking-wide">
-            Exact Matches ({results.exactMatches.length})
-          </h2>
-          <div className="mt-4 space-y-4">
-            {results.exactMatches.map((result, i) => (
-              <ResultCard key={`exact-${i}`} result={result} index={i} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {results.fuzzyMatches.length > 0 && (
-        <div>
-          <h2 className="mb-1 text-sm font-semibold text-gray-500 uppercase tracking-wide">
-            Related Results ({results.fuzzyMatches.length})
-          </h2>
-          <div className="mt-4 space-y-4">
-            {results.fuzzyMatches.map((result, i) => (
-              <ResultCard key={`fuzzy-${i}`} result={result} index={i} />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+    <>
+      <PopularAlternativesSection />
+      <CommonProblemsSection />
+      <RecentlyReviewedSection />
+    </>
   );
 }
+
+// ── Static section components ───────────────────────────────────────────────────
 
 function PopularAlternativesSection() {
   return (
@@ -298,110 +363,29 @@ function RecentlyReviewedSection() {
   );
 }
 
-function SearchPageContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
-  const [inputValue, setInputValue] = useState(query);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      router.push(`/tools/extension-search?q=${encodeURIComponent(inputValue.trim())}`);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Find Chrome Extension Fixes and MV3 Alternatives
-          </h1>
-          <p className="mt-3 text-lg text-gray-600">
-            Search an extension name, warning message, or Chrome extension problem.
-          </p>
-        </div>
-
-        {/* Search box — prominent */}
-        <div className="mt-8">
-          <form onSubmit={handleSearch} className="relative">
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
-                <svg className="h-6 w-6 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.35-4.35" />
-                </svg>
-              </div>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Paste a Chrome warning message, extension name, or problem..."
-                className="block w-full rounded-2xl border-2 border-gray-200 bg-white py-5 pl-14 pr-36 text-lg text-gray-900 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100"
-                autoFocus={!query}
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              >
-                Search
-              </button>
-            </div>
-          </form>
-
-          {/* Hot search chips */}
-          {query ? null : (
-            <div className="mt-4 flex flex-wrap items-center gap-2 px-1">
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">Popular:</span>
-              {HOT_SEARCHES.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => {
-                    setInputValue(s);
-                    router.push(`/tools/extension-search?q=${encodeURIComponent(s)}`);
-                  }}
-                  className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-600 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Content */}
-        {query ? (
-          <SearchResultsSection query={query} />
-        ) : (
-          <>
-            <PopularAlternativesSection />
-            <CommonProblemsSection />
-            <RecentlyReviewedSection />
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
+// ── Root page component ────────────────────────────────────────────────────────
 
 export default function ExtensionSearchPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <div className="inline-flex items-center gap-2 text-gray-500">
-            <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            Loading...
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        {/* Static hero: renders in HTML, h1 always present */}
+        <ExtensionSearchHero />
+        {/* Dynamic results: useSearchParams requires Suspense */}
+        <Suspense fallback={
+          <div className="mt-10 text-center text-gray-400">
+            <div className="inline-flex items-center gap-2">
+              <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              Loading...
+            </div>
           </div>
-        </div>
+        }>
+          <SearchResultsSection />
+        </Suspense>
       </div>
-    }>
-      <SearchPageContent />
-    </Suspense>
+    </div>
   );
 }
