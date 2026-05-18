@@ -32,8 +32,12 @@ function extractMeta(html, pattern) {
 
 function extractContent(html, selector) {
   // Simple tag content extraction (no DOM parser needed)
-  const tagMatch = html.match(new RegExp(`<${selector}[^>]*>([^<]+)</${selector}>`, 'i'));
-  return tagMatch ? tagMatch[1].trim() : null;
+  // Use [\s\S]*? to match across newlines and handle nested HTML comments in React SSR
+  const tagMatch = html.match(new RegExp(`<${selector}[^>]*>([\\s\\S]*?)<\\/${selector}>`, 'i'));
+  if (!tagMatch) return null;
+  // Strip React SSR comments (e.g. <!-- -->)
+  const stripped = tagMatch[1].replace(/<!--[\s\S]*?-->/g, '').trim();
+  return stripped.length > 0 ? stripped : null;
 }
 
 function checkNoindex(html) {
