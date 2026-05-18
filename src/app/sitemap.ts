@@ -50,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const fixPages: MetadataRoute.Sitemap = errors.map((err) => ({
-    url: `${baseUrl}/fix/${err.slug}`,
+    url: `${baseUrl}/fix/${err.slug}/`,
     lastModified: new Date(err.lastUpdated),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
