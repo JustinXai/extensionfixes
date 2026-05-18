@@ -1454,6 +1454,14 @@ export const extensions: ExtensionRecord[] = [
         reliability: 'secondary',
         supports: 'FoxyProxy developer information, product features, and support resources',
       },
+      {
+        title: 'Manifest V3 migration for extensions',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'secondary',
+        supports: 'Chrome extension platform and Manifest V3 migration context — clarifies why maintained extensions like FoxyProxy have updated to MV3',
+      },
     ],
     lastUpdated: '2026-05-18',
     atAGlance: {
