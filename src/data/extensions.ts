@@ -68,7 +68,7 @@ export const extensions: ExtensionRecord[] = [
         bestFor: 'Users needing advanced proxy features and multi-profile management',
         status: 'active_mv3',
         chromeStoreUrl:
-          'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+          'https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp',
         pros: [
           'Long-established proxy management tool',
           'Supports multiple proxy profiles with pattern matching',
@@ -137,7 +137,7 @@ export const extensions: ExtensionRecord[] = [
       },
       {
         title: 'FoxyProxy Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        url: 'https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp',
         publisher: 'Chrome Web Store',
       },
     ],
@@ -630,8 +630,13 @@ export const extensions: ExtensionRecord[] = [
     sources: [
       {
         title: 'ModHeader Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/modheader-modify-http-hea/idgpnmonknjnojddfkpgkljpfnnfcklj',
+        url: 'https://chromewebstore.google.com/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj',
         publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'ModHeader Documentation',
+        url: 'https://docs.modheader.com/',
+        publisher: 'ModHeader',
       },
     ],
     lastUpdated: '2026-05-13',
@@ -812,7 +817,7 @@ export const extensions: ExtensionRecord[] = [
         bestFor: 'Users needing advanced proxy features and multi-profile management',
         status: 'active_mv3',
         chromeStoreUrl:
-          'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+          'https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp',
         pros: [
           'Long-established proxy management tool with a solid reputation',
           'Supports multiple proxy profiles with pattern matching',
@@ -889,7 +894,7 @@ export const extensions: ExtensionRecord[] = [
       },
       {
         title: 'FoxyProxy Standard Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        url: 'https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp',
         publisher: 'Chrome Web Store',
       },
     ],
@@ -1282,6 +1287,11 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://chromewebstore.google.com/detail/auto-tab-discard-suspend/jhnleheckmknfcgijgkadoemagpecfol',
         publisher: 'Chrome Web Store',
       },
+      {
+        title: 'Auto Tab Discard — WebExtensions.org Listing',
+        url: 'https://webextension.org/listing/tab-discard.html',
+        publisher: 'WebExtensions.org',
+      },
     ],
     lastUpdated: '2026-05-18',
   },
@@ -1375,8 +1385,13 @@ export const extensions: ExtensionRecord[] = [
     sources: [
       {
         title: 'FoxyProxy Standard Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        url: 'https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp',
         publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'FoxyProxy Official Website',
+        url: 'https://getfoxyproxy.org/',
+        publisher: 'Beholder Corporation',
       },
     ],
     lastUpdated: '2026-05-18',
@@ -1534,8 +1549,13 @@ export const extensions: ExtensionRecord[] = [
     sources: [
       {
         title: 'Session Buddy Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/session-buddy/iancjfoljcpenaloeigejedmfpl药物治疗',
+        url: 'https://chromewebstore.google.com/detail/session-buddy/edacconmaakjimmfgnblocblbcdcpbko',
         publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Session Buddy Official Support',
+        url: 'https://sessionbuddy.com/support',
+        publisher: 'Session Buddy',
       },
     ],
     lastUpdated: '2026-05-18',
@@ -1809,6 +1829,11 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://chromewebstore.google.com/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall',
         publisher: 'Chrome Web Store',
       },
+      {
+        title: 'OneTab Official Website',
+        url: 'https://www.one-tab.com/',
+        publisher: 'OneTab',
+      },
     ],
     lastUpdated: '2026-05-18',
   },
@@ -1902,6 +1927,11 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://chromewebstore.google.com/detail/video-downloadhelper/lmegbjnfcocmkpcgfleegnjjhhcoiocj',
         publisher: 'Chrome Web Store',
       },
+      {
+        title: 'Video DownloadHelper Official Website',
+        url: 'https://www.downloadhelper.net/',
+        publisher: 'ACLAP (DownloadHelper)',
+      },
     ],
     lastUpdated: '2026-05-18',
   },
@@ -1993,6 +2023,11 @@ export const extensions: ExtensionRecord[] = [
         title: 'User-Agent Switcher Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/user-agent-switcher/abgpipoelcvcncpcgapdmhbkfklelamd',
         publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Chrome DevTools Device Emulation',
+        url: 'https://developer.chrome.com/docs/devtools/device-mode/',
+        publisher: 'Google Chrome Developers',
       },
     ],
     lastUpdated: '2026-05-18',
@@ -2091,9 +2126,9 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Chrome Web Store',
       },
       {
-        title: 'LanguageTool',
-        url: 'https://languagetool.org/',
-        publisher: 'LanguageTool Community',
+        title: 'Grammarly Official Website',
+        url: 'https://www.grammarly.com/',
+        publisher: 'Grammarly',
       },
     ],
     lastUpdated: '2026-05-18',
@@ -2192,9 +2227,9 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Chrome Web Store',
       },
       {
-        title: 'Bitwarden',
-        url: 'https://bitwarden.com/',
-        publisher: 'Bitwarden',
+        title: 'LastPass Official Website',
+        url: 'https://www.lastpass.com/',
+        publisher: 'LastPass',
       },
     ],
     lastUpdated: '2026-05-18',
@@ -2371,6 +2406,11 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://chromewebstore.google.com/detail/honey/bmnkcadhipjbcaoccccknpnghdcjhadp',
         publisher: 'Chrome Web Store',
       },
+      {
+        title: 'Honey Official Website',
+        url: 'https://www.joinhoney.com/',
+        publisher: 'Honey (PayPal)',
+      },
     ],
     lastUpdated: '2026-05-18',
   },
@@ -2462,6 +2502,11 @@ export const extensions: ExtensionRecord[] = [
         title: 'Google Translate Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb',
         publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Google Translate Official Website',
+        url: 'https://translate.google.com/',
+        publisher: 'Google',
       },
     ],
     lastUpdated: '2026-05-18',
