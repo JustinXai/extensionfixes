@@ -7,6 +7,7 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://extensionfixes.com';
+  // v=2 ensures fresh CDN cache after deployment
 
   const staticPages: MetadataRoute.Sitemap = [
     {
