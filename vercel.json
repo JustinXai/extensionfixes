@@ -1,16 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/fix/chrome-extension-disabled",
-      "destination": "/fix/chrome-disabled-extension/",
-      "permanent": true
-    },
-    {
-      "source": "/fix/chrome-extension-disabled/",
-      "destination": "/fix/chrome-disabled-extension/",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
       "has": [
         {
