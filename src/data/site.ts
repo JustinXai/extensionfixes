@@ -59,7 +59,7 @@ export const footerLinks = [
       { label: 'Chrome Extension Error Messages', href: '/chrome-extension-error-messages' },
       { label: 'All Alternatives', href: '/alternatives' },
       { label: 'All Guides', href: '/guides' },
-      { label: 'Sitemap', href: '/sitemap.xml' },
+      { label: 'Sitemap', href: '/sitemap' },
     ],
   },
 ];

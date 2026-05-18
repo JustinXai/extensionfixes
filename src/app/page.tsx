@@ -94,29 +94,30 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-16">
+        {/* What do you need to fix? */}
+        <section id="what-to-fix" className="py-16 border-b border-gray-200">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Start with what you see in Chrome</h2>
+            <h2 className="text-2xl font-bold text-slate-900">What do you need to fix?</h2>
             <p className="mt-2 text-slate-600">
               Choose the scenario that matches your situation.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Link
-              href="/chrome-extension-error-messages"
+              href="/tools/extension-search"
               className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900">I see a Chrome warning</h3>
+              <h3 className="font-semibold text-slate-900">Search an extension</h3>
               <p className="mt-2 text-sm text-slate-600">
-                Match the exact warning message and find a practical next step.
+                Find current Chrome status, alternatives, and related fix guides.
               </p>
               <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
-                Look up warning messages
+                Search extensions
                 <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -131,9 +132,9 @@ export default function HomePage() {
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900">I need an extension alternative</h3>
+              <h3 className="font-semibold text-slate-900">Browse alternatives</h3>
               <p className="mt-2 text-sm text-slate-600">
-                Compare maintained replacements for unsupported or removed extensions.
+                Compare MV3-compatible and maintained alternatives.
               </p>
               <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
                 Browse alternatives
@@ -143,20 +144,40 @@ export default function HomePage() {
               </span>
             </Link>
             <Link
-              href="/tools/extension-search"
+              href="/chrome-extension-error-messages"
               className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900">I know the extension name</h3>
+              <h3 className="font-semibold text-slate-900">Fix Chrome warnings</h3>
               <p className="mt-2 text-sm text-slate-600">
-                Search by extension name, Web Store URL, or extension ID.
+                Understand common warnings and what to do next.
               </p>
               <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
-                Search extensions
+                Look up warnings
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/fix/manifest-v2-disabled"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600 mb-4">
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-slate-900">Understand MV2 shutdown</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Learn why older extensions stopped working in Chrome.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read MV2 guide
                 <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
