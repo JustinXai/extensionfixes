@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/remove-conflicting-html.js",
     "start": "next start",
     "lint": "eslint",
     "seo:smoke": "node scripts/seo-smoke-test.mjs",
