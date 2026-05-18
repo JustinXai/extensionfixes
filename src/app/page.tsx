@@ -101,7 +101,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-semibold text-slate-900">I see a Chrome warning</h3>
               <p className="mt-2 text-sm text-slate-600">
-                Match the exact warning message and find the safest next step.
+                Match the exact warning message and find a practical next step.
               </p>
               <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
                 Look up warning messages

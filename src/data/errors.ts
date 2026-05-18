@@ -232,6 +232,87 @@ export const errors: ErrorRecord[] = [
     ],
     lastUpdated: '2026-05-13',
   },
+  {
+    slug: 'extension-removed-from-chrome-web-store',
+    title: 'Chrome Extension Removed from Web Store: What to Do Next',
+    aliases: [
+      'extension removed from chrome web store',
+      'extension removed from store',
+      'chrome web store removed extension',
+      'extension no longer in web store',
+      'developer removed extension',
+    ],
+    shortAnswer:
+      'Chrome removes extensions from the Web Store for policy violations, developer request, or malware detection. Do not install unofficial copies of removed extensions. Check for official alternatives, community forks, or browser-native features as your next step.',
+    whyItHappens: [
+      'The developer voluntarily removed the extension from the Chrome Web Store.',
+      'The extension violated Chrome Web Store policies (spam, misleading content, or deceptive practices).',
+      'Google detected malware, phishing, or security threats associated with the extension.',
+      'The extension made unauthorized use of user data or violated privacy policies.',
+      'The developer stopped maintaining the extension and it was auto-removed after a period of inactivity.',
+    ],
+    whatYouCanDo: [
+      'Check the Chrome Web Store for an official alternative by the same developer.',
+      'Search Extension Fixes for known alternatives to common removed extensions.',
+      'Look for community-maintained forks that continue development.',
+      'Check if Firefox or other browsers have the extension available.',
+      'Use browser-native features that may replace the extension\'s functionality.',
+      'Export settings from any remaining installed version before it is also disabled.',
+      'Report the extension if you believe it was incorrectly removed or if you found malware.',
+    ],
+    whatNotToDo: [
+      'Do not download CRX files from unofficial download sites for removed extensions.',
+      'Do not install similar-looking extensions from unknown developers as replacements.',
+      'Do not disable Chrome security features to load unpacked extensions.',
+      'Do not assume a removed extension was malicious — some are removed for policy or maintenance reasons.',
+    ],
+    relatedExtensionSlugs: ['great-suspender'],
+    faqs: [
+      {
+        question: 'Why was my extension removed from the Chrome Web Store?',
+        answer:
+          'Extensions are removed for several reasons: developer request (voluntary removal), policy violations (spam, misleading content, or deceptive practices), malware detection (security threats or unauthorized data collection), or prolonged inactivity (Chrome auto-removes extensions not updated for extended periods). The specific reason depends on the extension.',
+      },
+      {
+        question: 'Is a removed extension dangerous to keep using?',
+        answer:
+          'Not necessarily. Extensions can be removed for non-security reasons like developer request or policy violations. However, if an extension was removed due to malware or security concerns, Chrome may proactively disable installed copies. Check the Chrome Web Store listing and news sources for context.',
+      },
+      {
+        question: 'Can I reinstall a removed extension?',
+        answer:
+          'No. Once removed from the Chrome Web Store, the extension cannot be reinstalled. If you still have the extension installed, it may continue to work temporarily, but you should not expect long-term support or updates. Chrome may also proactively disable removed extensions.',
+      },
+      {
+        question: 'How do I find a safe replacement for a removed extension?',
+        answer:
+          'Check if the developer released an alternative in the Chrome Web Store. Search Extension Fixes for known alternatives. Look for community forks on GitHub. Verify the replacement developer and permissions before installing. Use browser-native features as a fallback.',
+      },
+      {
+        question: 'What if the extension was removed by mistake?',
+        answer:
+          'If you believe an extension was incorrectly removed, you can appeal through the Chrome Web Store developer dashboard. For general users, you can file feedback through Chrome settings. However, the appeals process is primarily available to extension developers.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Web Store Program Policies',
+        url: 'https://developer.chrome.com/docs/webstore/program-policies/policies',
+        publisher: 'Google Chrome Developers',
+      },
+      {
+        title: 'Chrome Web Store Developer Distribution Agreement',
+        url: 'https://developer.chrome.com/docs/webstore/program-policies/',
+        publisher: 'Google Chrome Developers',
+      },
+      {
+        title: 'Manage extensions on work or school Chromebooks',
+        url: 'https://support.google.com/chrome/a/answer/9296680',
+        publisher: 'Google Chrome Help',
+      },
+    ],
+    lastUpdated: '2026-05-18',
+  },
 ];
 
 export function getErrorBySlug(slug: string): ErrorRecord | undefined {

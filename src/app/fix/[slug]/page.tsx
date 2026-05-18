@@ -35,7 +35,7 @@ const fixMetadata: Record<string, { title: string; description: string; quickAns
     description:
       'Chrome has disabled Manifest V2 extensions. Learn what this means, why old extensions stopped working, and how to find MV3-compatible replacements.',
     quickAnswer:
-      'Chrome 138 disabled all Manifest V2 extensions by default. This affects extensions built on MV2 that have not been updated. Recommended path: find MV3-compatible replacements, check for official updates from developers, or consider Firefox which still supports MV2.',
+      'Chrome has disabled Manifest V2 extensions by default. This affects extensions built on MV2 that have not been updated to MV3. Recommended path: find MV3-compatible replacements, check for official updates from developers, or consider Firefox which still supports MV2 extensions.',
   },
   'chrome-disabled-extension': {
     title: 'Chrome Disabled My Extension: Causes and Safe Fixes',
@@ -214,6 +214,40 @@ export default async function FixPage({ params }: PageProps) {
             </div>
           </section>
 
+          {slug === 'manifest-v2-disabled' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
+              <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Extension No Longer Supported Fix
+                </Link>
+                <Link href="/alternatives/ublock-origin" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  uBlock Origin Alternatives
+                </Link>
+                <Link href="/alternatives/proxy-switchyomega" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Proxy SwitchyOmega Alternatives
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'chrome-disabled-extension' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
+              <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Extension No Longer Supported Fix
+                </Link>
+                <Link href="/fix/extension-removed-from-chrome-web-store" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Extension Removed from Web Store
+                </Link>
+                <Link href="/alternatives/great-suspender" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Great Suspender Alternatives
+                </Link>
+              </div>
+            </section>
+          )}
+
           {slug === 'this-extension-is-no-longer-supported' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
               <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
@@ -234,29 +268,15 @@ export default async function FixPage({ params }: PageProps) {
             </section>
           )}
 
-          {slug === 'manifest-v2-disabled' && (
+          {slug === 'extension-removed-from-chrome-web-store' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
               <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
               <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Chrome Disabled My Extension
+                </Link>
                 <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Extension No Longer Supported Fix
-                </Link>
-                <Link href="/alternatives/switchyomega" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  SwitchyOmega Alternatives
-                </Link>
-                <Link href="/alternatives/ublock-origin" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  uBlock Origin Alternatives
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'chrome-disabled-extension' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
-              <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Extension No Longer Supported Fix
+                  Extension No Longer Supported
                 </Link>
                 <Link href="/alternatives/great-suspender" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Great Suspender Alternatives

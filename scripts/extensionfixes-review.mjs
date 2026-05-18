@@ -183,11 +183,24 @@ for (const { file, matches } of localhostFindings) {
 }
 
 // ── 7. undefined literal risk (scan src/ only) ────────────────────────────────
+// Skips:
+//   - Type annotations: `T | undefined` or `?: undefined`
+//   - Return statements from .find() which legitimately return T | undefined
+//   - Function parameters that include undefined in union types
 const undefinedFindings = scanDir(path.join(ROOT, 'src'), ['.ts', '.tsx'], (file, content) => {
   const lines = [];
   const contentLines = content.split('\n');
   contentLines.forEach((line, i) => {
     if (/(?<![a-zA-Z_$])undefined(?![a-zA-Z_$])/.test(line)) {
+      const trimmed = line.trim();
+      // Skip type annotation unions: `| undefined`
+      if (/\| *undefined/.test(trimmed)) return;
+      // Skip function parameters with undefined in union: `?: ... | undefined`
+      if (/^\s*\w[^=]*=\s*[^|]*\|\s*undefined/.test(trimmed)) return;
+      // Skip parameter type unions: `(string | undefined)`
+      if (/^\s*\w[^=]*\([^)]*\|\s*undefined/.test(trimmed)) return;
+      // Skip return statements from .find() which naturally return T | undefined
+      if (/return\s+\w+\.find\([^)]+\)/.test(trimmed)) return;
       lines.push(`line ${i + 1}: contains undefined literal`);
     }
   });

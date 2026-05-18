@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Chrome Extension Error Messages: What They Mean and How to Fix Them',
     description:
-      'Look up common Chrome extension warning messages and find the safest next steps.',
+      'Look up common Chrome extension warning messages and find practical next steps.',
   },
 };
 
@@ -71,6 +71,13 @@ const warningMessages = [
     nextStep: 'Check for a current Chrome Web Store version or a maintained alternative.',
     link: '/fix/manifest-v2-disabled',
   },
+  {
+    message: 'Extension removed from Chrome Web Store',
+    meaning:
+      'The extension was removed from the Chrome Web Store. This can happen due to policy violations, developer request, or security concerns.',
+    nextStep: 'Do not install unofficial copies. Find a maintained alternative.',
+    link: '/fix/extension-removed-from-chrome-web-store',
+  },
 ];
 
 const checklistItems = [
@@ -96,6 +103,8 @@ const relatedGuides = [
   { label: 'Extension Was Turned Off', href: '/this-extension-was-turned-off-because-it-is-no-longer-supported' },
   { label: 'Extension May Soon Be Unsupported', href: '/this-extension-may-soon-no-longer-be-supported' },
   { label: 'Manifest V2 Disabled', href: '/fix/manifest-v2-disabled' },
+  { label: 'Extension Removed from Web Store', href: '/fix/extension-removed-from-chrome-web-store' },
+  { label: 'Chrome Disabled Extension', href: '/fix/chrome-disabled-extension' },
   { label: 'SwitchyOmega Not Working', href: '/switchyomega-not-working' },
   { label: 'FoxyProxy Alternatives', href: '/foxyproxy-alternative-for-chrome' },
   { label: 'Great Suspender History', href: '/the-great-suspender-malware' },
@@ -199,7 +208,7 @@ export default function ChromeExtensionErrorMessagesPage() {
               Chrome Extension Error Messages: What They Mean and How to Fix Them
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              Paste or match the warning you see in Chrome, then follow the safest next step.
+              Paste or match the warning you see in Chrome, then follow a practical next step.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link

@@ -328,7 +328,7 @@ export const landingPages: LandingPageRecord[] = [
           'uBlock Origin Lite is developed by the same trusted developer (Raymond Hill) and is available in the official Chrome Web Store. Other MV3 ad blockers like AdGuard or AdBlock are also available options from established developers.',
       },
       {
-        question: 'Is uBlock Origin Lite an official replacement from the same developer?',
+        question: 'Is uBlock Origin Lite a recommended alternative from the same developer?',
         answer:
           'Yes. uBlock Origin Lite is developed by Raymond Hill, the same developer who created classic uBlock Origin. It is the MV3-compatible version.',
       },

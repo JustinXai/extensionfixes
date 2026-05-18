@@ -665,6 +665,159 @@ export const extensions: ExtensionRecord[] = [
     ],
     lastUpdated: '2026-05-13',
   },
+  {
+    slug: 'proxy-switchyomega',
+    name: 'Proxy SwitchyOmega',
+    aliases: [
+      'Proxy SwitchyOmega',
+      'SwitchyOmega proxy',
+      'Switchy Omega proxy',
+      'chrome proxy extension',
+      'proxy manager chrome',
+      'proxy switcher chrome mv3',
+    ],
+    category: 'Proxy Manager',
+    summary:
+      'A proxy switcher extension for managing and automatically switching between multiple proxy configurations in Chrome.',
+    status: 'affected_by_mv2',
+    riskLevel: 'medium',
+    oldExtensionIds: ['padekgcemlokbadohgkifijomclgjgif'],
+    issueSummary:
+      'Proxy SwitchyOmega is affected by Chrome Manifest V2 deprecation and no longer works in Chrome 138 and later.',
+    shortAnswer:
+      'Proxy SwitchyOmega stopped working in Chrome 138 because Chrome disabled all Manifest V2 extensions. The closest migration path is ZeroOmega, a community-maintained MV3-compatible fork that can import your existing SwitchyOmega settings directly. FoxyProxy is another established option with MV3 support.',
+    whatHappened: [
+      'Chrome 138 disabled all Manifest V2 extensions by default for all users.',
+      'Proxy SwitchyOmega was built on Manifest V2 and is no longer compatible with modern Chrome.',
+      'ZeroOmega emerged as a community fork specifically designed as a SwitchyOmega successor for MV3.',
+      'FoxyProxy Standard has been updated with full Manifest V3 support.',
+    ],
+    migrationSteps: [
+      'Export your SwitchyOmega profile backup if the extension is still partially accessible.',
+      'Install ZeroOmega or FoxyProxy from the Chrome Web Store.',
+      'Import SwitchyOmega profiles if using ZeroOmega (ZeroOmega supports direct import of SwitchyOmega profile files).',
+      'Review and recreate proxy profile settings in your chosen alternative.',
+      'Test each proxy profile individually before enabling auto-switch rules.',
+      'Verify that proxy authentication and SSL certificates work correctly.',
+      'Gradually remove the old SwitchyOmega extension once satisfied with the new setup.',
+    ],
+    safetyNotes: [
+      'Only install proxy managers from the official Chrome Web Store.',
+      'Review permissions carefully: legitimate proxy extensions need access to modify network requests.',
+      'Be cautious with extensions requiring excessive permissions beyond proxy functionality.',
+      'Verify the developer identity matches expectations before installing.',
+    ],
+    alternatives: [
+      {
+        name: 'ZeroOmega',
+        slug: 'zeroomega',
+        bestFor: 'SwitchyOmega users who want a familiar interface with direct profile import',
+        status: 'active_mv3',
+        chromeStoreUrl:
+          'https://chromewebstore.google.com/detail/proxy-switchyomega-3-zero/pfnededegaaopdmhkdmcofjmoldfiped',
+        githubUrl: 'https://github.com/zero-peak/ZeroOmega',
+        pros: [
+          'Direct fork of the SwitchyOmega codebase',
+          'Manifest V3 compatible and actively maintained',
+          'Similar interface to the original SwitchyOmega',
+          'Supports direct import of SwitchyOmega profile files',
+          'Open source for community review',
+        ],
+        cons: [
+          'Newer project with limited production testing compared to established tools',
+          'Some advanced SwitchyOmega features may not yet be available',
+        ],
+        note: 'ZeroOmega is a community-maintained fork designed specifically as a SwitchyOmega successor for MV3. It can import existing SwitchyOmega profiles directly.',
+      },
+      {
+        name: 'FoxyProxy Standard',
+        slug: 'foxyproxy',
+        bestFor: 'Users needing advanced proxy features and multi-profile management',
+        status: 'active_mv3',
+        chromeStoreUrl:
+          'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        pros: [
+          'Long-established proxy management tool with a solid reputation',
+          'Supports multiple proxy profiles with pattern matching',
+          'Available for multiple browsers',
+          'Full MV3 support in Chrome 138 and later',
+        ],
+        cons: [
+          'Interface differs from SwitchyOmega',
+          'Some advanced features require premium subscription',
+        ],
+        note: 'FoxyProxy has been a popular proxy manager for years and offers MV3-compatible versions for Chrome.',
+      },
+      {
+        name: 'Proxy Switcher and Manager',
+        slug: 'proxy-switcher-manager',
+        bestFor: 'Users wanting straightforward proxy switching without complexity',
+        status: 'active_mv3',
+        chromeStoreUrl:
+          'https://chromewebstore.google.com/detail/proxy-switcher-and-manager/hmidjncakjnlkjkicopkoobegggfmhdp',
+        pros: [
+          'Simple and intuitive interface',
+          'Multiple proxy profiles',
+          'Quick toggle between proxies',
+        ],
+        cons: [
+          'May lack advanced auto-switch capabilities',
+          'Limited pattern-based routing compared to SwitchyOmega',
+        ],
+        note: 'A practical alternative for users who need basic proxy switching functionality in an MV3-compatible package.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why did Proxy SwitchyOmega stop working in Chrome?',
+        answer:
+          'Proxy SwitchyOmega was built on Chrome Manifest V2. Chrome 138 fully disabled all Manifest V2 extensions by default, which means SwitchyOmega can no longer function in current Chrome versions without a Manifest V3 update from the developer.',
+      },
+      {
+        question: 'Can I import my SwitchyOmega profiles into ZeroOmega?',
+        answer:
+          'Yes. ZeroOmega is designed to be compatible with SwitchyOmega configurations. If you have an exported backup of your SwitchyOmega profiles, you can import them directly into ZeroOmega from the Options menu.',
+      },
+      {
+        question: 'Is ZeroOmega safe to use?',
+        answer:
+          'ZeroOmega is a community-maintained open-source fork. Review its permissions and consider its open-source nature when making your decision. The project can be audited on GitHub. As with any extension, verify the developer and permissions before installing.',
+      },
+      {
+        question: 'What if I need the exact features from SwitchyOmega?',
+        answer:
+          'If you rely on specific SwitchyOmega features, try multiple alternatives to find the best fit. Some features may require adjusting your workflow. FoxyProxy Standard offers the most comprehensive proxy management features among MV3-compatible options.',
+      },
+      {
+        question: 'Can I use browser proxy settings instead of an extension?',
+        answer:
+          'Browser proxy settings work for basic single-proxy setups but offer less flexibility for switching between multiple profiles or using auto-switch rules. If you manage multiple proxy configurations, an extension is more convenient.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+      },
+      {
+        title: 'ZeroOmega Chrome Web Store Listing',
+        url: 'https://chromewebstore.google.com/detail/proxy-switchyomega-3-zero/pfnededegaaopdmhkdmcofjmoldfiped',
+        publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'ZeroOmega GitHub Repository',
+        url: 'https://github.com/zero-peak/ZeroOmega',
+        publisher: 'ZeroOmega Contributors',
+      },
+      {
+        title: 'FoxyProxy Standard Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/foxyproxy-standard/jicccghpmafppfhkpgcdpniancjiiokj',
+        publisher: 'Chrome Web Store',
+      },
+    ],
+    lastUpdated: '2026-05-18',
+  },
 ];
 
 export function getExtensionBySlug(slug: string): ExtensionRecord | undefined {
