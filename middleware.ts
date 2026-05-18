@@ -25,5 +25,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/fix/chrome-extension-disabled'],
+  matcher: ['/fix/chrome-extension-disabled', '/fix/chrome-extension-disabled/'],
 };
