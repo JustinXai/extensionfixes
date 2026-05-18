@@ -249,6 +249,7 @@ export default async function AlternativePage({ params }: PageProps) {
 
   if (!extension) {
     notFound();
+    return null;
   }
 
   const customMeta = extensionMetadata[slug] || { quickAnswer: extension.shortAnswer };

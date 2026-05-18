@@ -104,6 +104,7 @@ export default async function FixPage({ params }: PageProps) {
 
   if (!error) {
     notFound();
+    return null;
   }
 
   const customMeta = fixMetadata[slug] || { quickAnswer: error.shortAnswer };
