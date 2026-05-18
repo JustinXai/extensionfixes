@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const REDIRECTS: ReadonlyArray<{ source: string; destination: string }> = [
   {
     source: '/fix/chrome-extension-disabled',
-    destination: '/fix/chrome-disabled-extension/',
+    destination: '/fix/chrome-disabled-extension',
   },
 ];
 
