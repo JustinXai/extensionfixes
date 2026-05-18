@@ -230,6 +230,88 @@ for (const p of [altPagePath, fixPagePath]) {
   }
 }
 
+// ── 9. Source Quality Layer v1 checks (Top 10 pages) ─────────────────────────
+const TOP10_ALT_SLUGS = [
+  'ublock-origin', 'proxy-switchyomega', 'tampermonkey', 'foxyproxy',
+  'dark-reader', 'bitwarden', 'lastpass', 'video-downloadhelper',
+];
+const TOP10_FIX_SLUGS = ['manifest-v2-disabled', 'chrome-disabled-extension'];
+
+function parseSourceBlocks(sourcesRaw) {
+  const sources = [];
+  const blocks = sourcesRaw.split(/\{[\s]*title:/);
+  for (let i = 1; i < blocks.length; i++) {
+    const block = blocks[i];
+    const titleM = block.match(/^\s*['"](.+?)['"]/);
+    const urlM = block.match(/url:\s*['"](.+?)['"]/);
+    const relM = block.match(/reliability:\s*['"](.+?)['"]/);
+    if (titleM && urlM) {
+      sources.push({
+        title: titleM[1],
+        url: urlM[1],
+        reliability: relM ? relM[1] : null,
+      });
+    }
+  }
+  return sources;
+}
+
+function extractSourcesFromFile(filePath, targetSlugs) {
+  if (!fs.existsSync(filePath)) return {};
+  const content = fs.readFileSync(filePath, 'utf8');
+  const results = {};
+  for (const slug of targetSlugs) {
+    const slugIdx = content.indexOf(`slug: '${slug}',`);
+    if (slugIdx === -1) {
+      results[slug] = [];
+      continue;
+    }
+    // Search for sources array between this slug and the next object in the array
+    // Prefer lastUpdated: as boundary (when sources is the last field)
+    // Fall back to } (next top-level object) when sources has trailing comma
+    const afterSlug = content.slice(slugIdx);
+    const matchWithLastUpdated = afterSlug.match(/sources:\s*\[([\s\S]*?)\],\s*\n\s*lastUpdated:/);
+    if (matchWithLastUpdated) {
+      results[slug] = parseSourceBlocks(matchWithLastUpdated[1]);
+      continue;
+    }
+    const matchWithBrace = afterSlug.match(/sources:\s*\[([\s\S]*?)\],\s*\n\s+\}/);
+    if (matchWithBrace) {
+      results[slug] = parseSourceBlocks(matchWithBrace[1]);
+      continue;
+    }
+    results[slug] = [];
+  }
+  return results;
+}
+
+const extSources = extractSourcesFromFile(path.join(ROOT, 'src', 'data', 'extensions.ts'), TOP10_ALT_SLUGS);
+const errSources = extractSourcesFromFile(path.join(ROOT, 'src', 'data', 'errors.ts'), TOP10_FIX_SLUGS);
+
+const allTop10 = [
+  ...TOP10_ALT_SLUGS.map(s => ({ slug: s, url: `/alternatives/${s}/`, sources: extSources[s] || [] })),
+  ...TOP10_FIX_SLUGS.map(s => ({ slug: s, url: `/fix/${s}/`, sources: errSources[s] || [] })),
+];
+
+for (const page of allTop10) {
+  const { url, sources } = page;
+  if (sources.length === 0) {
+    warnings.push(`Source quality [${url}]: NO sources — needs at least 3 sources`);
+  } else {
+    if (sources.length < 3) {
+      warnings.push(`Source quality [${url}]: only ${sources.length} source(s) — needs at least 3`);
+    }
+    const primaryCount = sources.filter(s => s.reliability === 'primary').length;
+    if (primaryCount === 0) {
+      warnings.push(`Source quality [${url}]: no primary source — needs at least 1 primary source`);
+    }
+    const discoveryCount = sources.filter(s => s.reliability === 'discovery').length;
+    if (discoveryCount > 0 && primaryCount === 0) {
+      warnings.push(`Source quality [${url}]: discovery sources present without primary — discovery sources should not be used as safety proof`);
+    }
+  }
+}
+
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');
 console.log('====================');

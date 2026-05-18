@@ -5,14 +5,23 @@ interface SourceListProps {
   className?: string;
 }
 
-function getDomainFromUrl(url: string): string {
-  try {
-    const urlObj = new URL(url);
-    return urlObj.hostname.replace('www.', '');
-  } catch {
-    return '';
-  }
-}
+const reliabilityLabel: Record<string, string> = {
+  primary: 'Primary source',
+  secondary: 'Secondary source',
+  discovery: 'Discovery source',
+};
+
+const typeLabel: Record<string, string> = {
+  'chrome-web-store': 'Chrome Web Store',
+  'chrome-developers': 'Chrome Developers',
+  'official-website': 'Official website',
+  github: 'GitHub',
+  documentation: 'Documentation',
+  'alternative-directory': 'Alternative directory',
+  'community-discussion': 'Community discussion',
+  news: 'News',
+  other: 'Other',
+};
 
 export function SourceList({ sources, className = '' }: SourceListProps) {
   if (!sources || sources.length === 0) return null;
@@ -20,40 +29,58 @@ export function SourceList({ sources, className = '' }: SourceListProps) {
   return (
     <div className={className}>
       <h2 className="text-lg font-semibold text-slate-900 mb-4">Sources</h2>
-      <ul className="space-y-3">
-        {sources.map((source, index) => (
-          <li key={index} className="flex items-start gap-3 text-sm">
-            <svg
-              className="mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <div className="flex-1 min-w-0">
+      <ul className="space-y-4">
+        {sources.map((source, index) => {
+          const reliability = source.reliability
+            ? reliabilityLabel[source.reliability] ?? source.reliability
+            : null;
+          const sourceType = source.sourceType
+            ? typeLabel[source.sourceType] ?? source.sourceType
+            : null;
+
+          return (
+            <li key={index} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
               <a
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                className="text-blue-600 hover:text-blue-800 hover:underline font-medium text-sm"
               >
                 {source.title}
               </a>
-              <div className="mt-1 text-slate-500 text-xs">
+              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                 {source.publisher && (
-                  <span>{source.publisher}</span>
+                  <span className="font-medium">{source.publisher}</span>
                 )}
-                <span className="mx-1">·</span>
-                <span className="text-slate-400">{getDomainFromUrl(source.url)}</span>
+                {source.publisher && sourceType && (
+                  <span className="text-slate-300" aria-hidden="true">·</span>
+                )}
+                {sourceType && (
+                  <span className="text-slate-500">{sourceType}</span>
+                )}
+                {reliability && (
+                  <>
+                    <span className="text-slate-300" aria-hidden="true">·</span>
+                    <span className={`font-medium ${
+                      reliability === 'Primary source'
+                        ? 'text-green-700'
+                        : reliability === 'Secondary source'
+                        ? 'text-amber-700'
+                        : 'text-slate-500'
+                    }`}>
+                      {reliability}
+                    </span>
+                  </>
+                )}
               </div>
-            </div>
-          </li>
-        ))}
+              {source.supports && (
+                <p className="mt-1 text-xs text-slate-400 italic">
+                  Supports: {source.supports}
+                </p>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

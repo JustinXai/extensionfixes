@@ -11,7 +11,8 @@
     "review": "node scripts/extensionfixes-review.mjs",
     "review:report": "node scripts/generate-review-report.mjs",
     "verify": "npm run lint && npm run build && npm run review",
-    "check:prod": "node scripts/check-production-pages.mjs"
+    "check:prod": "node scripts/check-production-pages.mjs",
+    "source:report": "node scripts/generate-source-quality-report.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

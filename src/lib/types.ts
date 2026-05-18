@@ -15,12 +15,32 @@ export interface FAQItem {
   answer: string;
 }
 
-// Source Item
+// Source type for categorizing sources by authority level
+export type SourceType =
+  | 'chrome-web-store'
+  | 'chrome-developers'
+  | 'official-website'
+  | 'github'
+  | 'documentation'
+  | 'alternative-directory'
+  | 'community-discussion'
+  | 'news'
+  | 'other';
+
+// Reliability tier — used to check if a source is being used as safety proof inappropriately
+export type SourceReliability = 'primary' | 'secondary' | 'discovery';
+
+// Source Item — describes a citation used in a page
 export interface SourceItem {
   title: string;
   url: string;
   publisher?: string;
   dateAccessed?: string;
+  // Source Quality Layer v1 fields (optional for backward compatibility)
+  sourceType?: SourceType;
+  reliability?: SourceReliability;
+  /** What claim or section this source supports — displayed to readers */
+  supports?: string;
 }
 
 // Alternative Record
