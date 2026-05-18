@@ -26,6 +26,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match both /path and /path/ to prevent trailingSlash: true redirect loop
-  matcher: ['/fix/chrome-extension-disabled', '/fix/chrome-extension-disabled/'],
+  matcher: ['/fix/chrome-extension-disabled'],
 };
