@@ -18,6 +18,18 @@ export default function AlternativesPage() {
 
   return (
     <Container>
+      {/* Quick Answer */}
+      <section className="py-8 border-b border-gray-200">
+        <div className="rounded-xl border border-blue-200 bg-blue-50 p-6">
+          <h2 className="text-sm font-semibold text-blue-800 uppercase tracking-wide mb-2">
+            Quick Answer
+          </h2>
+          <p className="text-slate-700 leading-relaxed">
+            Browse maintained alternatives for Chrome extensions that have been disabled, removed, or affected by the Manifest V2 phaseout. Each page covers why the original stopped working, practical replacement options, migration steps, and safety notes.
+          </p>
+        </div>
+      </section>
+
       <section className="py-16">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">

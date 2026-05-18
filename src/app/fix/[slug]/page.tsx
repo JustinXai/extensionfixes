@@ -44,6 +44,13 @@ const fixMetadata: Record<string, { title: string; description: string; quickAns
     quickAnswer:
       'Chrome disables extensions for several reasons: deprecated APIs, Web Store removal, security concerns, or administrator policies. The fix depends on the cause. Check the specific error message, verify the extension status in the Chrome Web Store, and look for maintained replacements.',
   },
+  'extension-removed-from-chrome-web-store': {
+    title: 'Chrome Extension Removed from Web Store: What to Do Next',
+    description:
+      'Chrome removed an extension from the Web Store? Learn why extensions get removed, whether it is safe to keep using them, and how to find maintained alternatives.',
+    quickAnswer:
+      'Chrome removes extensions from the Web Store for policy violations, developer request, or malware detection. Do not install unofficial copies of removed extensions. Check for official alternatives, community forks, or browser-native features as your next step.',
+  },
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

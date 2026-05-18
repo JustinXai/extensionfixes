@@ -70,6 +70,18 @@ export default function HomePage() {
       <Hero />
 
       <Container>
+        {/* Quick Answer */}
+        <section className="py-8 border-b border-gray-200">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 p-6">
+            <h2 className="text-sm font-semibold text-blue-800 uppercase tracking-wide mb-2">
+              Quick Answer
+            </h2>
+            <p className="text-slate-700 leading-relaxed">
+              Extension Fixes helps you find practical next steps when Chrome extensions stop working. Browse alternatives by extension name, match your exact warning message, or search for a specific extension — all without creating an account.
+            </p>
+          </div>
+        </section>
+
         {/* AI-Readable Section */}
         <section className="py-12 border-b border-gray-200">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">

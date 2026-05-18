@@ -371,6 +371,15 @@ export default function ExtensionSearchPage() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Static hero: renders in HTML, h1 always present */}
         <ExtensionSearchHero />
+        {/* Quick Answer */}
+        <div className="mt-6 rounded-xl border border-blue-200 bg-blue-50 p-5">
+          <h2 className="text-sm font-semibold text-blue-800 uppercase tracking-wide mb-2">
+            Quick Answer
+          </h2>
+          <p className="text-slate-700 text-sm leading-relaxed">
+            Search for any Chrome extension name, warning message, or problem description to find relevant guides, alternatives, and practical next steps. No login or extension installation required.
+          </p>
+        </div>
         {/* Dynamic results: useSearchParams requires Suspense */}
         <Suspense fallback={
           <div className="mt-10 text-center text-gray-400">
