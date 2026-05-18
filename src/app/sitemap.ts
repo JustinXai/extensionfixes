@@ -16,19 +16,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/alternatives`,
+      url: `${baseUrl}/alternatives/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/guides`,
+      url: `${baseUrl}/guides/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tools/extension-search`,
+      url: `${baseUrl}/tools/extension-search/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -50,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const fixPages: MetadataRoute.Sitemap = errors.map((err) => ({
-    url: `${baseUrl}/fix/${err.slug}/`,
+    url: `${baseUrl}/fix/${err.slug}`,
     lastModified: new Date(err.lastUpdated),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
