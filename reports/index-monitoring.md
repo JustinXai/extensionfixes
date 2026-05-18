@@ -50,8 +50,15 @@ Tracks URL submission status, indexing, and performance in Google Search Console
 | CTR | Click-through rate = Clicks / Impressions |
 | Next action | What to do next (submit, monitor, update) |
 
+## GSC Query Observations
+
+| Date | Observed queries | Actions taken |
+|---|---|---|
+| 2026-05-18 | this extension was turned off because it is no longer supported (1 click / 3 impressions), the great suspender alternative, the great suspender malware, the great suspender chrome, foxyproxy alternative for chrome, ublock origin crx, chrome ublock origin lite, chrome adblock not working, manifest v2, ublock origin no longer working, cannot install extension unsupported manifest, ublock origin no longer supported, ublock origin alternative chrome | Added Great Suspender comparison table, decision guide, common mistakes; enhanced uBlock Origin CRX/no-longer-supported FAQ and CRX warning block; added exact Chrome warning phrase to errors data; added FAQ about "This extension was turned off because it is no longer supported" to error messages hub |
+
 ## Update Log
 
 | Date | Notes |
 |---|---|
 | 2026-05-18 | Initial table created — all URLs pending manual submission |
+| 2026-05-18 | Added GSC query observations after first data review |

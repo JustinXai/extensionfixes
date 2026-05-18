@@ -509,6 +509,15 @@ export default async function AlternativePage({ params }: PageProps) {
           )}
 
           {slug === 'ublock-origin' && (
+            <section className="mb-10 p-5 bg-amber-50 rounded-xl border border-amber-200" aria-labelledby="no-crx-heading">
+              <h2 id="no-crx-heading" className="text-lg font-semibold text-amber-800 mb-2">Do not download random CRX files</h2>
+              <p className="text-sm text-amber-700 leading-relaxed">
+                Searching for &quot;uBlock Origin CRX&quot; may return modified packages from third-party sites. These can contain outdated code, unexpected permissions, or supply-chain risks. Always install uBlock Origin Lite from the official <a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh" className="font-medium underline hover:text-amber-900" target="_blank" rel="noopener noreferrer">Chrome Web Store listing</a>, or visit the official <a href="https://github.com/gorhill/uBlock" className="font-medium underline hover:text-amber-900" target="_blank" rel="noopener noreferrer">uBlock Origin GitHub</a> to verify current options.
+              </p>
+            </section>
+          )}
+
+          {slug === 'ublock-origin' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
               <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
               <div className="flex flex-wrap gap-4 text-sm">

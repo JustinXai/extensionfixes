@@ -292,6 +292,21 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'MV3 has fundamental differences from MV2 that prevent a direct update. The developer created uBlock Origin Lite as the best possible MV3 implementation while being transparent about the limitations.',
       },
+      {
+        question: 'Should I download a uBlock Origin CRX file for Chrome?',
+        answer:
+          'Not recommended. Installing random CRX files from search results can expose you to modified packages, stale code, or unexpected permissions. Use the official Chrome Web Store listing for uBlock Origin Lite, or visit the official uBlock Origin GitHub page to verify current options. Prefer extensions from verified sources to avoid supply-chain risks.',
+      },
+      {
+        question: 'Why does Chrome say uBlock Origin is no longer supported?',
+        answer:
+          'Chrome shows this message because the classic uBlock Origin extension uses Manifest V2, which Chrome has fully disabled since Chrome 138. The extension has not been updated to Manifest V3 by its developer. uBlock Origin Lite is the official MV3-compatible version developed by the same author.',
+      },
+      {
+        question: 'Is uBlock Origin Lite the same as uBlock Origin?',
+        answer:
+          'uBlock Origin Lite is not a one-to-one replacement. It is a separate MV3-compatible extension developed by the same author. Some features work differently due to MV3 limitations, particularly dynamic filtering rules. For most users browsing with filter lists, Lite provides equivalent ad blocking. Advanced users relying on specific MV2-only features may notice differences.',
+      },
     ],
     sources: [
       {
@@ -537,22 +552,124 @@ export const extensions: ExtensionRecord[] = [
     ],
     sources: [
       {
-        title: '9to5Google - The Great Suspender removed from Chrome Web Store for malware',
+        title: '9to5Google — The Great Suspender removed from Chrome Web Store for containing malware',
         url: 'https://9to5google.com/2021/02/04/the-great-suspender-extension-has-been-removed-from-chrome-web-store-for-containing-malware/',
         publisher: '9to5Google',
+        sourceType: 'news',
+        reliability: 'primary',
+        supports: 'Removal reason, malware concern, and timeline for The Great Suspender',
       },
       {
-        title: 'The Verge - Chrome blocks The Great Suspender extension',
+        title: 'The Verge — Chrome blocks The Great Suspender extension',
         url: 'https://www.theverge.com/2021/2/4/22266798/chrome-blocks-the-great-suspender-disabled-malware-tab-recovery',
         publisher: 'The Verge',
+        sourceType: 'news',
+        reliability: 'primary',
+        supports: 'Chrome proactive disable action and tab recovery context',
       },
       {
-        title: 'Chrome Web Store - Auto Tab Discard',
+        title: 'Auto Tab Discard Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/auto-tab-discard-suspend/jhnleheckmknfcgijgkadoemagpecfol',
         publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Auto Tab Discard MV3 availability and active maintenance status',
+      },
+      {
+        title: 'OneTab Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'OneTab MV3 availability and developer identity',
+      },
+      {
+        title: 'Session Buddy Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/session-buddy/edacconmaakjimmfgnblocblbcdcpbko',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Session Buddy MV3 availability and active maintenance status',
       },
     ],
-    lastUpdated: '2026-05-13',
+    lastUpdated: '2026-05-18',
+    atAGlance: {
+      originalExtension: 'The Great Suspender',
+      currentStatus: 'Removed from Chrome Web Store — disabled by Google due to malware concerns',
+      bestPracticalOption: 'Chrome Memory Saver (built-in) or Auto Tab Discard (Web Store)',
+      bestForAdvancedUsers: 'Auto Tab Discard (customizable discard rules)',
+      mainCaution: 'Do not download CRX copies or unofficial versions of The Great Suspender — the original was confirmed to contain unwanted code',
+    },
+    comparisonTable: [
+      {
+        option: 'Chrome Memory Saver',
+        bestFor: 'Users wanting zero setup with no extra extension',
+        mv3Support: 'Built-in (N/A)',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'None',
+        mainTradeoff: 'Minimal customization — on/off only',
+      },
+      {
+        option: 'Auto Tab Discard',
+        bestFor: 'Users who want control over which tabs are discarded',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Requires some configuration for optimal use',
+      },
+      {
+        option: 'OneTab',
+        bestFor: 'Users who prefer manual tab consolidation',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Manual only — no automatic tab suspension',
+      },
+      {
+        option: 'Session Buddy',
+        bestFor: 'Users who need to save and restore tab sessions',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Focuses on session management, not automatic suspension',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Chrome Memory Saver',
+        when: 'You want the simplest solution with no setup and are comfortable with minimal control.',
+      },
+      {
+        choose: 'Auto Tab Discard',
+        when: 'You want to customize which tabs are discarded and under what conditions.',
+      },
+      {
+        choose: 'OneTab',
+        when: 'You prefer to manually consolidate tabs into a list rather than automatic background suspension.',
+      },
+      {
+        choose: 'Session Buddy',
+        when: 'You need to save complete browsing sessions and restore them later across sessions.',
+      },
+    ],
+    commonMistakes: [
+      {
+        doNot: 'Download a CRX file of The Great Suspender from a search result or file sharing site.',
+        instead: 'Install a currently maintained extension from the Chrome Web Store, or use Chrome built-in Memory Saver.',
+      },
+      {
+        doNot: 'Install an extension with a similar name hoping it is a safe continuation.',
+        instead: 'Verify the developer and review the Chrome Web Store listing before installing any tab management tool.',
+      },
+      {
+        doNot: 'Grant broad permissions to tab management extensions you do not recognize.',
+        instead: 'Legitimate tab management extensions need permission to manage tabs. Review permissions before installing.',
+      },
+    ],
   },
   {
     slug: 'modheader',

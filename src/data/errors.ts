@@ -11,6 +11,7 @@ export const errors: ErrorRecord[] = [
       'extension disabled after chrome update',
       'extension may soon no longer be supported',
       'chrome extension not working anymore',
+      'this extension was turned off because it is no longer supported',
     ],
     shortAnswer:
       'Chrome shows "This extension is no longer supported" when an extension uses outdated APIs, was removed from the Web Store, or is incompatible with your Chrome version. Recommended approach: find a maintained replacement from the Chrome Web Store. Avoid downloading old copies from unofficial sources.',
@@ -62,6 +63,11 @@ export const errors: ErrorRecord[] = [
         question: 'How do I find a safe alternative?',
         answer:
           'Look for alternatives in the Chrome Web Store with good reviews, check developer credibility, and verify the permissions match the stated functionality. Extension Fixes provides recommendations for common affected extensions.',
+      },
+      {
+        question: 'What does "This extension was turned off because it is no longer supported" mean?',
+        answer:
+          'Chrome may display this message when an extension uses deprecated APIs, was removed from the Web Store, is no longer maintained, or violates current extension platform requirements. The practical next steps are: check whether the developer has a current version, use a maintained alternative from the Chrome Web Store, or remove the extension if it asks for unexpected permissions.',
       },
     ],
     sources: [

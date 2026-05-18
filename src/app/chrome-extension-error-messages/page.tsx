@@ -142,6 +142,11 @@ const faqs = [
     answer:
       'Export your extension settings if the option is still available. Many extensions allow you to export profiles or configuration files. Check what the extension did so you can verify alternatives meet your needs. Review the extension permissions to understand what data it had access to. After finding a replacement, check if it supports importing your exported settings.',
   },
+  {
+    question: 'What does "This extension was turned off because it is no longer supported" mean?',
+    answer:
+      'Chrome displays this message when an extension uses deprecated APIs, was removed from the Web Store, is no longer maintained, or violates current extension platform requirements. The practical next steps are: check whether the developer has a current version, use a maintained alternative from the Chrome Web Store, or remove the extension if it asks for unexpected permissions.',
+  },
 ];
 
 const sources = [
