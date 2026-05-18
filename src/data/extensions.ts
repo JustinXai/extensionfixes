@@ -1054,9 +1054,9 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Chrome Web Store',
       },
       {
-        title: 'Violentmonkey GitHub',
-        url: 'https://github.com/violentmonkey/violentmonkey',
-        publisher: 'Violentmonkey Contributors',
+        title: 'Tampermonkey GitHub Repository',
+        url: 'https://github.com/tampermonkey/tampermonkey',
+        publisher: 'Tampermonkey',
       },
     ],
     lastUpdated: '2026-05-18',

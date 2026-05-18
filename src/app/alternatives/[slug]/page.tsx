@@ -549,6 +549,9 @@ export default async function AlternativePage({ params }: PageProps) {
                 <Link href="/violentmonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Violentmonkey Alternatives
                 </Link>
+                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Manifest V2 Disabled Guide
+                </Link>
                 <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Search More Extensions
                 </Link>
@@ -594,8 +597,8 @@ export default async function AlternativePage({ params }: PageProps) {
                 <Link href="/switchyomega" className="text-blue-600 hover:text-blue-800 hover:underline">
                   SwitchyOmega Alternatives
                 </Link>
-                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Chrome Disabled Extension Guide
+                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Manifest V2 Disabled Guide
                 </Link>
                 <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Search More Extensions
