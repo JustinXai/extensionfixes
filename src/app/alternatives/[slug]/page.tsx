@@ -507,24 +507,7 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
-          {extension.decisionGuide && extension.decisionGuide.length > 0 && (
-            <section className="mb-10" aria-labelledby="decision-guide-heading">
-              <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Which Option Should You Choose?</h2>
-              <div className="space-y-4">
-                {extension.decisionGuide.map((item, i) => (
-                  <div key={i} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-900">{item.choose}</p>
-                      <p className="mt-1 text-sm text-slate-600">{item.when}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          {/* slug === 'tampermonkey' uses decisionGuide below */}
 
           {extension.commonMistakes && extension.commonMistakes.length > 0 && (
             <section className="mb-10" aria-labelledby="common-mistakes-heading">
@@ -650,7 +633,7 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
-          {slug === 'tampermonkey' && extension.decisionGuide && extension.decisionGuide.length > 0 && (
+          {extension.decisionGuide && extension.decisionGuide.length > 0 && (
             <section className="mb-10" aria-labelledby="decision-guide-heading">
               <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
               <div className="space-y-4">
@@ -662,26 +645,6 @@ export default async function AlternativePage({ params }: PageProps) {
                     <div>
                       <p className="font-semibold text-slate-900">{item.choose}</p>
                       <p className="mt-1 text-sm text-slate-600">{item.when}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {slug === 'violentmonkey' && (
-            <section className="mb-10" aria-labelledby="who-choose-heading">
-              <h2 id="who-choose-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
-              <div className="space-y-4">
-                {[
-                  { choose: 'Violentmonkey', reason: 'You prefer an open-source userscript manager and want control over imported scripts.' },
-                  { choose: 'Tampermonkey', reason: 'You need broad userscript compatibility and a large script ecosystem.' },
-                  { choose: 'Browser bookmarks/snippets', reason: 'You only need to run very simple personal scripts without an extension.' },
-                ].map((item) => (
-                  <div key={item.choose} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-slate-900">{item.choose}</p>
-                      <p className="mt-1 text-sm text-slate-600">{item.reason}</p>
                     </div>
                   </div>
                 ))}

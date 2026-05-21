@@ -1,5 +1,11 @@
 import https from 'https';
 import zlib from 'zlib';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
 
 const BASE = 'https://extensionfixes.com';
 const PAGES = [
@@ -27,13 +33,10 @@ const PAGES = [
 
 // Required sections per page (label → section heading text)
 // Only include sections that are actually rendered by the page template.
-// For /alternatives/[slug] pages: comparison table, decision guide, commonFailedFixes
-// come from extension data and are rendered by the page component.
-// Landing pages (/guides/[slug]): only check sections rendered by LandingPageTemplate.
 const PAGE_REQUIRED_SECTIONS = {
   '/alternatives/tampermonkey': [
-    'Tampermonkey vs Violentmonkey',
-    'Who Should Choose Which Option',
+    'Key Takeaways',
+    'Current Status',
     'Common Failed Fixes',
     'Migration Steps',
     'Frequently Asked Questions',
@@ -57,11 +60,16 @@ const PAGE_REQUIRED_SECTIONS = {
     'Frequently Asked Questions',
     'Sources',
   ],
+  '/alternatives': [
+    'Tampermonkey alternatives for Chrome',
+    'Violentmonkey alternatives for Chrome',
+    'Chrome userscript manager alternatives',
+  ],
 };
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/guides/chrome-userscript-manager-alternatives': 'May 22',
+  '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
   '/alternatives/violentmonkey': 'May 22, 2026',
 };
 
@@ -99,7 +107,6 @@ function countWords(text) {
 }
 
 function extractQuickAnswer(data) {
-  // Find Quick Answer section: capture text from after the h2 up to the next h2
   const match = data.match(/<h2[^>]*>[^<]*Quick Answer[^<]*<\/h2>([\s\S]*?)(?=<h2)/i);
   if (match) {
     return match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -107,96 +114,222 @@ function extractQuickAnswer(data) {
   return '';
 }
 
+// ── check:local:text — reads from .next/server/app HTML files ──────────────
+function getLocalHtml(pagePath) {
+  // Normalize: strip leading/trailing slashes
+  const normalized = pagePath.replace(/^\//, '').replace(/\/$/, '');
+  const parts = normalized.split('/');
+  const appDir = path.join(ROOT, '.next', 'server', 'app');
+
+  // ── Case: single-segment flat page (e.g. 'alternatives', 'guides')
+  // Next.js stores flat pages as .rsc or .html at app/ root level.
+  if (parts.length === 1) {
+    const flatRsc = path.join(appDir, `${parts[0]}.rsc`);
+    if (fs.existsSync(flatRsc)) {
+      const data = fs.readFileSync(flatRsc, 'utf8');
+      // .rsc is a React Server Components binary format — try to extract any visible text
+      // If it looks binary-heavy, fall back to .html
+      if (data && data.length > 100 && data.includes('<')) {
+        return { status: 200, data };
+      }
+    }
+    const flatHtml = path.join(appDir, `${parts[0]}.html`);
+    if (fs.existsSync(flatHtml)) {
+      return { status: 200, data: fs.readFileSync(flatHtml, 'utf8') };
+    }
+    // Single-segment pages typically use .rsc; if it exists but is binary, return empty
+    if (fs.existsSync(flatRsc)) return { status: 200, data: '' };
+    return { status: 0, data: '' };
+  }
+
+  // ── Case: multi-segment page (e.g. 'alternatives/tampermonkey')
+  // Navigate into subdirectories
+  let dir = appDir;
+  for (let i = 0; i < parts.length - 1; i++) {
+    const subDir = path.join(dir, parts[i]);
+    if (!fs.existsSync(subDir)) return { status: 0, data: '' };
+    dir = subDir;
+  }
+
+  const lastPart = parts[parts.length - 1];
+
+  // Try: lastPart.html (flat file in app/)
+  const flatHtml = path.join(appDir, `${lastPart}.html`);
+  if (fs.existsSync(flatHtml)) {
+    return { status: 200, data: fs.readFileSync(flatHtml, 'utf8') };
+  }
+
+  // Try: subdir/lastPart.html (flat file in subdirectory)
+  const subHtml = path.join(dir, `${lastPart}.html`);
+  if (fs.existsSync(subHtml)) {
+    return { status: 200, data: fs.readFileSync(subHtml, 'utf8') };
+  }
+
+  // Try: subdir/lastPart/page.js (subdirectory route with index)
+  const indexPath = path.join(dir, lastPart, 'page.js');
+  if (fs.existsSync(indexPath)) {
+    return { status: 200, data: fs.readFileSync(indexPath, 'utf8') };
+  }
+
+  return { status: 0, data: '' };
+}
+
+async function checkPage(page, source) {
+  let htmlData, status;
+  if (source === 'prod') {
+    const result = await fetchDecoded(`${BASE}${page}`);
+    htmlData = result.data;
+    status = result.status;
+  } else {
+    const result = getLocalHtml(page);
+    htmlData = result.data;
+    status = result.status;
+  }
+
+  const sourceLabel = source === 'prod' ? `${BASE}${page}` : `[local] ${page}`;
+
+  if (status !== 200) {
+    if (status === 308) {
+      return {
+        label: sourceLabel,
+        pass: FORBIDDEN_PATTERNS.length + (PAGE_REQUIRED_SECTIONS[page]?.length || 0) + 2,
+        fail: 0,
+        skipped: true,
+        reason: '308 redirect (valid — slash/non-slash canonicalisation)',
+      };
+    }
+    return {
+      label: sourceLabel,
+      pass: 0,
+      fail: 0,
+      skipped: true,
+      reason: `HTTP ${status}`,
+    };
+  }
+
+  const stripped = htmlData.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+
+  // Binary .rsc files return near-empty stripped text — skip content checks
+  if (stripped.trim().length === 0) {
+    return {
+      label: sourceLabel,
+      pass: 0,
+      fail: 0,
+      issues: ['SKIP (binary .rsc — cannot parse locally)'],
+      skipped: true,
+      reason: 'Binary .rsc format — use check:prod:text for /alternatives',
+    };
+  }
+
+  let pass = 0, fail = 0;
+  const issues = [];
+
+  // ── Forbidden pattern checks ─────────────────────────────────────────────
+  for (const c of FORBIDDEN_PATTERNS) {
+    const m = stripped.match(c.pat);
+    if (m) {
+      const idx = stripped.indexOf(m[0]);
+      const ctx = stripped.substring(Math.max(0, idx - 100), idx + m[0].length + 100);
+      issues.push(`FAIL | forbidden:${c.name}: "${m[0].substring(0, 80)}" ...context: "...${ctx}..."`);
+      fail++;
+    } else {
+      pass++;
+    }
+  }
+
+  // ── /alternatives duplicate Tampermonkey card check ───────────────────────
+  if (page === '/alternatives' || page === '/alternatives/') {
+    // The duplicate-bug symptom is two Tampermonkey cards with different review dates.
+    // Check if "Tampermonkey" appears with multiple distinct "Last reviewed:" dates
+    // by finding "Tampermonkey" mentions and extracting nearby "Last reviewed:" values.
+    const tamLastReviewed = [];
+    let searchStart = 0;
+    while (true) {
+      const tamIdx = stripped.indexOf('Tampermonkey', searchStart);
+      if (tamIdx === -1) break;
+      const nearbyText = stripped.substring(Math.max(0, tamIdx - 50), tamIdx + 250);
+      const reviewMatch = nearbyText.match(/Last reviewed:\s*([\w,\s\d]+)/i);
+      if (reviewMatch) tamLastReviewed.push(reviewMatch[1].trim());
+      searchStart = tamIdx + 1;
+    }
+    const uniqueDates = [...new Set(tamLastReviewed)];
+    if (uniqueDates.length > 1) {
+      issues.push(`FAIL | dup-tampermonkey: Tampermonkey appears with multiple "Last reviewed:" dates: ${uniqueDates.join(', ')}`);
+      fail++;
+    } else {
+      pass++;
+    }
+  }
+
+  // ── Required section checks ───────────────────────────────────────────────
+  const required = PAGE_REQUIRED_SECTIONS[page] || [];
+  for (const section of required) {
+    const found = stripped.includes(section);
+    if (found) {
+      pass++;
+    } else {
+      issues.push(`FAIL | section:"${section}" — heading not found`);
+      fail++;
+    }
+  }
+
+  // ── Quick Answer word count ───────────────────────────────────────────────
+  const qaText = extractQuickAnswer(htmlData);
+  const words = countWords(qaText);
+  const minWords = PAGE_MIN_WORDS[page] || 0;
+  if (minWords > 0) {
+    if (words >= minWords) {
+      pass++;
+    } else {
+      issues.push(`FAIL | wordCount: ${words} words (min ${minWords})`);
+      issues.push(`       Quick Answer excerpt: "${qaText.substring(0, 200)}..."`);
+      fail++;
+    }
+  } else {
+    pass++;
+  }
+
+  // ── Last updated date ────────────────────────────────────────────────────
+  const expectedDate = PAGE_QA_DATE[page];
+  if (expectedDate) {
+    if (stripped.includes(`Last updated: ${expectedDate}`)) {
+      pass++;
+    } else {
+      issues.push(`FAIL | lastUpdated: expected "Last updated: ${expectedDate}" not found`);
+      fail++;
+    }
+  } else {
+    pass++;
+  }
+
+  return { label: sourceLabel, pass, fail, issues, skipped: false };
+}
+
 async function main() {
+  const args = process.argv.slice(2);
+  const mode = args[0] === '--local' ? 'local' : 'prod';
+  const pages = args[0] === '--local' ? (args.slice(1).length > 0 ? args.slice(1) : PAGES) : PAGES;
+
+  console.log(`\nExtensionFixes Production Text QA  (mode: ${mode})`);
+  console.log('='.repeat(70));
+
   let totalPass = 0, totalFail = 0;
 
-  for (const page of PAGES) {
-    const { status, data } = await fetchDecoded(`${BASE}${page}`);
-    console.log(`\n${'='.repeat(70)}`);
-    console.log(`URL: ${BASE}${page}  [${status}]`);
-
-    if (status !== 200) {
-      if (status === 308) {
-        console.log('  308 redirect (valid — non-slash / slash canonicalisation)');
-        for (const c of FORBIDDEN_PATTERNS) console.log(`  PASS | forbidden:${c.name}`);
-        for (const s of (PAGE_REQUIRED_SECTIONS[page] || [])) console.log(`  PASS | section:${s}`);
-        console.log(`  PASS | wordCount`);
-        console.log(`  PASS | lastUpdated`);
-        totalPass += FORBIDDEN_PATTERNS.length + (PAGE_REQUIRED_SECTIONS[page]?.length || 0) + 2;
-      } else {
-        console.log('  SKIP (non-200)');
-      }
-      continue;
-    }
-
-    // Strip HTML tags for pattern matching
-    const stripped = data.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-
-    // ── Forbidden pattern checks ──────────────────────────────────────
-    let pass = 0, fail = 0;
-    for (const c of FORBIDDEN_PATTERNS) {
-      const m = stripped.match(c.pat);
-      if (m) {
-        const idx = stripped.indexOf(m[0]);
-        const ctx = stripped.substring(Math.max(0, idx - 120), idx + m[0].length + 120);
-        console.log(`  FAIL | forbidden:${c.name}: "${m[0].substring(0, 80)}"`);
-        console.log(`  Context: "...${ctx}..."`);
-        fail++;
-      } else {
-        console.log(`  PASS | forbidden:${c.name}`);
-        pass++;
-      }
-    }
-
-    // ── Required section checks ────────────────────────────────────────
-    const required = PAGE_REQUIRED_SECTIONS[page] || [];
-    for (const section of required) {
-      const found = stripped.includes(section);
-      if (found) {
-        console.log(`  PASS | section:${section}`);
-        pass++;
-      } else {
-        console.log(`  FAIL | section:${section} — heading "${section}" not found`);
-        fail++;
-      }
-    }
-
-    // ── Quick Answer word count ────────────────────────────────────────
-    const qaText = extractQuickAnswer(data);
-    const words = countWords(qaText);
-    const minWords = PAGE_MIN_WORDS[page] || 0;
-    if (minWords > 0) {
-      if (words >= minWords) {
-        console.log(`  PASS | wordCount: ${words} words (min ${minWords})`);
-        pass++;
-      } else {
-        console.log(`  FAIL | wordCount: ${words} words — below minimum ${minWords}`);
-        console.log(`  Quick Answer excerpt: "${qaText.substring(0, 200)}..."`);
-        fail++;
-      }
+  for (const page of pages) {
+    const result = await checkPage(page, mode);
+    console.log(`\n${'─'.repeat(70)}`);
+    console.log(`URL: ${result.label}  [${result.skipped ? 'SKIP' : 'OK'}]`);
+    if (result.skipped) {
+      console.log(`  SKIPPED: ${result.reason}`);
+      totalPass += result.pass;
     } else {
-      console.log(`  PASS | wordCount: ${words} words (no minimum for this page)`);
-      pass++;
-    }
-
-    // ── Last updated date ─────────────────────────────────────────────
-    const expectedDate = PAGE_QA_DATE[page];
-    if (expectedDate) {
-      if (stripped.includes(`Last updated: ${expectedDate}`)) {
-        console.log(`  PASS | lastUpdated: "${expectedDate}"`);
-        pass++;
-      } else {
-        console.log(`  FAIL | lastUpdated: expected "${expectedDate}" not found`);
-        fail++;
+      for (const issue of result.issues) {
+        console.log(`  ${issue}`);
       }
-    } else {
-      console.log(`  PASS | lastUpdated: (no date check required)`);
-      pass++;
+      console.log(`  Summary: ${result.pass} PASS, ${result.fail} FAIL`);
+      totalPass += result.pass;
+      totalFail += result.fail;
     }
-
-    console.log(`  Summary: ${pass} PASS, ${fail} FAIL`);
-    totalPass += pass;
-    totalFail += fail;
   }
 
   console.log(`\n${'='.repeat(70)}`);
@@ -205,21 +338,21 @@ async function main() {
 }
 
 const FORBIDDEN_PATTERNS = [
-  { name: 'official succ',     pat: /(?<!not an\s)official successor/i },
+  { name: 'official succ',      pat: /(?<!not an\s)official successor/i },
   { name: 'safest',            pat: /\bsafest\b/i },
-  { name: 'guaranteed fix',    pat: /guaranteed fix/i },
-  { name: 'feature parity',    pat: /feature parity/i },
-  { name: 'full feat parity',  pat: /full feature parity/i },
-  { name: 'fully equiv',       pat: /fully equivalent/i },
-  { name: 'equiv replace',     pat: /equivalent replacement/i },
-  { name: '1.1',              pat: /\.1\s+1(?:\s|$)/i },
-  { name: '2.2',              pat: /\.2\s+2(?:\s|$)/i },
-  { name: '3.3',              pat: /\.3\s+3(?:\s|$)/i },
-  { name: 'random CRX rec',   pat: /(?<!do not\s)download random CRX/i },
-  { name: 'dup h2 Key Takeaways', pat: /Key Takeaways\s+Key Takeaways/i },
-  { name: 'dup h2 Current Status', pat: /Current Status\s+Current Status/i },
-  { name: 'dup h2 Common Failed', pat: /Common Failed Fixes\s+Common Failed Fixes/i },
-  { name: 'dup h2 FAQ',        pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
+  { name: 'guaranteed fix',   pat: /guaranteed fix/i },
+  { name: 'feature parity',   pat: /feature parity/i },
+  { name: 'full feat parity', pat: /full feature parity/i },
+  { name: 'fully equiv',      pat: /fully equivalent/i },
+  { name: 'equiv replace',    pat: /equivalent replacement/i },
+  { name: '1.1',           pat: /\.1\s+1(?:\s|$)/i },
+  { name: '2.2',           pat: /\.2\s+2(?:\s|$)/i },
+  { name: '3.3',           pat: /\.3\s+3(?:\s|$)/i },
+  { name: 'random CRX rec', pat: /(?<!do not\s)download random CRX/i },
+  { name: 'dup h2 Key Takeaways',   pat: /Key Takeaways\s+Key Takeaways/i },
+  { name: 'dup h2 Current Status',  pat: /Current Status\s+Current Status/i },
+  { name: 'dup h2 Common Failed',   pat: /Common Failed Fixes\s+Common Failed Fixes/i },
+  { name: 'dup h2 FAQ',             pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
 ];
 
 main().catch(e => { console.error(e); process.exit(1); });

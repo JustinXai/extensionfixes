@@ -1339,6 +1339,14 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Tampermonkey MV3 availability, listing status, and publisher identity',
       },
       {
+        title: 'Tampermonkey Official Site',
+        url: 'https://tampermonkey.net/',
+        publisher: 'Tampermonkey',
+        sourceType: 'official-website',
+        reliability: 'primary',
+        supports: 'Tampermonkey official documentation, download information, and script management guide',
+      },
+      {
         title: 'Tampermonkey GitHub Repository',
         url: 'https://github.com/tampermonkey/tampermonkey',
         publisher: 'Tampermonkey',
@@ -1346,65 +1354,14 @@ export const extensions: ExtensionRecord[] = [
         reliability: 'secondary',
         supports: 'Tampermonkey open-source status (partial — editor is GPL, newer versions proprietary), development activity, and changelog',
       },
-      {
-        title: 'Tampermonkey Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
-        publisher: 'Chrome Web Store',
-        sourceType: 'chrome-web-store',
-        reliability: 'primary',
-        supports: 'Tampermonkey MV3 availability, listing status, and publisher identity',
-      },
     ],
-    atAGlance: {
-      originalExtension: 'Tampermonkey',
-      currentStatus: 'Active and MV3-compatible — works in current Chrome',
-      bestPracticalOption: 'Tampermonkey (already working, no migration needed)',
-      bestForAdvancedUsers: 'Violentmonkey (open source, lightweight, same script compatibility)',
-      mainCaution: 'Only install scripts from sources you trust — scripts run with your browser privileges',
-    },
-    decisionGuide: [
-      {
-        choose: 'Tampermonkey',
-        when: 'You want the most widely-supported userscript manager with the largest script library and community support.',
-      },
-      {
-        choose: 'Violentmonkey',
-        when: 'You prefer open-source transparency and a lightweight interface, and want Tampermonkey script compatibility.',
-      },
-    ],
-    comparisonTable: [
-      {
-        option: 'Tampermonkey',
-        bestFor: 'Users wanting the most widely-supported userscript manager',
-        mv3Support: 'Yes',
-        cost: 'Free',
-        openSource: 'Yes (editor is open source)',
-        setupDifficulty: 'Easy',
-        mainTradeoff: 'Closed-source binary; larger resource footprint than Violentmonkey',
-      },
-      {
-        option: 'Violentmonkey',
-        bestFor: 'Privacy-conscious users wanting full open-source transparency',
-        mv3Support: 'Yes',
-        cost: 'Free',
-        openSource: 'Yes (fully open source)',
-        setupDifficulty: 'Easy',
-        mainTradeoff: 'Smaller script library community; fewer built-in features',
-      },
-    ],
-    commonMistakes: [
-      {
-        doNot: 'Install user scripts from random websites without checking the source code first',
-        instead: 'Always review the script source before installing — scripts run with browser privileges',
-      },
-      {
-        doNot: 'Grant broad permissions to scripts without understanding what they do',
-        instead: 'Check the script permissions request and only install if you understand why they are needed',
-      },
-      {
-        doNot: 'Assume all scripts from Greasy Fork are safe — some contain unwanted behavior',
-        instead: 'Read script descriptions, reviews, and source code before installing from any repository',
-      },
+    keyTakeaways: [
+      'Tampermonkey is actively maintained and works in current Chrome as an MV3 extension.',
+      'Violentmonkey is a lightweight, fully open-source alternative with Tampermonkey script compatibility.',
+      'Both managers support scripts from Greasy Fork and OpenUserJS.',
+      'Only install scripts from sources you trust — scripts run with browser-level access.',
+      'Review @match and @grant permissions before installing any userscript.',
+      'Keep your userscript manager updated to receive security patches.',
     ],
     currentStatus: [
       { label: 'Tampermonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
@@ -2192,7 +2149,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Is Stylus safe?',
         answer:
-          'Yes. Stylus is an open-source extension that does not collect any user data. It is widely used and recommended by privacy-conscious users as a replacement for Stylish.',
+          'Yes. Stylus is an open-source extension that does not collect any user data. It is widely used and recommended by users who prefer transparent extension code as a replacement for Stylish.',
       },
       {
         question: 'Can I use Stylish styles with Stylus?',
@@ -2646,7 +2603,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Grammarly is actively maintained and available for Chrome as an MV3-compatible extension.',
     shortAnswer:
-      'Grammarly is actively maintained and works in modern Chrome as an MV3-compatible extension. It provides real-time grammar, spelling, and style suggestions. For privacy-conscious users, LanguageTool is an open-source alternative with similar features.',
+      'Grammarly is actively maintained and works in modern Chrome as an MV3-compatible extension. It provides real-time grammar, spelling, and style suggestions. For users who prefer open-source tooling, LanguageTool is an open-source alternative with similar features.',
     whatHappened: [
       'Grammarly was updated to support Manifest V3.',
       'The extension remains actively maintained with regular improvements.',
@@ -2681,7 +2638,7 @@ export const extensions: ExtensionRecord[] = [
           'May not have all Grammarly premium features',
           'Different suggestions interface',
         ],
-        note: 'LanguageTool is an open-source grammar and style checker that offers both cloud and self-hosted options for privacy-conscious users.',
+        note: 'LanguageTool is an open-source grammar and style checker that offers both cloud and self-hosted options for users who prefer transparent, open-source tooling.',
       },
       {
         name: 'Ginger Software',
@@ -2861,7 +2818,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Bitwarden is actively maintained as an MV3-compatible extension. It is one of the most recommended open-source password managers.',
     shortAnswer:
-      'Bitwarden is an actively maintained MV3-compatible password manager with full source code transparency. It offers cloud-hosted and self-hosted options, making it popular among privacy-conscious users. LastPass and 1Password are alternatives with different feature sets.',
+      'Bitwarden is an actively maintained MV3-compatible password manager with full source code transparency. It offers cloud-hosted and self-hosted options, making it popular among users who prefer transparent open-source tooling. LastPass and 1Password are alternatives with different feature sets.',
     whatHappened: [
       'Bitwarden was updated to support Manifest V3.',
       'The project remains actively maintained with regular security updates.',

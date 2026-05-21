@@ -369,6 +369,34 @@ function checkSlugUniqueness(filePath, label) {
 
 checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'extensions.ts'), 'extensions');
 checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'errors.ts'), 'errors');
+checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'landingPages.ts'), 'landingPages');
+
+// ── 11. Script Manager cluster: verify tampermonkey/violentmonkey slugs are clean ────
+// Check that extensions.ts has exactly one entry per script-manager slug
+function checkClusterDataIntegrity() {
+  const extFile = path.join(ROOT, 'src', 'data', 'extensions.ts');
+  const content = fs.readFileSync(extFile, 'utf8');
+
+  // Count top-level slug occurrences for script manager slugs
+  const clusterSlugs = ['tampermonkey', 'violentmonkey'];
+  const lines = content.split('\n');
+  for (const slug of clusterSlugs) {
+    const pattern = /^    slug:\s*['"]([^'"]+)['"]/;
+    const matches = [];
+    for (let i = 0; i < lines.length; i++) {
+      const m = lines[i].match(pattern);
+      if (m && m[1] === slug) matches.push(i + 1);
+    }
+    if (matches.length > 1) {
+      errors.push(
+        `Cluster integrity [${slug}]: found ${matches.length} top-level entries at lines ${matches.join(', ')}`
+      );
+    } else if (matches.length === 1) {
+      console.log(`  Cluster integrity [${slug}]: 1 entry confirmed`);
+    }
+  }
+}
+checkClusterDataIntegrity();
 
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');

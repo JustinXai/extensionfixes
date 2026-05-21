@@ -13,6 +13,7 @@
     "verify": "npm run lint && npm run build && npm run review",
     "check:prod": "node scripts/check-production-pages.mjs",
     "check:prod:text": "node scripts/check-production-text.mjs",
+    "check:local:text": "node scripts/check-production-text.mjs --local",
     "source:report": "node scripts/generate-source-quality-report.mjs"
   },
   "dependencies": {
