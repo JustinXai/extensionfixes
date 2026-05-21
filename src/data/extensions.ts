@@ -256,7 +256,7 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://www.mozilla.org/firefox/',
         pros: [
           'Classic uBlock Origin works fully in Firefox',
-          'Full MV2 feature set — same as original uBlock Origin in Firefox',
+          'Full MV2 feature set ? same as original uBlock Origin in Firefox',
           'Firefox supports Manifest V2 extensions',
         ],
         cons: [
@@ -310,7 +310,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Why did Chrome disable uBlock Origin?',
         answer:
-          'Chrome did not "disable" uBlock Origin for policy violations. Classic uBlock Origin stopped working because it uses Manifest V2 APIs that Chrome has deprecated. Chrome 138 and later disabled all Manifest V2 extensions by default. The extension remains safe and legitimate — it simply requires an MV3-compatible version.',
+          'Chrome did not "disable" uBlock Origin for policy violations. Classic uBlock Origin stopped working because it uses Manifest V2 APIs that Chrome has deprecated. Chrome 138 and later disabled all Manifest V2 extensions by default. The extension remains safe and legitimate ? it simply requires an MV3-compatible version.',
       },
       {
         question: 'Can I install uBlock Origin CRX manually?',
@@ -320,7 +320,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'What should I use if uBlock Origin is not working in Chrome?',
         answer:
-          'Install uBlock Origin Lite from the official Chrome Web Store — it is the MV3-compatible version developed by the same author. If uBlock Origin Lite does not meet your needs, other MV3 ad blockers like AdGuard or AdBlock are available. Firefox with classic uBlock Origin remains an option for users who need full MV2 features.',
+          'Install uBlock Origin Lite from the official Chrome Web Store ? it is the MV3-compatible version developed by the same author. If uBlock Origin Lite does not meet your needs, other MV3 ad blockers like AdGuard or AdBlock are available. Firefox with classic uBlock Origin remains an option for users who need full MV2 features.',
       },
       {
         question: 'Does Chrome 140 support classic uBlock Origin?',
@@ -330,7 +330,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     sources: [
       {
-        title: 'uBlock Origin Wiki — About Chrome\'s "This extension may soon no longer be supported"',
+        title: 'uBlock Origin Wiki ? About Chrome\'s "This extension may soon no longer be supported"',
         url: 'https://github.com/gorhill/uBlock/wiki/About-Google-Chrome%27s-%E2%80%9CThis-extension-may-soon-no-longer-be-supported%E2%80%9D',
         publisher: 'Raymond Hill (uBlock Origin Author)',
         sourceType: 'documentation',
@@ -357,7 +357,7 @@ export const extensions: ExtensionRecord[] = [
     lastUpdated: '2026-05-19',
     atAGlance: {
       originalExtension: 'Classic uBlock Origin',
-      currentStatus: 'Affected by Chrome 138 MV2 disable — no longer works in Chrome',
+      currentStatus: 'Affected by Chrome 138 MV2 disable ? no longer works in Chrome',
       bestPracticalOption: 'uBlock Origin Lite (by the same developer)',
       bestForAdvancedUsers: 'Firefox with classic uBlock Origin (full MV2 feature set)',
       mainCaution: 'uBlock Origin Lite has reduced dynamic filtering compared to classic uBlock Origin due to MV3 limitations',
@@ -424,25 +424,25 @@ export const extensions: ExtensionRecord[] = [
         instead: 'Only install from the official Chrome Web Store listing by Raymond Hill',
       },
       {
-        doNot: 'Assume all ad blockers provide equivalent blocking — efficiency and filter quality vary significantly',
+        doNot: 'Assume all ad blockers provide equivalent blocking ? efficiency and filter quality vary significantly',
         instead: 'Test commonly visited sites with your chosen alternative to verify adequate blocking',
       },
       {
-        doNot: 'Ignore filter list maintenance — outdated lists can miss new trackers and ads',
+        doNot: 'Ignore filter list maintenance ? outdated lists can miss new trackers and ads',
         instead: 'Periodically update filter lists or enable automatic updates in your ad blocker settings',
       },
     ],
     keyTakeaways: [
       'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions.',
       'uBlock Origin Lite is the MV3-compatible option from the same developer (Raymond Hill).',
-      'Lite is not a feature-identical replacement due to MV3 limitations — particularly reduced dynamic filtering.',
+      'Lite is not a feature-identical replacement due to MV3 limitations ? particularly reduced dynamic filtering.',
       'Firefox remains an option for users who need full classic uBlock Origin functionality.',
       'Do not install random CRX copies of classic uBlock Origin from search results.',
       'uBlock Origin Lite may require adjusting filtering modes from your previous configuration.',
     ],
     currentStatus: [
       { label: 'Classic uBlock Origin', value: 'Disabled in Chrome 138+ (MV2)', variant: 'bad' },
-      { label: 'uBlock Origin Lite', value: 'Active — MV3 from same developer', variant: 'good' },
+      { label: 'uBlock Origin Lite', value: 'Active ? MV3 from same developer', variant: 'good' },
       { label: 'Firefox support', value: 'Classic uBlock Origin works in Firefox', variant: 'good' },
     ],
     commonFailedFixes: [
@@ -455,7 +455,7 @@ export const extensions: ExtensionRecord[] = [
         whyItFails: 'MV3 limitations reduce dynamic filtering capabilities. For many users, uBlock Origin Lite provides satisfactory blocking for common filter lists, but advanced users relying on dynamic rules may notice differences.',
       },
       {
-        doesNotWork: 'Re-enabling classic uBlock Origin in regular Chrome is not possible — MV2 support is fully removed.',
+        doesNotWork: 'Re-enabling classic uBlock Origin in regular Chrome is not possible ? MV2 support is fully removed.',
       },
     ],
   },
@@ -603,7 +603,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'What are the best Great Suspender alternatives for Chrome?',
         answer:
-          'Chrome Memory Saver is the official built-in solution — open Settings > Performance > Memory Saver and turn it on. Auto Tab Discard is a well-maintained MV3 extension from the Chrome Web Store that lets you customize which tabs are suspended. OneTab provides manual tab consolidation. Workona is an option for users who want workspace-based session management. Each has a different level of automation and control.',
+          'Chrome Memory Saver is the official built-in solution ? open Settings > Performance > Memory Saver and turn it on. Auto Tab Discard is a well-maintained MV3 extension from the Chrome Web Store that lets you customize which tabs are suspended. OneTab provides manual tab consolidation. Workona is an option for users who want workspace-based session management. Each has a different level of automation and control.',
       },
       {
         question: 'Are there safe alternatives to Great Suspender?',
@@ -613,7 +613,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     sources: [
       {
-        title: '9to5Google — The Great Suspender removed from Chrome Web Store for containing malware',
+        title: '9to5Google ? The Great Suspender removed from Chrome Web Store for containing malware',
         url: 'https://9to5google.com/2021/02/04/the-great-suspender-extension-has-been-removed-from-chrome-web-store-for-containing-malware/',
         publisher: '9to5Google',
         sourceType: 'news',
@@ -621,7 +621,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Removal reason, malware concern, and timeline for The Great Suspender',
       },
       {
-        title: 'The Verge — Chrome blocks The Great Suspender extension',
+        title: 'The Verge ? Chrome blocks The Great Suspender extension',
         url: 'https://www.theverge.com/2021/2/4/22266798/chrome-blocks-the-great-suspender-disabled-malware-tab-recovery',
         publisher: 'The Verge',
         sourceType: 'news',
@@ -656,10 +656,10 @@ export const extensions: ExtensionRecord[] = [
     lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'The Great Suspender',
-      currentStatus: 'Removed from Chrome Web Store — disabled by Google due to malware concerns',
+      currentStatus: 'Removed from Chrome Web Store ? disabled by Google due to malware concerns',
       bestPracticalOption: 'Chrome Memory Saver (built-in) or Auto Tab Discard (Web Store)',
       bestForAdvancedUsers: 'Auto Tab Discard (customizable discard rules)',
-      mainCaution: 'Do not download CRX copies or unofficial versions of The Great Suspender — the original was confirmed to contain unwanted code',
+      mainCaution: 'Do not download CRX copies or unofficial versions of The Great Suspender ? the original was confirmed to contain unwanted code',
     },
     comparisonTable: [
       {
@@ -669,7 +669,7 @@ export const extensions: ExtensionRecord[] = [
         cost: 'Free',
         openSource: 'No',
         setupDifficulty: 'None',
-        mainTradeoff: 'Minimal customization — on/off only',
+        mainTradeoff: 'Minimal customization ? on/off only',
       },
       {
         option: 'Auto Tab Discard',
@@ -687,7 +687,7 @@ export const extensions: ExtensionRecord[] = [
         cost: 'Free',
         openSource: 'No',
         setupDifficulty: 'Easy',
-        mainTradeoff: 'Manual only — no automatic tab suspension',
+        mainTradeoff: 'Manual only ? no automatic tab suspension',
       },
       {
         option: 'Session Buddy',
@@ -733,11 +733,11 @@ export const extensions: ExtensionRecord[] = [
     ],
     keyTakeaways: [
       'The original Great Suspender was removed and disabled by Google in 2021 due to malware concerns after ownership changed.',
-      'Chrome Memory Saver is the official built-in solution — no extension needed.',
+      'Chrome Memory Saver is the official built-in solution ? no extension needed.',
       'Auto Tab Discard is the most customizable extension alternative for tab suspension.',
       'OneTab is manual consolidation, not automatic tab suspension.',
       'Workona is primarily workspace and session management, not a pure suspender replacement.',
-      'Do not install unofficial Great Suspender CRX files — they may contain unwanted code.',
+      'Do not install unofficial Great Suspender CRX files ? they may contain unwanted code.',
     ],
     currentStatus: [
       { label: 'Original Great Suspender', value: 'Removed and disabled', variant: 'bad' },
@@ -1146,10 +1146,10 @@ export const extensions: ExtensionRecord[] = [
     lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'Proxy SwitchyOmega',
-      currentStatus: 'Affected by Chrome 138 MV2 disable — no longer works in Chrome',
+      currentStatus: 'Affected by Chrome 138 MV2 disable ? no longer works in Chrome',
       bestPracticalOption: 'ZeroOmega (direct fork with SwitchyOmega profile import)',
       bestForAdvancedUsers: 'FoxyProxy Standard (established tool with advanced proxy features)',
-      mainCaution: 'Only install proxy managers from the official Chrome Web Store — proxy extensions require network modification permissions',
+      mainCaution: 'Only install proxy managers from the official Chrome Web Store ? proxy extensions require network modification permissions',
     },
     decisionGuide: [
       {
@@ -1254,7 +1254,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     safetyNotes: [
       'Only install userscript managers from the official Chrome Web Store.',
-      'Review scripts before installing — they run with your browser privileges.',
+      'Review scripts before installing ? they run with your browser privileges.',
       'Be cautious with scripts requesting broad permissions.',
       'Verify script sources before installation.',
     ],
@@ -1326,14 +1326,14 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'What is the recommended way to test a userscript?',
         answer:
-          'Review the script code before installing it — check what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the manager to temporarily disable scripts you are not actively using.',
+          'Review the script code before installing it ? check what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the manager to temporarily disable scripts you are not actively using.',
       },
     ],
     sources: [
       {
         title: 'Tampermonkey Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
-        publisher: 'Chrome Web Store',
+        publisher: 'Tampermonkey',
         sourceType: 'chrome-web-store',
         reliability: 'primary',
         supports: 'Tampermonkey MV3 availability, listing status, and publisher identity',
@@ -1352,27 +1352,27 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Tampermonkey',
         sourceType: 'github',
         reliability: 'secondary',
-        supports: 'Tampermonkey open-source status (partial — editor is GPL, newer versions proprietary), development activity, and changelog',
+        supports: 'Tampermonkey open-source status (partial ? editor is GPL, newer versions proprietary), development activity, and changelog',
       },
     ],
     keyTakeaways: [
       'Tampermonkey is actively maintained and works in current Chrome as an MV3 extension.',
       'Violentmonkey is a lightweight, fully open-source alternative with Tampermonkey script compatibility.',
       'Both managers support scripts from Greasy Fork and OpenUserJS.',
-      'Only install scripts from sources you trust — scripts run with browser-level access.',
+      'Only install scripts from sources you trust ? scripts run with browser-level access.',
       'Review @match and @grant permissions before installing any userscript.',
       'Keep your userscript manager updated to receive security patches.',
     ],
     currentStatus: [
-      { label: 'Tampermonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
-      { label: 'Violentmonkey', value: 'Active MV3 alternative — open source', variant: 'good' },
+      { label: 'Tampermonkey', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
+      { label: 'Violentmonkey', value: 'Active MV3 alternative ? open source', variant: 'good' },
       { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3', variant: 'good' },
       { label: 'Last reviewed', value: 'May 22, 2026', variant: 'neutral' },
     ],
     commonFailedFixes: [
       {
         tried: 'Install userscripts from random mirrors or search results',
-        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access — tampered scripts can collect data or manipulate pages.',
+        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access ? tampered scripts can collect data or manipulate pages.',
         saferAlternative: 'Only install scripts from known repositories like Greasy Fork or OpenUserJS, or scripts you have reviewed personally.',
       },
       {
@@ -1389,6 +1389,20 @@ export const extensions: ExtensionRecord[] = [
         tried: 'Assume all userscript managers behave identically',
         whyItFails: 'Tampermonkey and Violentmonkey have different interfaces, update mechanisms, and some feature differences. Scripts may behave slightly differently between managers.',
         saferAlternative: 'Test scripts after switching managers to verify expected behavior.',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Tampermonkey',
+        when: 'You want the most widely-supported userscript manager with the largest script library and built-in features.',
+      },
+      {
+        choose: 'Violentmonkey',
+        when: 'You prefer an open-source userscript manager with a simpler interface and lighter resource usage.',
+      },
+      {
+        choose: 'Browser bookmarklets',
+        when: 'You only need to run very simple custom scripts occasionally and want no extension overhead.',
       },
     ],
     lastUpdated: '2026-05-22',
@@ -1432,8 +1446,8 @@ export const extensions: ExtensionRecord[] = [
       'Disable or remove scripts you no longer use to reduce attack surface.',
     ],
     safetyNotes: [
-      'Violentmonkey is open source — code is available on GitHub for community review.',
-      'Userscripts run with significant browser access — only install scripts from sources you trust.',
+      'Violentmonkey is open source ? code is available on GitHub for community review.',
+      'Userscripts run with significant browser access ? only install scripts from sources you trust.',
       'Review script permissions before installation; scripts can read and modify page content.',
       'Avoid installing scripts from random websites, CRX mirrors, or search results.',
       'Disable or remove scripts you no longer use to reduce unnecessary browser access.',
@@ -1485,7 +1499,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Is Tampermonkey a Violentmonkey alternative?',
         answer:
-          'Yes. Tampermonkey is the most widely-used userscript manager and is a practical alternative to Violentmonkey. Both support the same script format and work in Chrome as MV3 extensions. The main differences are in interface design, resource usage, and feature set — Tampermonkey has more built-in features while Violentmonkey is more lightweight.',
+          'Yes. Tampermonkey is the most widely-used userscript manager and is a practical alternative to Violentmonkey. Both support the same script format and work in Chrome as MV3 extensions. The main differences are in interface design, resource usage, and feature set ? Tampermonkey has more built-in features while Violentmonkey is more lightweight.',
       },
       {
         question: 'Are userscript managers safe?',
@@ -1495,7 +1509,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Can userscripts read pages I visit?',
         answer:
-          'Yes. Userscripts run on the web pages you visit and can read page content, interact with page elements, and make network requests. This is their intended purpose — they are designed to modify how pages behave. Before installing any userscript, review what permissions it requests and where it will run.',
+          'Yes. Userscripts run on the web pages you visit and can read page content, interact with page elements, and make network requests. This is their intended purpose ? they are designed to modify how pages behave. Before installing any userscript, review what permissions it requests and where it will run.',
       },
       {
         question: 'Should I install scripts from random websites?',
@@ -1510,7 +1524,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'What is the recommended way to test a userscript?',
         answer:
-          'Review the script code before installing it — look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the userscript manager to temporarily disable scripts you are not actively using. If a script requests permissions that seem excessive for its stated purpose, do not install it.',
+          'Review the script code before installing it ? look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the userscript manager to temporarily disable scripts you are not actively using. If a script requests permissions that seem excessive for its stated purpose, do not install it.',
       },
     ],
     sources: [
@@ -1544,13 +1558,13 @@ export const extensions: ExtensionRecord[] = [
       'Violentmonkey is actively maintained as an MV3-compatible userscript manager.',
       'Tampermonkey is the most widely-used alternative with a larger script ecosystem.',
       'Violentmonkey is open source; Tampermonkey has closed-source components.',
-      'Both support the same script format — scripts from Greasy Fork work with either.',
-      'Only install userscripts from sources you trust — random mirrors can be risky.',
-      'Userscripts run on pages you visit and can access page content — review permissions.',
+      'Both support the same script format ? scripts from Greasy Fork work with either.',
+      'Only install userscripts from sources you trust ? random mirrors can be risky.',
+      'Userscripts run on pages you visit and can access page content ? review permissions.',
     ],
     currentStatus: [
-      { label: 'Violentmonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
-      { label: 'Tampermonkey', value: 'Active MV3 extension — most widely-used userscript manager', variant: 'good' },
+      { label: 'Violentmonkey', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
+      { label: 'Tampermonkey', value: 'Active MV3 extension ? most widely-used userscript manager', variant: 'good' },
       { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3 versions', variant: 'good' },
       { label: 'Last reviewed', value: 'May 22, 2026', variant: 'neutral' },
     ],
@@ -1580,7 +1594,7 @@ export const extensions: ExtensionRecord[] = [
         cost: 'Free',
         openSource: 'N/A',
         setupDifficulty: 'Very Easy',
-        mainTradeoff: 'Not a full userscript manager — limited functionality',
+        mainTradeoff: 'Not a full userscript manager ? limited functionality',
       },
     ],
     decisionGuide: [
@@ -1600,7 +1614,7 @@ export const extensions: ExtensionRecord[] = [
     commonFailedFixes: [
       {
         tried: 'Install userscripts from random mirrors or search results',
-        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access — tampered scripts can collect data or manipulate pages.',
+        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access ? tampered scripts can collect data or manipulate pages.',
         saferAlternative: 'Only install scripts from known repositories like Greasy Fork or OpenUserJS, or scripts you have reviewed personally.',
       },
       {
@@ -1716,7 +1730,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Chrome Web Store',
       },
       {
-        title: 'Auto Tab Discard — WebExtensions.org Listing',
+        title: 'Auto Tab Discard ? WebExtensions.org Listing',
         url: 'https://webextension.org/listing/tab-discard.html',
         publisher: 'WebExtensions.org',
       },
@@ -1759,10 +1773,10 @@ export const extensions: ExtensionRecord[] = [
     ],
     safetyNotes: [
       'Only install FoxyProxy from the official Chrome Web Store.',
-      'Review permissions — proxy extensions need network modification access.',
+      'Review permissions ? proxy extensions need network modification access.',
       'Verify the developer identity before installing.',
       'Avoid unofficial CRX copies of old proxy extensions.',
-      'Proxy extensions can affect all browsing traffic — remove unused extensions.',
+      'Proxy extensions can affect all browsing traffic ? remove unused extensions.',
     ],
     alternatives: [
       {
@@ -1838,7 +1852,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Does FoxyProxy include proxy servers?',
         answer:
-          'No. FoxyProxy is a proxy management tool — it helps you switch between proxy configurations — but it does not provide proxy servers. You need to set up your own proxy server or subscribe to a proxy service separately.',
+          'No. FoxyProxy is a proxy management tool ? it helps you switch between proxy configurations ? but it does not provide proxy servers. You need to set up your own proxy server or subscribe to a proxy service separately.',
       },
       {
         question: 'What is the simplest Chrome proxy option?',
@@ -1885,16 +1899,16 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'secondary',
-        supports: 'Chrome extension platform and Manifest V3 migration context — clarifies why maintained extensions like FoxyProxy have updated to MV3',
+        supports: 'Chrome extension platform and Manifest V3 migration context ? clarifies why maintained extensions like FoxyProxy have updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'FoxyProxy',
-      currentStatus: 'Active and MV3-compatible — works in current Chrome',
+      currentStatus: 'Active and MV3-compatible ? works in current Chrome',
       bestPracticalOption: 'FoxyProxy Standard (already working, no migration needed)',
       bestForAdvancedUsers: 'ZeroOmega (open source fork of SwitchyOmega with direct profile import)',
-      mainCaution: 'Proxy extensions require network modification permissions — only install from the official Chrome Web Store',
+      mainCaution: 'Proxy extensions require network modification permissions ? only install from the official Chrome Web Store',
     },
     decisionGuide: [
       {
@@ -1959,12 +1973,12 @@ export const extensions: ExtensionRecord[] = [
       'Choose ZeroOmega if you need SwitchyOmega-style rules and direct profile import.',
       'Choose FoxyProxy if you need an established proxy manager with multi-profile switching.',
       'Chrome system proxy settings are the simplest option for single-proxy setups.',
-      'Proxy extensions require broad network permissions — only install from the official Chrome Web Store.',
+      'Proxy extensions require broad network permissions ? only install from the official Chrome Web Store.',
     ],
     currentStatus: [
-      { label: 'FoxyProxy', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
-      { label: 'ZeroOmega', value: 'Active MV3 community fork — direct SwitchyOmega profile import', variant: 'good' },
-      { label: 'Chrome system proxy', value: 'Built-in — no extension needed', variant: 'neutral' },
+      { label: 'FoxyProxy', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
+      { label: 'ZeroOmega', value: 'Active MV3 community fork ? direct SwitchyOmega profile import', variant: 'good' },
+      { label: 'Chrome system proxy', value: 'Built-in ? no extension needed', variant: 'neutral' },
     ],
     commonFailedFixes: [
       {
@@ -2017,7 +2031,7 @@ export const extensions: ExtensionRecord[] = [
     safetyNotes: [
       'Only install Session Buddy from the official Chrome Web Store.',
       'Verify the developer identity matches the official publisher.',
-      'Review permissions — session managers need access to tabs and windows.',
+      'Review permissions ? session managers need access to tabs and windows.',
     ],
     alternatives: [
       {
@@ -2119,7 +2133,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     safetyNotes: [
       'Only install Stylus from the official Chrome Web Store.',
-      'Review styles before installing — they run CSS on web pages.',
+      'Review styles before installing ? they run CSS on web pages.',
       'Be cautious with styles requesting access to all websites.',
       'Stylus is open source and does not collect user data unlike its predecessor.',
     ],
@@ -2204,7 +2218,7 @@ export const extensions: ExtensionRecord[] = [
     safetyNotes: [
       'Only install Dark Reader from the official Chrome Web Store.',
       'Dark Reader is open source, allowing code review.',
-      'Review permissions — the extension needs access to modify page appearance.',
+      'Review permissions ? the extension needs access to modify page appearance.',
     ],
     alternatives: [
       {
@@ -2266,7 +2280,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline — Dark Reader was updated to MV3',
+        supports: 'Official Chrome MV2 deprecation timeline ? Dark Reader was updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',
@@ -2331,7 +2345,7 @@ export const extensions: ExtensionRecord[] = [
         bestFor: 'Users wanting comprehensive session management with organization',
         status: 'active_mv3',
         chromeStoreUrl:
-          'https://chromewebstore.google.com/detail/session-buddy/iancjfoljcpenaloeigejedmfpl药物治疗',
+          'https://chromewebstore.google.com/detail/session-buddy/iancjfoljcpenaloeigejedmfpl????',
         pros: [
           'Save and organize multiple sessions',
           'Named session collections',
@@ -2482,7 +2496,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline — Video DownloadHelper was updated to MV3',
+        supports: 'Official Chrome MV2 deprecation timeline ? Video DownloadHelper was updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',
@@ -2795,7 +2809,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline — LastPass was updated to MV3',
+        supports: 'Official Chrome MV2 deprecation timeline ? LastPass was updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',
@@ -2907,7 +2921,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline — Bitwarden was updated to MV3',
+        supports: 'Official Chrome MV2 deprecation timeline ? Bitwarden was updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',
@@ -3034,7 +3048,7 @@ export const extensions: ExtensionRecord[] = [
         bestFor: 'Users preferring Microsoft translation engine',
         status: 'active_mv3',
         chromeStoreUrl:
-          'https://chromewebstore.google.com/detail/microsoft-translator/a发改bjkfpejawfejgijbbhbcomeghpfbj',
+          'https://chromewebstore.google.com/detail/microsoft-translator/a??bjkfpejawfejgijbbhbcomeghpfbj',
         pros: [
           'Powered by Microsoft Translator',
           'Multiple language support',

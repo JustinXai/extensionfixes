@@ -38,6 +38,7 @@ const PAGE_REQUIRED_SECTIONS = {
     'Key Takeaways',
     'Current Status',
     'Common Failed Fixes',
+    'Who Should Choose Which Option',
     'Migration Steps',
     'Frequently Asked Questions',
     'Sources',
@@ -190,9 +191,10 @@ async function checkPage(page, source) {
 
   if (status !== 200) {
     if (status === 308) {
+      const isTampermonkey = TAMPERMONKEY_PAGES.includes(page);
       return {
         label: sourceLabel,
-        pass: FORBIDDEN_PATTERNS.length + (PAGE_REQUIRED_SECTIONS[page]?.length || 0) + 2,
+        pass: FORBIDDEN_PATTERNS.length + (isTampermonkey ? TAMPERMONKEY_FORBIDDEN.length : 0) + (PAGE_REQUIRED_SECTIONS[page]?.length || 0) + 2,
         fail: 0,
         skipped: true,
         reason: '308 redirect (valid — slash/non-slash canonicalisation)',
@@ -235,6 +237,24 @@ async function checkPage(page, source) {
     } else {
       pass++;
     }
+  }
+
+  // ── Tampermonkey-page-only forbidden checks ──────────────────────────────
+  if (TAMPERMONKEY_PAGES.includes(page)) {
+    for (const c of TAMPERMONKEY_FORBIDDEN) {
+      const m = stripped.match(c.pat);
+      if (m) {
+        const idx = stripped.indexOf(m[0]);
+        const ctx = stripped.substring(Math.max(0, idx - 100), idx + m[0].length + 100);
+        issues.push(`FAIL | forbidden:${c.name}: "${m[0].substring(0, 80)}" ...context: "...${ctx}..."`);
+        fail++;
+      } else {
+        pass++;
+      }
+    }
+  } else {
+    // Not a tampermonkey page — just count these as pass
+    pass += TAMPERMONKEY_FORBIDDEN.length;
   }
 
   // ── /alternatives duplicate Tampermonkey card check ───────────────────────
@@ -354,5 +374,16 @@ const FORBIDDEN_PATTERNS = [
   { name: 'dup h2 Common Failed',   pat: /Common Failed Fixes\s+Common Failed Fixes/i },
   { name: 'dup h2 FAQ',             pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
 ];
+
+// Tampermonkey-page-only forbidden patterns
+const TAMPERMONKEY_FORBIDDEN = [
+  { name: 'tampermonkey-atAGlance',      pat: /At a Glance/i },
+  { name: 'tampermonkey-commonMistakes', pat: /Common Mistakes to Avoid/i },
+  { name: 'tampermonkey-oldDecision',    pat: /Which Option Should You Choose/i },
+  { name: 'tampermonkey-privacyCon',     pat: /privacy-conscious/i },
+  { name: 'tampermonkey-openSrc',        pat: /full open-source transparency/i },
+];
+
+const TAMPERMONKEY_PAGES = ['/alternatives/tampermonkey', '/alternatives/tampermonkey/'];
 
 main().catch(e => { console.error(e); process.exit(1); });
