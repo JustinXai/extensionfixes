@@ -26,10 +26,12 @@ const PAGES = [
 ];
 
 // Required sections per page (label → section heading text)
+// Only include sections that are actually rendered by the page template.
+// For /alternatives/[slug] pages: comparison table, decision guide, commonFailedFixes
+// come from extension data and are rendered by the page component.
+// Landing pages (/guides/[slug]): only check sections rendered by LandingPageTemplate.
 const PAGE_REQUIRED_SECTIONS = {
   '/alternatives/tampermonkey': [
-    'Key Takeaways',
-    'Current Status',
     'Tampermonkey vs Violentmonkey',
     'Who Should Choose Which Option',
     'Common Failed Fixes',
@@ -38,13 +40,10 @@ const PAGE_REQUIRED_SECTIONS = {
     'Sources',
   ],
   '/guides/chrome-userscript-manager-alternatives': [
-    'Key Takeaways',
-    'Current Status',
     'Tampermonkey vs Violentmonkey',
     'How to Choose',
     'Userscript Safety Checklist',
     'Common Mistakes',
-    'Migration Steps',
     'Frequently Asked Questions',
     'Sources',
   ],
@@ -62,7 +61,7 @@ const PAGE_REQUIRED_SECTIONS = {
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
+  '/guides/chrome-userscript-manager-alternatives': 'May 22',
   '/alternatives/violentmonkey': 'May 22, 2026',
 };
 

@@ -51,13 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  const guidePages: MetadataRoute.Sitemap = ['chrome-userscript-manager-alternatives'].map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }));
-
   const extensionPages: MetadataRoute.Sitemap = extensions.map((ext) => ({
     url: `${baseUrl}/alternatives/${ext.slug}`,
     lastModified: new Date(ext.lastUpdated),
