@@ -97,7 +97,7 @@ export const errors: ErrorRecord[] = [
         supports: 'Finding MV3 alternatives for common affected extensions',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-22',
     keyTakeaways: [
       'Chrome shows this message when an extension has been automatically disabled — usually due to MV2 deprecation or Web Store removal.',
       'You generally cannot re-enable a turned-off extension in regular Chrome.',

@@ -32,7 +32,8 @@ const PAGES = [
 ];
 
 // Required sections per page (label → section heading text)
-// Only include sections that are actually rendered by the page template.
+// Organized by templateType. New pages should be added here.
+// Explicit page configs take precedence over TEMPLATE_DEFAULT_REQUIRED (below).
 const PAGE_REQUIRED_SECTIONS = {
   '/alternatives/tampermonkey': [
     'Key Takeaways',
@@ -60,6 +61,32 @@ const PAGE_REQUIRED_SECTIONS = {
     'Frequently Asked Questions',
     'Sources',
   ],
+  '/alternatives/foxyproxy': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/alternatives/ublock-origin': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/alternatives/great-suspender': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/fix/cannot-install-extension-unsupported-manifest': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/fix/manifest-v2-disabled': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+
+  // ── Index pages ─────────────────────────────────────────────────────
   '/alternatives': [
     'Tampermonkey alternatives for Chrome',
     'Violentmonkey alternatives for Chrome',
@@ -69,16 +96,65 @@ const PAGE_REQUIRED_SECTIONS = {
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
   '/alternatives/violentmonkey': 'May 22, 2026',
+  '/alternatives/foxyproxy': 'May 22, 2026',
+  '/alternatives/ublock-origin': 'May 22, 2026',
+  '/alternatives/great-suspender': 'May 22, 2026',
+  '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
 };
 
-// Min Quick Answer word count per page
 const PAGE_MIN_WORDS = {
   '/alternatives/tampermonkey': 80,
-  '/guides/chrome-userscript-manager-alternatives': 80,
   '/alternatives/violentmonkey': 80,
+  '/alternatives/foxyproxy': 80,
+  '/alternatives/ublock-origin': 80,
+  '/alternatives/great-suspender': 80,
+  '/guides/chrome-userscript-manager-alternatives': 80,
 };
+
+// Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)
+// To add a new page, either:
+//   a) Add an explicit entry to PAGE_REQUIRED_SECTIONS above (overrides), OR
+//   b) Ensure its URL path correctly maps to a templateType below, then it will use these defaults.
+const TEMPLATE_DEFAULT_REQUIRED = {
+  alternative: [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  fix: [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  guide: [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  comparison: [
+    'Verdict', 'Key Differences', 'Which One Should You Choose',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  collection: [
+    'Best Options at a Glance', 'How We Chose',
+    'Frequently Asked Questions', 'Sources',
+  ],
+};
+
+// Map URL path prefix to templateType for auto-detection
+const URL_TO_TYPE = [
+  { prefix: '/alternatives/', type: 'alternative' },
+  { prefix: '/fix/', type: 'fix' },
+  { prefix: '/comparisons/', type: 'comparison' },
+  { prefix: '/guides/', type: 'guide' },
+];
+
+function detectTemplateType(pagePath) {
+  const normalized = pagePath.replace(/\/$/, '');
+  if (PAGE_REQUIRED_SECTIONS[normalized]) return null; // explicit override takes precedence
+  for (const { prefix, type } of URL_TO_TYPE) {
+    if (normalized.startsWith(prefix)) return type;
+  }
+  return null;
+}
 
 function fetchDecoded(url) {
   return new Promise(resolve => {
@@ -190,14 +266,18 @@ async function checkPage(page, source) {
 
   if (status !== 200) {
     if (status === 308) {
-      const isTampermonkey = TAMPERMONKEY_PAGES.includes(page);
-      return {
-        label: sourceLabel,
-        pass: FORBIDDEN_PATTERNS.length + (isTampermonkey ? TAMPERMONKEY_FORBIDDEN.length : 0) + (PAGE_REQUIRED_SECTIONS[page]?.length || 0) + 2,
-        fail: 0,
-        skipped: true,
-        reason: '308 redirect (valid — slash/non-slash canonicalisation)',
-      };
+    const isTampermonkey = TAMPERMONKEY_PAGES.includes(page);
+    const type = detectTemplateType(page);
+    const pageReqSections = PAGE_REQUIRED_SECTIONS[normalized] || [];
+    const typeReqSections = (!pageReqSections.length && type) ? (TEMPLATE_DEFAULT_REQUIRED[type] || []) : [];
+    const requiredSectionCount = pageReqSections.length || typeReqSections.length;
+    return {
+      label: sourceLabel,
+      pass: FORBIDDEN_PATTERNS.length + (isTampermonkey ? TAMPERMONKEY_FORBIDDEN.length : 0) + requiredSectionCount + 2,
+      fail: 0,
+      skipped: true,
+      reason: '308 redirect (valid — slash/non-slash canonicalisation)',
+    };
     }
     return {
       label: sourceLabel,
@@ -294,15 +374,27 @@ async function checkPage(page, source) {
   }
 
   // ── Required section checks ───────────────────────────────────────────────
-  const required = PAGE_REQUIRED_SECTIONS[page] || [];
-  for (const section of required) {
-    const found = stripped.includes(section);
-    if (found) {
-      pass++;
-    } else {
-      issues.push(`FAIL | section:"${section}" — heading not found`);
-      fail++;
+  // Priority: explicit PAGE_REQUIRED_SECTIONS[page] > TEMPLATE_DEFAULT_REQUIRED[type] > none
+  const normalized = page.replace(/\/$/, '');
+  let required = PAGE_REQUIRED_SECTIONS[normalized] || null;
+  if (!required) {
+    const type = detectTemplateType(page);
+    if (type && TEMPLATE_DEFAULT_REQUIRED[type]) {
+      required = TEMPLATE_DEFAULT_REQUIRED[type];
     }
+  }
+  if (required) {
+    for (const section of required) {
+      const found = stripped.includes(section);
+      if (found) {
+        pass++;
+      } else {
+        issues.push(`FAIL | section:"${section}" — heading not found`);
+        fail++;
+      }
+    }
+  } else {
+    pass++; // unknown type — skip section checks
   }
 
   // ── Quick Answer word count ───────────────────────────────────────────────

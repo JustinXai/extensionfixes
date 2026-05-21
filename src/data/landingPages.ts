@@ -619,7 +619,7 @@ export const landingPages: LandingPageRecord[] = [
     ],
   },
   {
-    slug: 'this-extension-was-turned-off-because-it-is-no-longer-supported',
+    slug: 'fix-this-extension-turned-off-landing',
     title: 'Fix "This Extension Was Turned Off Because It Is No Longer Supported"',
     description:
       'Chrome turned off an extension because it is no longer supported? Learn what the warning means, whether you can re-enable it, and how to find a maintained replacement.',

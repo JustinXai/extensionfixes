@@ -173,7 +173,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'The classic uBlock Origin extension is affected by Chrome Manifest V2 deprecation and stopped working in Chrome 138 and later.',
     shortAnswer:
-      'Classic uBlock Origin stopped working in Chrome 138 because Chrome disabled Manifest V2 extensions. The MV3-compatible version by the same author is uBlock Origin Lite. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin. Firefox remains an option for users who need full MV2 functionality. Other MV3-compatible ad blockers like AdGuard and Adblock Plus are also available.',
+      'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it does not replicate every feature of the original extension. Firefox remains a practical option for users who need full classic uBlock Origin functionality, since Firefox still supports MV2 extensions. Avoid installing random CRX copies of classic uBlock Origin from unofficial sources, because modified extensions can create privacy and security risks. The MV3-compatible ad blocker space is actively developed, and other options like AdGuard AdBlocker and Adblock Plus are available in the Chrome Web Store.',
     whatHappened: [
       'Chrome 138 disabled all Manifest V2 extensions, including classic uBlock Origin.',
       'uBlock Origin Lite was released by the same developer as an MV3-compatible version.',
@@ -354,7 +354,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline and what extensions are affected',
       },
     ],
-    lastUpdated: '2026-05-19',
+    lastUpdated: '2026-05-22',
     atAGlance: {
       originalExtension: 'Classic uBlock Origin',
       currentStatus: 'Affected by Chrome 138 MV2 disable ? no longer works in Chrome',
@@ -476,7 +476,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'The original Great Suspender was removed from the Chrome Web Store and disabled due to reports of malware after ownership changed.',
     shortAnswer:
-      'The original Great Suspender was removed from the Chrome Web Store and disabled by Google in 2021 due to malware-related concerns. Do not install CRX copies of this extension from unofficial sources. Use Chrome built-in Memory Saver or alternatives like Auto Tab Discard for tab suspension needs.',
+      'The original Great Suspender was removed from the Chrome Web Store after a malicious version incident in 2021, and Chrome proactively disabled it for installed users. Users should avoid reinstalling old CRX copies from mirror sites because modified versions can contain unwanted code. For most Chrome users, Chrome Memory Saver is the simplest built-in replacement for tab suspension. Auto Tab Discard is a practical extension alternative for automatic tab unloading, while OneTab is better for manual tab consolidation and Workona is more focused on workspace management. The best option depends on whether you want automatic suspension, simple memory savings, or session organization.',
     whatHappened: [
       'The original developer abandoned the project and transferred ownership in 2020.',
       'The new owner introduced code that was flagged as malware by security researchers.',
@@ -653,7 +653,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Session Buddy MV3 availability and active maintenance status',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-22',
     atAGlance: {
       originalExtension: 'The Great Suspender',
       currentStatus: 'Removed from Chrome Web Store ? disabled by Google due to malware concerns',
@@ -1727,7 +1727,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'WebExtensions.org',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-22',
   },
   {
     slug: 'foxyproxy',
@@ -1894,7 +1894,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Chrome extension platform and Manifest V3 migration context ? clarifies why maintained extensions like FoxyProxy have updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-22',
     atAGlance: {
       originalExtension: 'FoxyProxy',
       currentStatus: 'Active and MV3-compatible ? works in current Chrome',
@@ -3062,7 +3062,7 @@ export const extensions: ExtensionRecord[] = [
         pros: [
           'Powered by DeepL translation engine',
           'Known for high-quality translations',
-          'Privacy-conscious with data handling policies',
+          'Uses privacy-respecting data handling policies',
         ],
         cons: [
           'Limited language support compared to Google',

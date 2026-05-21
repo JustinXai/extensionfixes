@@ -1,31 +1,20 @@
+// /alternatives/[slug] — uses AlternativePageTemplate
+// All content rendering is delegated to the template component.
+// Route layer handles: generateStaticParams, generateMetadata, params.
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getExtensionBySlug, extensions } from '@/data/extensions';
-import { AlternativeTable } from '@/components/AlternativeTable';
-import { FAQ } from '@/components/FAQ';
-import { SourceList } from '@/components/SourceList';
-import { StatusBadge } from '@/components/StatusBadge';
-import { JsonLd } from '@/components/JsonLd';
-import { Container } from '@/components/Container';
-import { KeyTakeaways } from '@/components/KeyTakeaways';
-import { CurrentStatusCard } from '@/components/CurrentStatusCard';
-import { CommonFailedFixes } from '@/components/CommonFailedFixes';
-import { createFAQSchema, createBreadcrumbSchema, createTechArticleSchema, createHowToSchema } from '@/lib/seo';
-import { formatDate } from '@/lib/utils';
+import { AlternativePageTemplate } from '@/components/templates/AlternativePageTemplate';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return extensions.map((ext) => ({
-    slug: ext.slug,
-  }));
+  return extensions.map((ext) => ({ slug: ext.slug }));
 }
 
-// SEO metadata for each extension
-const extensionMetadata: Record<string, { title: string; description: string; quickAnswer: string }> = {
+const extensionMeta: Record<string, { title: string; description: string; quickAnswer: string }> = {
   switchyomega: {
     title: 'Best Proxy SwitchyOmega Alternatives for Chrome MV3',
     description:
@@ -38,14 +27,14 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
     description:
       'Learn why classic uBlock Origin stopped working in Chrome, how uBlock Origin Lite differs, and which alternatives are available.',
     quickAnswer:
-      'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. The official MV3 replacement is uBlock Origin Lite, developed by the same creator. For many Chrome users, Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin due to MV3 limitations.',
+      'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it does not replicate every feature of the original extension. Firefox remains a practical option for users who need full classic uBlock Origin functionality, since Firefox still supports MV2 extensions. Avoid installing random CRX copies of classic uBlock Origin from unofficial sources, because modified extensions can create privacy and security risks. The MV3-compatible ad blocker space is actively developed, and other options like AdGuard AdBlocker and Adblock Plus are available in the Chrome Web Store.',
   },
   'great-suspender': {
     title: 'The Great Suspender Alternatives and Tab Recovery Guide',
     description:
       'The original Great Suspender was removed from the Chrome Web Store. Learn safer alternatives and what to know before trying to recover suspended tabs.',
     quickAnswer:
-      'The original Great Suspender was removed from the Chrome Web Store due to a malicious version. Chrome Memory Saver is the built-in replacement. Auto Tab Discard is a community alternative with similar functionality.',
+      'The original Great Suspender was removed from the Chrome Web Store after a malicious version incident in 2021, and Chrome proactively disabled it for installed users. Users should avoid reinstalling old CRX copies from mirror sites because modified versions can contain unwanted code. For most Chrome users, Chrome Memory Saver is the simplest built-in replacement for tab suspension. Auto Tab Discard is a practical extension alternative for automatic tab unloading, while OneTab is better for manual tab consolidation and Workona is more focused on workspace management. The best option depends on whether you want automatic suspension, simple memory savings, or session organization.',
   },
   modheader: {
     title: 'ModHeader Alternatives for Chrome',
@@ -171,28 +160,19 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const extension = getExtensionBySlug(slug);
+  if (!extension) return { title: 'Extension Not Found' };
 
-  if (!extension) {
-    return {
-      title: 'Extension Not Found',
-      description: 'The requested extension alternative page could not be found.',
-    };
-  }
-
-  const customMeta = extensionMetadata[slug] || {
+  const customMeta = extensionMeta[slug] || {
     title: `Best ${extension.name} Alternatives for Chrome MV3`,
     description: extension.shortAnswer,
     quickAnswer: extension.shortAnswer,
   };
-
   const canonical = `https://extensionfixes.com/alternatives/${slug}`;
 
   return {
     title: customMeta.title,
     description: customMeta.description,
-    alternates: {
-      canonical,
-    },
+    alternates: { canonical },
     openGraph: {
       title: customMeta.title,
       description: customMeta.description,
@@ -201,618 +181,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: 'en_US',
       type: 'website',
     },
-    twitter: {
-      card: 'summary',
-      title: customMeta.title,
-      description: customMeta.description,
-    },
+    twitter: { card: 'summary', title: customMeta.title, description: customMeta.description },
   };
-}
-
-function QuickAnswer({ answer }: { answer: string }) {
-  return (
-    <div className="rounded-xl border border-blue-200 bg-blue-50 p-5">
-      <h2 className="text-sm font-semibold text-blue-800 uppercase tracking-wide mb-2">
-        Quick Answer
-      </h2>
-      <p className="text-slate-700 leading-relaxed">{answer}</p>
-    </div>
-  );
-}
-
-function WhatNotToDo({ items }: { items: string[] }) {
-  return (
-    <div className="rounded-xl border border-red-200 bg-red-50 p-5">
-      <h2 className="text-sm font-semibold text-red-800 uppercase tracking-wide mb-3">
-        What Not to Do
-      </h2>
-      <ul className="space-y-2">
-        {items.map((item, index) => (
-          <li key={index} className="flex gap-2 text-red-700 text-sm">
-            <span className="flex-shrink-0 mt-0.5">
-              <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-            <span className="leading-relaxed">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 }
 
 export default async function AlternativePage({ params }: PageProps) {
   const { slug } = await params;
   const extension = getExtensionBySlug(slug);
+  if (!extension) { notFound(); return null; }
 
-  if (!extension) {
-    notFound();
-    return null;
-  }
-
-  const customMeta = extensionMetadata[slug] || { quickAnswer: extension.shortAnswer };
-  const canonical = `https://extensionfixes.com/alternatives/${slug}`;
-
-  const breadcrumbSchema = createBreadcrumbSchema([
-    { name: 'Home', url: 'https://extensionfixes.com' },
-    { name: 'Alternatives', url: 'https://extensionfixes.com/alternatives' },
-    { name: extension.name, url: canonical },
-  ]);
-
-  const techArticleSchema = createTechArticleSchema({
-    title: `Best ${extension.name} Alternatives for Chrome MV3`,
-    description: extension.shortAnswer,
-    url: canonical,
-    lastUpdated: extension.lastUpdated,
-  });
-
-  const howToSchema = createHowToSchema({
-    title: `How to migrate from ${extension.name}`,
-    steps: extension.migrationSteps,
-  });
-
-  const defaultWhatNotToDo = [
-    'Do not install random CRX files from unknown download sites.',
-    'Do not assume a similar name means it is from the same developer.',
-    'Do not grant broad permissions without checking the developer.',
-    'Export settings before removing old extensions if you still need the configuration.',
-  ];
-
+  const meta = extensionMeta[slug];
   return (
-    <>
-      <JsonLd data={breadcrumbSchema} />
-      <JsonLd data={techArticleSchema} />
-      {extension.faqs.length > 0 && <JsonLd data={createFAQSchema(extension.faqs)} />}
-      {extension.migrationSteps.length > 0 && <JsonLd data={howToSchema} />}
-
-      <Container>
-        <nav className="py-4 text-sm" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-900">Home</Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link href="/alternatives" className="hover:text-slate-900">Alternatives</Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-900" aria-current="page">{extension.name}</li>
-          </ol>
-        </nav>
-
-        <article className="pb-16">
-          <header className="mb-8">
-            <div className="flex items-center gap-3 mb-3">
-              <StatusBadge status={extension.status} />
-              <span className="text-sm text-slate-500">{extension.category}</span>
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl leading-tight mb-6">
-              {slug === 'tampermonkey'
-                ? 'Tampermonkey Alternatives for Chrome'
-                : `Best ${extension.name} Alternatives for Chrome MV3`}
-            </h1>
-            <QuickAnswer answer={customMeta.quickAnswer} />
-          </header>
-
-          <section className="mb-10" aria-labelledby="what-happened-heading">
-            <h2 id="what-happened-heading" className="text-xl font-semibold text-slate-900 mb-4">What Happened</h2>
-            <ul className="space-y-3">
-              {extension.whatHappened.map((item, index) => (
-                <li key={index} className="flex gap-3 text-slate-600">
-                  <svg className="h-5 w-5 flex-shrink-0 text-slate-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {extension.alternatives.length > 0 && (
-            <section className="mb-10" aria-labelledby="alternatives-heading">
-              <h2 id="alternatives-heading" className="text-xl font-semibold text-slate-900 mb-4">
-                Best Alternatives to {extension.name}
-              </h2>
-              <div className="overflow-x-auto">
-                <AlternativeTable alternatives={extension.alternatives} />
-              </div>
-            </section>
-          )}
-
-          <section className="mb-10" aria-labelledby="migration-heading">
-            <h2 id="migration-heading" className="text-xl font-semibold text-slate-900 mb-4">Migration Steps</h2>
-            <div className="space-y-4">
-              {extension.migrationSteps.map((step, index) => (
-                <div key={index} className="flex gap-4">
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-600" aria-hidden="true">
-                    {index + 1}
-                  </span>
-                  <span className="text-slate-600 pt-0.5 leading-relaxed">{step}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {extension.safetyNotes.length > 0 && (
-            <section className="mb-10" aria-labelledby="safety-heading">
-              <h2 id="safety-heading" className="text-xl font-semibold text-slate-900 mb-4">Safety Notes</h2>
-              <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
-                <ul className="space-y-2">
-                  {extension.safetyNotes.map((note, index) => (
-                    <li key={index} className="flex gap-2 text-amber-800 text-sm">
-                      <svg className="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path
-                          fillRule="evenodd"
-                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="leading-relaxed">{note}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )}
-
-          <section className="mb-10">
-            <WhatNotToDo items={defaultWhatNotToDo} />
-          </section>
-
-          {/* ── Top 5 Enhanced Sections ─────────────────────────────── */}
-          {extension.atAGlance && (
-            <section className="mb-10" aria-labelledby="at-a-glance-heading">
-              <h2 id="at-a-glance-heading" className="text-xl font-semibold text-slate-900 mb-4">At a Glance</h2>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {[
-                  { label: 'Original extension', value: extension.atAGlance.originalExtension },
-                  { label: 'Current Chrome status', value: extension.atAGlance.currentStatus },
-                  { label: 'Best practical option', value: extension.atAGlance.bestPracticalOption },
-                  ...(extension.atAGlance.bestForAdvancedUsers
-                    ? [{ label: 'Best for advanced users', value: extension.atAGlance.bestForAdvancedUsers }]
-                    : []),
-                  { label: 'Main caution', value: extension.atAGlance.mainCaution },
-                ].map((item) => (
-                  <div key={item.label} className="flex flex-col gap-1 rounded-xl border border-gray-200 bg-white p-4">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">{item.label}</span>
-                    <span className="text-sm text-slate-700">{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* slug === 'tampermonkey' uses decisionGuide below */}
-
-          {!['violentmonkey', 'tampermonkey'].includes(slug) && extension.comparisonTable && extension.comparisonTable.length > 0 && (
-            <section className="mb-10" aria-labelledby="comparison-heading">
-              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Comparison Table</h2>
-              <div className="overflow-x-auto rounded-xl border border-gray-200">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      {['Option', 'Best For', 'MV3', 'Cost', 'Open Source', 'Setup', 'Main Trade-off'].map((h) => (
-                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
-                    {extension.comparisonTable.map((row, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
-                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
-                        <td className="px-4 py-4 text-sm sm:px-6">
-                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
-                            row.mv3Support === 'Yes (official)' || row.mv3Support === 'Yes'
-                              ? 'bg-green-50 text-green-700'
-                              : row.mv3Support.includes('MV2')
-                              ? 'bg-amber-50 text-amber-700'
-                              : 'bg-gray-50 text-gray-600'
-                          }`}>{row.mv3Support}</span>
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
-                        <td className="px-4 py-4 text-sm sm:px-6">
-                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${row.openSource === 'Yes' ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-600'}`}>{row.openSource}</span>
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.setupDifficulty}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
-
-          {/* slug === 'tampermonkey' uses decisionGuide below */}
-
-          {extension.commonMistakes && extension.commonMistakes.length > 0 && (
-            <section className="mb-10" aria-labelledby="common-mistakes-heading">
-              <h2 id="common-mistakes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Mistakes to Avoid</h2>
-              <div className="space-y-3">
-                {extension.commonMistakes.map((item, i) => (
-                  <div key={i} className="flex gap-3 rounded-xl border border-red-100 bg-red-50 p-4">
-                    <svg className="h-5 w-5 flex-shrink-0 text-red-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-red-800">Do not: {item.doNot}</p>
-                      {item.instead && (
-                        <p className="mt-1 text-sm text-green-700">
-                          <span className="font-medium">Instead:</span> {item.instead}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {extension.keyTakeaways && extension.keyTakeaways.length > 0 && (
-            <section className="mb-10" aria-labelledby="key-takeaways-heading">
-              <h2 id="key-takeaways-heading" className="text-xl font-semibold text-slate-900 mb-4">Key Takeaways</h2>
-              <KeyTakeaways items={extension.keyTakeaways} />
-            </section>
-          )}
-
-          {extension.currentStatus && extension.currentStatus.length > 0 && (
-            <section className="mb-10" aria-labelledby="current-status-heading">
-              <h2 id="current-status-heading" className="text-xl font-semibold text-slate-900 mb-4">Current Status</h2>
-              <CurrentStatusCard entries={extension.currentStatus} />
-            </section>
-          )}
-
-          {extension.commonFailedFixes && extension.commonFailedFixes.length > 0 && (
-            <section className="mb-10" aria-labelledby="common-failed-fixes-heading">
-              <h2 id="common-failed-fixes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Failed Fixes</h2>
-              <CommonFailedFixes items={extension.commonFailedFixes} />
-            </section>
-          )}
-
-          {slug === 'switchyomega' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/switchyomega-not-working" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  SwitchyOmega Not Working Guide
-                </Link>
-                <Link href="/switchyomega-alternative" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Best SwitchyOmega Alternatives
-                </Link>
-                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Manifest V2 Disabled Guide
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'ublock-origin' && (
-            <section className="mb-10 p-5 bg-amber-50 rounded-xl border border-amber-200" aria-labelledby="no-crx-heading">
-              <h2 id="no-crx-heading" className="text-lg font-semibold text-amber-800 mb-2">Do not download random CRX files</h2>
-              <p className="text-sm text-amber-700 leading-relaxed">
-                Searching for &quot;uBlock Origin CRX&quot; may return modified packages from third-party sites. These can contain outdated code, unexpected permissions, or supply-chain risks. Always install uBlock Origin Lite from the official <a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh" className="font-medium underline hover:text-amber-900" target="_blank" rel="noopener noreferrer">Chrome Web Store listing</a>, or visit the official <a href="https://github.com/gorhill/uBlock" className="font-medium underline hover:text-amber-900" target="_blank" rel="noopener noreferrer">uBlock Origin GitHub</a> to verify current options.
-              </p>
-            </section>
-          )}
-
-          {slug === 'ublock-origin' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/ublock-origin-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  uBlock Origin No Longer Supported Guide
-                </Link>
-                <Link href="/ublock-origin-lite-vs-ublock-origin" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  uBlock Origin Lite vs Classic
-                </Link>
-                <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Extension No Longer Supported Fix
-                </Link>
-                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Manifest V2 Disabled Guide
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'great-suspender' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Chrome Disabled Extension Guide
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'tampermonkey' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/violentmonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Violentmonkey Alternatives
-                </Link>
-                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Manifest V2 Disabled Guide
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {extension.decisionGuide && extension.decisionGuide.length > 0 && (
-            <section className="mb-10" aria-labelledby="decision-guide-heading">
-              <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
-              <div className="space-y-4">
-                {extension.decisionGuide.map((item, i) => (
-                  <div key={i} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-900">{item.choose}</p>
-                      <p className="mt-1 text-sm text-slate-600">{item.when}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {slug === 'violentmonkey' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tampermonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Tampermonkey Alternatives
-                </Link>
-                <Link href="/guides/chrome-userscript-manager-alternatives" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Chrome Userscript Manager Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'auto-tab-discard' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/great-suspender" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Great Suspender Alternatives
-                </Link>
-                <Link href="/onetab" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  OneTab Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'foxyproxy' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/switchyomega" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  SwitchyOmega Alternatives
-                </Link>
-                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Manifest V2 Disabled Guide
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'onetab' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/auto-tab-discard" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Auto Tab Discard Alternatives
-                </Link>
-                <Link href="/session-buddy" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Session Buddy Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'session-buddy' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/onetab" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  OneTab Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'stylus' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'dark-reader' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'video-downloadhelper' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/downthemall" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  DownThemAll Alternatives
-                </Link>
-                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Chrome Disabled Extension Guide
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'user-agent-switcher' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/modheader" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  ModHeader Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'grammarly' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'lastpass' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/bitwarden" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Bitwarden Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'bitwarden' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/lastpass" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  LastPass Alternatives
-                </Link>
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'honey' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {slug === 'google-translate' && (
-            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
-              <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  Search More Extensions
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {extension.faqs.length > 0 && (
-            <section className="mb-10" aria-labelledby="faq-heading">
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <FAQ faqs={extension.faqs} skipHeading />
-            </section>
-          )}
-
-          <section className="mb-10" aria-labelledby="sources-heading">
-            <SourceList sources={extension.sources} />
-          </section>
-
-          <footer className="pt-6 border-t border-slate-200 text-sm text-slate-500">
-            <p>Last updated: {formatDate(extension.lastUpdated)}</p>
-            <p className="mt-2 text-xs">
-              Independent guide. Not affiliated with Google, Chrome, Chrome Web Store, or listed extension developers.
-            </p>
-          </footer>
-        </article>
-      </Container>
-    </>
+    <AlternativePageTemplate
+      extension={extension}
+      meta={meta}
+    />
   );
 }

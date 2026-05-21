@@ -15,7 +15,7 @@ const ROOT = path.resolve(__dirname, '..');
 const errors = [];
 const warnings = [];
 
-const EXCLUDE_DIRS = new Set(['node_modules', '.next', '.git', '.vercel', 'out', 'coverage']);
+const EXCLUDE_DIRS = new Set(['node_modules', '.next', '.git', '.vercel', 'out', 'coverage', 'scripts']);
 
 function scanDir(dir, extensions, predicate) {
   const results = [];
@@ -114,19 +114,13 @@ function checkWording(dir) {
   return scanDir(dir, ['.ts', '.tsx', '.md', '.mdx'], (file, content) => {
     const found = [];
     const isRiskDoc = file.includes('05-risk-words-and-claims.md');
+    // content-templates.md lists these phrases as documentation — skip
+    const isContentTemplatesDoc = file.includes('content-templates.md');
 
     for (const phrase of FAIL_PHRASES) {
       if (content.toLowerCase().includes(phrase.toLowerCase())) {
-        // Skip docs/05 if phrase appears inside a table row (phrases listed as documentation)
-        if (isRiskDoc) {
-          const lines = content.split('\n');
-          for (const line of lines) {
-            // table rows start with | and contain the phrase
-            if (line.trim().startsWith('|') && line.toLowerCase().includes(phrase.toLowerCase())) {
-              found.push(`doc-reference: "${phrase}" (in forbidden-phrase table — intentional, not flagged)`);
-              break;
-            }
-          }
+        if (isRiskDoc || isContentTemplatesDoc) {
+          found.push(`doc-reference: "${phrase}" (in documentation — intentional, not flagged)`);
         } else {
           // Check negation exceptions
           const negPattern = NEGATION_EXCEPTIONS[phrase.toLowerCase()];
@@ -140,7 +134,7 @@ function checkWording(dir) {
     }
     for (const phrase of WARN_PHRASES) {
       if (content.toLowerCase().includes(phrase.toLowerCase())) {
-        if (!isRiskDoc) found.push(`WARN: "${phrase}"`);
+        if (!isRiskDoc && !isContentTemplatesDoc) found.push(`WARN: "${phrase}"`);
       }
     }
     return found;
@@ -181,6 +175,7 @@ const requiredFiles = [
   'src/data/extensions.ts',
   'src/data/errors.ts',
   'src/data/landingPages.ts',
+  'src/data/comparisons.ts',
   'src/data/site.ts',
 ];
 for (const file of requiredFiles) {
@@ -221,6 +216,8 @@ const undefinedFindings = scanDir(path.join(ROOT, 'src'), ['.ts', '.tsx'], (file
       if (/^\s*\w[^=]*\([^)]*\|\s*undefined/.test(trimmed)) return;
       // Skip return statements from .find() which naturally return T | undefined
       if (/return\s+\w+\.find\([^)]+\)/.test(trimmed)) return;
+      // Skip type guard filter predicates: .filter(..., e !== null && e !== undefined)
+      if (/\.filter\(/.test(trimmed) && /!==\s*null/.test(trimmed) && /!==\s*undefined/.test(trimmed)) return;
       lines.push(`line ${i + 1}: contains undefined literal`);
     }
   });
@@ -231,23 +228,31 @@ for (const { file, matches } of undefinedFindings) {
 }
 
 // ── 8. Top-5 enhanced content checks (lightweight text scan) ─────────────────
-const altPagePath = path.join(ROOT, 'src', 'app', 'alternatives', '[slug]', 'page.tsx');
-const fixPagePath = path.join(ROOT, 'src', 'app', 'fix', '[slug]', 'page.tsx');
+// Route layer page.tsx files delegate rendering to template components.
+// Quick Answer and Sources headings live in imported components that templates use,
+// so we scan both the template TSX files and any component files they directly import.
+const templateDir = path.join(ROOT, 'src', 'components', 'templates');
+const reviewedTemplateFiles = ['AlternativePageTemplate.tsx', 'FixPageTemplate.tsx'];
+const allFilesToCheck = [
+  ...reviewedTemplateFiles.map(f => path.join(templateDir, f)),
+  // QuickAnswer.tsx exists in both src/components/ and src/components/templates/
+  // Both must be checked since templates import from ../QuickAnswer (not ../templates/QuickAnswer)
+  path.join(ROOT, 'src', 'components', 'QuickAnswer.tsx'),
+  path.join(templateDir, 'QuickAnswer.tsx'),
+  path.join(ROOT, 'src', 'components', 'SourceList.tsx'),
+];
+const allContent = allFilesToCheck
+  .filter(f => fs.existsSync(f))
+  .map(f => fs.readFileSync(f, 'utf8'))
+  .join('\n');
 
-for (const p of [altPagePath, fixPagePath]) {
-  if (!fs.existsSync(p)) continue;
-  const content = fs.readFileSync(p, 'utf8');
-  const checks = [
-    { label: 'Quick Answer', pattern: /Quick Answer/i },
-    { label: 'At a Glance', pattern: /At a Glance|at-a-glance-heading/i },
-    { label: 'Comparison Table', pattern: /Comparison Table|comparison-heading/i },
-    { label: 'Decision Guide', pattern: /Which Option Should You Choose|decision-guide-heading/i },
-    { label: 'Sources', pattern: /Sources|sources-heading/i },
-  ];
-  const missing = checks.filter((c) => !c.pattern.test(content));
-  if (missing.length > 0) {
-    warnings.push(`Template ${rel(p)} may be missing: ${missing.map((m) => m.label).join(', ')}`);
-  }
+const essentialChecks = [
+  { label: 'Quick Answer', pattern: /Quick Answer|quick-answer-heading/i },
+  { label: 'Sources', pattern: /Sources|sources-heading/i },
+];
+const missingEssential = essentialChecks.filter(c => !c.pattern.test(allContent));
+if (missingEssential.length > 0) {
+  warnings.push(`Content components may be missing: ${missingEssential.map(m => m.label).join(', ')}`);
 }
 
 // ── 9. Source Quality Layer v1 checks (Top 10 pages) ─────────────────────────
@@ -289,13 +294,12 @@ function extractSourcesFromFile(filePath, targetSlugs) {
     // Search for sources array between this slug and the next object in the array
     // Prefer lastUpdated: as boundary (when sources is the last field)
     // Fall back to } (next top-level object) when sources has trailing comma
-    const afterSlug = content.slice(slugIdx);
-    const matchWithLastUpdated = afterSlug.match(/sources:\s*\[([\s\S]*?)\],\s*\n\s*lastUpdated:/);
+    const matchWithLastUpdated = content.slice(slugIdx).match(/sources:\s*\[([\s\S]*?)\],\s*\n\s*lastUpdated:/);
     if (matchWithLastUpdated) {
       results[slug] = parseSourceBlocks(matchWithLastUpdated[1]);
       continue;
     }
-    const matchWithBrace = afterSlug.match(/sources:\s*\[([\s\S]*?)\],\s*\n\s+\}/);
+    const matchWithBrace = content.slice(slugIdx).match(/sources:\s*\[([\s\S]*?)\],\s*\n\s+\}/);
     if (matchWithBrace) {
       results[slug] = parseSourceBlocks(matchWithBrace[1]);
       continue;
@@ -332,7 +336,7 @@ for (const page of allTop10) {
   }
 }
 
-// ── 10. Slug uniqueness: top-level extension slugs must be unique ─────────────────
+// ── 10. Global slug uniqueness across ALL data files ───────────────────────────
 function checkSlugUniqueness(filePath, label) {
   if (!fs.existsSync(filePath)) {
     errors.push(`Slug check [${label}]: file not found`);
@@ -341,13 +345,11 @@ function checkSlugUniqueness(filePath, label) {
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split('\n');
 
-  // Find all lines where exactly 4 spaces precede "slug:"
-  // (top-level within an array of ExtensionRecord objects)
-  const slugPositions = {}; // slug -> [{ line, value }]
+  const slugPositions = {};
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const stripped = line.replace(/\r$/, '');
-    // Exactly 4 spaces of indentation = top-level
+    // Exactly 4 spaces of indentation = top-level object in the array
     if (/^    slug:\s*['"]([^'"]+)['"]/.test(stripped)) {
       const m = stripped.match(/^    slug:\s*['"]([^'"]+)['"]/);
       const slug = m[1];
@@ -367,9 +369,44 @@ function checkSlugUniqueness(filePath, label) {
   }
 }
 
-checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'extensions.ts'), 'extensions');
-checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'errors.ts'), 'errors');
-checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'landingPages.ts'), 'landingPages');
+// Collect all slugs globally so we can detect cross-file collisions
+function collectAllSlugs(filePath) {
+  if (!fs.existsSync(filePath)) return {};
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split('\n');
+  const slugs = {};
+  for (let i = 0; i < lines.length; i++) {
+    const stripped = lines[i].replace(/\r$/, '');
+    if (/^    slug:\s*['"]([^'"]+)['"]/.test(stripped)) {
+      const m = stripped.match(/^    slug:\s*['"]([^'"]+)['"]/);
+      slugs[m[1]] = { file: rel(filePath), line: i + 1 };
+    }
+  }
+  return slugs;
+}
+
+const allFileSlugs = {};
+const dataFiles = [
+  { path: path.join(ROOT, 'src', 'data', 'extensions.ts'), label: 'extensions' },
+  { path: path.join(ROOT, 'src', 'data', 'errors.ts'), label: 'errors' },
+  { path: path.join(ROOT, 'src', 'data', 'landingPages.ts'), label: 'landingPages' },
+  { path: path.join(ROOT, 'src', 'data', 'comparisons.ts'), label: 'comparisons' },
+];
+for (const { path: fp, label } of dataFiles) {
+  checkSlugUniqueness(fp, label);
+  const slugs = collectAllSlugs(fp);
+  for (const [slug, info] of Object.entries(slugs)) {
+    if (!allFileSlugs[slug]) allFileSlugs[slug] = [];
+    allFileSlugs[slug].push(info);
+  }
+}
+
+// Cross-file slug collision check
+const crossDuplicates = Object.entries(allFileSlugs).filter(([, entries]) => entries.length > 1);
+for (const [slug, entries] of crossDuplicates) {
+  const locations = entries.map(e => `${e.file}:${e.line}`).join(', ');
+  errors.push(`Cross-file slug collision: '${slug}' appears in ${locations} — URL paths must be globally unique`);
+}
 
 // ── 11. Script Manager cluster: verify tampermonkey/violentmonkey slugs are clean ────
 // Check that extensions.ts has exactly one entry per script-manager slug
@@ -397,6 +434,231 @@ function checkClusterDataIntegrity() {
   }
 }
 checkClusterDataIntegrity();
+
+// ── 12. Forbidden old section titles ──────────────────────────────────────────
+// These titles are from the legacy template and must not appear in new pages.
+const FORBIDDEN_TITLES = [
+  'At a Glance',
+  'Common Mistakes to Avoid',
+  'Which Option Should You Choose',
+  'AI Summary',
+  'Summary for AI Assistants',
+];
+const forbiddenTitleFindings = scanDir(path.join(ROOT, 'src'), ['.ts', '.tsx'], (file, content) => {
+  const found = [];
+  for (const title of FORBIDDEN_TITLES) {
+    // Match <h2 ...>Old Title</h2> or id="old-title-heading"
+    const escaped = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp(`<h2[^>]*>[^<]*${escaped}[^<]*</h2>`, 'i').test(content)) {
+      found.push(title);
+    }
+    if (new RegExp(`id="[a-z-]*${escaped.replace(/\s+/g, '-').toLowerCase()}[-"]`, 'i').test(content)) {
+      found.push(title);
+    }
+  }
+  return found;
+});
+for (const { file, matches } of forbiddenTitleFindings) {
+  warnings.push(`Old section title in ${rel(file)}: ${matches.join(', ')}`);
+}
+
+// ── 13. Forbidden claims (additions to existing list) ───────────────────────────
+// These are checked alongside existing FAIL_PHRASES and WARN_PHRASES.
+const ADDITIONAL_FAIL_CLAIMS = [
+  'privacy-conscious',
+  'full open-source transparency',
+];
+// Note: Skip scripts/ — ADDITIONAL_FAIL_CLAIMS strings appear as literal array entries here
+const additionalClaimFindings = scanDir(path.join(ROOT, 'src'), ['.ts', '.tsx'], (file, content) => {
+  const found = [];
+  for (const phrase of ADDITIONAL_FAIL_CLAIMS) {
+    if (content.toLowerCase().includes(phrase.toLowerCase())) {
+      found.push(phrase);
+    }
+  }
+  return found;
+});
+for (const { file, matches } of additionalClaimFindings) {
+  errors.push(`Forbidden claim in ${rel(file)}: "${matches.join(', ')}"`);
+}
+
+// ── 14. Source deduplication: title AND url uniqueness per page ─────────────────
+function checkSourceDeduplication(filePath, targetSlugs, pageLabel) {
+  if (!fs.existsSync(filePath)) return;
+  const content = fs.readFileSync(filePath, 'utf8');
+  for (const slug of targetSlugs) {
+    const slugIdx = content.indexOf(`slug: '${slug}',`);
+    if (slugIdx === -1) continue;
+    const afterSlug = content.slice(slugIdx);
+    const match = afterSlug.match(/sources:\s*\[([\s\S]*?)\],\s*\n\s*(?:lastUpdated|relatedExtensionSlugs)/);
+    if (!match) continue;
+    const sourceBlock = match[1];
+    const titleMatches = [...sourceBlock.matchAll(/title:\s*['"]([^'"]+)['"]/g)].map(m => m[1]);
+    const urlMatches = [...sourceBlock.matchAll(/url:\s*['"]([^'"]+)['"]/g)].map(m => m[1]);
+
+    const dupTitles = titleMatches.filter((t, i) => titleMatches.indexOf(t) !== i);
+    const dupUrls = urlMatches.filter((u, i) => urlMatches.indexOf(u) !== i);
+
+    if (dupTitles.length > 0) {
+      errors.push(`Source duplicate title(s) in ${pageLabel}[${slug}]: "${dupTitles.join(', ')}"`);
+    }
+    if (dupUrls.length > 0) {
+      errors.push(`Source duplicate URL(s) in ${pageLabel}[${slug}]: "${dupUrls.join(', ')}"`);
+    }
+  }
+}
+checkSourceDeduplication(
+  path.join(ROOT, 'src', 'data', 'extensions.ts'),
+  ['tampermonkey', 'violentmonkey', 'ublock-origin', 'foxyproxy', 'great-suspender'],
+  'extensions'
+);
+checkSourceDeduplication(
+  path.join(ROOT, 'src', 'data', 'errors.ts'),
+  ['this-extension-was-turned-off-because-it-is-no-longer-supported', 'cannot-install-extension-unsupported-manifest', 'manifest-v2-disabled'],
+  'errors'
+);
+
+// ── 15. Required data fields by templateType ─────────────────────────────────────
+// Rules derived from content-templates.md checklist requirements.
+function countFieldInBlock(block, field) {
+  // Match top-level field declarations (4 spaces of indentation in the record block)
+  // Must be a standalone property key, not inside a nested string like aliases or urls.
+  // Strategy: look for the field at start-of-line with 4+ spaces, then a colon.
+  const lines = block.split('\n');
+  let count = 0;
+  for (const line of lines) {
+    // 4 spaces = top-level field within record
+    if (/^    \w/.test(line)) {
+      const fieldName = line.replace(/^    (\w+).*/, '$1');
+      if (fieldName === field) count++;
+    }
+  }
+  return count;
+}
+
+function countArrayItems(sourceBlock, field) {
+  return countFieldInBlock(sourceBlock, field);
+}
+
+function extractRecordBlock(content, slug) {
+  const slugIdx = content.indexOf(`slug: '${slug}',`);
+  if (slugIdx === -1) return null;
+
+  // The slug line is preceded by "  {". Back up to find the opening brace of this record.
+  const beforeSlug = content.slice(Math.max(0, slugIdx - 5), slugIdx);
+  const openBrace = beforeSlug.indexOf('{');
+  if (openBrace === -1) return null;
+  const recordStart = slugIdx - 5 + openBrace; // absolute position of '{'
+
+  const afterOpen = content.slice(recordStart);
+  let depth = 0;
+  let end = 0;
+  for (let i = 0; i < afterOpen.length; i++) {
+    const ch = afterOpen[i];
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) { end = i + 1; break; }
+    }
+  }
+  return afterOpen.slice(0, end);
+}
+
+function checkRequiredDataByType(filePath, targetSlugs, pageLabel, type) {
+  if (!fs.existsSync(filePath)) return;
+  const content = fs.readFileSync(filePath, 'utf8');
+  const rules = {
+    alternative: [
+      { field: 'shortAnswer', min: 1, note: 'quickAnswer or shortAnswer required' },
+      { field: 'keyTakeaways', min: 3 },
+      { field: 'currentStatus', min: 3 },
+      { field: 'commonFailedFixes', min: 3 },
+      { field: 'faqs', min: 5 },
+      { field: 'sources', min: 2 },
+      { field: 'lastUpdated', min: 1 },
+    ],
+    fix: [
+      { field: 'quickAnswer', min: 1, note: 'quickAnswer required' },
+      { field: 'keyTakeaways', min: 3 },
+      { field: 'currentStatus', min: 3 },
+      { field: 'commonFailedFixes', min: 3 },
+      { field: 'faqs', min: 5 },
+      { field: 'sources', min: 2 },
+      { field: 'lastUpdated', min: 1 },
+    ],
+    guide: [
+      { field: 'quickAnswer', min: 1 },
+      { field: 'keyTakeaways', min: 3 },
+      { field: 'currentStatus', min: 3 },
+      { field: 'faqs', min: 5 },
+      { field: 'sources', min: 2 },
+      { field: 'lastUpdated', min: 1 },
+    ],
+    comparison: [
+      { field: 'verdict', min: 1 },
+      { field: 'keyDifferences', min: 3 },
+      { field: 'comparisonTable', min: 3 },
+      { field: 'decisionGuide', min: 3 },
+      { field: 'faqs', min: 5 },
+      { field: 'sources', min: 2 },
+      { field: 'lastUpdated', min: 1 },
+    ],
+    collection: [
+      { field: 'selectionCriteria', min: 3 },
+      { field: 'options', min: 3 },
+      { field: 'comparisonTable', min: 3 },
+      { field: 'faqs', min: 5 },
+      { field: 'sources', min: 2 },
+      { field: 'lastUpdated', min: 1 },
+    ],
+  };
+
+  const fieldRules = rules[type];
+  if (!fieldRules) return;
+
+  for (const slug of targetSlugs) {
+    const block = extractRecordBlock(content, slug);
+    if (!block) continue;
+    for (const rule of fieldRules) {
+      const count = countArrayItems(block, rule.field);
+      if (count < rule.min) {
+        const note = rule.note || `needs at least ${rule.min}`;
+        errors.push(`Required data [${pageLabel}/${slug}] ${rule.field}: ${count} found (${note})`);
+      }
+    }
+  }
+}
+
+checkRequiredDataByType(
+  path.join(ROOT, 'src', 'data', 'extensions.ts'),
+  ['tampermonkey', 'violentmonkey', 'foxyproxy', 'ublock-origin', 'great-suspender'],
+  'extensions', 'alternative'
+);
+checkRequiredDataByType(
+  path.join(ROOT, 'src', 'data', 'errors.ts'),
+  ['this-extension-was-turned-off-because-it-is-no-longer-supported', 'cannot-install-extension-unsupported-manifest', 'manifest-v2-disabled'],
+  'errors', 'fix'
+);
+
+// ── 16. Duplicate h2 heading risk ─────────────────────────────────────────────
+// Warn if the same heading text appears twice in a page.tsx
+function checkDuplicateH2(filePath) {
+  if (!fs.existsSync(filePath)) return;
+  const content = fs.readFileSync(filePath, 'utf8');
+  const h2Matches = [...content.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map(m => m[1].trim());
+  const seen = {};
+  for (const h of h2Matches) {
+    if (!seen[h]) seen[h] = 0;
+    seen[h]++;
+  }
+  const duplicates = Object.entries(seen).filter(([, count]) => count > 1);
+  if (duplicates.length > 0) {
+    warnings.push(`Duplicate h2 in ${rel(filePath)}: ${duplicates.map(([h]) => `"${h}" (${seen[h]}x)`).join(', ')}`);
+  }
+}
+checkDuplicateH2(path.join(ROOT, 'src', 'app', 'alternatives', '[slug]', 'page.tsx'));
+checkDuplicateH2(path.join(ROOT, 'src', 'app', 'fix', '[slug]', 'page.tsx'));
+checkDuplicateH2(path.join(ROOT, 'src', 'app', 'guides', '[slug]', 'page.tsx'));
 
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');
