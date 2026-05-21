@@ -1355,7 +1355,6 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Tampermonkey MV3 availability, listing status, and publisher identity',
       },
     ],
-    lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'Tampermonkey',
       currentStatus: 'Active and MV3-compatible — works in current Chrome',
@@ -1407,6 +1406,35 @@ export const extensions: ExtensionRecord[] = [
         instead: 'Read script descriptions, reviews, and source code before installing from any repository',
       },
     ],
+    currentStatus: [
+      { label: 'Tampermonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
+      { label: 'Violentmonkey', value: 'Active MV3 alternative — open source', variant: 'good' },
+      { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 22, 2026', variant: 'neutral' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install userscripts from random mirrors or search results',
+        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access — tampered scripts can collect data or manipulate pages.',
+        saferAlternative: 'Only install scripts from known repositories like Greasy Fork or OpenUserJS, or scripts you have reviewed personally.',
+      },
+      {
+        tried: 'Import all old scripts without reviewing them',
+        whyItFails: 'Old scripts may have unmaintained code, unexpected permissions, or may not work with current website layouts.',
+        saferAlternative: 'Review each script before importing. Remove ones you no longer need.',
+      },
+      {
+        tried: 'Grant broad permissions to scripts without reading their code',
+        whyItFails: 'Userscripts with excessive permissions can read or modify sensitive page content. Some scripts may collect browsing data.',
+        saferAlternative: "Check the script's permissions and code before installing. Avoid scripts requesting access to all websites unless necessary.",
+      },
+      {
+        tried: 'Assume all userscript managers behave identically',
+        whyItFails: 'Tampermonkey and Violentmonkey have different interfaces, update mechanisms, and some feature differences. Scripts may behave slightly differently between managers.',
+        saferAlternative: 'Test scripts after switching managers to verify expected behavior.',
+      },
+    ],
+    lastUpdated: '2026-05-22',
   },
   {
     slug: 'violentmonkey',
