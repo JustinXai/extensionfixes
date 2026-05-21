@@ -268,7 +268,7 @@ async function checkPage(page, source) {
     if (status === 308) {
     const isTampermonkey = TAMPERMONKEY_PAGES.includes(page);
     const type = detectTemplateType(page);
-    const pageReqSections = PAGE_REQUIRED_SECTIONS[normalized] || [];
+    const pageReqSections = PAGE_REQUIRED_SECTIONS[page.replace(/\/$/, '')] || [];
     const typeReqSections = (!pageReqSections.length && type) ? (TEMPLATE_DEFAULT_REQUIRED[type] || []) : [];
     const requiredSectionCount = pageReqSections.length || typeReqSections.length;
     return {
