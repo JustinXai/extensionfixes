@@ -381,7 +381,7 @@ export const landingPages: LandingPageRecord[] = [
       'Compare uBlock Origin Lite and classic uBlock Origin, including Manifest V3 limitations, filtering modes, setup differences, and browser choices.',
     h1: 'uBlock Origin Lite vs uBlock Origin: What\'s Different?',
     shortAnswer:
-      'uBlock Origin Lite is the Manifest V3 version with some feature differences. Both are developed by Raymond Hill. Static filter lists work the same in both versions. Dynamic filtering rules are restricted in uBlock Origin Lite due to MV3 limitations. Most users who rely on filter lists will find uBlock Origin Lite equivalent.',
+      'uBlock Origin Lite is the Manifest V3 version with some feature differences. Both are developed by Raymond Hill. Static filter lists work the same in both versions. Dynamic filtering rules are restricted in uBlock Origin Lite due to MV3 limitations. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin.',
     aliases: [
       'ublock origin lite vs ublock origin',
       'ublock origin lite',
@@ -421,7 +421,7 @@ export const landingPages: LandingPageRecord[] = [
         type: 'text',
         title: 'Who Should Use uBlock Origin Lite',
         content:
-          'If you use Chrome 138 or later and primarily rely on pre-made filter lists, uBlock Origin Lite provides equivalent blocking. As an MV3-based content blocker by the same developer, it offers the same trusted filter lists. Most users will not notice a difference. The reduced permissions in Lite are actually a privacy improvement.',
+          'If you use Chrome 138 or later and primarily rely on pre-made filter lists, uBlock Origin Lite is a practical MV3 option from the same developer. For many Chrome users, it is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin. Most users relying on filter lists will find it satisfactory, but advanced users may notice differences in dynamic filtering.',
       },
       {
         type: 'text',

@@ -1,6 +1,6 @@
 # ExtensionFixes Source Quality Report
 
-Generated: 2026-05-18T10:37:22.059Z
+Generated: 2026-05-18T11:40:31.926Z
 
 ## Top 10 Pages — Source Coverage
 

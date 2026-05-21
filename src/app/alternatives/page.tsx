@@ -57,6 +57,72 @@ export default function AlternativesPage() {
         </div>
       </section>
 
+      {/* Popular Chrome Extension Problems */}
+      <section className="py-12 border-b border-gray-200">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-lg font-semibold text-slate-900 mb-4">
+            Popular Chrome extension problems
+          </h2>
+          <ul className="space-y-2">
+            {[
+              {
+                href: '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported',
+                label: 'This extension was turned off because it is no longer supported',
+                desc: 'Extension disabled by Chrome — what it means and what to do',
+              },
+              {
+                href: '/fix/cannot-install-extension-unsupported-manifest',
+                label: 'Cannot install extension because it uses an unsupported manifest version',
+                desc: 'Chrome blocks installation of outdated extension packages',
+              },
+              {
+                href: '/alternatives/ublock-origin',
+                label: 'uBlock Origin no longer supported in Chrome',
+                desc: 'Classic uBlock Origin stopped working — alternatives and paths forward',
+              },
+              {
+                href: '/alternatives/great-suspender',
+                label: 'The Great Suspender removed from Chrome',
+                desc: 'What happened and safer tab management options',
+              },
+              {
+                href: '/switchyomega-not-working',
+                label: 'SwitchyOmega stopped working in Chrome',
+                desc: 'Why it stopped and how to migrate your proxy profiles',
+              },
+              {
+                href: '/alternatives/switchyomega',
+                label: 'SwitchyOmega alternative for Chrome',
+                desc: 'MV3-compatible proxy management options including ZeroOmega and FoxyProxy',
+              },
+              {
+                href: '/alternatives/foxyproxy',
+                label: 'FoxyProxy alternative for Chrome',
+                desc: 'Proxy manager options for profile-based and rule-based switching in modern Chrome',
+              },
+              {
+                href: '/alternatives/violentmonkey',
+                label: 'Violentmonkey alternative for Chrome',
+                desc: 'Compare Violentmonkey and Tampermonkey userscript manager options for Chrome',
+              },
+            ].map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 rounded-lg border border-gray-100 p-3 hover:border-blue-200 hover:bg-blue-50/50 transition-colors group"
+                >
+                  <span className="text-sm font-medium text-blue-600 group-hover:text-blue-700 min-w-0">
+                    {item.label}
+                  </span>
+                  <span className="hidden sm:inline text-slate-300 flex-shrink-0">·</span>
+                  <span className="text-xs text-slate-500">{item.desc}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Hero */}
       <section className="py-12 border-b border-gray-200">
         <div className="mx-auto max-w-4xl text-center">

@@ -31,6 +31,16 @@ function extractMeta(html, name) {
     const match = html.match(pattern);
     if (match) return match[1];
   }
+
+  // Next.js 14+ doesn't output <meta name="title">; fall back to <title> tag / og:title
+  if (name === 'title') {
+    const titleTag = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    if (titleTag) return titleTag[1];
+    const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i);
+    if (ogTitle) return ogTitle[1];
+  }
+
   return null;
 }
 
@@ -41,17 +51,24 @@ function extractCanonical(html) {
 
 function checkForIssues(html) {
   const issues = [];
-  if (html.includes('undefined')) {
-    issues.push('Contains "undefined"');
+
+  // Only scan the <head> section — the React RSC payload in <script> tags
+  // contains null/$undefined from React internals and is not page content.
+  const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+  const headContent = headMatch ? headMatch[1] : html;
+
+  // "undefined" appearing in the visible <head> is almost always a bug.
+  if (headContent.includes('undefined')) {
+    issues.push('Contains "undefined" in <head>');
   }
-  if (html.includes('NaN')) {
-    issues.push('Contains "NaN"');
+  if (headContent.includes('NaN')) {
+    issues.push('Contains "NaN" in <head>');
   }
-  if (html.includes('null')) {
-    const nullMatches = html.match(/null(?![^<]*>)/g);
-    if (nullMatches && nullMatches.length > 5) {
-      issues.push('Contains multiple "null" strings');
-    }
+
+  // null is rare in <head> metadata; flag only if there are more than a few.
+  const nullMatches = headContent.match(/null(?![^<]*>)/g);
+  if (nullMatches && nullMatches.length > 3) {
+    issues.push(`Contains ${nullMatches.length} "null" strings in <head>`);
   }
   return issues;
 }

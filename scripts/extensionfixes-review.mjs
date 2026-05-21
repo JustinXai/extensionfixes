@@ -85,16 +85,30 @@ const FAIL_PHRASES = [
   'official successor',
   '100% safe',
   'guaranteed safe',
+  'guaranteed fix',
   'The Great Suspender is malware',
   'all MV2 extensions are malware',
   'download old CRX',
   'download unknown CRX',
+  'feature parity',
+  'full feature parity',
+  'fully equivalent',
+  'equivalent replacement',
 ];
 const WARN_PHRASES = [
   'safest',
   'official replacement',
   'the only safe choice',
 ];
+
+// Negation exceptions: pattern => regex that matches allowed negated forms
+// e.g. "is not an official successor" is fine; "is an official successor" is not
+const NEGATION_EXCEPTIONS = {
+  'official successor': /is not an official successor/i,
+  'download old crx': /do not download old crx/i,
+  'download unknown crx': /do not download unknown crx/i,
+  'download random crx': /do not download random crx/i,
+};
 
 function checkWording(dir) {
   return scanDir(dir, ['.ts', '.tsx', '.md', '.mdx'], (file, content) => {
@@ -114,7 +128,13 @@ function checkWording(dir) {
             }
           }
         } else {
-          found.push(`FAIL: "${phrase}"`);
+          // Check negation exceptions
+          const negPattern = NEGATION_EXCEPTIONS[phrase.toLowerCase()];
+          if (negPattern && negPattern.test(content)) {
+            // allowed: negative form found — skip silently
+          } else {
+            found.push(`FAIL: "${phrase}"`);
+          }
         }
       }
     }

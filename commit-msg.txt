@@ -1,0 +1,11 @@
+Sprint 4: Source Quality Layer v1 — enhanced sources, new review checks, report script
+
+Changes:
+- src/lib/types.ts: Added SourceType and SourceReliability enums; extended SourceItem with sourceType, reliability, supports
+- src/components/SourceList.tsx: Enhanced display to show source type, reliability tier, and what each source supports
+- src/data/extensions.ts: Enhanced Top 10 sources with sourceType/reliability/supports fields
+- src/data/errors.ts: Enhanced Top 2 fix page sources; fixed duplicate chrome-disabled-extension entry
+- scripts/extensionfixes-review.mjs: Added Source Quality Layer v1 checks for Top 10 pages
+- scripts/generate-source-quality-report.mjs: New script generating reports/source-quality-report.md
+- package.json: Added npm run source:report script
+- reports/source-quality-report.md: Auto-generated source quality report

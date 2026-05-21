@@ -8,6 +8,9 @@ import { SourceList } from '@/components/SourceList';
 import { StatusBadge } from '@/components/StatusBadge';
 import { JsonLd } from '@/components/JsonLd';
 import { Container } from '@/components/Container';
+import { KeyTakeaways } from '@/components/KeyTakeaways';
+import { CurrentStatusCard } from '@/components/CurrentStatusCard';
+import { CommonFailedFixes } from '@/components/CommonFailedFixes';
 import { createFAQSchema, createBreadcrumbSchema, createTechArticleSchema, createHowToSchema } from '@/lib/seo';
 import { formatDate } from '@/lib/utils';
 
@@ -35,7 +38,7 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
     description:
       'Learn why classic uBlock Origin stopped working in Chrome, how uBlock Origin Lite differs, and which alternatives are available.',
     quickAnswer:
-      'Classic uBlock Origin stopped working in Chrome 138+ because it uses Manifest V2. The official MV3 replacement is uBlock Origin Lite, developed by the same creator. For most users relying on filter lists, Lite provides equivalent ad blocking.',
+      'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. The official MV3 replacement is uBlock Origin Lite, developed by the same creator. For many Chrome users, Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin due to MV3 limitations.',
   },
   'great-suspender': {
     title: 'The Great Suspender Alternatives and Tab Recovery Guide',
@@ -66,11 +69,11 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
       'Tampermonkey is actively maintained as an MV3-compatible extension for Chrome. Violentmonkey is a lightweight open-source alternative that supports Tampermonkey-compatible scripts.',
   },
   violentmonkey: {
-    title: 'Violentmonkey Alternatives for Chrome',
+    title: 'Violentmonkey Alternatives for Chrome Users',
     description:
-      'Violentmonkey is actively maintained in Chrome. Compare alternatives like Tampermonkey for userscript management.',
+      'Compare Violentmonkey, Tampermonkey, and userscript manager options for Chrome. Learn what to use, what to avoid, and how to migrate safely.',
     quickAnswer:
-      'Violentmonkey is an actively maintained open-source userscript manager. Tampermonkey is the most widely-used option with more built-in features and a larger script library.',
+      'Violentmonkey is an open-source userscript manager used to run custom browser scripts on websites you visit. If you need a Violentmonkey alternative for Chrome, Tampermonkey is the most widely known option, while Violentmonkey remains a practical choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permission expectations, browser support, and how much control you want over imported scripts. Userscript managers can run powerful code on pages you visit, so avoid random script mirrors, review script permissions, and only install scripts from sources you trust.',
   },
   'auto-tab-discard': {
     title: 'Auto Tab Discard Alternatives for Chrome',
@@ -82,9 +85,9 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
   foxyproxy: {
     title: 'FoxyProxy Alternatives for Chrome',
     description:
-      'FoxyProxy is actively maintained in Chrome. Compare alternatives like ZeroOmega for proxy management.',
+      'Compare FoxyProxy, ZeroOmega, and other proxy manager options for Chrome. Learn which is best for profile-based switching or SwitchyOmega migration.',
     quickAnswer:
-      'FoxyProxy is an actively maintained MV3 proxy manager for Chrome with advanced features. ZeroOmega and Proxy Switcher are alternatives with different interfaces and feature sets.',
+      'FoxyProxy remains a practical Chrome proxy manager for users who need multiple proxy profiles, pattern-based switching, and quick control over browser proxy settings. If you are migrating from SwitchyOmega, ZeroOmega may feel more familiar because it is a community fork designed for modern Manifest V3 browsers. FoxyProxy is a better fit when you want an established proxy manager with long-running Chrome and Firefox support. The best choice depends on whether you need SwitchyOmega-style rules, FoxyProxy-style profiles, or a simpler one-click proxy switcher.',
   },
   'session-buddy': {
     title: 'Session Buddy Alternatives for Chrome',
@@ -345,16 +348,16 @@ export default async function AlternativePage({ params }: PageProps) {
 
           <section className="mb-10" aria-labelledby="migration-heading">
             <h2 id="migration-heading" className="text-xl font-semibold text-slate-900 mb-4">Migration Steps</h2>
-            <ol className="space-y-4">
+            <div className="space-y-4">
               {extension.migrationSteps.map((step, index) => (
-                <li key={index} className="flex gap-4">
+                <div key={index} className="flex gap-4">
                   <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-600" aria-hidden="true">
                     {index + 1}
                   </span>
                   <span className="text-slate-600 pt-0.5 leading-relaxed">{step}</span>
-                </li>
+                </div>
               ))}
-            </ol>
+            </div>
           </section>
 
           {extension.safetyNotes.length > 0 && (
@@ -406,7 +409,35 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
-          {extension.comparisonTable && extension.comparisonTable.length > 0 && (
+          {slug === 'violentmonkey' && extension.comparisonTable && extension.comparisonTable.length > 0 && (
+            <section className="mb-10" aria-labelledby="comparison-heading">
+              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Violentmonkey vs Tampermonkey vs Other Options</h2>
+              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {['Option', 'Best For', 'Chrome status', 'Strength', 'Trade-off'].map((h) => (
+                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {extension.comparisonTable.map((row, i) => (
+                      <tr key={i} className="hover:bg-gray-50">
+                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mv3Support}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {!['violentmonkey'].includes(slug) && extension.comparisonTable && extension.comparisonTable.length > 0 && (
             <section className="mb-10" aria-labelledby="comparison-heading">
               <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Comparison Table</h2>
               <div className="overflow-x-auto rounded-xl border border-gray-200">
@@ -488,6 +519,27 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
+          {extension.keyTakeaways && extension.keyTakeaways.length > 0 && (
+            <section className="mb-10" aria-labelledby="key-takeaways-heading">
+              <h2 id="key-takeaways-heading" className="text-xl font-semibold text-slate-900 mb-4">Key Takeaways</h2>
+              <KeyTakeaways items={extension.keyTakeaways} />
+            </section>
+          )}
+
+          {extension.currentStatus && extension.currentStatus.length > 0 && (
+            <section className="mb-10" aria-labelledby="current-status-heading">
+              <h2 id="current-status-heading" className="text-xl font-semibold text-slate-900 mb-4">Current Status</h2>
+              <CurrentStatusCard entries={extension.currentStatus} />
+            </section>
+          )}
+
+          {extension.commonFailedFixes && extension.commonFailedFixes.length > 0 && (
+            <section className="mb-10" aria-labelledby="common-failed-fixes-heading">
+              <h2 id="common-failed-fixes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Failed Fixes</h2>
+              <CommonFailedFixes items={extension.commonFailedFixes} />
+            </section>
+          )}
+
           {slug === 'switchyomega' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-resources-heading">
               <h2 id="related-resources-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Resources</h2>
@@ -564,6 +616,26 @@ export default async function AlternativePage({ params }: PageProps) {
                 <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Search More Extensions
                 </Link>
+              </div>
+            </section>
+          )}
+
+          {slug === 'violentmonkey' && (
+            <section className="mb-10" aria-labelledby="who-choose-heading">
+              <h2 id="who-choose-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
+              <div className="space-y-4">
+                {[
+                  { choose: 'Violentmonkey', reason: 'You prefer an open-source userscript manager and want control over imported scripts.' },
+                  { choose: 'Tampermonkey', reason: 'You need broad userscript compatibility and a large script ecosystem.' },
+                  { choose: 'Browser bookmarks/snippets', reason: 'You only need to run very simple personal scripts without an extension.' },
+                ].map((item) => (
+                  <div key={item.choose} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-slate-900">{item.choose}</p>
+                      <p className="mt-1 text-sm text-slate-600">{item.reason}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           )}
@@ -764,7 +836,7 @@ export default async function AlternativePage({ params }: PageProps) {
           {extension.faqs.length > 0 && (
             <section className="mb-10" aria-labelledby="faq-heading">
               <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <FAQ faqs={extension.faqs} />
+              <FAQ faqs={extension.faqs} skipHeading />
             </section>
           )}
 

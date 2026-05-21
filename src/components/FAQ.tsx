@@ -5,17 +5,21 @@ import type { FAQItem } from '@/lib/types';
 
 interface FAQProps {
   faqs: FAQItem[];
+  /** Skips rendering the h2 — caller provides the section heading instead. */
+  skipHeading?: boolean;
   className?: string;
 }
 
-export function FAQ({ faqs, className = '' }: FAQProps) {
+export function FAQ({ faqs, skipHeading = false, className = '' }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   if (!faqs || faqs.length === 0) return null;
 
   return (
     <div className={`space-y-3 ${className}`}>
-      <h2 className="text-xl font-semibold text-gray-900">Frequently Asked Questions</h2>
+      {!skipHeading && (
+        <h2 className="text-xl font-semibold text-gray-900">Frequently Asked Questions</h2>
+      )}
       <div className="divide-y divide-gray-200 rounded-xl border border-gray-200">
         {faqs.map((faq, index) => {
           const isOpen = openIndex === index;

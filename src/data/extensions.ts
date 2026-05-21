@@ -153,7 +153,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'FoxyProxy MV3 availability, listing status, and publisher identity',
       },
     ],
-    lastUpdated: '2026-05-13',
+    lastUpdated: '2026-05-19',
   },
   {
     slug: 'ublock-origin',
@@ -173,7 +173,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'The classic uBlock Origin extension is affected by Chrome Manifest V2 deprecation and stopped working in Chrome 138 and later.',
     shortAnswer:
-      'Classic uBlock Origin stopped working in Chrome 138 because Chrome disabled Manifest V2 extensions. The MV3-compatible version by the same author is uBlock Origin Lite. For full feature parity, Firefox with classic uBlock Origin remains an option. Other MV3-compatible ad blockers like AdGuard and Adblock Plus are also available.',
+      'Classic uBlock Origin stopped working in Chrome 138 because Chrome disabled Manifest V2 extensions. The MV3-compatible version by the same author is uBlock Origin Lite. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin. Firefox remains an option for users who need full MV2 functionality. Other MV3-compatible ad blockers like AdGuard and Adblock Plus are also available.',
     whatHappened: [
       'Chrome 138 disabled all Manifest V2 extensions, including classic uBlock Origin.',
       'uBlock Origin Lite was released by the same developer as an MV3-compatible version.',
@@ -256,7 +256,7 @@ export const extensions: ExtensionRecord[] = [
         url: 'https://www.mozilla.org/firefox/',
         pros: [
           'Classic uBlock Origin works fully in Firefox',
-          'Full feature parity with original uBlock Origin',
+          'Full MV2 feature set — same as original uBlock Origin in Firefox',
           'Firefox supports Manifest V2 extensions',
         ],
         cons: [
@@ -305,7 +305,27 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Is uBlock Origin Lite the same as uBlock Origin?',
         answer:
-          'uBlock Origin Lite is not a one-to-one replacement. It is a separate MV3-compatible extension developed by the same author. Some features work differently due to MV3 limitations, particularly dynamic filtering rules. For most users browsing with filter lists, Lite provides equivalent ad blocking. Advanced users relying on specific MV2-only features may notice differences.',
+          'uBlock Origin Lite is not a one-to-one replacement. It is a separate MV3-compatible extension developed by the same author. Some features work differently due to MV3 limitations, particularly dynamic filtering rules. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it is not a feature-identical replacement for classic uBlock Origin. Advanced users relying on specific MV2-only features may notice differences.',
+      },
+      {
+        question: 'Why did Chrome disable uBlock Origin?',
+        answer:
+          'Chrome did not "disable" uBlock Origin for policy violations. Classic uBlock Origin stopped working because it uses Manifest V2 APIs that Chrome has deprecated. Chrome 138 and later disabled all Manifest V2 extensions by default. The extension remains safe and legitimate — it simply requires an MV3-compatible version.',
+      },
+      {
+        question: 'Can I install uBlock Origin CRX manually?',
+        answer:
+          'Installing CRX files from search results or third-party download sites is not recommended. These packages may be outdated, modified, or request unexpected permissions. Chrome may also block loading them. The recommended path is to install uBlock Origin Lite from the official Chrome Web Store listing or visit the official uBlock Origin GitHub page to verify current options.',
+      },
+      {
+        question: 'What should I use if uBlock Origin is not working in Chrome?',
+        answer:
+          'Install uBlock Origin Lite from the official Chrome Web Store — it is the MV3-compatible version developed by the same author. If uBlock Origin Lite does not meet your needs, other MV3 ad blockers like AdGuard or AdBlock are available. Firefox with classic uBlock Origin remains an option for users who need full MV2 features.',
+      },
+      {
+        question: 'Does Chrome 140 support classic uBlock Origin?',
+        answer:
+          'No. Chrome 140 does not restore classic Manifest V2 extension support. Chrome disabled MV2 extensions earlier in the Chrome MV2 phase-out. Users should use MV3-compatible alternatives or a browser that still supports the classic extension behavior.',
       },
     ],
     sources: [
@@ -334,12 +354,12 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline and what extensions are affected',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-19',
     atAGlance: {
       originalExtension: 'Classic uBlock Origin',
       currentStatus: 'Affected by Chrome 138 MV2 disable — no longer works in Chrome',
       bestPracticalOption: 'uBlock Origin Lite (by the same developer)',
-      bestForAdvancedUsers: 'Firefox with classic uBlock Origin (full feature parity)',
+      bestForAdvancedUsers: 'Firefox with classic uBlock Origin (full MV2 feature set)',
       mainCaution: 'uBlock Origin Lite has reduced dynamic filtering compared to classic uBlock Origin due to MV3 limitations',
     },
     decisionGuide: [
@@ -390,7 +410,7 @@ export const extensions: ExtensionRecord[] = [
       },
       {
         option: 'Firefox + classic uBlock Origin',
-        bestFor: 'Advanced users who need full dynamic filtering and feature parity',
+        bestFor: 'Advanced users who need full dynamic filtering in Firefox',
         mv3Support: 'MV2 (Firefox)',
         cost: 'Free',
         openSource: 'Yes',
@@ -410,6 +430,32 @@ export const extensions: ExtensionRecord[] = [
       {
         doNot: 'Ignore filter list maintenance — outdated lists can miss new trackers and ads',
         instead: 'Periodically update filter lists or enable automatic updates in your ad blocker settings',
+      },
+    ],
+    keyTakeaways: [
+      'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions.',
+      'uBlock Origin Lite is the MV3-compatible option from the same developer (Raymond Hill).',
+      'Lite is not a feature-identical replacement due to MV3 limitations — particularly reduced dynamic filtering.',
+      'Firefox remains an option for users who need full classic uBlock Origin functionality.',
+      'Do not install random CRX copies of classic uBlock Origin from search results.',
+      'uBlock Origin Lite may require adjusting filtering modes from your previous configuration.',
+    ],
+    currentStatus: [
+      { label: 'Classic uBlock Origin', value: 'Disabled in Chrome 138+ (MV2)', variant: 'bad' },
+      { label: 'uBlock Origin Lite', value: 'Active — MV3 from same developer', variant: 'good' },
+      { label: 'Firefox support', value: 'Classic uBlock Origin works in Firefox', variant: 'good' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Search for "uBlock Origin CRX" to install classic uBlock Origin manually',
+        whyItFails: 'CRX files from third-party sites may contain outdated code, unexpected permissions, or supply-chain risks. Chrome may block loading them.',
+      },
+      {
+        tried: 'Assume uBlock Origin Lite behaves identically to classic uBlock Origin in all cases',
+        whyItFails: 'MV3 limitations reduce dynamic filtering capabilities. For many users, uBlock Origin Lite provides satisfactory blocking for common filter lists, but advanced users relying on dynamic rules may notice differences.',
+      },
+      {
+        doesNotWork: 'Re-enabling classic uBlock Origin in regular Chrome is not possible — MV2 support is fully removed.',
       },
     ],
   },
@@ -525,6 +571,16 @@ export const extensions: ExtensionRecord[] = [
     ],
     faqs: [
       {
+        question: 'What happened to The Great Suspender?',
+        answer:
+          'The original Great Suspender was a legitimate tab management extension that suspended inactive tabs to save browser memory. In late 2020, the project was sold to a new developer who introduced code that security researchers flagged as problematic. In early 2021, Google removed the extension from the Chrome Web Store and proactively disabled it for users who had installed it. The original developer had no involvement with the problematic version.',
+      },
+      {
+        question: 'Is The Great Suspender malware?',
+        answer:
+          'The original version of The Great Suspender was a legitimate extension. However, after ownership changed in late 2020, the version released by the new owner contained code that security researchers identified as potentially harmful. Google disabled the extension to protect users. We recommend using established alternatives instead of trying to install any version of The Great Suspender from unofficial sources.',
+      },
+      {
         question: 'Is Great Suspender safe to use?',
         answer:
           'NO. The original Great Suspender was removed and disabled due to malware concerns. Do not install any version of this extension from unofficial sources. The risks outweigh any potential benefits.',
@@ -543,6 +599,11 @@ export const extensions: ExtensionRecord[] = [
         question: 'What happened to the tabs I had open when Great Suspender was disabled?',
         answer:
           'Chrome may have recovered some tabs during session restoration. Check your recently closed tabs and browser session data. However, suspended tabs specifically may have been lost.',
+      },
+      {
+        question: 'What are the best Great Suspender alternatives for Chrome?',
+        answer:
+          'Chrome Memory Saver is the official built-in solution — open Settings > Performance > Memory Saver and turn it on. Auto Tab Discard is a well-maintained MV3 extension from the Chrome Web Store that lets you customize which tabs are suspended. OneTab provides manual tab consolidation. Workona is an option for users who want workspace-based session management. Each has a different level of automation and control.',
       },
       {
         question: 'Are there safe alternatives to Great Suspender?',
@@ -592,7 +653,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Session Buddy MV3 availability and active maintenance status',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'The Great Suspender',
       currentStatus: 'Removed from Chrome Web Store — disabled by Google due to malware concerns',
@@ -668,6 +729,32 @@ export const extensions: ExtensionRecord[] = [
       {
         doNot: 'Grant broad permissions to tab management extensions you do not recognize.',
         instead: 'Legitimate tab management extensions need permission to manage tabs. Review permissions before installing.',
+      },
+    ],
+    keyTakeaways: [
+      'The original Great Suspender was removed and disabled by Google in 2021 due to malware concerns after ownership changed.',
+      'Chrome Memory Saver is the official built-in solution — no extension needed.',
+      'Auto Tab Discard is the most customizable extension alternative for tab suspension.',
+      'OneTab is manual consolidation, not automatic tab suspension.',
+      'Workona is primarily workspace and session management, not a pure suspender replacement.',
+      'Do not install unofficial Great Suspender CRX files — they may contain unwanted code.',
+    ],
+    currentStatus: [
+      { label: 'Original Great Suspender', value: 'Removed and disabled', variant: 'bad' },
+      { label: 'Chrome Memory Saver', value: 'Built-in and active', variant: 'good' },
+      { label: 'Auto Tab Discard', value: 'Active in Chrome Web Store', variant: 'good' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install an old Great Suspender CRX from a download site',
+        whyItFails: 'Chrome may block unofficial extensions, and the downloaded file may contain the unwanted code that caused the original removal.',
+      },
+      {
+        tried: 'Install an extension with a similar name from a different developer',
+        whyItFails: 'Legitimate-looking clones can have different functionality and permissions. Always verify the developer before installing.',
+      },
+      {
+        doesNotWork: 'Great Suspender will not return to the Chrome Web Store',
       },
     ],
   },
@@ -1056,7 +1143,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Why managed enterprise devices may have different extension policies',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'Proxy SwitchyOmega',
       currentStatus: 'Affected by Chrome 138 MV2 disable — no longer works in Chrome',
@@ -1079,7 +1166,7 @@ export const extensions: ExtensionRecord[] = [
       },
       {
         choose: 'Firefox with SwitchyOmega',
-        when: 'You need exact SwitchyOmega feature parity and do not mind switching browsers.',
+        when: 'You need full SwitchyOmega behavior and do not mind switching browsers.',
       },
     ],
     comparisonTable: [
@@ -1112,7 +1199,7 @@ export const extensions: ExtensionRecord[] = [
       },
       {
         option: 'Firefox + SwitchyOmega',
-        bestFor: 'Advanced users who need exact SwitchyOmega feature parity',
+        bestFor: 'Advanced users who need exact SwitchyOmega behavior',
         mv3Support: 'MV2 (Firefox)',
         cost: 'Free',
         openSource: 'Yes',
@@ -1175,7 +1262,7 @@ export const extensions: ExtensionRecord[] = [
       {
         name: 'Violentmonkey',
         slug: 'violentmonkey',
-        bestFor: 'Users wanting a lightweight userscript manager with open-source transparency',
+        bestFor: 'Users wanting a lightweight, open-source userscript manager',
         status: 'active_mv3',
         chromeStoreUrl:
           'https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag',
@@ -1190,7 +1277,24 @@ export const extensions: ExtensionRecord[] = [
           'Fewer built-in features than Tampermonkey',
           'Smaller user community for script support',
         ],
-        note: 'Violentmonkey is an open-source userscript manager that supports Tampermonkey-compatible scripts with a simpler interface.',
+        note: 'Violentmonkey is an open-source userscript manager that supports Tampermonkey-compatible scripts with a simpler interface. It is not an official successor to Tampermonkey.',
+      },
+      {
+        name: 'Browser bookmarklets',
+        slug: 'browser-bookmarklets',
+        bestFor: 'Users wanting to run very simple custom scripts with no extension needed',
+        status: 'active_mv3',
+        pros: [
+          'No extension required',
+          'Simple and lightweight',
+          'Works across all browsers',
+        ],
+        cons: [
+          'Not a full userscript manager',
+          'Limited functionality compared to extensions',
+          'No automatic script updates',
+        ],
+        note: 'Bookmarklets work for simple custom scripts but are not a replacement for a full userscript manager.',
       },
     ],
     faqs: [
@@ -1203,6 +1307,26 @@ export const extensions: ExtensionRecord[] = [
         question: 'Can I use Tampermonkey scripts with Violentmonkey?',
         answer:
           'Yes. Violentmonkey is designed to be compatible with scripts written for Tampermonkey, including those from Greasy Fork and other script repositories.',
+      },
+      {
+        question: 'Are userscript managers safe?',
+        answer:
+          'Tampermonkey is safe when installed from the official Chrome Web Store. However, individual userscripts vary in quality. Scripts run with significant browser access and can read or modify page content. Always review a script\'s code and permissions before installing it.',
+      },
+      {
+        question: 'Should I install scripts from random websites?',
+        answer:
+          'No. Installing userscripts from unknown or random sources can expose your browsing data. Only install scripts from well-known repositories like Greasy Fork or OpenUserJS, or scripts whose code you have reviewed. Avoid scripts from websites you do not recognize.',
+      },
+      {
+        question: 'Can userscripts read pages I visit?',
+        answer:
+          'Yes. Userscripts run on the web pages you visit and can read page content, interact with page elements, and make network requests. Before installing any userscript, review what permissions it requests and where it will run.',
+      },
+      {
+        question: 'What is the recommended way to test a userscript?',
+        answer:
+          'Review the script code before installing it — check what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the manager to temporarily disable scripts you are not actively using.',
       },
     ],
     sources: [
@@ -1231,7 +1355,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Tampermonkey MV3 availability, listing status, and publisher identity',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'Tampermonkey',
       currentStatus: 'Active and MV3-compatible — works in current Chrome',
@@ -1289,9 +1413,15 @@ export const extensions: ExtensionRecord[] = [
     name: 'Violentmonkey',
     aliases: [
       'Violentmonkey',
+      'violentmonkey chrome',
+      'violentmonkey alternative',
+      'violentmonkey userscript',
       'userscript manager',
       'open source script manager',
       'lightweight userscript',
+      'userscript chrome mv3',
+      'tampermonkey vs violentmonkey',
+      'violentmonkey vs tampermonkey',
     ],
     category: 'Script Manager',
     summary:
@@ -1299,55 +1429,103 @@ export const extensions: ExtensionRecord[] = [
     status: 'active_mv3',
     riskLevel: 'low',
     issueSummary:
-      'Violentmonkey is actively maintained as an MV3-compatible extension. Users may compare it with Tampermonkey for preference.',
+      'Violentmonkey is an actively maintained MV3-compatible userscript manager. Users compare it with Tampermonkey for feature and interface preferences.',
     shortAnswer:
-      'Violentmonkey is an open-source userscript manager that works in modern Chrome. It supports Tampermonkey-compatible scripts and is known for its lightweight design and transparency. Tampermonkey remains the most widely-used option with more built-in features.',
+      'Violentmonkey is an open-source userscript manager used to run custom browser scripts on websites you visit. If you need a Violentmonkey alternative for Chrome, Tampermonkey is the most widely known option, while Violentmonkey remains a practical choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permission expectations, browser support, and how much control you want over imported scripts. Userscript managers can run powerful code on pages you visit, so avoid random script mirrors, review script permissions, and only install scripts from sources you trust. The Violentmonkey page on Extension Fixes compares both options with migration steps, safety notes, and a full comparison table.',
     whatHappened: [
-      'Violentmonkey was updated to support Manifest V3.',
+      'Violentmonkey was updated to support Manifest V3 and works in current Chrome.',
       'The project remains actively maintained by its open-source community.',
-      'Users compare it with Tampermonkey for interface and feature preferences.',
+      'Users compare it with Tampermonkey for interface preferences, feature trade-offs, and resource usage.',
+      'Both Violentmonkey and Tampermonkey are legitimate, maintained options with different design goals.',
     ],
     migrationSteps: [
-      'No migration needed if Violentmonkey is working for you.',
-      'Export your scripts before switching to another manager.',
-      'Violentmonkey supports importing Tampermonkey-format scripts.',
+      'Export your active scripts from Violentmonkey before switching.',
+      'Review each script\'s permissions and functionality before reinstalling.',
+      'Install Tampermonkey or your chosen alternative from the official Chrome Web Store.',
+      'Import scripts into the new manager and verify each one works on your target sites.',
+      'Remove the old extension after confirming the new setup works as expected.',
+      'Disable or remove scripts you no longer use to reduce attack surface.',
     ],
     safetyNotes: [
-      'Violentmonkey is open source, allowing code review on GitHub.',
-      'Only install scripts from trusted sources.',
-      'Review script permissions before installation.',
+      'Violentmonkey is open source — code is available on GitHub for community review.',
+      'Userscripts run with significant browser access — only install scripts from sources you trust.',
+      'Review script permissions before installation; scripts can read and modify page content.',
+      'Avoid installing scripts from random websites, CRX mirrors, or search results.',
+      'Disable or remove scripts you no longer use to reduce unnecessary browser access.',
     ],
     alternatives: [
       {
         name: 'Tampermonkey',
         slug: 'tampermonkey',
-        bestFor: 'Users wanting the most widely-supported userscript manager',
+        bestFor: 'Users wanting the most widely-supported userscript manager with a large script library',
         status: 'active_mv3',
         chromeStoreUrl:
           'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
         pros: [
           'Most popular userscript manager',
           'Large community and script library',
-          'Rich feature set',
+          'Rich feature set with built-in editor',
           'Active development and support',
         ],
         cons: [
           'Larger resource usage than Violentmonkey',
-          'Closed source compared to Violentmonkey',
+          'Has closed-source components compared to Violentmonkey',
         ],
-        note: 'Tampermonkey is the most widely-used userscript manager with the largest script library.',
+        note: 'Tampermonkey is the most widely-used userscript manager. It is not an official successor to Violentmonkey.',
+      },
+      {
+        name: 'Browser bookmarklets',
+        slug: 'browser-bookmarklets',
+        bestFor: 'Users wanting to run very simple custom scripts with no extension needed',
+        status: 'active_mv3',
+        pros: [
+          'No extension required',
+          'Simple and lightweight',
+          'Works across all browsers',
+        ],
+        cons: [
+          'Not a full userscript manager',
+          'Limited functionality compared to extensions',
+          'No automatic script updates',
+        ],
+        note: 'Bookmarklets work for simple custom scripts but are not a replacement for a full userscript manager.',
       },
     ],
     faqs: [
       {
-        question: 'Is Violentmonkey open source?',
+        question: 'What is Violentmonkey used for?',
         answer:
-          'Yes. Violentmonkey is fully open source and its code is available on GitHub for community review and audit.',
+          'Violentmonkey is a userscript manager that lets you install and run custom JavaScript scripts (userscripts) in your browser to modify web pages, add features, or automate tasks. It supports scripts written for the Tampermonkey format, which means scripts from sites like Greasy Fork and OpenUserJS are compatible.',
       },
       {
-        question: 'Can I use Violentmonkey with scripts from Greasy Fork?',
+        question: 'Is Tampermonkey a Violentmonkey alternative?',
         answer:
-          'Yes. Violentmonkey is compatible with scripts written for Tampermonkey, including those hosted on Greasy Fork and other userscript repositories.',
+          'Yes. Tampermonkey is the most widely-used userscript manager and is a practical alternative to Violentmonkey. Both support the same script format and work in Chrome as MV3 extensions. The main differences are in interface design, resource usage, and feature set — Tampermonkey has more built-in features while Violentmonkey is more lightweight.',
+      },
+      {
+        question: 'Are userscript managers safe?',
+        answer:
+          'Userscript managers themselves are safe when installed from the official Chrome Web Store. However, individual userscripts vary in quality and intent. Scripts run with significant browser access and can read or modify page content. Always review a script\'s code and permissions before installing it, and only use scripts from sources you trust.',
+      },
+      {
+        question: 'Can userscripts read pages I visit?',
+        answer:
+          'Yes. Userscripts run on the web pages you visit and can read page content, interact with page elements, and make network requests. This is their intended purpose — they are designed to modify how pages behave. Before installing any userscript, review what permissions it requests and where it will run.',
+      },
+      {
+        question: 'Should I install scripts from random websites?',
+        answer:
+          'No. Installing userscripts from unknown or random sources can expose your browsing data and accounts. Only install scripts from well-known repositories like Greasy Fork or OpenUserJS, or scripts whose code you have reviewed. Avoid scripts from websites you do not recognize or that appear in search results as standalone downloads.',
+      },
+      {
+        question: 'How do I migrate scripts from Violentmonkey?',
+        answer:
+          'Export your scripts from Violentmonkey (usually via Options > Scripts > Export). Install your chosen alternative from the official Chrome Web Store. Then import the exported scripts into the new manager and verify each one works on the sites you need. Remove any scripts you no longer actively use.',
+      },
+      {
+        question: 'What is the recommended way to test a userscript?',
+        answer:
+          'Review the script code before installing it — look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the userscript manager to temporarily disable scripts you are not actively using. If a script requests permissions that seem excessive for its stated purpose, do not install it.',
       },
     ],
     sources: [
@@ -1355,14 +1533,106 @@ export const extensions: ExtensionRecord[] = [
         title: 'Violentmonkey Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag',
         publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Violentmonkey MV3 availability, listing status, and publisher identity',
       },
       {
         title: 'Violentmonkey GitHub Repository',
         url: 'https://github.com/violentmonkey/violentmonkey',
         publisher: 'Violentmonkey Contributors',
+        sourceType: 'github',
+        reliability: 'secondary',
+        supports: 'Open-source code transparency and development status',
+      },
+      {
+        title: 'Tampermonkey Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Tampermonkey MV3 availability and alternative status',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
+    keyTakeaways: [
+      'Violentmonkey is actively maintained as an MV3-compatible userscript manager.',
+      'Tampermonkey is the most widely-used alternative with a larger script ecosystem.',
+      'Violentmonkey is open source; Tampermonkey has closed-source components.',
+      'Both support the same script format — scripts from Greasy Fork work with either.',
+      'Only install userscripts from sources you trust — random mirrors can be risky.',
+      'Userscripts run on pages you visit and can access page content — review permissions.',
+    ],
+    currentStatus: [
+      { label: 'Violentmonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
+      { label: 'Tampermonkey', value: 'Active MV3 extension — most widely-used userscript manager', variant: 'good' },
+      { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3 versions', variant: 'good' },
+    ],
+    comparisonTable: [
+      {
+        option: 'Violentmonkey',
+        bestFor: 'Users who want a lightweight, open-source userscript manager',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Fewer built-in features than Tampermonkey',
+      },
+      {
+        option: 'Tampermonkey',
+        bestFor: 'Users who want the most widely-supported manager with the largest script library',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Partial',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'More resource-intensive; has closed-source components',
+      },
+      {
+        option: 'Browser bookmarklets',
+        bestFor: 'Users who need very simple custom scripts without an extension',
+        mv3Support: 'N/A',
+        cost: 'Free',
+        openSource: 'N/A',
+        setupDifficulty: 'Very Easy',
+        mainTradeoff: 'Not a full userscript manager — limited functionality',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Violentmonkey',
+        when: 'You prefer a lightweight, open-source manager and mainly use established scripts from trusted repositories.',
+      },
+      {
+        choose: 'Tampermonkey',
+        when: 'You want the largest script library, built-in editor, and most community support.',
+      },
+      {
+        choose: 'Browser bookmarklets',
+        when: 'You only need to run very simple custom scripts occasionally and want no extension overhead.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install userscripts from random mirrors or search results',
+        whyItFails: 'Random script mirrors may contain modified or malicious code. Userscripts run with significant browser access — tampered scripts can collect data or manipulate pages.',
+        saferAlternative: 'Only install scripts from known repositories like Greasy Fork or OpenUserJS, or scripts you have reviewed personally.',
+      },
+      {
+        tried: 'Import all old scripts without reviewing them',
+        whyItFails: 'Old scripts may have unmaintained code, unexpected permissions, or may not work with current website layouts.',
+        saferAlternative: 'Review each script before importing. Remove ones you no longer need.',
+      },
+      {
+        tried: 'Grant broad permissions to scripts without reading their code',
+        whyItFails: 'Userscripts with excessive permissions can read or modify sensitive page content. Some scripts may collect browsing data.',
+        saferAlternative: 'Check the script\'s permissions and code before installing. Avoid scripts requesting access to all websites unless necessary.',
+      },
+      {
+        tried: 'Assume all userscript managers behave identically',
+        whyItFails: 'Violentmonkey and Tampermonkey have different interfaces, update mechanisms, and some feature differences. Scripts may behave slightly differently between managers.',
+        saferAlternative: 'Test scripts after switching managers to verify expected behavior.',
+      },
+    ],
   },
   {
     slug: 'auto-tab-discard',
@@ -1465,7 +1735,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'WebExtensions.org',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'foxyproxy',
@@ -1484,23 +1754,29 @@ export const extensions: ExtensionRecord[] = [
     status: 'active_mv3',
     riskLevel: 'low',
     issueSummary:
-      'FoxyProxy is actively maintained as an MV3 extension for Chrome. It is one of the most established proxy management tools.',
+      'FoxyProxy is a practical Chrome proxy manager for users who need multiple profiles and pattern-based switching. ZeroOmega is a community fork designed for SwitchyOmega-style migration. Both are MV3-compatible.',
     shortAnswer:
-      'FoxyProxy is an actively maintained MV3 proxy manager for Chrome with advanced features like multi-profile management and pattern-based auto-switching. It is available on the Chrome Web Store and works with modern Chrome.',
+      'FoxyProxy remains a practical Chrome proxy manager for users who need multiple proxy profiles, pattern-based switching, and quick control over browser proxy settings. If you are migrating from SwitchyOmega, ZeroOmega may feel more familiar because it is a community fork designed for modern Manifest V3 browsers. FoxyProxy is a better fit when you want an established proxy manager with long-running Chrome and Firefox support. The best choice depends on whether you need SwitchyOmega-style rules, FoxyProxy-style profiles, or a simpler one-click proxy switcher.',
     whatHappened: [
-      'FoxyProxy released MV3-compatible versions for Chrome.',
-      'The extension remains actively maintained by its developer.',
-      'It has been a popular proxy management tool for over a decade.',
+      'FoxyProxy released MV3-compatible versions for Chrome and remains actively maintained.',
+      'The extension is available on the Chrome Web Store with long-running Chrome and Firefox support.',
+      'ZeroOmega emerged as a community-maintained fork of Proxy SwitchyOmega, specifically designed for MV3 browsers.',
+      'Both FoxyProxy and ZeroOmega solve overlapping but not identical proxy management needs.',
     ],
     migrationSteps: [
-      'No migration needed if FoxyProxy is working for you.',
-      'Export proxy profiles as a backup before making changes.',
-      'Review the MV3 version features for any differences from the MV2 version.',
+      'Export or document your current proxy profiles.',
+      'List the websites or patterns that require a proxy.',
+      'Choose FoxyProxy for profile-based switching or ZeroOmega for SwitchyOmega-style migration.',
+      'Recreate only the rules you still need.',
+      'Test with a low-risk website first.',
+      'Remove old or duplicate proxy extensions.',
     ],
     safetyNotes: [
       'Only install FoxyProxy from the official Chrome Web Store.',
       'Review permissions — proxy extensions need network modification access.',
       'Verify the developer identity before installing.',
+      'Avoid unofficial CRX copies of old proxy extensions.',
+      'Proxy extensions can affect all browsing traffic — remove unused extensions.',
     ],
     alternatives: [
       {
@@ -1544,14 +1820,44 @@ export const extensions: ExtensionRecord[] = [
     ],
     faqs: [
       {
-        question: 'Is FoxyProxy still supported in Chrome?',
+        question: 'Is FoxyProxy still available for Chrome?',
         answer:
-          'Yes. FoxyProxy has been updated to support Manifest V3 and works with the current version of Chrome.',
+          'Yes. FoxyProxy is actively maintained and available on the Chrome Web Store as an MV3-compatible extension. It works with modern Chrome versions including Chrome 138 and later.',
       },
       {
-        question: 'Does FoxyProxy support multiple proxy profiles?',
+        question: 'Is FoxyProxy a SwitchyOmega replacement?',
         answer:
-          'Yes. FoxyProxy Standard supports multiple named proxy profiles with pattern-based automatic switching, which is one of its most popular features.',
+          'Not exactly. FoxyProxy and SwitchyOmega use different workflows and rule models. FoxyProxy is profile-based, while SwitchyOmega uses switch rules and pattern matching. ZeroOmega is a community fork of SwitchyOmega designed specifically for SwitchyOmega users migrating to MV3 and may feel more familiar.',
+      },
+      {
+        question: 'Is ZeroOmega the same as SwitchyOmega?',
+        answer:
+          'No. ZeroOmega is a community fork of Proxy SwitchyOmega, designed for MV3 browsers. It aims to replicate SwitchyOmega\'s interface and import functionality, but it is a separate project maintained by a different community developer. It is not an official successor.',
+      },
+      {
+        question: 'Should I choose FoxyProxy or ZeroOmega?',
+        answer:
+          'Choose FoxyProxy if you need profile-based proxy switching and established multi-browser support. Choose ZeroOmega if you are migrating from SwitchyOmega and want a familiar interface with direct profile import. Both solve overlapping needs but have different workflows.',
+      },
+      {
+        question: 'Can a proxy extension see my browsing traffic?',
+        answer:
+          'Yes. A proxy extension routes your browser traffic through the configured proxy server. This means the proxy provider can see metadata about your browsing (URLs, domains) depending on how the proxy is configured. Use a trusted proxy provider and HTTPS sites to reduce exposure.',
+      },
+      {
+        question: 'Is it safe to install old proxy extension CRX files?',
+        answer:
+          'No. Installing old proxy extension CRX files from random mirrors is not safe. Proxy extensions require broad network permissions, and unofficial copies may be modified to collect or redirect your browsing traffic. Always install from the official Chrome Web Store.',
+      },
+      {
+        question: 'Does FoxyProxy include proxy servers?',
+        answer:
+          'No. FoxyProxy is a proxy management tool — it helps you switch between proxy configurations — but it does not provide proxy servers. You need to set up your own proxy server or subscribe to a proxy service separately.',
+      },
+      {
+        question: 'What is the simplest Chrome proxy option?',
+        answer:
+          'For basic single-proxy setups, Chrome\'s built-in system proxy settings under Settings > Advanced > Proxy are the simplest option. However, they do not support multiple profiles, auto-switch rules, or pattern-based routing. An extension like FoxyProxy or ZeroOmega is more convenient if you manage multiple proxy configurations.',
       },
     ],
     sources: [
@@ -1572,6 +1878,22 @@ export const extensions: ExtensionRecord[] = [
         supports: 'FoxyProxy developer information, product features, and support resources',
       },
       {
+        title: 'ZeroOmega Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/proxy-switchyomega-3-zero/pfnededegaaopdmhkdmcofjmoldfiped',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'ZeroOmega MV3 availability, listing status, and community fork status',
+      },
+      {
+        title: 'ZeroOmega GitHub Repository',
+        url: 'https://github.com/zero-peak/ZeroOmega',
+        publisher: 'ZeroOmega Community',
+        sourceType: 'github',
+        reliability: 'secondary',
+        supports: 'ZeroOmega open-source project, MV3-compatible fork of Proxy SwitchyOmega',
+      },
+      {
         title: 'Manifest V3 migration for extensions',
         url: 'https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3',
         publisher: 'Google Chrome Developers',
@@ -1580,7 +1902,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Chrome extension platform and Manifest V3 migration context — clarifies why maintained extensions like FoxyProxy have updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
     atAGlance: {
       originalExtension: 'FoxyProxy',
       currentStatus: 'Active and MV3-compatible — works in current Chrome',
@@ -1643,6 +1965,36 @@ export const extensions: ExtensionRecord[] = [
       {
         doNot: 'Use proxy configurations for sensitive activities without verifying the proxy provider is trustworthy',
         instead: 'Verify the proxy service reputation and security before routing traffic through it',
+      },
+    ],
+    keyTakeaways: [
+      'FoxyProxy is actively maintained as an MV3 extension and works in current Chrome.',
+      'ZeroOmega is a community fork of Proxy SwitchyOmega designed for MV3 browsers, not an official successor.',
+      'Choose ZeroOmega if you need SwitchyOmega-style rules and direct profile import.',
+      'Choose FoxyProxy if you need an established proxy manager with multi-profile switching.',
+      'Chrome system proxy settings are the simplest option for single-proxy setups.',
+      'Proxy extensions require broad network permissions — only install from the official Chrome Web Store.',
+    ],
+    currentStatus: [
+      { label: 'FoxyProxy', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
+      { label: 'ZeroOmega', value: 'Active MV3 community fork — direct SwitchyOmega profile import', variant: 'good' },
+      { label: 'Chrome system proxy', value: 'Built-in — no extension needed', variant: 'neutral' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Download random CRX copies of old proxy extensions',
+        whyItFails: 'Proxy extensions need broad network access. Unofficial CRX copies may redirect or collect your browsing traffic.',
+        saferAlternative: 'Install from the official Chrome Web Store only.',
+      },
+      {
+        tried: 'Assume FoxyProxy and ZeroOmega work the same way',
+        whyItFails: 'They have different workflows. FoxyProxy is profile-based; ZeroOmega uses SwitchyOmega-style switch rules.',
+        saferAlternative: 'Choose based on your workflow needs: profile switching (FoxyProxy) vs. rule-based switching (ZeroOmega).',
+      },
+      {
+        tried: 'Use a proxy extension without verifying the proxy provider is trustworthy',
+        whyItFails: 'Proxy extensions route your browsing traffic through a server. An untrustworthy proxy provider can see your browsing metadata.',
+        saferAlternative: 'Use a reputable proxy service and HTTPS sites to reduce exposure.',
       },
     ],
   },
@@ -1744,7 +2096,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Session Buddy',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'stylus',
@@ -1831,7 +2183,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'OpenStyles Community',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'dark-reader',
@@ -1931,7 +2283,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — Dark Reader was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'onetab',
@@ -2035,7 +2387,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'OneTab',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'video-downloadhelper',
@@ -2147,7 +2499,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — Video DownloadHelper was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'user-agent-switcher',
@@ -2244,7 +2596,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'grammarly',
@@ -2345,7 +2697,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Grammarly',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'lastpass',
@@ -2460,7 +2812,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — LastPass was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'bitwarden',
@@ -2572,7 +2924,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — Bitwarden was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'honey',
@@ -2654,7 +3006,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Honey (PayPal)',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
   {
     slug: 'google-translate',
@@ -2751,7 +3103,7 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google',
       },
     ],
-    lastUpdated: '2026-05-18',
+    lastUpdated: '2026-05-21',
   },
 ];
 

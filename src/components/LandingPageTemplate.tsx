@@ -352,7 +352,7 @@ export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTempla
               <h2 className="text-2xl font-bold text-slate-900 mb-6">
                 Frequently Asked Questions
               </h2>
-              <FAQ faqs={page.faqs} />
+              <FAQ faqs={page.faqs} skipHeading />
             </section>
           )}
 

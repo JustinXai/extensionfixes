@@ -8,6 +8,9 @@ import { FAQ } from '@/components/FAQ';
 import { SourceList } from '@/components/SourceList';
 import { JsonLd } from '@/components/JsonLd';
 import { Container } from '@/components/Container';
+import { KeyTakeaways } from '@/components/KeyTakeaways';
+import { CurrentStatusCard } from '@/components/CurrentStatusCard';
+import { CommonFailedFixes } from '@/components/CommonFailedFixes';
 import { createFAQSchema, createBreadcrumbSchema, createTechArticleSchema } from '@/lib/seo';
 import { formatDate } from '@/lib/utils';
 
@@ -23,6 +26,13 @@ export async function generateStaticParams() {
 
 // SEO metadata for each fix page
 const fixMetadata: Record<string, { title: string; description: string; quickAnswer: string }> = {
+  'cannot-install-extension-unsupported-manifest': {
+    title: 'Cannot Install Extension: Unsupported Manifest Version in Chrome',
+    description:
+      'Chrome may block extensions that use an unsupported manifest version. Learn what the error means, what not to do, and safer MV3 alternatives.',
+    quickAnswer:
+      'Chrome shows an unsupported manifest version error when an extension package uses an older extension format that modern Chrome no longer accepts, most commonly Manifest V2. In current Chrome versions, ordinary users usually cannot fix this by changing a simple setting. Reinstalling the same extension, downloading random CRX files, or disabling security protections can create privacy and malware risks. The safer path is to check whether the developer provides a Manifest V3 version, install a maintained alternative from the Chrome Web Store, or use a browser that still supports the extension you need.',
+  },
   'this-extension-is-no-longer-supported': {
     title: 'Fix "This Extension Is No Longer Supported" in Chrome',
     description:
@@ -35,7 +45,7 @@ const fixMetadata: Record<string, { title: string; description: string; quickAns
     description:
       'Chrome has disabled Manifest V2 extensions. Learn what this means, why old extensions stopped working, and how to find MV3-compatible replacements.',
     quickAnswer:
-      'Chrome has disabled Manifest V2 extensions by default. This affects extensions built on MV2 that have not been updated to MV3. Recommended path: find MV3-compatible replacements, check for official updates from developers, or consider Firefox which still supports MV2 extensions.',
+      'Chrome 138 fully disabled Manifest V2 extensions for all regular users. This affects extensions built on MV2 that have not been updated to MV3. Ordinary users cannot restore MV2 support in regular Chrome. Recommended path: find MV3-compatible replacements, check for official updates, or consider Firefox which still supports MV2 extensions. Enterprise-managed devices may use the ExtensionManifestV2Enabled policy.',
   },
   'chrome-disabled-extension': {
     title: 'Chrome Disabled My Extension: Causes and Safe Fixes',
@@ -327,6 +337,27 @@ export default async function FixPage({ params }: PageProps) {
             </section>
           )}
 
+          {error.keyTakeaways && error.keyTakeaways.length > 0 && (
+            <section className="mb-10" aria-labelledby="key-takeaways-heading">
+              <h2 id="key-takeaways-heading" className="text-xl font-semibold text-slate-900 mb-4">Key Takeaways</h2>
+              <KeyTakeaways items={error.keyTakeaways} />
+            </section>
+          )}
+
+          {error.currentStatus && error.currentStatus.length > 0 && (
+            <section className="mb-10" aria-labelledby="current-status-heading">
+              <h2 id="current-status-heading" className="text-xl font-semibold text-slate-900 mb-4">Current Status</h2>
+              <CurrentStatusCard entries={error.currentStatus} />
+            </section>
+          )}
+
+          {error.commonFailedFixes && error.commonFailedFixes.length > 0 && (
+            <section className="mb-10" aria-labelledby="common-failed-fixes-heading">
+              <h2 id="common-failed-fixes-heading" className="text-xl font-semibold text-slate-900 mb-4">Common Failed Fixes</h2>
+              <CommonFailedFixes items={error.commonFailedFixes} />
+            </section>
+          )}
+
           {slug === 'manifest-v2-disabled' && (
             <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
               <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
@@ -398,6 +429,23 @@ export default async function FixPage({ params }: PageProps) {
             </section>
           )}
 
+          {slug === 'cannot-install-extension-unsupported-manifest' && (
+            <section className="mb-10 p-5 bg-slate-50 rounded-xl border border-slate-200" aria-labelledby="related-guides-heading">
+              <h2 id="related-guides-heading" className="text-lg font-semibold text-slate-900 mb-3">Related Guides</h2>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link href="/fix/manifest-v2-disabled" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Manifest V2 Disabled Guide
+                </Link>
+                <Link href="/fix/this-extension-is-no-longer-supported" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Extension No Longer Supported Fix
+                </Link>
+                <Link href="/fix/chrome-disabled-extension" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Chrome Disabled My Extension
+                </Link>
+              </div>
+            </section>
+          )}
+
           {relatedExtensions.length > 0 && (
             <section className="mb-10" aria-labelledby="related-alternatives-heading">
               <h2 id="related-alternatives-heading" className="text-xl font-semibold text-slate-900 mb-4">Related Alternatives</h2>
@@ -414,7 +462,7 @@ export default async function FixPage({ params }: PageProps) {
           {error.faqs.length > 0 && (
             <section className="mb-10" aria-labelledby="faq-heading">
               <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <FAQ faqs={error.faqs} />
+              <FAQ faqs={error.faqs} skipHeading />
             </section>
           )}
 

@@ -89,6 +89,11 @@ export interface CommonMistake {
   instead: string;
 }
 
+// Failed Fix entry — discriminated union
+export type FailedFixEntry =
+  | { tried: string; whyItFails?: string; saferAlternative?: string; doesNotWork?: never }
+  | { doesNotWork: string; tried?: never; whyItFails?: never; saferAlternative?: never };
+
 // Extension Record
 export interface ExtensionRecord {
   slug: string;
@@ -117,6 +122,10 @@ export interface ExtensionRecord {
   decisionGuide?: DecisionGuideItem[];
   comparisonTable?: ComparisonRow[];
   commonMistakes?: CommonMistake[];
+  // New enhanced sections
+  keyTakeaways?: string[];
+  currentStatus?: { label: string; value: string; variant?: 'good' | 'bad' | 'neutral' }[];
+  commonFailedFixes?: FailedFixEntry[];
 }
 
 // Error Record
@@ -137,6 +146,10 @@ export interface ErrorRecord {
   decisionGuide?: DecisionGuideItem[];
   comparisonTable?: ComparisonRow[];
   commonMistakes?: CommonMistake[];
+  // New enhanced sections
+  keyTakeaways?: string[];
+  currentStatus?: { label: string; value: string; variant?: 'good' | 'bad' | 'neutral' }[];
+  commonFailedFixes?: FailedFixEntry[];
 }
 
 // Search Result Types
