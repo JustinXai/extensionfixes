@@ -1982,8 +1982,8 @@ export const extensions: ExtensionRecord[] = [
     ],
     commonFailedFixes: [
       {
-        tried: 'Download random CRX copies of old proxy extensions',
-        whyItFails: 'Proxy extensions need broad network access. Unofficial CRX copies may redirect or collect your browsing traffic.',
+        tried: 'Install old proxy extension packages from unofficial mirror sites',
+        whyItFails: 'Old proxy extension packages may be outdated, modified, or unsafe. Proxy extensions can affect all browsing traffic, so use maintained Chrome Web Store listings or verified project sources.',
         saferAlternative: 'Install from the official Chrome Web Store only.',
       },
       {
