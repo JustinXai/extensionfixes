@@ -332,6 +332,44 @@ for (const page of allTop10) {
   }
 }
 
+// ── 10. Slug uniqueness: top-level extension slugs must be unique ─────────────────
+function checkSlugUniqueness(filePath, label) {
+  if (!fs.existsSync(filePath)) {
+    errors.push(`Slug check [${label}]: file not found`);
+    return;
+  }
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split('\n');
+
+  // Find all lines where exactly 4 spaces precede "slug:"
+  // (top-level within an array of ExtensionRecord objects)
+  const slugPositions = {}; // slug -> [{ line, value }]
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const stripped = line.replace(/\r$/, '');
+    // Exactly 4 spaces of indentation = top-level
+    if (/^    slug:\s*['"]([^'"]+)['"]/.test(stripped)) {
+      const m = stripped.match(/^    slug:\s*['"]([^'"]+)['"]/);
+      const slug = m[1];
+      if (!slugPositions[slug]) slugPositions[slug] = [];
+      slugPositions[slug].push({ line: i + 1, value: slug });
+    }
+  }
+
+  const duplicates = Object.entries(slugPositions).filter(([, positions]) => positions.length > 1);
+  if (duplicates.length > 0) {
+    for (const [slug, positions] of duplicates) {
+      const linesList = positions.map(p => `line ${p.line}`).join(', ');
+      errors.push(`Duplicate slug [${label}] '${slug}' found at ${linesList} — each top-level slug must be unique`);
+    }
+  } else {
+    console.log(`  Slug uniqueness [${label}]: ${Object.keys(slugPositions).length} slugs, all unique`);
+  }
+}
+
+checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'extensions.ts'), 'extensions');
+checkSlugUniqueness(path.join(ROOT, 'src', 'data', 'errors.ts'), 'errors');
+
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');
 console.log('====================');
