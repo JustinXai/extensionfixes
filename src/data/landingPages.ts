@@ -1027,6 +1027,139 @@ export const landingPages: LandingPageRecord[] = [
     secondaryCta: { label: 'Browse Alternatives', href: '/alternatives' },
     bestOptions: [],
   },
+  {
+    slug: 'chrome-userscript-manager-alternatives',
+    title: 'Chrome Userscript Manager Alternatives: Tampermonkey vs Violentmonkey',
+    description:
+      'Compare Chrome userscript manager options including Tampermonkey and Violentmonkey. Learn how to choose, migrate, and avoid unsafe scripts.',
+    h1: 'Chrome Userscript Manager Alternatives',
+    shortAnswer:
+      'The main Chrome userscript manager options are Tampermonkey and Violentmonkey. Tampermonkey is widely used and has a large userscript ecosystem, while Violentmonkey is a common choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permissions, sync needs, and how much control you want over imported scripts. Userscript managers can run code on websites you visit, so choosing the extension is only part of the decision. You should also review script sources, inspect permissions, test scripts on non-sensitive pages, and remove old scripts you no longer use.',
+    aliases: [
+      'chrome userscript manager alternatives',
+      'best userscript manager for chrome',
+      'userscript manager chrome alternative',
+      'tampermonkey vs violentmonkey',
+      'violentmonkey vs tampermonkey',
+      'chrome userscript manager manifest v3',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'How to Choose a Userscript Manager',
+        content:
+          'Tampermonkey and Violentmonkey are the main options most Chrome users compare. Tampermonkey has a larger script ecosystem and is more widely known. Violentmonkey is fully open source and lightweight. The right choice depends on what you value most: script compatibility, open-source transparency, resource usage, or interface preferences. Userscript managers can run code on websites you visit, so script trust is critical regardless of which extension you choose.',
+      },
+      {
+        type: 'list',
+        title: 'Userscript Safety Checklist',
+        items: [
+          'Check the source of the script before installing.',
+          'Review @match rules to see which sites the script will run on.',
+          'Review @grant permissions to understand what access the script requests.',
+          'Avoid scripts that request access to unrelated sites.',
+          'Test scripts on non-sensitive pages before enabling on everyday sites.',
+          'Disable scripts you no longer use.',
+          'Keep backups of scripts you depend on.',
+        ],
+      },
+      {
+        type: 'text',
+        title: 'Tampermonkey vs Violentmonkey',
+        content:
+          'Both Tampermonkey and Violentmonkey support the same Tampermonkey-compatible script format. Scripts from Greasy Fork and OpenUserJS work with either manager. Tampermonkey has more built-in features and a larger community. Violentmonkey is fully open source with a more minimal interface. Neither is objectively better — the choice depends on your priorities.',
+      },
+      {
+        type: 'list',
+        title: 'Common Mistakes to Avoid',
+        items: [
+          'Installing scripts from unknown mirrors or random websites.',
+          'Enabling all imported scripts at once without reviewing them.',
+          'Ignoring @match permissions and granting scripts broad access.',
+          'Using abandoned or unmaintained scripts without review.',
+          'Keeping multiple userscript managers enabled at the same time.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a userscript manager?',
+        answer:
+          'A userscript manager is a browser extension that lets you install and run custom JavaScript scripts (userscripts) to modify web pages, add features, or automate tasks. Popular managers for Chrome include Tampermonkey and Violentmonkey. Scripts are written in JavaScript and can read or modify page content where they run.',
+      },
+      {
+        question: 'What is the best userscript manager for Chrome?',
+        answer:
+          'Tampermonkey and Violentmonkey are the two main options. Tampermonkey is more widely used with a larger script ecosystem. Violentmonkey is fully open source and uses fewer system resources. The best choice depends on whether you prioritize script compatibility, open-source tooling, or resource usage.',
+      },
+      {
+        question: 'Is Tampermonkey better than Violentmonkey?',
+        answer:
+          'Neither is objectively better. Tampermonkey has more built-in features and a larger community with more scripts available. Violentmonkey is fully open source with a lighter interface. Users who prefer open-source tooling often choose Violentmonkey. Users who want the largest script library often choose Tampermonkey.',
+      },
+      {
+        question: 'Is Violentmonkey open source?',
+        answer:
+          'Yes. Violentmonkey is fully open source with its code available on GitHub. Tampermonkey has a mix of open and closed-source components. Both are legitimate, maintained projects.',
+      },
+      {
+        question: 'Are userscripts safe?',
+        answer:
+          'Userscript managers themselves are safe when installed from the official Chrome Web Store. However, individual userscripts vary in quality and intent. Scripts run with significant browser access and can read or modify page content. Always review a script\'s code and permissions before installing it, and only use scripts from sources you trust.',
+      },
+      {
+        question: 'Can userscripts steal data?',
+        answer:
+          'Userscripts can technically access the content of pages where they run. This is their intended purpose — they are designed to modify web pages. A malicious script could read sensitive page content. To stay safe, only install scripts from trusted repositories like Greasy Fork or OpenUserJS, review script permissions before installing, and avoid scripts that request excessive access for their stated purpose.',
+      },
+      {
+        question: 'Should I use more than one userscript manager?',
+        answer:
+          'No. Running multiple userscript managers simultaneously can cause conflicts, duplicate script execution, and unexpected behavior. Choose one manager and use it consistently. If you want to switch managers, export your scripts first, then install the new manager and import your scripts.',
+      },
+      {
+        question: 'How do I migrate userscripts safely?',
+        answer:
+          'Export your scripts from your current manager (usually via Options > Scripts > Export). Install your new manager from the official Chrome Web Store. Import scripts a few at a time. Review @match and @grant permissions before enabling. Test on non-sensitive sites first. Remove scripts you no longer use.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Tampermonkey Official Site',
+        url: 'https://tampermonkey.net/',
+        publisher: 'Tampermonkey',
+      },
+      {
+        title: 'Tampermonkey Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
+        publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Violentmonkey Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag',
+        publisher: 'Chrome Web Store',
+      },
+      {
+        title: 'Violentmonkey GitHub Repository',
+        url: 'https://github.com/violentmonkey/violentmonkey',
+        publisher: 'Violentmonkey Contributors',
+      },
+    ],
+    lastUpdated: '2026-05-22',
+    relatedLinks: [
+      { label: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey' },
+      { label: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
+      { label: 'Chrome Extension Alternatives', href: '/alternatives' },
+      { label: 'Unsupported Extension Fix', href: '/fix/cannot-install-extension-unsupported-manifest' },
+    ],
+    primaryCta: { label: 'Compare Tampermonkey vs Violentmonkey', href: '/alternatives/tampermonkey' },
+    secondaryCta: { label: 'View Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
+    bestOptions: [
+      { label: 'For script ecosystem:', description: 'Tampermonkey (largest community)' },
+      { label: 'For open source:', description: 'Violentmonkey (fully open source)' },
+      { label: 'For simple needs:', description: 'Browser bookmarks/snippets' },
+    ],
+  },
 ];
 
 export function getLandingPageBySlug(slug: string): LandingPageRecord | undefined {

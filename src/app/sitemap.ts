@@ -41,9 +41,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const landingPagesList: MetadataRoute.Sitemap = landingPages.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: new Date(page.lastUpdated),
+  const landingPagesList: MetadataRoute.Sitemap = landingPages.map((page) => {
+    const isGuidePage = page.slug === 'chrome-userscript-manager-alternatives';
+    return {
+      url: isGuidePage ? `${baseUrl}/guides/${page.slug}` : `${baseUrl}/${page.slug}`,
+      lastModified: new Date(page.lastUpdated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    };
+  });
+
+  const guidePages: MetadataRoute.Sitemap = ['chrome-userscript-manager-alternatives'].map((slug) => ({
+    url: `${baseUrl}/guides/${slug}`,
+    lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));

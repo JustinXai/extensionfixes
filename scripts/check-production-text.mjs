@@ -3,8 +3,10 @@ import zlib from 'zlib';
 
 const BASE = 'https://extensionfixes.com';
 const PAGES = [
-  '/fix/cannot-install-extension-unsupported-manifest',
-  '/fix/cannot-install-extension-unsupported-manifest/',
+  '/alternatives/tampermonkey',
+  '/alternatives/tampermonkey/',
+  '/guides/chrome-userscript-manager-alternatives',
+  '/guides/chrome-userscript-manager-alternatives/',
   '/alternatives/violentmonkey',
   '/alternatives/violentmonkey/',
   '/alternatives/foxyproxy',
@@ -19,10 +21,33 @@ const PAGES = [
   '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported/',
   '/fix/manifest-v2-disabled',
   '/fix/manifest-v2-disabled/',
+  '/fix/cannot-install-extension-unsupported-manifest',
+  '/fix/cannot-install-extension-unsupported-manifest/',
 ];
 
 // Required sections per page (label → section heading text)
 const PAGE_REQUIRED_SECTIONS = {
+  '/alternatives/tampermonkey': [
+    'Key Takeaways',
+    'Current Status',
+    'Tampermonkey vs Violentmonkey',
+    'Who Should Choose Which Option',
+    'Common Failed Fixes',
+    'Migration Steps',
+    'Frequently Asked Questions',
+    'Sources',
+  ],
+  '/guides/chrome-userscript-manager-alternatives': [
+    'Key Takeaways',
+    'Current Status',
+    'Tampermonkey vs Violentmonkey',
+    'How to Choose',
+    'Userscript Safety Checklist',
+    'Common Mistakes',
+    'Migration Steps',
+    'Frequently Asked Questions',
+    'Sources',
+  ],
   '/alternatives/violentmonkey': [
     'Key Takeaways',
     'Current Status',
@@ -36,11 +61,15 @@ const PAGE_REQUIRED_SECTIONS = {
 };
 
 const PAGE_QA_DATE = {
-  '/alternatives/violentmonkey': 'May 21, 2026',
+  '/alternatives/tampermonkey': 'May 22, 2026',
+  '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
+  '/alternatives/violentmonkey': 'May 22, 2026',
 };
 
 // Min Quick Answer word count per page
 const PAGE_MIN_WORDS = {
+  '/alternatives/tampermonkey': 80,
+  '/guides/chrome-userscript-manager-alternatives': 80,
   '/alternatives/violentmonkey': 80,
 };
 
@@ -188,6 +217,10 @@ const FORBIDDEN_PATTERNS = [
   { name: '2.2',              pat: /\.2\s+2(?:\s|$)/i },
   { name: '3.3',              pat: /\.3\s+3(?:\s|$)/i },
   { name: 'random CRX rec',   pat: /(?<!do not\s)download random CRX/i },
+  { name: 'dup h2 Key Takeaways', pat: /Key Takeaways\s+Key Takeaways/i },
+  { name: 'dup h2 Current Status', pat: /Current Status\s+Current Status/i },
+  { name: 'dup h2 Common Failed', pat: /Common Failed Fixes\s+Common Failed Fixes/i },
+  { name: 'dup h2 FAQ',        pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
 ];
 
 main().catch(e => { console.error(e); process.exit(1); });

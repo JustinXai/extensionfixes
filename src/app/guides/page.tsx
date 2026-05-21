@@ -30,6 +30,7 @@ export default function GuidesPage() {
       'ublock-origin-no-longer-supported',
       'ublock-origin-lite-vs-ublock-origin',
       'this-extension-may-soon-no-longer-be-supported',
+      'chrome-userscript-manager-alternatives',
     ].includes(page.slug)
   );
 
@@ -114,7 +115,11 @@ export default function GuidesPage() {
             {additionalGuides.map((page) => (
               <Link
                 key={page.slug}
-                href={`/${page.slug}`}
+                href={
+                  page.slug === 'chrome-userscript-manager-alternatives'
+                    ? '/guides/chrome-userscript-manager-alternatives'
+                    : `/${page.slug}`
+                }
                 className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
               >
                 <h3 className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">

@@ -1,1 +1,1 @@
-Clean up FoxyProxy QA wording
+Add userscript manager alternatives cluster

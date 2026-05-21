@@ -62,11 +62,11 @@ const extensionMetadata: Record<string, { title: string; description: string; qu
       'DownThemAll remains active in Chrome. If you need alternatives, Chrono Download Manager and native browser download features offer similar capabilities for managing multiple file downloads.',
   },
   tampermonkey: {
-    title: 'Tampermonkey Alternatives for Chrome',
+    title: 'Tampermonkey Alternatives for Chrome Users',
     description:
-      'Tampermonkey is actively maintained in Chrome. Compare alternatives like Violentmonkey for userscript management needs.',
+      'Compare Tampermonkey, Violentmonkey, and other userscript manager options for Chrome. Learn what to use, what to avoid, and how to migrate safely.',
     quickAnswer:
-      'Tampermonkey is actively maintained as an MV3-compatible extension for Chrome. Violentmonkey is a lightweight open-source alternative that supports Tampermonkey-compatible scripts.',
+      'Tampermonkey is one of the most widely used userscript managers for Chrome, but some users look for alternatives because they prefer open-source tooling, want a different permission model, or need to test script compatibility in another manager. Violentmonkey is the most common alternative for users who want an open-source userscript workflow, while simple browser bookmarks or snippets may be enough for very small personal scripts. Userscript managers can run powerful code on pages you visit, so the main decision is not only which extension to install, but also which scripts you trust and how carefully you review permissions.',
   },
   violentmonkey: {
     title: 'Violentmonkey Alternatives for Chrome Users',
@@ -312,7 +312,9 @@ export default async function AlternativePage({ params }: PageProps) {
               <span className="text-sm text-slate-500">{extension.category}</span>
             </div>
             <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl leading-tight mb-6">
-              Best {extension.name} Alternatives for Chrome MV3
+              {slug === 'tampermonkey'
+                ? 'Tampermonkey Alternatives for Chrome'
+                : `Best ${extension.name} Alternatives for Chrome MV3`}
             </h1>
             <QuickAnswer answer={customMeta.quickAnswer} />
           </header>
@@ -405,6 +407,34 @@ export default async function AlternativePage({ params }: PageProps) {
                     <span className="text-sm text-slate-700">{item.value}</span>
                   </div>
                 ))}
+              </div>
+            </section>
+          )}
+
+          {slug === 'tampermonkey' && extension.comparisonTable && extension.comparisonTable.length > 0 && (
+            <section className="mb-10" aria-labelledby="comparison-heading">
+              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Tampermonkey vs Violentmonkey vs Other Options</h2>
+              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {['Option', 'Best For', 'Chrome status', 'Strength', 'Trade-off'].map((h) => (
+                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {extension.comparisonTable.map((row, i) => (
+                      <tr key={i} className="hover:bg-gray-50">
+                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mv3Support}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
+                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
           )}
@@ -620,6 +650,25 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
+          {slug === 'tampermonkey' && extension.decisionGuide && extension.decisionGuide.length > 0 && (
+            <section className="mb-10" aria-labelledby="decision-guide-heading">
+              <h2 id="decision-guide-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
+              <div className="space-y-4">
+                {extension.decisionGuide.map((item, i) => (
+                  <div key={i} className="flex gap-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-900">{item.choose}</p>
+                      <p className="mt-1 text-sm text-slate-600">{item.when}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {slug === 'violentmonkey' && (
             <section className="mb-10" aria-labelledby="who-choose-heading">
               <h2 id="who-choose-heading" className="text-xl font-semibold text-slate-900 mb-4">Who Should Choose Which Option</h2>
@@ -646,6 +695,9 @@ export default async function AlternativePage({ params }: PageProps) {
               <div className="flex flex-wrap gap-4 text-sm">
                 <Link href="/tampermonkey" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Tampermonkey Alternatives
+                </Link>
+                <Link href="/guides/chrome-userscript-manager-alternatives" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  Chrome Userscript Manager Alternatives
                 </Link>
                 <Link href="/tools/extension-search" className="text-blue-600 hover:text-blue-800 hover:underline">
                   Search More Extensions
