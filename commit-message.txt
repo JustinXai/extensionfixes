@@ -1,8 +1,12 @@
-Fix userscript cluster data integrity
+Clean up Tampermonkey alternative page structure
 
-- extensions.ts: Remove duplicate source entry from tampermonkey; add keyTakeaways; add third source; remove old atAGlance/commonMistakes sections
-- extensions.ts: Replace 'privacy-conscious users' with 'users who prefer open-source tooling/transparent extension code'
-- [slug]/page.tsx: Remove duplicate 'Who Should Choose Which Option' for tampermonkey; consolidate generic decision guide
-- extensionfixes-review.mjs: Add landingPages.ts slug uniqueness check + cluster data integrity check
-- check-production-text.mjs: Add /alternatives required checks; add tampermonkey dup detection; add binary .rsc skip logic; add --local mode
-- package.json: Add check:local:text script
+- Add decisionGuide (Who Should Choose Which Option) to tampermonkey
+  extension entry so the section renders with the new template structure
+- Remove duplicate publisher from Tampermonkey Chrome Web Store source
+  (publisher changed from 'Chrome Web Store' to 'Tampermonkey' to
+  prevent double-rendering: publisher + typeLabel both showed 'Chrome Web Store')
+- Add tampermonkey-page-scoped forbidden checks to
+  check-production-text.mjs covering: At a Glance, Common Mistakes
+  to Avoid, Which Option Should You Choose, privacy-conscious,
+  full open-source transparency
+- Add 'Who Should Choose Which Option' to tampermonkey required sections

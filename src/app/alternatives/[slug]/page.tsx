@@ -411,63 +411,9 @@ export default async function AlternativePage({ params }: PageProps) {
             </section>
           )}
 
-          {slug === 'tampermonkey' && extension.comparisonTable && extension.comparisonTable.length > 0 && (
-            <section className="mb-10" aria-labelledby="comparison-heading">
-              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Tampermonkey vs Violentmonkey vs Other Options</h2>
-              <div className="overflow-x-auto rounded-xl border border-gray-200">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      {['Option', 'Best For', 'Chrome status', 'Strength', 'Trade-off'].map((h) => (
-                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
-                    {extension.comparisonTable.map((row, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
-                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mv3Support}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
+          {/* slug === 'tampermonkey' uses decisionGuide below */}
 
-          {slug === 'violentmonkey' && extension.comparisonTable && extension.comparisonTable.length > 0 && (
-            <section className="mb-10" aria-labelledby="comparison-heading">
-              <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Violentmonkey vs Tampermonkey vs Other Options</h2>
-              <div className="overflow-x-auto rounded-xl border border-gray-200">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      {['Option', 'Best For', 'Chrome status', 'Strength', 'Trade-off'].map((h) => (
-                        <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
-                    {extension.comparisonTable.map((row, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
-                        <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mv3Support}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.cost}</td>
-                        <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.mainTradeoff}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
-
-          {!['violentmonkey'].includes(slug) && extension.comparisonTable && extension.comparisonTable.length > 0 && (
+          {!['violentmonkey', 'tampermonkey'].includes(slug) && extension.comparisonTable && extension.comparisonTable.length > 0 && (
             <section className="mb-10" aria-labelledby="comparison-heading">
               <h2 id="comparison-heading" className="text-xl font-semibold text-slate-900 mb-4">Comparison Table</h2>
               <div className="overflow-x-auto rounded-xl border border-gray-200">

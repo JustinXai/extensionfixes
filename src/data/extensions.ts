@@ -1544,14 +1544,6 @@ export const extensions: ExtensionRecord[] = [
         reliability: 'secondary',
         supports: 'Open-source code transparency and development status',
       },
-      {
-        title: 'Tampermonkey Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
-        publisher: 'Chrome Web Store',
-        sourceType: 'chrome-web-store',
-        reliability: 'primary',
-        supports: 'Tampermonkey MV3 availability and alternative status',
-      },
     ],
     lastUpdated: '2026-05-22',
     keyTakeaways: [

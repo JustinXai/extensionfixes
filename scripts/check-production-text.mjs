@@ -54,7 +54,6 @@ const PAGE_REQUIRED_SECTIONS = {
   '/alternatives/violentmonkey': [
     'Key Takeaways',
     'Current Status',
-    'Violentmonkey vs Tampermonkey',
     'Who Should Choose Which Option',
     'Common Failed Fixes',
     'Migration Steps',
@@ -281,6 +280,19 @@ async function checkPage(page, source) {
     }
   }
 
+  // ── Tampermonkey-page-only duplicate source check ─────────────────────
+  if (TAMPERMONKEY_PAGES.includes(page)) {
+    // Count exact source titles in <a> tags (the clickable link text)
+    // Only the Sources section <a> tags contain "Tampermonkey Chrome Web Store" as title
+    const sourceLinkMatches = (htmlData.match(/<a[^>]*>[^<]*Tampermonkey Chrome Web Store[^<]*<\/a>/gi) || []).length;
+    if (sourceLinkMatches !== 1) {
+      issues.push(`FAIL | tampermonkey-source-dup: "Tampermonkey Chrome Web Store" appears in <a> tags ${sourceLinkMatches} time(s) (expected 1)`);
+      fail++;
+    } else {
+      pass++;
+    }
+  }
+
   // ── Required section checks ───────────────────────────────────────────────
   const required = PAGE_REQUIRED_SECTIONS[page] || [];
   for (const section of required) {
@@ -378,6 +390,7 @@ const FORBIDDEN_PATTERNS = [
 // Tampermonkey-page-only forbidden patterns
 const TAMPERMONKEY_FORBIDDEN = [
   { name: 'tampermonkey-atAGlance',      pat: /At a Glance/i },
+  { name: 'tampermonkey-comparisonTable', pat: /Comparison Table/i },
   { name: 'tampermonkey-commonMistakes', pat: /Common Mistakes to Avoid/i },
   { name: 'tampermonkey-oldDecision',    pat: /Which Option Should You Choose/i },
   { name: 'tampermonkey-privacyCon',     pat: /privacy-conscious/i },
