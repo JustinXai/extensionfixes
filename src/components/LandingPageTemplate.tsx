@@ -386,6 +386,7 @@ export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTempla
           <p className="mt-12 pt-8 border-t border-slate-200 text-center text-sm text-slate-500">
             Last updated: {new Date(page.lastUpdated).toLocaleDateString('en-US', {
               month: 'long',
+              day: 'numeric',
               year: 'numeric'
             })}
           </p>
