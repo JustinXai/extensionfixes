@@ -31,8 +31,14 @@ const PAGES = [
   '/fix/cannot-install-extension-unsupported-manifest/',
   '/comparisons/tampermonkey-vs-violentmonkey',
   '/comparisons/tampermonkey-vs-violentmonkey/',
+  '/comparisons/ublock-origin-vs-ublock-origin-lite',
+  '/comparisons/ublock-origin-vs-ublock-origin-lite/',
+  '/comparisons/foxyproxy-vs-switchyomega',
+  '/comparisons/foxyproxy-vs-switchyomega/',
   '/guides/best-userscript-managers-for-chrome',
   '/guides/best-userscript-managers-for-chrome/',
+  '/fix/chrome-140-manifest-v2',
+  '/fix/chrome-140-manifest-v2/',
 ];
 
 // Required sections per page (label → section heading text)
@@ -93,10 +99,22 @@ const PAGE_REQUIRED_SECTIONS = {
     'Verdict', 'Key Differences', 'Which One Should You Choose',
     'Common Failed Fixes', 'Related Resources', 'Frequently Asked Questions', 'Sources',
   ],
+  '/comparisons/ublock-origin-vs-ublock-origin-lite': [
+    'Verdict', 'Key Differences', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Frequently Asked Questions', 'Sources',
+  ],
+  '/comparisons/foxyproxy-vs-switchyomega': [
+    'Verdict', 'Key Differences', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Frequently Asked Questions', 'Sources',
+  ],
   '/guides/best-userscript-managers-for-chrome': [
     'How We Chose', 'Side-by-side Comparison',
     'Who Should Choose Which Option', 'What Not to Do',
     'Safety Checklist', 'Frequently Asked Questions', 'Sources',
+  ],
+  '/fix/chrome-140-manifest-v2': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
   ],
 
   // ── Index pages ─────────────────────────────────────────────────────
@@ -112,10 +130,14 @@ const PAGE_QA_DATE = {
   '/alternatives/violentmonkey': 'May 22, 2026',
   '/alternatives/foxyproxy': 'May 22, 2026',
   '/alternatives/ublock-origin': 'May 22, 2026',
-  '/alternatives/great-suspender': 'May 22, 2026',
+  '/alternatives/great-suspender': 'May 23, 2026',
   '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
   '/comparisons/tampermonkey-vs-violentmonkey': 'May 23, 2026',
+  '/comparisons/ublock-origin-vs-ublock-origin-lite': 'May 23, 2026',
+  '/comparisons/foxyproxy-vs-switchyomega': 'May 23, 2026',
   '/guides/best-userscript-managers-for-chrome': 'May 23, 2026',
+  '/fix/chrome-140-manifest-v2': 'May 23, 2026',
+  '/fix/cannot-install-extension-unsupported-manifest': 'May 23, 2026',
 };
 
 const PAGE_MIN_WORDS = {

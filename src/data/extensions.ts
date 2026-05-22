@@ -581,6 +581,11 @@ export const extensions: ExtensionRecord[] = [
           'The original version of The Great Suspender was a legitimate extension. However, after ownership changed in late 2020, the version released by the new owner contained code that security researchers identified as potentially harmful. Google disabled the extension to protect users. We recommend using established alternatives instead of trying to install any version of The Great Suspender from unofficial sources.',
       },
       {
+        question: 'Is The Great Suspender still in the Chrome Web Store?',
+        answer:
+          'No. The Great Suspender was removed from the Chrome Web Store and proactively disabled by Google in early 2021. It is no longer available for installation from the Chrome Web Store. Searching for it may return mirror sites or similar-sounding extensions — neither of which are the original extension. Users should avoid these and use Chrome Memory Saver or Auto Tab Discard instead.',
+      },
+      {
         question: 'Is Great Suspender safe to use?',
         answer:
           'NO. The original Great Suspender was removed and disabled due to malware concerns. Do not install any version of this extension from unofficial sources. The risks outweigh any potential benefits.',
@@ -653,7 +658,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Session Buddy MV3 availability and active maintenance status',
       },
     ],
-    lastUpdated: '2026-05-22',
+    lastUpdated: '2026-05-23',
     atAGlance: {
       originalExtension: 'The Great Suspender',
       currentStatus: 'Removed from Chrome Web Store ? disabled by Google due to malware concerns',

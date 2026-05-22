@@ -575,6 +575,26 @@ export const errors: ErrorRecord[] = [
         answer:
           'Check whether the developer has released an MV3 version or announced migration plans. If no official MV3 version exists, look for a maintained alternative from the Chrome Web Store. For enterprise-managed Chrome devices, your IT administrator may be able to use enterprise extension policies. Always verify any replacement extension\'s developer identity and permissions before installing.',
       },
+      {
+        question: 'Why does Chrome say an extension uses an unsupported manifest version?',
+        answer:
+          'Chrome shows this error when the extension\'s manifest.json declares a manifest version that modern Chrome no longer accepts. This usually means the extension uses Manifest V2, which is no longer supported for ordinary users. The manifest file controls the extension\'s permissions, background scripts, and API usage. When the manifest version is no longer in Chrome\'s supported list, Chrome blocks installation regardless of the extension\'s other contents.',
+      },
+      {
+        question: 'What does "manifest unknown keys ignored: applications" mean?',
+        answer:
+          'The "applications" key in a manifest.json file is a Gecko-specific field used by Firefox to declare browser compatibility. Chrome does not recognize this key and ignores it. If Chrome also shows an unsupported manifest version error, the extension package is using a manifest format that Chrome does not accept — typically Manifest V2. Simply removing the applications key does not make an MV2 extension compatible with modern Chrome.',
+      },
+      {
+        question: 'Is this related to Firefox or Gecko manifest keys?',
+        answer:
+          'Yes, partially. Some extension packages include Firefox-specific manifest fields like "applications" (in Manifest V2) or "browser_specific_settings" (in Manifest V3). Chrome ignores these fields because they are Gecko-specific. However, if the manifest version itself is unsupported in Chrome, removing Firefox-specific keys alone will not resolve the issue.',
+      },
+      {
+        question: 'Can I edit manifest.json to make the extension install?',
+        answer:
+          'Changing the manifest version number in manifest.json does not make an MV2 extension compatible with modern Chrome. The underlying APIs, background script behavior, and permissions that the extension uses are still based on MV2 design. Developers who want to support Chrome need to rewrite extension code to use the MV3 API. Editing manifest.json to bump the version number without corresponding code changes is not a proper migration and will not result in a working extension.',
+      },
     ],
     sources: [
       {
@@ -602,7 +622,7 @@ export const errors: ErrorRecord[] = [
         supports: 'Why unsupported extension packages may be blocked from the Chrome Web Store',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-23',
     keyTakeaways: [
       'This error usually appears before installation, not after an extension is already enabled.',
       'It often means the extension package uses Manifest V2 or another outdated manifest format.',
@@ -614,7 +634,7 @@ export const errors: ErrorRecord[] = [
       { label: 'Chrome status', value: 'Modern Chrome blocks unsupported manifest formats', variant: 'bad' },
       { label: 'User control', value: 'Ordinary users generally cannot permanently re-enable MV2 installation', variant: 'bad' },
       { label: 'Safer path', value: 'Use an official MV3 update or a maintained alternative', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 19, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 23, 2026', variant: 'neutral' },
     ],
     commonFailedFixes: [
       {
@@ -641,6 +661,147 @@ export const errors: ErrorRecord[] = [
         tried: 'Disable browser security protections',
         whyItFails: 'It increases the risk of malicious extensions reading pages, cookies, or credentials.',
         saferAlternative: 'Replace the extension with a maintained alternative.',
+      },
+    ],
+  },
+  {
+    slug: 'chrome-140-manifest-v2',
+    title: 'Chrome 140 and Manifest V2 Extensions',
+    aliases: [
+      'chrome 140 manifest v2',
+      'chrome v2 manifest',
+      'chrome manifest v2 extensions',
+      'manifest v2 chrome 140',
+      'chrome 140 mv2',
+      'chrome 140 extensions disabled',
+      'chrome 140 old extensions not working',
+    ],
+    shortAnswer:
+      'Chrome 140 does not bring back Manifest V2 support for ordinary users. Manifest V2 extensions were disabled earlier in the MV2 phase-out, so old extensions that depend on MV2 usually do not work in modern Chrome. Users should check for maintained Manifest V3 updates, use trusted alternatives, or consider another browser only when they specifically need classic extension behavior. Avoid installing old CRX files or disabling browser protections, because unsupported extensions can request broad access to pages you visit.',
+    whyItHappens: [
+      'Chrome 140 is part of the ongoing Manifest V2 deprecation and does not restore MV2 support for regular users.',
+      'Chrome 138 fully disabled MV2 extensions by default for all non-enterprise users.',
+      'Chrome 140 follows the same MV2 deprecation schedule with no special exception for regular users.',
+      'The MV2-to-MV3 migration is a platform-level change, not a per-extension setting.',
+      'Chrome enterprise administrators can still use enterprise extension policies to manage MV2 on managed devices.',
+    ],
+    whatYouCanDo: [
+      'Identify which extensions stopped working and check whether MV3 updates are available.',
+      'Search the Chrome Web Store for maintained MV3-compatible versions from the same developer.',
+      'Use Extension Fixes to find verified alternatives for affected extensions.',
+      'Export settings from old extensions if possible before removing them.',
+      'Consider Firefox as a secondary browser for specific extensions that only work with MV2.',
+      'Report extension migration issues to the developer\'s official support channels.',
+    ],
+    whatNotToDo: [
+      'Do not install old CRX files from mirror sites.',
+      'Do not keep using an outdated Chrome build to preserve MV2 support.',
+      'Do not enable developer flags to try to force MV2 support — flags are temporary and version-dependent.',
+      'Do not disable browser protections to run old extensions, because this exposes your browsing data.',
+    ],
+    relatedExtensionSlugs: ['ublock-origin', 'foxyproxy', 'switchyomega', 'great-suspender'],
+    faqs: [
+      {
+        question: 'Does Chrome 140 support Manifest V2 extensions?',
+        answer:
+          'No. Chrome 140 does not restore Manifest V2 support for ordinary users. MV2 extensions were disabled at Chrome 138. Chrome 140 follows the same platform behavior with no special exception for regular users.',
+      },
+      {
+        question: 'Why did my Chrome extensions stop working?',
+        answer:
+          'Most extensions that stopped working in Chrome 138 and later are Manifest V2 extensions. Chrome 138 disabled MV2 by default for all non-enterprise users as part of the platform migration. Chrome 140 follows the same policy.',
+      },
+      {
+        question: 'Can I turn Manifest V2 back on?',
+        answer:
+          'Ordinary users generally cannot restore MV2 support. Chrome does not provide a user-accessible setting to re-enable MV2. Flags and developer mode do not make unsupported APIs compatible with modern Chrome.',
+      },
+      {
+        question: 'Is Chrome 140 different from Chrome 138 for MV2?',
+        answer:
+          'Chrome 138 fully disabled MV2. Chrome 140 follows the same policy without restoring MV2 support. The practical difference for users is that some extensions may now be unavailable in additional contexts compared to earlier versions.',
+      },
+      {
+        question: 'Can enterprise-managed devices still use MV2?',
+        answer:
+          'Enterprise Chrome administrators can use the ExtensionManifestV2Enabled policy to extend MV2 support on managed devices. However, this is only available for organizational deployments, not individual users.',
+      },
+      {
+        question: 'Should I install old CRX files?',
+        answer:
+          'No. Old CRX files from unofficial sources are not recommended. They may be outdated, modified, or incompatible with modern Chrome. Using unsupported extensions from unverified sources creates security risks without guaranteeing functionality.',
+      },
+      {
+        question: 'What should I use instead of old MV2 extensions?',
+        answer:
+          'Look for MV3-compatible updates from the same developer, or find maintained alternatives in the Chrome Web Store. Extension Fixes tracks alternatives for commonly affected extensions including ad blockers, proxy managers, and userscript managers.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Chrome MV2 deprecation schedule, which versions disabled MV2, and enterprise policy options',
+      },
+      {
+        title: 'Manifest V3 Migration Guide',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'What MV3 is, why it replaced MV2, and how extensions must migrate',
+      },
+      {
+        title: 'Chrome Extension Installation',
+        url: 'https://developer.chrome.com/docs/extensions/install/',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Chrome extension installation requirements and manifest version policies',
+      },
+    ],
+    lastUpdated: '2026-05-23',
+    keyTakeaways: [
+      'Chrome 140 does not restore ordinary-user Manifest V2 support.',
+      'Many old Chrome extensions stopped working because of the MV2 phase-out.',
+      'Reinstalling the same extension usually does not solve the compatibility issue.',
+      'Maintained MV3 alternatives are the long-term path for Chrome users.',
+      'Old CRX files from mirror sites are not recommended and can be unsafe.',
+    ],
+    currentStatus: [
+      { label: 'Chrome status', value: 'MV2 support no longer available for ordinary users', variant: 'bad' },
+      { label: 'User control', value: 'No simple toggle restores old MV2 support', variant: 'bad' },
+      { label: 'Recommended path', value: 'Use MV3 updates or maintained alternatives', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 23, 2026', variant: 'neutral' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install old CRX files from mirror sites',
+        whyItFails: 'Old CRX packages may be outdated, modified, or incompatible with Chrome 140. Chrome does not support MV2 extensions regardless.',
+        saferAlternative: 'Use MV3-compatible alternatives from the Chrome Web Store.',
+      },
+      {
+        tried: 'Keep using an outdated Chrome build',
+        whyItFails: 'Outdated Chrome builds do not receive security patches. The security risk outweighs any benefit from preserving MV2 extension access.',
+        saferAlternative: 'Use a modern Chrome build and migrate to MV3-compatible extensions.',
+      },
+      {
+        tried: 'Enable developer mode and expect old APIs to work',
+        whyItFails: 'Developer Mode does not re-enable MV2 APIs. It only allows loading unpacked extensions that still use the supported platform.',
+        saferAlternative: 'Look for MV3-compatible versions of the extensions you need.',
+      },
+      {
+        tried: 'Change Chrome flags to re-enable MV2',
+        whyItFails: 'MV2 removal flags are temporary, version-dependent, and removed in later Chrome versions. They do not make unsupported APIs functional.',
+        saferAlternative: 'Use this only as a short-term data export path, not a permanent workaround.',
+      },
+      {
+        tried: 'Disable browser protections to run old extensions',
+        whyItFails: 'Disabling browser protections exposes your pages, cookies, and credentials to any extension loaded, including old or unverified ones.',
+        saferAlternative: 'Use only verified extensions from the Chrome Web Store.',
       },
     ],
   },

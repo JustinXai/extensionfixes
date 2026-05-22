@@ -114,6 +114,259 @@ export const comparisons: ComparisonRecord[] = [
     ],
     lastUpdated: '2026-05-23',
   },
+  {
+    templateType: 'comparison',
+    slug: 'ublock-origin-vs-ublock-origin-lite',
+    title: 'uBlock Origin vs uBlock Origin Lite',
+    metaTitle: 'uBlock Origin vs uBlock Origin Lite: What Chrome Users Should Know',
+    metaDescription:
+      'Compare uBlock Origin and uBlock Origin Lite for Chrome users after Manifest V2. Learn what changed, what to use, and what to avoid.',
+    quickAnswer:
+      'Classic uBlock Origin stopped working in modern Chrome because Chrome disabled Manifest V2 extensions. uBlock Origin Lite is the MV3-compatible option from the same developer, but it is not the same extension and advanced users may notice differences. For many Chrome users, uBlock Origin Lite is the closest practical Chrome option from the same developer. Users who need classic uBlock Origin behavior can consider Firefox, where the original extension may still be available. Avoid installing old CRX copies of classic uBlock Origin from unofficial sources because modified versions can create privacy and security risks.',
+    comparedItems: ['uBlock Origin', 'uBlock Origin Lite', 'Firefox with classic uBlock Origin'],
+    verdict:
+      'Chrome users should use uBlock Origin Lite as the closest practical MV3-compatible option from the same developer. Firefox remains a practical path for users who specifically need classic uBlock Origin behavior. Old CRX copies of classic uBlock Origin from unofficial sources are not recommended, regardless of browser.',
+    keyDifferences: [
+      'Classic uBlock Origin uses Manifest V2; uBlock Origin Lite uses Manifest V3. Chrome 138+ disabled MV2 extensions for ordinary users.',
+      'Chrome does not run classic uBlock Origin; uBlock Origin Lite is the available Chrome Web Store option from the same developer.',
+      'uBlock Origin Lite uses a declarative filtering model that differs from classic uBlock Origin\'s more flexible approach.',
+      'Advanced uBlock Origin features like dynamic rules and some scriptlet injections have more limited equivalents in uBlock Origin Lite.',
+      'Firefox still supports MV2 extensions and may have classic uBlock Origin available, making it a practical option for users who need the original extension behavior.',
+    ],
+    comparisonTable: [
+      { option: 'uBlock Origin (classic)', bestFor: 'Firefox users who need full uBlock Origin behavior', mv3Support: 'No (MV2 only)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Not available in modern Chrome for ordinary users' },
+      { option: 'uBlock Origin Lite', bestFor: 'Chrome users who want the closest option from the same developer', mv3Support: 'Yes (MV3)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Fewer advanced controls than classic uBlock Origin' },
+      { option: 'Firefox with classic uBlock Origin', bestFor: 'Users who need classic uBlock Origin and are willing to use Firefox', mv3Support: 'Yes (MV2 still supported)', cost: 'Free', openSource: 'Fully open source', setupDifficulty: 'Moderate', mainTradeoff: 'Requires using Firefox instead of Chrome' },
+      { option: 'Other Chrome Web Store ad blockers', bestFor: 'Chrome users who need ad blocking without specific uBlock features', mv3Support: 'Yes (MV3)', cost: 'Free / Paid', openSource: 'Varies', setupDifficulty: 'Easy', mainTradeoff: 'Different filtering models and feature sets' },
+      { option: 'Old CRX copies of classic uBlock Origin', bestFor: 'Not recommended for any use case', mv3Support: 'No', cost: 'N/A', openSource: 'Unknown', setupDifficulty: 'N/A', mainTradeoff: 'Risky — unofficial sources can modify extension packages' },
+    ],
+    decisionGuide: [
+      {
+        choose: 'uBlock Origin Lite',
+        when: 'You use Chrome and want the closest MV3-compatible option from the same developer as classic uBlock Origin.',
+        href: '/alternatives/ublock-origin',
+      },
+      {
+        choose: 'Firefox with classic uBlock Origin',
+        when: 'You need specific uBlock Origin features that are not yet available in uBlock Origin Lite and are willing to use Firefox as your primary browser.',
+      },
+      {
+        choose: 'Other Chrome Web Store ad blockers',
+        when: 'Your workflow does not depend on specific uBlock-specific controls and you need reliable ad blocking in Chrome.',
+      },
+      {
+        choose: 'Avoid old CRX copies from unofficial sources',
+        when: 'You are considering unofficial downloads of classic uBlock Origin — these are not recommended regardless of browser.',
+        href: '/fix/manifest-v2-disabled',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Installing old CRX copies of classic uBlock Origin from mirror sites',
+        whyItFails:
+          'Unofficial CRX files may be outdated, modified, or contain unwanted code. Chrome does not support MV2 extensions, so the CRX file will not install properly in modern Chrome regardless.',
+        saferAlternative: 'Use uBlock Origin Lite from the Chrome Web Store, or Firefox with classic uBlock Origin.',
+      },
+      {
+        tried: 'Assuming uBlock Origin Lite behaves identically to classic uBlock Origin in all cases',
+        whyItFails:
+          'uBlock Origin Lite uses a declarative filtering model constrained by MV3. Some advanced dynamic filtering rules and scriptlet injections from classic uBlock Origin are not available or work differently.',
+        saferAlternative: 'Review uBlock Origin Lite\'s feature set before migrating, and test filtering behavior on your most-visited sites.',
+      },
+      {
+        tried: 'Keeping an outdated Chrome build to preserve MV2 support',
+        whyItFails:
+          'Using outdated Chrome versions for MV2 extension support creates security vulnerabilities. Chrome releases security patches that older versions do not receive.',
+        saferAlternative: 'Use a modern Chrome build with uBlock Origin Lite or consider Firefox as a secondary browser.',
+      },
+      {
+        tried: 'Installing multiple ad blockers simultaneously in Chrome',
+        whyItFails:
+          'Multiple MV3 content blockers running at the same time can conflict, cause duplicate filtering, or degrade browser performance without improving blocking results.',
+        saferAlternative: 'Use a single well-maintained ad blocker rather than stacking multiple extensions.',
+      },
+    ],
+    relatedPages: [
+      { title: 'uBlock Origin Alternatives', href: '/alternatives/ublock-origin', description: 'Current status, migration options, and alternatives for uBlock Origin users.' },
+      { title: 'Manifest V2 Disabled in Chrome', href: '/fix/manifest-v2-disabled', description: 'Why MV2 extensions stopped working in Chrome and what to do.' },
+      { title: 'Chrome 140 and Manifest V2', href: '/fix/chrome-140-manifest-v2', description: 'What Chrome 140 means for old extension support.' },
+      { title: 'All Extension Alternatives', href: '/alternatives', description: 'Browse all extension alternatives on Extension Fixes.' },
+    ],
+    faqs: [
+      {
+        question: 'Is uBlock Origin Lite the same as uBlock Origin?',
+        answer:
+          'No. uBlock Origin Lite is a separate extension developed by the same developer (Raymond Hill) for the Manifest V3 platform. It provides ad blocking functionality, but it does not replicate every feature of classic uBlock Origin. Advanced users who rely on specific dynamic filtering rules may notice differences.',
+      },
+      {
+        question: 'Why did Chrome disable uBlock Origin?',
+        answer:
+          'Chrome did not disable uBlock Origin specifically. Chrome 138 disabled all Manifest V2 extensions for ordinary users as part of the MV2 deprecation plan. Classic uBlock Origin uses MV2 and stopped working as part of this broader platform change.',
+      },
+      {
+        question: 'Does uBlock Origin still work in Firefox?',
+        answer:
+          'Yes. Firefox still supports Manifest V2 extensions and classic uBlock Origin may still be available. Users who specifically need classic uBlock Origin features and are willing to use Firefox can continue using it there.',
+      },
+      {
+        question: 'Is uBlock Origin Lite made by the same developer?',
+        answer:
+          'Yes. uBlock Origin Lite is developed by Raymond Hill, the same developer behind classic uBlock Origin. It is the official MV3-compatible continuation of the project.',
+      },
+      {
+        question: 'Can I install classic uBlock Origin CRX manually?',
+        answer:
+          'Installing old CRX files from unofficial sources is not recommended. The CRX package uses MV2, which Chrome 138+ does not support. Modified CRX files from mirror sites can contain unwanted code. Use the official Chrome Web Store version of uBlock Origin Lite instead.',
+      },
+      {
+        question: 'What should Chrome users use instead of classic uBlock Origin?',
+        answer:
+          'uBlock Origin Lite is the closest option from the same developer. Other Chrome Web Store ad blockers like AdGuard AdBlocker and Adblock Plus are also available. The best choice depends on whether you need specific uBlock-specific features.',
+      },
+      {
+        question: 'Is uBlock Origin Lite enough for normal browsing?',
+        answer:
+          'For most users, yes. uBlock Origin Lite blocks ads and trackers effectively using the MV3 declarative filtering model. If you rely on advanced dynamic rules or specific scriptlet injections, test uBlock Origin Lite on your most-visited sites before switching.',
+      },
+    ],
+    sources: [
+      { title: 'Chrome Manifest V2 Deprecation Timeline', url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline', publisher: 'Google Chrome Developers', reliability: 'primary', supports: 'Chrome MV2 deprecation schedule and affected extensions' },
+      { title: 'uBlock Origin Lite — Chrome Web Store', url: 'https://chrome.google.com/webstore/detail/ublock-origin-lite/noablejinnpafcpeeecbfkepgeccekae', publisher: 'Chrome Web Store', reliability: 'primary', supports: 'Official Chrome Web Store listing for uBlock Origin Lite' },
+      { title: 'uBlock Origin GitHub Repository', url: 'https://github.com/gorhill/uBlock', publisher: 'Raymond Hill', reliability: 'primary', supports: 'Official source for uBlock Origin and uBlock Origin Lite development' },
+      { title: 'uBlock Origin Lite — Firefox Add-ons', url: 'https://addons.mozilla.org/firefox/addon/ublock-origin-lite/', publisher: 'Mozilla', reliability: 'primary', supports: 'uBlock Origin Lite availability for Firefox' },
+    ],
+    lastUpdated: '2026-05-23',
+  },
+  {
+    templateType: 'comparison',
+    slug: 'foxyproxy-vs-switchyomega',
+    title: 'FoxyProxy vs SwitchyOmega',
+    metaTitle: 'FoxyProxy vs SwitchyOmega: Which Chrome Proxy Manager Should You Use?',
+    metaDescription:
+      'Compare FoxyProxy, SwitchyOmega, and ZeroOmega for Chrome proxy management. Learn which option fits profiles, rules, and MV3 migration.',
+    quickAnswer:
+      'FoxyProxy and SwitchyOmega solve similar proxy switching problems but use different workflows. FoxyProxy is a practical option for users who want multiple proxy profiles and pattern-based switching. SwitchyOmega is familiar to many older Chrome users, but users should check whether their setup still works in modern Chrome. ZeroOmega may feel more familiar for users migrating from a SwitchyOmega-style workflow. The right choice depends on whether you prefer FoxyProxy-style profiles, SwitchyOmega-style rules, or a simpler one-proxy setup. Avoid old SwitchyOmega CRX files from unofficial sources because they may be outdated and can create security risks.',
+    comparedItems: ['FoxyProxy', 'SwitchyOmega', 'ZeroOmega', 'Chrome system proxy settings'],
+    verdict:
+      'FoxyProxy is the practical option for users who prefer profile-based proxy switching in modern Chrome. ZeroOmega is the practical option for users migrating from a SwitchyOmega-style workflow. SwitchyOmega users on modern Chrome should verify their current setup works and export settings before making changes. Chrome system proxy settings are sufficient for simple single-proxy use.',
+    keyDifferences: [
+      'FoxyProxy uses a profile-based switching model with pattern rules; SwitchyOmega uses a rule/profile hybrid that may require migration after Chrome MV2 changes.',
+      'FoxyProxy has an MV3 version available in the Chrome Web Store; SwitchyOmega\'s MV3 status requires verification in the current Chrome Web Store listing.',
+      'FoxyProxy is familiar to users who already use it; SwitchyOmega users may need to recreate or import rules when switching extensions.',
+      'ZeroOmega is a community-maintained MV3-compatible option that imports SwitchyOmega profiles directly, making it useful for migration.',
+      'Proxy providers carry risk — using unknown or free proxy servers can expose browsing data regardless of which extension you use.',
+    ],
+    comparisonTable: [
+      { option: 'FoxyProxy', bestFor: 'Multiple proxy profiles and pattern-based switching in modern Chrome', mv3Support: 'Available (Chrome Web Store)', cost: 'Free / Paid tiers', openSource: 'Partial', setupDifficulty: 'Easy', mainTradeoff: 'Requires rule recreation if migrating from SwitchyOmega' },
+      { option: 'SwitchyOmega', bestFor: 'Existing users with working configurations on older Chrome', mv3Support: 'Check Chrome Web Store listing', cost: 'Free', openSource: 'Open source', setupDifficulty: 'Moderate', mainTradeoff: 'May need migration or alternative on modern Chrome' },
+      { option: 'ZeroOmega', bestFor: 'SwitchyOmega users migrating to MV3-compatible Chrome', mv3Support: 'Yes (MV3)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Community fork — verify source before installing' },
+      { option: 'Chrome system proxy', bestFor: 'Simple single-proxy use with no profile switching needed', mv3Support: 'N/A (browser setting)', cost: 'Free', openSource: 'N/A', setupDifficulty: 'Easy', mainTradeoff: 'No profile switching or automatic rules' },
+      { option: 'Old CRX files (not recommended)', bestFor: 'Not recommended for any use case', mv3Support: 'No', cost: 'N/A', openSource: 'Unknown', setupDifficulty: 'N/A', mainTradeoff: 'Risky — old packages may be modified or outdated' },
+    ],
+    decisionGuide: [
+      {
+        choose: 'FoxyProxy',
+        when: 'You want profile-based proxy switching with pattern rules and need a maintained extension in the Chrome Web Store.',
+        href: '/alternatives/foxyproxy',
+      },
+      {
+        choose: 'ZeroOmega',
+        when: 'You are migrating from SwitchyOmega and want an MV3-compatible option that can import your existing proxy profiles.',
+        href: '/alternatives/switchyomega',
+      },
+      {
+        choose: 'Chrome system proxy settings',
+        when: 'You only need to set one proxy server and do not need automatic profile switching.',
+      },
+      {
+        choose: 'Avoid old SwitchyOmega CRX files from mirror sites',
+        when: 'You are considering unofficial downloads of SwitchyOmega — these are not recommended regardless of purpose.',
+        href: '/fix/cannot-install-extension-unsupported-manifest',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Installing old SwitchyOmega CRX files from mirror sites',
+        whyItFails:
+          'Old CRX files from unofficial mirrors may be outdated, modified, or incompatible with modern Chrome. Chrome 138+ does not support MV2 packages, so old SwitchyOmega files generally will not install properly.',
+        saferAlternative: 'Use ZeroOmega from the Chrome Web Store, which supports direct import of SwitchyOmega profiles.',
+      },
+      {
+        tried: 'Importing old proxy rules without reviewing them',
+        whyItFails:
+          'Proxy rules may reference servers that are no longer active or secure. Importing unverified rules can redirect traffic through unreliable proxy servers without your knowledge.',
+        saferAlternative: 'Review proxy rules individually before importing, and verify that each proxy server is still active and trusted.',
+      },
+      {
+        tried: 'Assuming FoxyProxy and SwitchyOmega behave identically',
+        whyItFails:
+          'The two extensions use different profile formats and rule syntaxes. Switching between them without adjusting settings can cause proxy rules to behave unexpectedly.',
+        saferAlternative: 'Export settings from one extension and test carefully when migrating to another.',
+      },
+      {
+        tried: 'Using unknown free proxy providers',
+        whyItFails:
+          'Free proxy servers can log browsing activity, inject ads, or modify page content regardless of which extension you use. Proxy extensions only route traffic — they do not make untrusted proxy servers safe.',
+        saferAlternative: 'Use proxy servers from providers you trust, and verify that your proxy connection is working as expected.',
+      },
+      {
+        tried: 'Keeping multiple proxy extensions enabled simultaneously',
+        whyItFails:
+          'Running two proxy extensions at the same time causes conflicts and unpredictable routing. Only one extension should control proxy settings at a time.',
+        saferAlternative: 'Use a single proxy extension and disable others when switching proxy managers.',
+      },
+    ],
+    relatedPages: [
+      { title: 'FoxyProxy Alternatives', href: '/alternatives/foxyproxy', description: 'Current status, migration options, and alternatives for FoxyProxy users.' },
+      { title: 'SwitchyOmega Alternatives', href: '/alternatives/switchyomega', description: 'Current status, migration options, and alternatives for SwitchyOmega users.' },
+      { title: 'Cannot Install Extension Unsupported Manifest', href: '/fix/cannot-install-extension-unsupported-manifest', description: 'Why Chrome blocks older extension packages and what to do.' },
+      { title: 'All Extension Alternatives', href: '/alternatives', description: 'Browse all extension alternatives on Extension Fixes.' },
+    ],
+    faqs: [
+      {
+        question: 'Is FoxyProxy a SwitchyOmega replacement?',
+        answer:
+          'FoxyProxy is not a direct replacement for SwitchyOmega because they use different profile formats and switching workflows. However, FoxyProxy can serve a similar purpose as a proxy manager in Chrome. For SwitchyOmega users, ZeroOmega may feel more familiar since it is designed to import SwitchyOmega profiles.',
+      },
+      {
+        question: 'Is SwitchyOmega still usable in Chrome?',
+        answer:
+          'SwitchyOmega users on modern Chrome should check whether their current installation still works. If SwitchyOmega has not been updated to MV3, it may have stopped working after Chrome 138. Export your proxy profiles before making any changes, then look for MV3-compatible options like ZeroOmega or FoxyProxy.',
+      },
+      {
+        question: 'What is ZeroOmega?',
+        answer:
+          'ZeroOmega is a community-maintained MV3-compatible proxy manager for Chrome. It is designed to import SwitchyOmega profiles directly, making it a practical option for users migrating from SwitchyOmega. Verify the Chrome Web Store listing and GitHub source before installing.',
+      },
+      {
+        question: 'Should I choose FoxyProxy or ZeroOmega?',
+        answer:
+          'Choose ZeroOmega if you are migrating from SwitchyOmega and want to keep your existing proxy profiles with minimal adjustment. Choose FoxyProxy if you prefer its profile-based workflow and do not need to preserve SwitchyOmega-specific rule formats.',
+      },
+      {
+        question: 'Can proxy extensions see my browsing traffic?',
+        answer:
+          'Proxy extensions route your browsing traffic through the proxy server you configure. The proxy server operator can see your requests unless the connection uses HTTPS. A proxy extension can see and modify extension configuration but does not automatically see your browsing data — that depends on the proxy server you use.',
+      },
+      {
+        question: 'Is it safe to install old proxy extension packages?',
+        answer:
+          'Old CRX files from unofficial sources for SwitchyOmega or other proxy managers are not recommended. These packages may be outdated, modified, or incompatible with modern Chrome. Use the official Chrome Web Store listings and verify the developer identity before installing any proxy extension.',
+      },
+      {
+        question: 'What is the simplest Chrome proxy option?',
+        answer:
+          'Chrome system proxy settings (Settings > System > Open your computer\'s proxy settings) are sufficient for routing all browser traffic through a single proxy server. No extension is needed for simple use cases. Proxy extensions are useful when you need multiple profiles, automatic switching based on URL patterns, or quick toggling between proxy configurations.',
+      },
+    ],
+    sources: [
+      { title: 'FoxyProxy — Chrome Web Store', url: 'https://chrome.google.com/webstore/detail/foxyproxy-standard/gchnhpkpgcajjkmemjehcnbjnebppjpn', publisher: 'Chrome Web Store', reliability: 'primary', supports: 'Official Chrome Web Store listing for FoxyProxy Standard' },
+      { title: 'ZeroOmega — Chrome Web Store', url: 'https://chromewebstore.google.com/detail/zeroomega-proxy-manager/hajegbgogmagjkepgbpgpjdelkiakhb', publisher: 'Chrome Web Store', reliability: 'primary', supports: 'Official Chrome Web Store listing for ZeroOmega' },
+      { title: 'ZeroOmega GitHub Repository', url: 'https://github.com/flighty-dev/ZeroOmega', publisher: 'flighty-dev', reliability: 'primary', supports: 'Official source for ZeroOmega development' },
+      { title: 'SwitchyOmega GitHub Repository', url: 'https://github.com/FelisCatus/SwitchyOmega', publisher: 'FelisCatus', reliability: 'primary', supports: 'Original SwitchyOmega source for reference' },
+    ],
+    lastUpdated: '2026-05-23',
+  },
 ];
 
 export function getComparisonBySlug(slug: string): ComparisonRecord | undefined {
