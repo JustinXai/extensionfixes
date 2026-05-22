@@ -88,16 +88,16 @@ const extensionMeta: Record<string, { title: string; description: string; quickA
   stylus: {
     title: 'Stylus Alternatives for Chrome',
     description:
-      'Stylus is actively maintained in Chrome. Compare alternatives for custom CSS style management and website theming.',
+      'Compare Stylus alternatives for Chrome users who need custom CSS, userstyles, and appearance changes. Learn what to use and what to avoid.',
     quickAnswer:
-      'Stylus is an actively maintained open-source style manager that replaced the deprecated Stylish extension. It lets you install custom CSS themes to modify website appearance.',
+      'Stylus is a Chrome extension for applying custom CSS and userstyles to websites. If you need a Stylus alternative, the right option depends on whether you want full custom CSS control, simple dark mode, or only small personal tweaks. Dark Reader is better for automatic dark mode, while browser bookmarks or snippets may work for very simple personal styles. Custom CSS tools can change how pages look and behave, so users should review style sources, avoid unknown mirrors, and disable styles they no longer use.',
   },
   'dark-reader': {
     title: 'Dark Reader Alternatives for Chrome',
     description:
-      'Dark Reader is actively maintained in Chrome. Compare alternatives like Night Eye for dark mode and accessibility needs.',
+      'Compare Dark Reader alternatives for Chrome, including browser dark mode settings, Stylus, and other appearance tools. Learn what to use and what to avoid.',
     quickAnswer:
-      'Dark Reader is an actively maintained MV3 extension for applying dark themes to websites. Night Eye offers multiple dark mode algorithms alongside additional features.',
+      'Dark Reader is a popular browser extension for applying dark mode to websites, but some users look for alternatives because of performance, site compatibility, or preference for custom CSS workflows. Chrome\'s built-in appearance settings may be enough for simple dark theme needs, while Stylus is better for users who want custom CSS styles on specific websites. The right choice depends on whether you want automatic dark mode, manual CSS control, or fewer extension permissions. Avoid installing unknown dark mode extensions that request broad access without clear maintenance or reviews.',
   },
   onetab: {
     title: 'OneTab Alternatives for Chrome',

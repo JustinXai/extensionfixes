@@ -1531,6 +1531,21 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'Review the script code before installing it ? look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the userscript manager to temporarily disable scripts you are not actively using. If a script requests permissions that seem excessive for its stated purpose, do not install it.',
       },
+      {
+        question: 'Does Violentmonkey support Manifest V3?',
+        answer:
+          'Yes. Violentmonkey was updated to support Manifest V3 and works in current Chrome versions as an MV3 extension. The project remains actively maintained by its open-source community, and the MV3 version is available in the Chrome Web Store.',
+      },
+      {
+        question: 'Is ScriptCat an alternative to Tampermonkey or Violentmonkey?',
+        answer:
+          'ScriptCat is another userscript manager option available in the Chrome Web Store. It is a separate project from both Tampermonkey and Violentmonkey, with its own development community. Users who are choosing between userscript managers may consider ScriptCat as an additional option alongside Tampermonkey and Violentmonkey, though the right choice depends on individual script compatibility, interface preferences, and specific feature needs.',
+      },
+      {
+        question: 'Should I switch from Violentmonkey to Tampermonkey?',
+        answer:
+          'Whether to switch depends on your specific needs. Both Violentmonkey and Tampermonkey support Manifest V3 and work in current Chrome. Tampermonkey has a larger built-in feature set and script library, while Violentmonkey is more lightweight and fully open source. Userscript compatibility depends on the specific scripts you use, their permissions, and how they behave with different managers. If your current scripts work well in Violentmonkey, there is no urgent reason to switch.',
+      },
     ],
     sources: [
       {
@@ -1550,7 +1565,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Open-source code transparency and development status',
       },
     ],
-    lastUpdated: '2026-05-22',
+    lastUpdated: '2026-05-24',
     keyTakeaways: [
       'Violentmonkey is actively maintained as an MV3-compatible userscript manager.',
       'Tampermonkey is the most widely-used alternative with a larger script ecosystem.',
@@ -1563,7 +1578,7 @@ export const extensions: ExtensionRecord[] = [
       { label: 'Violentmonkey', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
       { label: 'Tampermonkey', value: 'Active MV3 extension ? most widely-used userscript manager', variant: 'good' },
       { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3 versions', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 22, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {
@@ -2136,6 +2151,38 @@ export const extensions: ExtensionRecord[] = [
     ],
     alternatives: [
       {
+        name: 'Dark Reader',
+        slug: 'dark-reader',
+        bestFor: 'Automatic dark mode across many websites without managing CSS',
+        status: 'active_mv3',
+        chromeStoreUrl: 'https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh',
+        pros: [
+          'Automatic dark mode detection and application',
+          'Works across many popular websites out of the box',
+          'Per-site enable and disable controls',
+        ],
+        cons: [
+          'Not a full CSS manager — limited to dark mode and basic filters',
+          'Can affect site rendering on some pages',
+        ],
+        note: 'Dark Reader is better for automatic dark mode, not for full custom CSS workflows.',
+      },
+      {
+        name: 'Browser bookmarks/snippets',
+        slug: 'browser-bookmarklets',
+        bestFor: 'Very small personal tweaks without an extension',
+        status: 'active_mv3',
+        pros: [
+          'No extension needed',
+          'Works across browsers',
+        ],
+        cons: [
+          'Not a full userstyle manager',
+          'Very limited functionality',
+        ],
+        note: 'Browser bookmarks or snippets are only practical for very small personal CSS tweaks, not for managing multiple site styles.',
+      },
+      {
         name: 'Stylish',
         slug: 'stylish',
         bestFor: 'Users seeking the original Stylish interface (use with caution)',
@@ -2153,6 +2200,36 @@ export const extensions: ExtensionRecord[] = [
     ],
     faqs: [
       {
+        question: 'What is Stylus used for?',
+        answer:
+          'Stylus is a Chrome extension that lets you apply custom CSS styles to websites. You can install userstyles from repositories like Stylebots or userstyles.org, write your own CSS, or import styles created by others. It is commonly used for dark mode, custom site themes, and removing unwanted page elements.',
+      },
+      {
+        question: 'What is the best Stylus alternative for Chrome?',
+        answer:
+          'The best alternative depends on your goal. For automatic dark mode, Dark Reader is a practical option. For very small personal tweaks, browser bookmarks or built-in CSS snippets may be enough. Stylus itself remains a maintained and widely-used tool for full custom CSS control.',
+      },
+      {
+        question: 'Is Dark Reader a Stylus alternative?',
+        answer:
+          'Dark Reader is not a direct Stylus alternative. Dark Reader automatically applies dark mode to websites, while Stylus lets you write and apply any custom CSS. If your main goal is dark mode, Dark Reader is simpler. If you want full CSS control and custom site modifications, Stylus is the right tool.',
+      },
+      {
+        question: 'Can I use custom CSS in Chrome without an extension?',
+        answer:
+          'Chrome does not have a built-in way to apply custom CSS to websites. Browser bookmarklets can run small CSS snippets as one-off actions, but they are not a replacement for a full userstyle manager like Stylus. For persistent custom styles across sites, a dedicated extension is needed.',
+      },
+      {
+        question: 'Are userstyles safe?',
+        answer:
+          'Userstyles are generally safe when sourced from well-known repositories like Stylebots or userstyles.org and reviewed before enabling. However, styles from unknown mirrors or abandoned repositories may contain unwanted code, break site layouts, or have maintenance gaps. Review a style\'s rules and site match patterns before enabling it broadly.',
+      },
+      {
+        question: 'Can userstyles break websites?',
+        answer:
+          'Yes. Poorly written or outdated userstyles can conflict with a website\'s own CSS, causing broken layouts, missing elements, or incorrect formatting. Use per-site disable controls to quickly fix issues, and remove or disable styles that consistently cause problems.',
+      },
+      {
         question: 'What happened to Stylish?',
         answer:
           'The original Stylish extension was removed from the Chrome Web Store after researchers discovered it was collecting users browsing history. Stylus was created by the community as a privacy-respecting replacement without data collection.',
@@ -2167,20 +2244,131 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'Yes. Stylus is compatible with styles written for Stylish. Most userstyles from userstyles.org work with Stylus without modification.',
       },
+      {
+        question: 'How do I migrate from Stylus?',
+        answer:
+          'Export your active styles from Stylus (Options > Styles > Export). List which sites you need styles for and whether you need full CSS control or just dark mode. For dark mode, try Dark Reader or built-in browser settings. For full CSS control, keep Stylus or find an actively maintained alternative. Test replacements on non-critical sites before switching fully.',
+      },
     ],
     sources: [
       {
         title: 'Stylus Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne',
-        publisher: 'Chrome Web Store',
+        publisher: 'Stylus',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Stylus MV3 availability, listing status, and publisher identity',
       },
       {
         title: 'Stylus GitHub Repository',
         url: 'https://github.com/openstyles/stylus',
         publisher: 'OpenStyles Community',
+        sourceType: 'github',
+        reliability: 'primary',
+        supports: 'Stylus open-source development status and documentation',
+      },
+      {
+        title: 'Dark Reader Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh',
+        publisher: 'Dark Reader',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Dark Reader MV3 availability and listing status',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-24',
+    keyTakeaways: [
+      'Stylus is mainly for custom CSS and userstyles.',
+      'Dark Reader is better for automatic dark mode, not full CSS workflow.',
+      'Simple browser settings may be enough for basic appearance changes.',
+      'Userstyles from unknown sources can break pages or hide important UI.',
+      'Review style rules and site matches before enabling them.',
+    ],
+    currentStatus: [
+      { label: 'Stylus status', value: 'Custom CSS and userstyle extension — actively maintained MV3 version', variant: 'good' },
+      { label: 'Main alternative', value: 'Dark Reader for automatic dark mode', variant: 'neutral' },
+      { label: 'Main risk', value: 'Unreviewed styles can affect website UI', variant: 'bad' },
+      { label: 'Best practice', value: 'Use trusted styles and review site matches', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+    ],
+    comparisonTable: [
+      {
+        option: 'Stylus',
+        bestFor: 'Custom CSS and userstyles',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Moderate',
+        mainTradeoff: 'Requires reviewing styles — not a one-click dark mode tool',
+      },
+      {
+        option: 'Dark Reader',
+        bestFor: 'Automatic dark mode',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Not a custom CSS manager — limited to dark mode and basic filters',
+      },
+      {
+        option: 'Browser bookmarks/snippets',
+        bestFor: 'Very small personal tweaks',
+        mv3Support: 'N/A',
+        cost: 'Free',
+        openSource: 'N/A',
+        setupDifficulty: 'Very Easy',
+        mainTradeoff: 'Not a full userstyle manager — very limited functionality',
+      },
+      {
+        option: 'Unknown style mirrors',
+        bestFor: 'Not recommended',
+        mv3Support: 'Unknown',
+        cost: 'Unknown',
+        openSource: 'Unknown',
+        setupDifficulty: 'Unknown',
+        mainTradeoff: 'Broken UI and security risk — avoid',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Stylus',
+        when: 'You need site-specific CSS control and want to manage custom styles across multiple websites.',
+      },
+      {
+        choose: 'Dark Reader',
+        when: 'You mostly want automatic dark mode without managing CSS styles manually.',
+      },
+      {
+        choose: 'Browser bookmarks/snippets',
+        when: 'You only need very small personal tweaks occasionally and want no extension overhead.',
+      },
+      {
+        choose: 'Unknown style mirrors',
+        when: 'Never. Avoid unknown style mirrors or abandoned userstyles that lack active maintenance.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install userstyles from unknown mirrors',
+        whyItFails: 'Styles from unknown sources may contain unwanted code, break site layouts, or have outdated selectors that no longer work.',
+        saferAlternative: 'Use styles from well-known repositories like Stylebots or userstyles.org. Review styles before enabling.',
+      },
+      {
+        tried: 'Enable many overlapping styles on the same site',
+        whyItFails: 'Multiple styles targeting the same site can conflict, producing duplicate or broken styles.',
+        saferAlternative: 'Disable overlapping styles. Use per-site enable and disable controls to manage active styles.',
+      },
+      {
+        tried: 'Ignore site match patterns',
+        whyItFails: 'Styles with overly broad match patterns can apply to unintended sites, causing unexpected visual changes.',
+        saferAlternative: 'Review and adjust match patterns so styles only apply where intended.',
+      },
+      {
+        tried: 'Use abandoned styles without reviewing them',
+        whyItFails: 'Styles that are no longer maintained may have outdated CSS that breaks current site layouts.',
+        saferAlternative: 'Review abandoned styles before keeping them enabled. Remove or replace styles that consistently cause problems.',
+      },
+    ],
   },
   {
     slug: 'dark-reader',
@@ -2219,6 +2407,39 @@ export const extensions: ExtensionRecord[] = [
     ],
     alternatives: [
       {
+        name: 'Stylus',
+        slug: 'stylus',
+        bestFor: 'Users who want custom CSS and fine-grained site-specific style control',
+        status: 'active_mv3',
+        chromeStoreUrl: 'https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfoboffhnclfk',
+        pros: [
+          'Full custom CSS control per website',
+          'Supports userstyles from Stylebots and other repositories',
+          'No automatic site modification unless you enable styles',
+        ],
+        cons: [
+          'Requires CSS or userstyle knowledge',
+          'Does not auto-detect and apply dark mode',
+        ],
+        note: 'Stylus is a custom CSS manager, not a direct dark mode tool. Users need to install or write dark mode styles manually.',
+      },
+      {
+        name: 'Chrome built-in appearance settings',
+        slug: 'chrome-appearance-settings',
+        bestFor: 'Users who only need simple browser-level dark theme preferences',
+        status: 'active_mv3',
+        pros: [
+          'No extension required',
+          'Works for browser UI and compatible sites',
+          'Minimal performance impact',
+        ],
+        cons: [
+          'Does not restyle every website automatically',
+          'Limited customization options',
+        ],
+        note: 'Chrome built-in appearance settings are sufficient for basic browser dark theme needs but do not apply dark mode to individual websites.',
+      },
+      {
         name: 'Night Eye',
         slug: 'night-eye',
         bestFor: 'Users wanting multiple dark mode algorithms and additional features',
@@ -2239,6 +2460,41 @@ export const extensions: ExtensionRecord[] = [
     ],
     faqs: [
       {
+        question: 'What is the best Dark Reader alternative for Chrome?',
+        answer:
+          'The best alternative depends on your needs. Chrome built-in appearance settings work for basic browser theming. Stylus is better if you want custom CSS and are comfortable reviewing styles. Night Eye offers multiple dark mode algorithms. For most users, trying the built-in settings first is the practical starting point.',
+      },
+      {
+        question: 'Is Stylus a Dark Reader alternative?',
+        answer:
+          'Stylus is not a direct Dark Reader alternative — it is a custom CSS manager rather than an automatic dark mode tool. Stylus lets you apply custom CSS to websites, which can include dark mode styles, but you need to find or write the styles yourself. Dark Reader automatically detects and applies dark mode across many sites.',
+      },
+      {
+        question: 'Can Chrome use dark mode without an extension?',
+        answer:
+          'Yes. Chrome has built-in appearance settings under Settings > Appearance that let you switch between Light and Dark themes for the browser interface. However, this does not automatically restyle individual websites — only the browser chrome changes. For website dark mode, an extension like Dark Reader or Stylus with dark mode styles is needed.',
+      },
+      {
+        question: 'Do dark mode extensions affect website performance?',
+        answer:
+          'Dark mode extensions apply CSS styles to web pages, which can have a minor performance impact depending on the number of sites and styles configured. Dark Reader uses efficient selective injection, but on some complex sites the effect may be noticeable. Built-in browser settings have no impact on website performance.',
+      },
+      {
+        question: 'Can dark mode extensions read pages I visit?',
+        answer:
+          'Dark mode extensions need broad site access to apply styles to the pages you visit. This means they can interact with page content to inject styles. Before installing any appearance extension, review its permissions and verify it is actively maintained. Avoid extensions with broad permissions that have unclear or abandoned development.',
+      },
+      {
+        question: 'Should I install multiple dark mode extensions?',
+        answer:
+          'No. Installing multiple dark mode or appearance extensions at once can cause conflicts, duplicate styles, and performance issues. Use one maintained tool at a time and disable any others before testing a new one.',
+      },
+      {
+        question: 'What should I use if Dark Reader breaks a website?',
+        answer:
+          'If Dark Reader causes rendering issues on a specific site, try the built-in browser appearance settings for simple needs. For Stylus users, disable the conflicting style for that site. You can also temporarily disable Dark Reader on a per-site basis using its built-in controls. If an extension consistently causes problems, switch to a more maintained alternative.',
+      },
+      {
         question: 'Does Dark Reader affect all websites?',
         answer:
           'Dark Reader applies dark themes to most websites automatically. For sites with custom styling, you can use the extension settings to force-enable dark mode or create custom site overrides.',
@@ -2258,18 +2514,26 @@ export const extensions: ExtensionRecord[] = [
       {
         title: 'Dark Reader Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh',
-        publisher: 'Chrome Web Store',
+        publisher: 'Dark Reader',
         sourceType: 'chrome-web-store',
         reliability: 'primary',
         supports: 'Dark Reader MV3 availability, listing status, and publisher identity',
       },
       {
-        title: 'Dark Reader GitHub Repository',
-        url: 'https://github.com/darkreader/darkreader',
-        publisher: 'Dark Reader Contributors',
-        sourceType: 'github',
-        reliability: 'secondary',
-        supports: 'Dark Reader open-source status, code transparency, and recent development activity',
+        title: 'Dark Reader Official Site',
+        url: 'https://darkreader.org/',
+        publisher: 'Dark Reader',
+        sourceType: 'official-website',
+        reliability: 'primary',
+        supports: 'Dark Reader official documentation, GitHub, and development status',
+      },
+      {
+        title: 'Stylus Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfoboffhnclfk',
+        publisher: 'Stylus',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Stylus MV3 availability, listing status, and publisher identity',
       },
       {
         title: 'Chrome Manifest V2 Deprecation Timeline',
@@ -2277,10 +2541,103 @@ export const extensions: ExtensionRecord[] = [
         publisher: 'Google Chrome Developers',
         sourceType: 'chrome-developers',
         reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline ? Dark Reader was updated to MV3',
+        supports: 'Official Chrome MV2 deprecation timeline — Dark Reader was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-05-24',
+    keyTakeaways: [
+      'Dark Reader is widely used for automatic dark mode on websites.',
+      'Built-in browser appearance settings may be enough for simple needs.',
+      'Stylus is better for custom CSS and site-specific style control.',
+      'Appearance extensions can affect pages you visit, so permissions matter.',
+      'Avoid unknown dark mode extensions with broad permissions and unclear maintenance.',
+      'Multiple dark mode extensions can conflict — use one at a time.',
+    ],
+    currentStatus: [
+      { label: 'Dark Reader status', value: 'Widely used dark mode extension — actively maintained MV3 version', variant: 'good' },
+      { label: 'Main alternatives', value: 'Browser settings, Stylus, Night Eye, maintained dark mode tools', variant: 'neutral' },
+      { label: 'Main risk', value: 'Broad site access permissions', variant: 'bad' },
+      { label: 'Best practice', value: 'Use maintained extensions and review permissions', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+    ],
+    comparisonTable: [
+      {
+        option: 'Dark Reader',
+        bestFor: 'Automatic dark mode across many websites',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Can affect site rendering and performance on some pages',
+      },
+      {
+        option: 'Chrome built-in appearance settings',
+        bestFor: 'Simple browser theme preference',
+        mv3Support: 'N/A',
+        cost: 'Free',
+        openSource: 'N/A',
+        setupDifficulty: 'Very Easy',
+        mainTradeoff: 'Does not restyle every website automatically',
+      },
+      {
+        option: 'Stylus',
+        bestFor: 'Custom CSS and site-specific styles',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Moderate',
+        mainTradeoff: 'Requires CSS or userstyle knowledge — does not auto-apply dark mode',
+      },
+      {
+        option: 'Night Eye',
+        bestFor: 'Users wanting multiple dark mode algorithms',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Premium features may require subscription',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Dark Reader',
+        when: 'You want automatic dark mode across many websites without managing styles manually.',
+      },
+      {
+        choose: 'Chrome built-in appearance settings',
+        when: 'You only need simple browser-level theming and do not need per-site dark mode.',
+      },
+      {
+        choose: 'Stylus',
+        when: 'You want custom CSS control and are comfortable reviewing or writing styles.',
+      },
+      {
+        choose: 'Night Eye',
+        when: 'You want multiple dark mode rendering algorithms and are comfortable with its feature set.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install multiple dark mode extensions at once',
+        whyItFails: 'Multiple appearance extensions can conflict, produce duplicate styles, and degrade performance.',
+        saferAlternative: 'Use one maintained appearance tool at a time. Disable others before testing a new one.',
+      },
+      {
+        tried: 'Grant broad permissions without checking the extension',
+        whyItFails: 'Appearance extensions can interact with page content. Unknown or abandoned extensions with broad permissions pose privacy and security risks.',
+        saferAlternative: 'Verify the extension is actively maintained, check reviews, and review permissions before installing.',
+      },
+      {
+        tried: 'Use random userstyles from unknown sources',
+        whyItFails: 'Userstyles from unknown mirrors may contain unwanted code, break site layouts, or have maintenance gaps.',
+        saferAlternative: 'Use well-known style repositories and review styles before enabling them broadly.',
+      },
+      {
+        tried: 'Assume every website renders correctly in forced dark mode',
+        whyItFails: 'Some websites have custom styling that conflicts with forced dark mode, producing poor readability or broken layouts.',
+        saferAlternative: 'Use per-site disable controls to exclude sites where forced dark mode causes issues.',
+      },
+    ],
   },
   {
     slug: 'onetab',

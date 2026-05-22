@@ -41,6 +41,12 @@ const PAGES = [
   '/guides/best-userscript-managers-for-chrome/',
   '/fix/chrome-140-manifest-v2',
   '/fix/chrome-140-manifest-v2/',
+  '/fix/chrome-enable-unsupported-extensions',
+  '/fix/chrome-enable-unsupported-extensions/',
+  '/alternatives/dark-reader',
+  '/alternatives/dark-reader/',
+  '/alternatives/stylus',
+  '/alternatives/stylus/',
   '/sitemap',
   '/sitemap/',
 ];
@@ -120,6 +126,18 @@ const PAGE_REQUIRED_SECTIONS = {
     'Key Takeaways', 'Current Status', 'Common Failed Fixes',
     'Frequently Asked Questions', 'Sources',
   ],
+  '/fix/chrome-enable-unsupported-extensions': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/alternatives/dark-reader': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/alternatives/stylus': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
 
   // ── Index pages ─────────────────────────────────────────────────────
   '/alternatives': [
@@ -137,7 +155,7 @@ const PAGE_REQUIRED_SECTIONS = {
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/alternatives/violentmonkey': 'May 22, 2026',
+  '/alternatives/violentmonkey': 'May 24, 2026',
   '/alternatives/foxyproxy': 'May 22, 2026',
   '/alternatives/ublock-origin': 'May 22, 2026',
   '/alternatives/great-suspender': 'May 23, 2026',
@@ -146,8 +164,11 @@ const PAGE_QA_DATE = {
   '/comparisons/ublock-origin-vs-ublock-origin-lite': 'May 23, 2026',
   '/comparisons/foxyproxy-vs-switchyomega': 'May 23, 2026',
   '/guides/best-userscript-managers-for-chrome': 'May 23, 2026',
-  '/fix/chrome-140-manifest-v2': 'May 23, 2026',
-  '/fix/cannot-install-extension-unsupported-manifest': 'May 23, 2026',
+  '/fix/chrome-140-manifest-v2': 'May 24, 2026',
+  '/fix/cannot-install-extension-unsupported-manifest': 'May 24, 2026',
+  '/fix/chrome-enable-unsupported-extensions': 'May 24, 2026',
+  '/alternatives/dark-reader': 'May 24, 2026',
+  '/alternatives/stylus': 'May 24, 2026',
 };
 
 const PAGE_MIN_WORDS = {
@@ -156,8 +177,11 @@ const PAGE_MIN_WORDS = {
   '/alternatives/foxyproxy': 80,
   '/alternatives/ublock-origin': 80,
   '/alternatives/great-suspender': 80,
+  '/alternatives/dark-reader': 80,
+  '/alternatives/stylus': 80,
   '/guides/chrome-userscript-manager-alternatives': 80,
   '/guides/best-userscript-managers-for-chrome': 90,
+  '/fix/chrome-enable-unsupported-extensions': 80,
 };
 
 // Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)
