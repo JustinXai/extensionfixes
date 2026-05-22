@@ -28,7 +28,6 @@ export function SourceList({ sources, className = '' }: SourceListProps) {
 
   return (
     <div className={className}>
-      <h2 className="text-lg font-semibold text-slate-900 mb-4">Sources</h2>
       <ul className="space-y-4">
         {sources.map((source, index) => {
           const reliability = source.reliability

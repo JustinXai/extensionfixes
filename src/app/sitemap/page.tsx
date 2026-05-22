@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { extensions } from '@/data/extensions';
 import { errors } from '@/data/errors';
 import { landingPages } from '@/data/landingPages';
+import { comparisons } from '@/data/comparisons';
 import { Container } from '@/components/Container';
 
 export const metadata: Metadata = {
@@ -157,10 +158,59 @@ export default function SitemapPage() {
             </div>
           </div>
 
+          {/* Comparisons */}
+          <div>
+            <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-medium">4</span>
+              Comparisons
+            </h2>
+            <div className="space-y-4">
+              <Link
+                href="/comparisons"
+                className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-gray-300 hover:shadow-sm transition-all"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-medium text-slate-900 hover:text-blue-600 transition-colors">
+                      All Comparisons
+                    </h3>
+                    <p className="mt-1 text-sm text-slate-500">Hub</p>
+                    <p className="mt-1 text-sm text-slate-600 line-clamp-2">
+                      Side-by-side comparisons of Chrome extension alternatives.
+                    </p>
+                  </div>
+                  <svg className="h-4 w-4 flex-shrink-0 text-slate-400 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </Link>
+              {comparisons.map((comp) => (
+                <Link
+                  key={comp.slug}
+                  href={`/comparisons/${comp.slug}`}
+                  className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-gray-300 hover:shadow-sm transition-all"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="font-medium text-slate-900 hover:text-blue-600 transition-colors">
+                        {comp.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-slate-600 line-clamp-2">{comp.metaDescription}</p>
+                      <p className="mt-2 text-xs text-slate-400">Last reviewed: {comp.lastUpdated}</p>
+                    </div>
+                    <svg className="h-4 w-4 flex-shrink-0 text-slate-400 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Guides & Hubs */}
           <div>
             <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-orange-600 text-sm font-medium">4</span>
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-orange-600 text-sm font-medium">5</span>
               Guides &amp; Hubs
             </h2>
             <div className="space-y-4">

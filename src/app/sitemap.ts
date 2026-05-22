@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { extensions } from '@/data/extensions';
 import { errors } from '@/data/errors';
 import { landingPages } from '@/data/landingPages';
+import { comparisons } from '@/data/comparisons';
 
 export const dynamic = 'force-static';
 
@@ -28,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/comparisons`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/tools/extension-search`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
@@ -42,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const landingPagesList: MetadataRoute.Sitemap = landingPages.map((page) => {
-    const isGuidePage = page.slug === 'chrome-userscript-manager-alternatives';
+    const isGuidePage = page.slug === 'chrome-userscript-manager-alternatives' || page.slug === 'best-userscript-managers-for-chrome';
     return {
       url: isGuidePage ? `${baseUrl}/guides/${page.slug}` : `${baseUrl}/${page.slug}`,
       lastModified: new Date(page.lastUpdated),
@@ -65,5 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...landingPagesList, ...extensionPages, ...fixPages];
+  const comparisonPages: MetadataRoute.Sitemap = comparisons.map((comp) => ({
+    url: `${baseUrl}/comparisons/${comp.slug}`,
+    lastModified: new Date(comp.lastUpdated),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...landingPagesList, ...extensionPages, ...comparisonPages, ...fixPages];
 }

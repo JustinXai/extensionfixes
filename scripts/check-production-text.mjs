@@ -35,10 +35,14 @@ const PAGES = [
   '/comparisons/ublock-origin-vs-ublock-origin-lite/',
   '/comparisons/foxyproxy-vs-switchyomega',
   '/comparisons/foxyproxy-vs-switchyomega/',
+  '/comparisons',
+  '/comparisons/',
   '/guides/best-userscript-managers-for-chrome',
   '/guides/best-userscript-managers-for-chrome/',
   '/fix/chrome-140-manifest-v2',
   '/fix/chrome-140-manifest-v2/',
+  '/sitemap',
+  '/sitemap/',
 ];
 
 // Required sections per page (label → section heading text)
@@ -123,6 +127,12 @@ const PAGE_REQUIRED_SECTIONS = {
     'Violentmonkey alternatives for Chrome',
     'Chrome userscript manager alternatives',
   ],
+  // Sitemap page uses custom sections — skip generic template checks
+  '/sitemap': [],
+  '/sitemap/': [],
+  // Comparisons index uses custom sections — skip generic template checks
+  '/comparisons': [],
+  '/comparisons/': [],
 };
 
 const PAGE_QA_DATE = {
@@ -464,6 +474,56 @@ async function checkPage(page, source) {
     pass++;
   }
 
+  // ── Sitemap page content checks ────────────────────────────────────────
+  if (page === '/sitemap' || page === '/sitemap/') {
+    const sitemapRequired = [
+      'uBlock Origin vs uBlock Origin Lite',
+      'FoxyProxy vs SwitchyOmega',
+      'Chrome 140 and Manifest V2 Extensions',
+    ];
+    for (const text of sitemapRequired) {
+      if (stripped.includes(text)) {
+        pass++;
+      } else {
+        issues.push(`FAIL | sitemap-missing: sitemap page does not contain "${text}"`);
+        fail++;
+      }
+    }
+  }
+
+  // ── Comparisons index page content checks ─────────────────────────────
+  if (page === '/comparisons' || page === '/comparisons/') {
+    const comparisonsRequired = [
+      'Tampermonkey vs Violentmonkey',
+      'uBlock Origin vs uBlock Origin Lite',
+      'FoxyProxy vs SwitchyOmega',
+    ];
+    for (const text of comparisonsRequired) {
+      if (stripped.includes(text)) {
+        pass++;
+      } else {
+        issues.push(`FAIL | comparisons-missing: /comparisons page does not contain "${text}"`);
+        fail++;
+      }
+    }
+  }
+
+  // ── great-suspender duplicate Sources heading check ──────────────────
+  if (page === '/alternatives/great-suspender' || page === '/alternatives/great-suspender/') {
+    if (/Sources\s+Sources/i.test(stripped)) {
+      issues.push('FAIL | dup-sources-heading: "Sources Sources" pattern found in great-suspender page');
+      fail++;
+    } else {
+      pass++;
+    }
+    if (stripped.includes('Last updated: May 23, 2026')) {
+      pass++;
+    } else {
+      issues.push('FAIL | great-suspender-date: expected "Last updated: May 23, 2026" not found');
+      fail++;
+    }
+  }
+
   return { label: sourceLabel, pass, fail, issues, skipped: false };
 }
 
@@ -515,6 +575,7 @@ const FORBIDDEN_PATTERNS = [
   { name: 'dup h2 Current Status',  pat: /Current Status\s+Current Status/i },
   { name: 'dup h2 Common Failed',   pat: /Common Failed Fixes\s+Common Failed Fixes/i },
   { name: 'dup h2 FAQ',             pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
+  { name: 'dup h2 Sources',        pat: /Sources\s+Sources/i },
 ];
 
 // Tampermonkey-page-only forbidden patterns

@@ -359,6 +359,7 @@ export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTempla
           {/* Sources */}
           {page.sources.length > 0 && (
             <section className="mt-12">
+              <h2 className="text-xl font-semibold text-slate-900 mb-6">Sources</h2>
               <SourceList sources={page.sources} />
             </section>
           )}
