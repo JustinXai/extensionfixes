@@ -2130,7 +2130,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Stylus is actively maintained as an MV3 extension. It is widely considered the safer and community-maintained successor to the deprecated Stylish extension.',
     shortAnswer:
-      'Stylus is an actively maintained MV3 extension for managing custom CSS themes. It replaced the deprecated Stylish extension and has a strong community of style authors. Styles are available through its built-in repository and userstyles.org.',
+      'Stylus is a Chrome extension for applying custom CSS and userstyles to websites. If you need a Stylus alternative, the right option depends on whether you want full custom CSS control, simple dark mode, or only small personal tweaks. Dark Reader is better for automatic dark mode, while browser bookmarks or snippets may work for very simple personal styles. Custom CSS tools can change how pages look and behave, so users should review style sources, avoid unknown mirrors, and disable styles they no longer use.',
     whatHappened: [
       'Stylus emerged as the community-maintained alternative to the deprecated Stylish extension.',
       'The original Stylish was removed from the Chrome Web Store due to privacy concerns with its data collection.',
@@ -2389,7 +2389,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Dark Reader is actively maintained as an MV3 extension. It is one of the most popular accessibility and dark mode extensions for Chrome.',
     shortAnswer:
-      'Dark Reader is an actively maintained MV3 extension that applies dark themes to websites for reduced eye strain and battery savings. It offers extensive customization options and a large library of site-specific dark modes.',
+      'Dark Reader is a popular browser extension for applying dark mode to websites, but some users look for alternatives because of performance, site compatibility, or preference for custom CSS workflows. Chrome\'s built-in appearance settings may be enough for simple dark theme needs, while Stylus is better for users who want custom CSS styles on specific websites. The right choice depends on whether you want automatic dark mode, manual CSS control, or fewer extension permissions. Avoid installing unknown dark mode extensions that request broad access without clear maintenance or reviews.',
     whatHappened: [
       'Dark Reader was updated to support Manifest V3.',
       'The extension remains actively maintained with regular updates.',
