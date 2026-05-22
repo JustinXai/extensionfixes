@@ -1160,6 +1160,157 @@ export const landingPages: LandingPageRecord[] = [
       { label: 'For simple needs:', description: 'Browser bookmarks/snippets' },
     ],
   },
+  {
+    slug: 'best-userscript-managers-for-chrome',
+    title: 'Best Userscript Managers for Chrome: Tampermonkey, Violentmonkey, and More',
+    description:
+      'Compare practical userscript manager options for Chrome, including Tampermonkey and Violentmonkey, plus safety tips for choosing scripts.',
+    h1: 'Best Userscript Managers for Chrome',
+    shortAnswer:
+      'Tampermonkey and Violentmonkey are the two most practical userscript managers available for Chrome. Both are available as MV3 extensions in the Chrome Web Store and continue to work in Chrome 138 and later. Tampermonkey offers the widest script library and a feature-rich interface, while Violentmonkey is fully open source with direct GitHub Gist sync. For very simple automation, browser bookmarks or the built-in snippets feature are options that do not require any extension. Before installing a userscript manager, verify the extension comes from the official Chrome Web Store and review what permissions each script you install requires.',
+    aliases: [
+      'best userscript manager for chrome',
+      'chrome userscript manager',
+      'best userscripts chrome',
+      'tampermonkey vs violentmonkey chrome',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'How We Chose',
+        content:
+          'We evaluated userscript managers for Chrome based on three practical criteria. First, Chrome Web Store availability — the extension must be listed in the official store and be actively maintained. Second, MV3 compatibility — the extension must work in Chrome 138 and later, which means it needs a current Manifest V3 version. Third, community and script library size — a larger script ecosystem means more scripts are likely to work out of the box with less manual configuration. We excluded extensions that are abandoned, require unofficial installation, or lack a verifiable Chrome Web Store listing.',
+      },
+      {
+        type: 'list',
+        title: 'Best Options at a Glance',
+        items: [
+          'Tampermonkey — largest script library and familiar interface, MV3 version available',
+          'Violentmonkey — fully open source, lightweight, and GitHub Gist sync, MV3 version available',
+          'Browser bookmarks/snippets — for very simple automation, no extension required',
+        ],
+      },
+      {
+        type: 'table',
+        title: 'Side-by-side Comparison',
+        columns: ['Manager', 'Best For', 'MV3 Available', 'Open Source', 'Resource Usage'],
+        rows: [
+          ['Tampermonkey', 'Users with large script libraries', 'Yes (Chrome Web Store)', 'Partial', 'Moderate'],
+          ['Violentmonkey', 'Open-source preference, GitHub sync', 'Yes (Chrome Web Store)', 'Full', 'Low'],
+          ['Browser bookmarks', 'Simple static automation', 'N/A', 'N/A', 'Minimal'],
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Who Should Choose Which Option',
+        items: [
+          'Choose Tampermonkey if you already use scripts from GreaseMonkey communities or want the widest range of scripts to install with minimal setup.',
+          'Choose Violentmonkey if you prefer fully open-source software and want to sync your scripts through your own GitHub account.',
+          'Use browser bookmarks or snippets if you only need very simple automation that does not require external libraries or cross-origin requests.',
+        ],
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        items: [
+          'Random CRX downloads from unknown mirror sites — these can contain modified code that creates privacy or security risks.',
+          'Extensions that claim to be an "official" successor to Tampermonkey or Violentmonkey from unknown developers — verify the developer before installing.',
+          'Installing multiple userscript managers at the same time — this causes script conflicts and duplicate execution.',
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Safety Checklist Before Installing Scripts',
+        items: [
+          'Verify the extension is installed from the official Chrome Web Store.',
+          'Check the script\'s @match rules — confirm it only runs on sites you intend.',
+          'Review the @grant directives — avoid scripts that request broad or unnecessary permissions.',
+          'Read the script source code before installing if the repository is publicly available.',
+          'Test scripts on non-sensitive pages first before enabling them on accounts with personal data.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Are Tampermonkey and Violentmonkey available in the Chrome Web Store?',
+        answer:
+          'Yes. Both Tampermonkey and Violentmonkey have versions available in the Chrome Web Store. Both have been updated to support Manifest V3, which means they work in Chrome 138 and later. Make sure you install the correct MV3 version.',
+      },
+      {
+        question: 'What is the difference between Tampermonkey and Violentmonkey?',
+        answer:
+          'Tampermonkey has a larger community and more built-in features, with a script editor and dashboard. Violentmonkey is fully open source, uses fewer resources, and syncs scripts through GitHub Gist. Both support the same userscript format.',
+      },
+      {
+        question: 'Is Violentmonkey safer than Tampermonkey?',
+        answer:
+          'Both are legitimate, maintained projects. Violentmonkey is fully open source, which makes it more transparent about its code. Tampermonkey has some closed-source components. Neither makes arbitrary scripts safe — you should always review what scripts you install regardless of which manager you use.',
+      },
+      {
+        question: 'Can I use the same scripts in both Tampermonkey and Violentmonkey?',
+        answer:
+          'Most scripts written for the Tampermonkey API work in Violentmonkey. Scripts that use GM_xmlhttpRequest or GM_setValue require additional configuration in Violentmonkey. Test scripts individually when switching managers.',
+      },
+      {
+        question: 'Do I need a userscript manager if I only need simple page automation?',
+        answer:
+          'For very simple automation tasks, browser bookmarks with JavaScript or Chrome\'s built-in snippets feature may be sufficient. These require no extension and have no additional permissions. Userscript managers are needed when you want to install community scripts, use GM_* APIs, or automate across multiple sites with persistent configuration.',
+      },
+      {
+        question: 'How do I migrate scripts between userscript managers safely?',
+        answer:
+          'Export scripts from your current manager using its built-in export feature. Install the new manager from the official Chrome Web Store. Import scripts a few at a time through the new manager\'s interface. Review @match and @grant rules for each script before enabling it broadly.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Tampermonkey — Chrome Web Store',
+        url: 'https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Official Tampermonkey Chrome Web Store listing and MV3 availability',
+      },
+      {
+        title: 'Violentmonkey — Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Official Violentmonkey Chrome Web Store listing and MV3 availability',
+      },
+      {
+        title: 'Tampermonkey GitHub Repository',
+        url: 'https://github.com/Tampermonkey/tampermonkey',
+        publisher: 'Tampermonkey',
+        sourceType: 'github',
+        reliability: 'primary',
+        supports: 'Official source for Tampermonkey development',
+      },
+      {
+        title: 'Violentmonkey GitHub Repository',
+        url: 'https://github.com/violentmonkey/violentmonkey',
+        publisher: 'Violentmonkey',
+        sourceType: 'github',
+        reliability: 'primary',
+        supports: 'Official source for Violentmonkey development',
+      },
+    ],
+    lastUpdated: '2026-05-23',
+    relatedLinks: [
+      { label: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey' },
+      { label: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
+      { label: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
+      { label: 'Chrome Userscript Manager Alternatives', href: '/guides/chrome-userscript-manager-alternatives' },
+    ],
+    primaryCta: { label: 'Compare Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
+    secondaryCta: { label: 'View Tampermonkey Alternatives', href: '/alternatives/tampermonkey' },
+    bestOptions: [
+      { label: 'For largest script library:', description: 'Tampermonkey' },
+      { label: 'For fully open source:', description: 'Violentmonkey' },
+      { label: 'For simple needs:', description: 'Browser bookmarks/snippets' },
+    ],
+  },
 ];
 
 export function getLandingPageBySlug(slug: string): LandingPageRecord | undefined {

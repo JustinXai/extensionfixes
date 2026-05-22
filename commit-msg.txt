@@ -1,0 +1,11 @@
+Add userscript comparison and collection pages
+
+- Add /comparisons/tampermonkey-vs-violentmonkey (comparison template)
+  - Full comparison: Tampermonkey vs Violentmonkey vs browser bookmarks
+  - 6 FAQs, 4 sources, 3 common failed fixes, 4 decision guide items
+  - quickAnswer: 113 words
+- Add /guides/best-userscript-managers-for-chrome (collection)
+  - 3 options, 5 safety checklist items, 6 FAQs, 4 sources
+  - quickAnswer: 107 words
+- Update check-production-text.mjs: add new URLs and required sections
+- Update guides/[slug]/page.tsx: add slug to GUIDE_SLUGS whitelist

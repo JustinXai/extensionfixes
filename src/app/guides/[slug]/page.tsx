@@ -4,7 +4,7 @@ import { landingPages } from '@/data/landingPages';
 import { LandingPageTemplate } from '@/components/LandingPageTemplate';
 
 // Only slugs that belong under /guides/ (not / or /alternatives/)
-const GUIDE_SLUGS = ['chrome-userscript-manager-alternatives'];
+const GUIDE_SLUGS = ['chrome-userscript-manager-alternatives', 'best-userscript-managers-for-chrome'];
 
 export async function generateStaticParams() {
   return landingPages

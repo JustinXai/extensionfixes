@@ -29,6 +29,10 @@ const PAGES = [
   '/fix/manifest-v2-disabled/',
   '/fix/cannot-install-extension-unsupported-manifest',
   '/fix/cannot-install-extension-unsupported-manifest/',
+  '/comparisons/tampermonkey-vs-violentmonkey',
+  '/comparisons/tampermonkey-vs-violentmonkey/',
+  '/guides/best-userscript-managers-for-chrome',
+  '/guides/best-userscript-managers-for-chrome/',
 ];
 
 // Required sections per page (label → section heading text)
@@ -85,6 +89,15 @@ const PAGE_REQUIRED_SECTIONS = {
     'Key Takeaways', 'Current Status', 'Common Failed Fixes',
     'Frequently Asked Questions', 'Sources',
   ],
+  '/comparisons/tampermonkey-vs-violentmonkey': [
+    'Verdict', 'Key Differences', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Related Resources', 'Frequently Asked Questions', 'Sources',
+  ],
+  '/guides/best-userscript-managers-for-chrome': [
+    'How We Chose', 'Side-by-side Comparison',
+    'Who Should Choose Which Option', 'What Not to Do',
+    'Safety Checklist', 'Frequently Asked Questions', 'Sources',
+  ],
 
   // ── Index pages ─────────────────────────────────────────────────────
   '/alternatives': [
@@ -101,6 +114,8 @@ const PAGE_QA_DATE = {
   '/alternatives/ublock-origin': 'May 22, 2026',
   '/alternatives/great-suspender': 'May 22, 2026',
   '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
+  '/comparisons/tampermonkey-vs-violentmonkey': 'May 23, 2026',
+  '/guides/best-userscript-managers-for-chrome': 'May 23, 2026',
 };
 
 const PAGE_MIN_WORDS = {
@@ -110,6 +125,7 @@ const PAGE_MIN_WORDS = {
   '/alternatives/ublock-origin': 80,
   '/alternatives/great-suspender': 80,
   '/guides/chrome-userscript-manager-alternatives': 80,
+  '/guides/best-userscript-managers-for-chrome': 90,
 };
 
 // Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)
