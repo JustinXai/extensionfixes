@@ -1282,7 +1282,7 @@ export const extensions: ExtensionRecord[] = [
           'Fewer built-in features than Tampermonkey',
           'Smaller user community for script support',
         ],
-        note: 'Violentmonkey is an open-source userscript manager that supports Tampermonkey-compatible scripts with a simpler interface. It is not an official successor to Tampermonkey.',
+        note: 'Violentmonkey is an open-source userscript manager that supports Tampermonkey-compatible scripts with a simpler interface. It is not made or maintained by Tampermonkey developers.',
       },
       {
         name: 'Browser bookmarklets',
@@ -1475,7 +1475,7 @@ export const extensions: ExtensionRecord[] = [
           'Larger resource usage than Violentmonkey',
           'Has closed-source components compared to Violentmonkey',
         ],
-        note: 'Tampermonkey is the most widely-used userscript manager. It is not an official successor to Violentmonkey.',
+        note: 'Tampermonkey is the most widely-used userscript manager. It is not made or maintained by Violentmonkey developers.',
       },
       {
         name: 'Browser bookmarklets',
@@ -1829,7 +1829,7 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Is ZeroOmega the same as SwitchyOmega?',
         answer:
-          'No. ZeroOmega is a community fork of Proxy SwitchyOmega, designed for MV3 browsers. It aims to replicate SwitchyOmega\'s interface and import functionality, but it is a separate project maintained by a different community developer. It is not an official successor.',
+          'No. ZeroOmega is a community fork of Proxy SwitchyOmega, designed for MV3 browsers. It aims to replicate SwitchyOmega\'s interface and import functionality, but it is a separate project maintained by a different community developer. It is not developed or endorsed by the original SwitchyOmega team.',
       },
       {
         question: 'Should I choose FoxyProxy or ZeroOmega?',
@@ -1966,7 +1966,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     keyTakeaways: [
       'FoxyProxy is actively maintained as an MV3 extension and works in current Chrome.',
-      'ZeroOmega is a community fork of Proxy SwitchyOmega designed for MV3 browsers, not an official successor.',
+      'ZeroOmega is a community fork of Proxy SwitchyOmega designed for MV3 browsers, not developed by the original SwitchyOmega team.',
       'Choose ZeroOmega if you need SwitchyOmega-style rules and direct profile import.',
       'Choose FoxyProxy if you need an established proxy manager with multi-profile switching.',
       'Chrome system proxy settings are the simplest option for single-proxy setups.',

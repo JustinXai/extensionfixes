@@ -1,6 +1,6 @@
 # ExtensionFixes Source Quality Report
 
-Generated: 2026-05-18T11:40:31.926Z
+Generated: 2026-05-22T04:15:07.570Z
 
 ## Top 10 Pages — Source Coverage
 
@@ -19,7 +19,7 @@ Generated: 2026-05-18T11:40:31.926Z
 
 | # | Title | Type | Reliability | Supports |
 |---|-------|------|------------|----------|
-| 1 | uBlock Origin Wiki — About Chrome\ | documentation | primary | uBlock Origin author confirms MV2 deprecation and explains w... |
+| 1 | uBlock Origin Wiki ? About Chrome\ | documentation | primary | uBlock Origin author confirms MV2 deprecation and explains w... |
 | 2 | uBlock Origin Lite Chrome Web Store | chrome-web-store | primary | uBlock Origin Lite MV3 availability, listing status, and pub... |
 | 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline and what extensions... |
 
@@ -60,8 +60,8 @@ Generated: 2026-05-18T11:40:31.926Z
 | # | Title | Type | Reliability | Supports |
 |---|-------|------|------------|----------|
 | 1 | Tampermonkey Chrome Web Store | chrome-web-store | primary | Tampermonkey MV3 availability, listing status, and publisher... |
-| 2 | Tampermonkey GitHub Repository | github | secondary | Tampermonkey open-source status (partial — editor is GPL, ne... |
-| 3 | Tampermonkey Chrome Web Store | chrome-web-store | primary | Tampermonkey MV3 availability, listing status, and publisher... |
+| 2 | Tampermonkey Official Site | official-website | primary | Tampermonkey official documentation, download information, a... |
+| 3 | Tampermonkey GitHub Repository | github | secondary | Tampermonkey open-source status (partial ? editor is GPL, ne... |
 
 ### /alternatives/foxyproxy/
 
@@ -100,7 +100,7 @@ Generated: 2026-05-18T11:40:31.926Z
 |---|-------|------|------------|----------|
 | 1 | Dark Reader Chrome Web Store | chrome-web-store | primary | Dark Reader MV3 availability, listing status, and publisher ... |
 | 2 | Dark Reader GitHub Repository | github | secondary | Dark Reader open-source status, code transparency, and recen... |
-| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline — Dark Reader was u... |
+| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline ? Dark Reader was u... |
 
 ### /alternatives/bitwarden/
 
@@ -119,7 +119,7 @@ Generated: 2026-05-18T11:40:31.926Z
 |---|-------|------|------------|----------|
 | 1 | LastPass Chrome Web Store | chrome-web-store | primary | LastPass MV3 availability, listing status, and publisher ide... |
 | 2 | LastPass Official Website | official-website | secondary | LastPass product information and feature documentation |
-| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline — LastPass was upda... |
+| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline ? LastPass was upda... |
 
 ### /alternatives/lastpass/
 
@@ -138,7 +138,7 @@ Generated: 2026-05-18T11:40:31.926Z
 |---|-------|------|------------|----------|
 | 1 | LastPass Chrome Web Store | chrome-web-store | primary | LastPass MV3 availability, listing status, and publisher ide... |
 | 2 | LastPass Official Website | official-website | secondary | LastPass product information and feature documentation |
-| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline — LastPass was upda... |
+| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline ? LastPass was upda... |
 
 ### /alternatives/video-downloadhelper/
 
@@ -157,7 +157,7 @@ Generated: 2026-05-18T11:40:31.926Z
 |---|-------|------|------------|----------|
 | 1 | Video DownloadHelper Chrome Web Store | chrome-web-store | primary | Video DownloadHelper MV3 availability, listing status, and p... |
 | 2 | Video DownloadHelper Official Website | official-website | secondary | Video DownloadHelper developer information and feature docum... |
-| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline — Video DownloadHel... |
+| 3 | Chrome Manifest V2 Deprecation Timeline | chrome-developers | primary | Official Chrome MV2 deprecation timeline ? Video DownloadHel... |
 
 ### /fix/manifest-v2-disabled/
 
