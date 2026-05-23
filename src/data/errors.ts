@@ -600,6 +600,18 @@ export const errors: ErrorRecord[] = [
         answer:
           'Changing the manifest version number in manifest.json does not make an MV2 extension compatible with modern Chrome. The underlying APIs, background script behavior, and permissions that the extension uses are still based on MV2 design. Developers who want to support Chrome need to rewrite extension code to use the MV3 API. Editing manifest.json to bump the version number without corresponding code changes is not a proper migration and will not result in a working extension.',
       },
+      {
+        question: 'Why does IDM show an unsupported manifest version error?',
+        answer:
+          'Internet Download Manager (IDM) may inject a browser extension that shows an unsupported manifest version error if the IDM extension is outdated or not compatible with your Chrome version. IDM includes a browser integration component that uses extension APIs. Check the IDM website for an updated version of the IDM extension, or temporarily disable the IDM browser integration in Chrome settings if the extension is causing issues.',
+      },
+    ],
+    relatedPages: [
+      '/fix/chrome-extensions-disabled',
+      '/fix/chrome-enable-unsupported-extensions',
+      '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported',
+      '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+      '/alternatives',
     ],
     sources: [
       {
@@ -627,7 +639,7 @@ export const errors: ErrorRecord[] = [
         supports: 'Why unsupported extension packages may be blocked from the Chrome Web Store',
       },
     ],
-    lastUpdated: '2026-05-24',
+    lastUpdated: '2026-05-26',
     keyTakeaways: [
       'This error usually appears before installation, not after an extension is already enabled.',
       'It often means the extension package uses Manifest V2 or another outdated manifest format.',
@@ -890,6 +902,33 @@ export const errors: ErrorRecord[] = [
         answer:
           'These are related but different. The "unsupported manifest version" error appears during installation — Chrome refuses to install the package. The "extension was turned off" message appears after an extension is already installed — Chrome disabled a previously working extension. Both are commonly related to MV2 deprecation but happen at different stages.',
       },
+      {
+        question: 'Can I enable unsupported extensions in Chrome permanently?',
+        answer:
+          'Ordinary users generally cannot permanently enable unsupported extensions in modern Chrome. Chrome 138+ disabled all Manifest V2 extensions by default for regular users. Flags and Developer Mode are temporary or do not make unsupported APIs compatible. The recommended path is to find a maintained MV3 alternative or an official update from the developer.',
+      },
+      {
+        question: 'Is Developer Mode enough to enable unsupported extensions?',
+        answer:
+          'Developer Mode allows loading unpacked extension packages but does not make unsupported APIs compatible with modern Chrome. Even if an old extension loads in Developer Mode, it may not function correctly because the underlying APIs have been removed from Chrome. Developer Mode is not a path to restoring functionality for disabled extensions.',
+      },
+      {
+        question: 'What if Chrome says official support was disabled?',
+        answer:
+          'Chrome showing that "official support was disabled" means the extension developer\'s official Chrome Web Store listing is no longer available or the extension is blocked from installation. This typically happens when the extension was removed for policy violations, malware detection, or developer request. Do not try to bypass this by downloading unofficial copies. Use a maintained alternative from the Chrome Web Store instead.',
+      },
+      {
+        question: 'Is this different from Chrome extensions disabled?',
+        answer:
+          'No. "Chrome extensions disabled" and "enable unsupported extensions" describe the same underlying situation from different angles. Chrome disables extensions for multiple reasons: MV2 deprecation, Web Store removal, security flags, or policy violations. The right action depends on the specific warning shown. See /fix/chrome-extensions-disabled for a full guide on identifying and resolving different types of disabled extensions.',
+      },
+    ],
+    relatedPages: [
+      '/fix/chrome-extensions-disabled',
+      '/fix/cannot-install-extension-unsupported-manifest',
+      '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported',
+      '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+      '/alternatives',
     ],
     sources: [
       {
@@ -917,7 +956,7 @@ export const errors: ErrorRecord[] = [
         supports: 'Why extensions are removed from the Chrome Web Store and what policies apply',
       },
     ],
-    lastUpdated: '2026-05-24',
+    lastUpdated: '2026-05-26',
     keyTakeaways: [
       'Chrome can disable extensions for compatibility, policy, or security reasons.',
       'Unsupported Manifest V2 extensions generally cannot be permanently re-enabled by ordinary users.',
@@ -932,7 +971,7 @@ export const errors: ErrorRecord[] = [
       { label: 'User control', value: 'No simple permanent toggle for ordinary users', variant: 'bad' },
       { label: 'Security note', value: 'Policy-disabled or malware-related extensions should be removed', variant: 'bad' },
       { label: 'Recommended path', value: 'Use maintained alternatives or official updates', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 26, 2026', variant: 'neutral' },
     ],
     commonFailedFixes: [
       {
@@ -1109,6 +1148,158 @@ export const errors: ErrorRecord[] = [
         tried: 'Keep the disabled extension installed while searching for a fix',
         whyItFails: 'Disabled extensions may still retain some level of access depending on Chrome\'s implementation. If the extension was flagged for malware or policy violations, keeping it installed is not recommended.',
         saferAlternative: 'Remove the extension first, then research alternatives before installing any replacement.',
+      },
+    ],
+  },
+  {
+    slug: 'chrome-extensions-disabled',
+    title: 'Chrome Extensions Disabled: Why It Happens and What to Do',
+    aliases: [
+      'chrome extensions disabled',
+      'extensions disabled by chrome',
+      'chrome disabled extension',
+      'chrome disable extensions official support',
+      'this extension was turned off because it is no longer supported',
+      'chrome enable unsupported extensions',
+      'chrome disabled my extension',
+      'extension disabled by chrome',
+      'chrome extensions turned off',
+      'chrome extension disabled automatically',
+    ],
+    shortAnswer:
+      'Chrome can disable extensions for several different reasons: the extension may no longer be supported, may rely on old Manifest V2 APIs, may violate Chrome Web Store policies, or may show suspicious behavior. Ordinary users usually cannot fix every disabled extension with one toggle. The right action depends on the warning Chrome shows. For unsupported extensions, look for a maintained Manifest V3 update or alternative. For malware, suspicious behavior, or policy warnings, remove the extension and avoid old CRX copies from unofficial sources.',
+    whyItHappens: [
+      'The extension uses Manifest V2, which Chrome 138+ disabled by default for regular users.',
+      'Chrome removed the extension from the Web Store for policy violations or security concerns.',
+      'Chrome proactively disabled the extension due to detected malware, suspicious behavior, or policy violations.',
+      'The extension became incompatible with the current Chrome version.',
+      'An administrator applied policy restrictions on managed devices.',
+    ],
+    whatYouCanDo: [
+      'Open chrome://extensions and read the exact warning shown by Chrome.',
+      'Identify the specific reason Chrome disabled the extension.',
+      'If it says no longer supported, check for a Manifest V3 update or maintained alternative.',
+      'If it mentions malware, suspicious behavior, or policy violation, remove the extension.',
+      'Export settings if the extension still allows it before removing.',
+      'Search Extension Fixes for verified alternatives to your affected extension.',
+      'Contact the developer to ask about official MV3 updates or migration paths.',
+    ],
+    whatNotToDo: [
+      'Do not download old extension packages from mirror or CRX download sites.',
+      'Do not ignore malware, suspicious behavior, or policy violation warnings.',
+      'Do not expect Developer Mode to make unsupported APIs compatible with modern Chrome.',
+      'Do not try to re-enable extensions disabled for malware or policy violations.',
+      'Do not keep multiple broken extensions installed while searching for workarounds.',
+    ],
+    relatedExtensionSlugs: ['great-suspender', 'switchyomega', 'ublock-origin'],
+    faqs: [
+      {
+        question: 'Why did Chrome disable my extensions?',
+        answer:
+          'Chrome may disable extensions for several reasons. The most common in 2026 is Manifest V2 deprecation — Chrome 138 and later disabled all MV2 extensions by default. Other reasons include Web Store removal (policy violations, developer request, or malware detection), proactive security disablement by Google, and policy restrictions on managed devices.',
+      },
+      {
+        question: 'Can I re-enable disabled Chrome extensions?',
+        answer:
+          'Ordinary users generally cannot re-enable extensions that Chrome disabled for compatibility, security, or policy reasons. If an extension was disabled for MV2 deprecation, modern Chrome does not support re-enabling it. If it was disabled for malware, suspicious behavior, or policy violations, re-enabling is not recommended. Check whether a Manifest V3 update is available or use a maintained alternative.',
+      },
+      {
+        question: 'What does "no longer supported" mean in Chrome?',
+        answer:
+          '"No longer supported" usually means the extension uses deprecated Manifest V2 APIs that Chrome no longer accepts. It can also mean the extension was removed from the Chrome Web Store. The practical next steps are the same: check for a Manifest V3 update or use a maintained alternative.',
+      },
+      {
+        question: 'What should I do if Chrome says malware or suspicious behavior?',
+        answer:
+          'If Chrome disabled an extension due to malware, suspicious behavior, or a policy violation, remove the extension from Chrome. Do not try to force it back on, reinstall it from unofficial sources, or assume the warning is incorrect. Extensions flagged for these reasons can access pages you visit. Remove the extension and use a maintained alternative from the Chrome Web Store.',
+      },
+      {
+        question: 'Is this the same as an unsupported manifest version error?',
+        answer:
+          'These are related but different. The "unsupported manifest version" error appears during installation — Chrome refuses to install the package. The "extension was disabled" message appears after an extension is already installed — Chrome disabled a previously working extension. Both are commonly related to MV2 deprecation but happen at different stages.',
+      },
+      {
+        question: 'Can Developer Mode fix disabled extensions?',
+        answer:
+          'Developer Mode allows you to load unpacked extension packages but does not make unsupported APIs compatible with modern Chrome. Even if an old extension loads in Developer Mode, the underlying APIs it depends on may not function in current Chrome. Developer Mode is not a path to restoring disabled extension functionality.',
+      },
+      {
+        question: 'Is it safe to install old CRX files?',
+        answer:
+          'Installing old CRX files from unofficial sources is not safe. These packages may be outdated, modified, or contain unwanted code. They may request broad browsing permissions and could be used to collect your browsing data. Always use the official Chrome Web Store or the developer\'s verified release page.',
+      },
+      {
+        question: 'How do I find a maintained alternative?',
+        answer:
+          'Check the Chrome Web Store for official Manifest V3 updates from the same developer. Search Extension Fixes for verified alternatives to your affected extension. Verify any replacement extension\'s developer identity and permissions before installing. Avoid unofficial copies or lookalike extensions from unknown developers.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Chrome MV2 deprecation timeline, which versions disabled MV2, and what extensions are affected',
+      },
+      {
+        title: 'Chrome Extension Migration Documentation',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'What Manifest V3 is, why it replaced MV2, and how extensions must migrate',
+      },
+      {
+        title: 'Chrome Web Store Program Policies',
+        url: 'https://developer.chrome.com/docs/webstore/program-policies/policies',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'secondary',
+        supports: 'Why extensions are removed from the Chrome Web Store and what policies apply',
+      },
+    ],
+    lastUpdated: '2026-05-26',
+    keyTakeaways: [
+      'Chrome disables extensions for compatibility, policy, or security reasons.',
+      'The exact warning message matters — different causes need different actions.',
+      'Unsupported Manifest V2 extensions usually need MV3 updates or alternatives.',
+      'Extensions disabled for malware, suspicious behavior, or policy violations should not be forced back on.',
+      'Old CRX files from unofficial sources can be unsafe and should be avoided.',
+    ],
+    currentStatus: [
+      { label: 'Chrome status', value: 'Unsupported or unsafe extensions may be disabled', variant: 'bad' },
+      { label: 'User control', value: 'No single toggle fixes all disabled extensions', variant: 'bad' },
+      { label: 'Security note', value: 'Malware or policy-disabled extensions should be removed', variant: 'bad' },
+      { label: 'Recommended path', value: 'Identify the warning and use maintained alternatives', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 26, 2026', variant: 'neutral' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Try to re-enable every disabled extension the same way',
+        whyItFails: 'Different warning types need different actions. MV2 deprecation, malware flags, and policy violations all require different responses.',
+        saferAlternative: 'Identify the specific warning Chrome shows, then take the appropriate action for that cause.',
+      },
+      {
+        tried: 'Download CRX files from unofficial mirror sites',
+        whyItFails: 'Mirror packages may be outdated, modified, or contain unwanted code. Chrome may block loading extensions from unofficial sources.',
+        saferAlternative: 'Use a maintained MV3 alternative from the Chrome Web Store.',
+      },
+      {
+        tried: 'Ignore malware or policy violation warnings',
+        whyItFails: 'Extensions disabled for malware, suspicious behavior, or policy violations can continue to access pages you visit while installed.',
+        saferAlternative: 'Remove the extension and use a maintained alternative from the Chrome Web Store.',
+      },
+      {
+        tried: 'Use Developer Mode and expect unsupported APIs to work',
+        whyItFails: 'Developer Mode does not re-enable MV2 APIs or make unsupported APIs compatible with modern Chrome.',
+        saferAlternative: 'Look for MV3-compatible versions or maintained alternatives.',
+      },
+      {
+        tried: 'Keep multiple broken extensions installed',
+        whyItFails: 'Disabled extensions that are no longer maintained may have unresolved security gaps.',
+        saferAlternative: 'Replace each disabled extension with a maintained MV3 alternative.',
       },
     ],
   },

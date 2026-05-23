@@ -1551,6 +1551,21 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'Whether to switch depends on your specific needs. Both Violentmonkey and Tampermonkey support Manifest V3 and work in current Chrome. Tampermonkey has a larger built-in feature set and script library, while Violentmonkey is more lightweight and fully open source. Userscript compatibility depends on the specific scripts you use, their permissions, and how they behave with different managers. If your current scripts work well in Violentmonkey, there is no urgent reason to switch.',
       },
+      {
+        question: 'What does Violentmonkey MV3 mean?',
+        answer:
+          '"Violentmonkey MV3" means the Manifest V3 version of Violentmonkey. MV3 is the current Chrome extension platform with improved security and privacy controls. Violentmonkey was updated to support MV3 and works in Chrome 138 and later. The MV3 version is available in the Chrome Web Store and is the actively maintained version.',
+      },
+      {
+        question: 'Is Violentmonkey an open-source alternative to Tampermonkey?',
+        answer:
+          'Violentmonkey is a separate open-source userscript manager that some users compare with Tampermonkey. It is not affiliated with Tampermonkey. Violentmonkey is fully open source, while Tampermonkey has some closed-source components. Both support the same userscript format and work in Chrome. The choice between them depends on interface preference, feature needs, and whether open-source transparency is important to you.',
+      },
+      {
+        question: 'Should I compare Violentmonkey, Tampermonkey, and ScriptCat before switching?',
+        answer:
+          'Yes. Before choosing a userscript manager, comparing Violentmonkey, Tampermonkey, and ScriptCat helps you understand the trade-offs between ecosystems, interface design, and resource usage. The Extension Fixes guide at /guides/best-userscript-managers-for-chrome covers the practical differences. Tampermonkey vs Violentmonkey is covered at /comparisons/tampermonkey-vs-violentmonkey. ScriptCat vs Tampermonkey is covered at /comparisons/scriptcat-vs-tampermonkey. Userscript compatibility depends on the specific scripts you use and how they behave with different managers — test important scripts before fully migrating.',
+      },
     ],
     sources: [
       {
@@ -1578,7 +1593,14 @@ export const extensions: ExtensionRecord[] = [
         supports: 'ScriptCat comparison with Tampermonkey, relevant for users choosing between userscript managers',
       },
     ],
-    lastUpdated: '2026-05-25',
+    relatedPages: [
+      '/alternatives/tampermonkey',
+      '/comparisons/tampermonkey-vs-violentmonkey',
+      '/comparisons/scriptcat-vs-tampermonkey',
+      '/guides/best-userscript-managers-for-chrome',
+      '/alternatives',
+    ],
+    lastUpdated: '2026-05-26',
     keyTakeaways: [
       'Violentmonkey is actively maintained as an MV3-compatible userscript manager.',
       'Tampermonkey is the most widely-used alternative with a larger script ecosystem.',
@@ -1591,7 +1613,7 @@ export const extensions: ExtensionRecord[] = [
       { label: 'Violentmonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
       { label: 'Tampermonkey', value: 'Active MV3 extension — most widely-used userscript manager', variant: 'good' },
       { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3 versions', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 25, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 26, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {
@@ -2761,6 +2783,16 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'On OLED screens, using dark mode through Dark Reader can significantly reduce power consumption since black pixels are turned off. On LCD screens, the battery savings are minimal.',
       },
+      {
+        question: 'Is Stylus a Dark Reader alternative?',
+        answer:
+          'Stylus is not a direct Dark Reader alternative — it is a custom CSS manager rather than an automatic dark mode tool. Stylus lets you apply custom CSS to websites, which can include dark mode styles, but you need to find or write the styles yourself. Dark Reader automatically detects and applies dark mode across many sites. For a full comparison, see /alternatives/stylus.',
+      },
+      {
+        question: 'Should I use Dark Reader or a custom CSS extension?',
+        answer:
+          'Use Dark Reader if you want automatic dark mode across many websites without managing CSS. Use Stylus or another custom CSS extension if you want fine-grained control over how specific websites look — not just dark mode, but custom fonts, layouts, or other styling changes. If you only need simple browser theming, Chrome built-in appearance settings may be enough. For a guide comparing these options, see /guides/best-custom-css-and-dark-mode-extensions.',
+      },
     ],
     sources: [
       {
@@ -2796,7 +2828,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — Dark Reader was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-24',
+    lastUpdated: '2026-05-26',
     keyTakeaways: [
       'Dark Reader is widely used for automatic dark mode on websites.',
       'Built-in browser appearance settings may be enough for simple needs.',
@@ -2810,7 +2842,7 @@ export const extensions: ExtensionRecord[] = [
       { label: 'Main alternatives', value: 'Browser settings, Stylus, Night Eye, maintained dark mode tools', variant: 'neutral' },
       { label: 'Main risk', value: 'Broad site access permissions', variant: 'bad' },
       { label: 'Best practice', value: 'Use maintained extensions and review permissions', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 26, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {

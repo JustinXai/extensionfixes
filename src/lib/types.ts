@@ -126,6 +126,7 @@ export interface ExtensionRecord {
   keyTakeaways?: string[];
   currentStatus?: { label: string; value: string; variant?: 'good' | 'bad' | 'neutral' }[];
   commonFailedFixes?: FailedFixEntry[];
+  relatedPages?: string[];
 }
 
 // Error Record
@@ -150,6 +151,7 @@ export interface ErrorRecord {
   keyTakeaways?: string[];
   currentStatus?: { label: string; value: string; variant?: 'good' | 'bad' | 'neutral' }[];
   commonFailedFixes?: FailedFixEntry[];
+  relatedPages?: string[];
 }
 
 // Search Result Types

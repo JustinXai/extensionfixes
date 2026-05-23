@@ -1161,6 +1161,172 @@ export const landingPages: LandingPageRecord[] = [
     ],
   },
   {
+    slug: 'best-custom-css-and-dark-mode-extensions',
+    title: 'Best Custom CSS and Dark Mode Extensions for Chrome',
+    description:
+      'Compare Dark Reader, Stylus, and other Chrome appearance tools for dark mode, custom CSS, and userstyle workflows.',
+    h1: 'Best Custom CSS and Dark Mode Extensions for Chrome',
+    shortAnswer:
+      'Chrome users who want to change how websites look usually compare two types of tools: automatic dark mode extensions and custom CSS or userstyle managers. Dark Reader is useful for applying dark mode across many websites, while Stylus is better for users who want site-specific CSS control. Browser built-in appearance settings may be enough for simple browser theming, but they do not replace full website styling tools. The right choice depends on whether you want automatic dark mode, custom CSS, fewer permissions, or simple browser theming.',
+    aliases: [
+      'dark reader alternative',
+      'dark reader alternative chrome',
+      'stylus extension alternatives',
+      'chrome web store stylus extension custom css',
+      'custom css extension chrome',
+      'dark mode extension chrome',
+      'chrome dark mode extension',
+      'custom userstyle chrome',
+      'userstyle extension chrome',
+    ],
+    sections: [
+      {
+        type: 'comparison',
+        title: 'Appearance Extension Comparison',
+        columns: ['Option', 'Best for', 'Strength', 'Trade-off'],
+        rows: [
+          ['Dark Reader', 'Automatic dark mode', 'Easy broad dark mode', 'Can affect rendering or performance on some sites'],
+          ['Stylus', 'Custom CSS and userstyles', 'Fine-grained site control', 'Requires CSS knowledge or trusted styles'],
+          ['Chrome built-in settings', 'Simple browser appearance', 'No extension needed', 'Does not restyle every website'],
+          ['Browser bookmarks/snippets', 'Small personal tweaks', 'Lightweight', 'Not a full style manager'],
+        ],
+      },
+      {
+        type: 'text',
+        title: 'What Is the Right Choice for You?',
+        content:
+          'Choose Dark Reader if you want automatic dark mode across many websites without managing CSS. Choose Stylus if you want custom CSS, userstyles, or fine-grained site-specific control. Use Chrome built-in settings for simple browser theming. For very small personal CSS tweaks, browser bookmarks or snippets are lightweight options that require no extension.',
+      },
+      {
+        type: 'list',
+        title: 'Selection Criteria',
+        items: [
+          'Chrome Web Store availability and active maintenance',
+          'Permission scope and transparency',
+          'Fit for dark mode versus custom CSS use cases',
+          'Ability to disable or scope changes per site',
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Safety Checklist',
+        items: [
+          'Review extension permissions before installing.',
+          'Avoid unknown style mirrors or unofficial dark mode extensions.',
+          'Disable styles you no longer use.',
+          'Test site-specific styles on non-critical pages first.',
+          'Do not run multiple overlapping appearance extensions unless needed.',
+          'Review @match rules for any styles you import.',
+        ],
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        title: 'What to Avoid',
+        items: [
+          'Unknown style or dark mode extensions with broad permissions and unclear maintenance.',
+          'Extensions that claim to be an "official" successor from unknown developers — verify the developer before installing.',
+          'Installing multiple dark mode or CSS extensions simultaneously, which can cause conflicts or performance issues.',
+          'Using old CRX copies of appearance extensions from unofficial sources.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the best Chrome extension for dark mode?',
+        answer:
+          'Dark Reader is one of the most widely used and actively maintained dark mode extensions for Chrome. It automatically applies dark themes to websites with minimal setup. For users who want more control or custom dark mode styles, Stylus with dark mode userstyles is another option. The best choice depends on whether you want automatic dark mode or manual CSS control.',
+      },
+      {
+        question: 'Is Stylus a Dark Reader alternative?',
+        answer:
+          'Stylus is not a direct Dark Reader alternative — it is a custom CSS manager rather than an automatic dark mode tool. Stylus lets you apply custom CSS to websites, which can include dark mode styles, but you need to find or write the styles yourself. Dark Reader automatically detects and applies dark mode across many sites with no manual configuration.',
+      },
+      {
+        question: 'Can Chrome use dark mode without an extension?',
+        answer:
+          'Chrome has built-in appearance settings under Settings > Appearance that let you switch between Light and Dark themes for the browser interface. However, this only affects the browser chrome itself, not the websites you visit. For website dark mode, an extension like Dark Reader or Stylus with dark mode styles is needed.',
+      },
+      {
+        question: 'Are custom CSS extensions safe?',
+        answer:
+          'Custom CSS extensions are generally safe when installed from the official Chrome Web Store and when using styles from known repositories. However, appearance extensions need broad site access to apply styles. Review the permissions, check the developer, and for Stylus, review the source of any styles you import. Avoid extensions with broad permissions that have unclear or abandoned development.',
+      },
+      {
+        question: 'Can userstyles break websites?',
+        answer:
+          'Yes. Poorly written or outdated userstyles can conflict with a website\'s own CSS, causing broken layouts, missing elements, or incorrect formatting. Use per-site disable controls to quickly fix issues, and remove or disable styles that consistently cause problems.',
+      },
+      {
+        question: 'Should I install both Dark Reader and Stylus?',
+        answer:
+          'You can install both if they serve different purposes — Dark Reader for automatic dark mode and Stylus for custom CSS. However, if both try to modify the same site, they may conflict. Consider whether your needs are met by one tool before adding both. If you only need dark mode, Dark Reader alone is sufficient.',
+      },
+      {
+        question: 'What should I use for simple browser theming?',
+        answer:
+          'Chrome built-in appearance settings are sufficient for simple browser UI theming. They require no extension and have no additional permissions. If you only want to change how the browser looks without affecting websites, the built-in settings are the simplest option.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Dark Reader Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh',
+        publisher: 'Dark Reader',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Dark Reader MV3 availability, listing status, and publisher identity',
+      },
+      {
+        title: 'Dark Reader Official Site',
+        url: 'https://darkreader.org/',
+        publisher: 'Dark Reader',
+        sourceType: 'official-website',
+        reliability: 'primary',
+        supports: 'Dark Reader official documentation, GitHub, and development status',
+      },
+      {
+        title: 'Stylus Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfoboffhnclfk',
+        publisher: 'Stylus',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Stylus MV3 availability, listing status, and publisher identity',
+      },
+      {
+        title: 'Stylus GitHub Repository',
+        url: 'https://github.com/openstyles/stylus',
+        publisher: 'OpenStyles Community',
+        sourceType: 'github',
+        reliability: 'primary',
+        supports: 'Stylus open-source development status and documentation',
+      },
+      {
+        title: 'Chrome Extension Permissions Documentation',
+        url: 'https://developer.chrome.com/docs/extensions/mv3/permissions-overview/',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'secondary',
+        supports: 'Why extension permissions matter and what they mean for user security',
+      },
+    ],
+    lastUpdated: '2026-05-26',
+    relatedLinks: [
+      { label: 'Dark Reader Alternatives', href: '/alternatives/dark-reader' },
+      { label: 'Stylus Alternatives', href: '/alternatives/stylus' },
+      { label: 'Chrome Extension Alternatives', href: '/alternatives' },
+      { label: 'Chrome Userscript Manager Alternatives', href: '/guides/chrome-userscript-manager-alternatives' },
+    ],
+    primaryCta: { label: 'View Dark Reader Alternatives', href: '/alternatives/dark-reader' },
+    secondaryCta: { label: 'View Stylus Alternatives', href: '/alternatives/stylus' },
+    bestOptions: [
+      { label: 'For automatic dark mode:', description: 'Dark Reader (works across many sites with minimal setup)' },
+      { label: 'For custom CSS and userstyles:', description: 'Stylus (fine-grained site control)' },
+      { label: 'For simple browser theming:', description: 'Chrome built-in appearance settings (no extension needed)' },
+      { label: 'For small personal tweaks:', description: 'Browser bookmarks or snippets (lightweight, no extension)' },
+    ],
+  },
+  {
     slug: 'best-userscript-managers-for-chrome',
     title: 'Best Userscript Managers for Chrome: Tampermonkey, Violentmonkey, and More',
     description:
@@ -1226,7 +1392,7 @@ export const landingPages: LandingPageRecord[] = [
         title: 'Safety Checklist Before Installing Scripts',
         items: [
           'Verify the extension is installed from the official Chrome Web Store.',
-          'Check the script\'s @match rules — confirm it only runs on sites you intend.',
+          "Check the script's @match rules — confirm it only runs on sites you intend.",
           'Review the @grant directives — avoid scripts that request broad or unnecessary permissions.',
           'Read the script source code before installing if the repository is publicly available.',
           'Test scripts on non-sensitive pages first before enabling them on accounts with personal data.',
@@ -1257,12 +1423,12 @@ export const landingPages: LandingPageRecord[] = [
       {
         question: 'Do I need a userscript manager if I only need simple page automation?',
         answer:
-          'For very simple automation tasks, browser bookmarks with JavaScript or Chrome\'s built-in snippets feature may be sufficient. These require no extension and have no additional permissions. Userscript managers are needed when you want to install community scripts, use GM_* APIs, or automate across multiple sites with persistent configuration.',
+          "For very simple automation tasks, browser bookmarks with JavaScript or Chrome's built-in snippets feature may be sufficient. These require no extension and have no additional permissions. Userscript managers are needed when you want to install community scripts, use GM_* APIs, or automate across multiple sites with persistent configuration.",
       },
       {
         question: 'How do I migrate scripts between userscript managers safely?',
         answer:
-          'Export scripts from your current manager using its built-in export feature. Install the new manager from the official Chrome Web Store. Import scripts a few at a time through the new manager\'s interface. Review @match and @grant rules for each script before enabling it broadly.',
+          "Export scripts from your current manager using its built-in export feature. Install the new manager from the official Chrome Web Store. Import scripts a few at a time through the new manager's interface. Review @match and @grant rules for each script before enabling it broadly.",
       },
     ],
     sources: [

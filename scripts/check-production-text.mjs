@@ -55,6 +55,10 @@ const PAGES = [
   '/comparisons/scriptcat-vs-tampermonkey/',
   '/sitemap',
   '/sitemap/',
+  '/fix/chrome-extensions-disabled',
+  '/fix/chrome-extensions-disabled/',
+  '/guides/best-custom-css-and-dark-mode-extensions',
+  '/guides/best-custom-css-and-dark-mode-extensions/',
 ];
 
 // Required sections per page (label → section heading text)
@@ -161,6 +165,15 @@ const PAGE_REQUIRED_SECTIONS = {
     'Frequently Asked Questions', 'Sources',
   ],
 
+  '/fix/chrome-extensions-disabled': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/guides/best-custom-css-and-dark-mode-extensions': [
+    'Best Options at a Glance', 'Safety Checklist',
+    'Frequently Asked Questions', 'Sources',
+  ],
+
   // ── Index pages ─────────────────────────────────────────────────────
   '/alternatives': [
     'Tampermonkey alternatives for Chrome',
@@ -177,7 +190,7 @@ const PAGE_REQUIRED_SECTIONS = {
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/alternatives/violentmonkey': 'May 25, 2026',
+  '/alternatives/violentmonkey': 'May 26, 2026',
   '/alternatives/foxyproxy': 'May 22, 2026',
   '/alternatives/ublock-origin': 'May 22, 2026',
   '/alternatives/great-suspender': 'May 23, 2026',
@@ -187,13 +200,15 @@ const PAGE_QA_DATE = {
   '/comparisons/foxyproxy-vs-switchyomega': 'May 23, 2026',
   '/guides/best-userscript-managers-for-chrome': 'May 25, 2026',
   '/fix/chrome-140-manifest-v2': 'May 24, 2026',
-  '/fix/cannot-install-extension-unsupported-manifest': 'May 24, 2026',
-  '/fix/chrome-enable-unsupported-extensions': 'May 24, 2026',
-  '/alternatives/dark-reader': 'May 24, 2026',
+  '/fix/cannot-install-extension-unsupported-manifest': 'May 26, 2026',
+  '/fix/chrome-enable-unsupported-extensions': 'May 26, 2026',
+  '/alternatives/dark-reader': 'May 26, 2026',
   '/alternatives/stylus': 'May 24, 2026',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 'May 25, 2026',
   '/alternatives/video-downloadhelper': 'May 25, 2026',
   '/comparisons/scriptcat-vs-tampermonkey': 'May 25, 2026',
+  '/fix/chrome-extensions-disabled': 'May 26, 2026',
+  '/guides/best-custom-css-and-dark-mode-extensions': 'May 26, 2026',
 };
 
 const PAGE_MIN_WORDS = {
@@ -212,6 +227,8 @@ const PAGE_MIN_WORDS = {
   // that prevents the full shortAnswer from being shown. QA word check disabled until resolved.
   '/alternatives/video-downloadhelper': 0,
   '/comparisons/scriptcat-vs-tampermonkey': 0,
+  '/fix/chrome-extensions-disabled': 80,
+  '/guides/best-custom-css-and-dark-mode-extensions': 80,
 };
 
 // Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)
@@ -567,6 +584,8 @@ async function checkPage(page, source) {
       'uBlock Origin vs uBlock Origin Lite',
       'FoxyProxy vs SwitchyOmega',
       'Chrome 140 and Manifest V2 Extensions',
+      'Best Custom CSS and Dark Mode Extensions for Chrome',
+      'Chrome Extensions Disabled',
     ];
     for (const text of sitemapRequired) {
       if (stripped.includes(text)) {
