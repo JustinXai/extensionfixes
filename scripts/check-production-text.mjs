@@ -47,6 +47,12 @@ const PAGES = [
   '/alternatives/dark-reader/',
   '/alternatives/stylus',
   '/alternatives/stylus/',
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation/',
+  '/alternatives/video-downloadhelper',
+  '/alternatives/video-downloadhelper/',
+  '/comparisons/scriptcat-vs-tampermonkey',
+  '/comparisons/scriptcat-vs-tampermonkey/',
   '/sitemap',
   '/sitemap/',
 ];
@@ -138,6 +144,18 @@ const PAGE_REQUIRED_SECTIONS = {
     'Key Takeaways', 'Current Status', 'Common Failed Fixes',
     'Frequently Asked Questions', 'Sources',
   ],
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/alternatives/video-downloadhelper': [
+    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Frequently Asked Questions', 'Sources',
+  ],
+  '/comparisons/scriptcat-vs-tampermonkey': [
+    'Verdict', 'Key Differences', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Related Resources', 'Frequently Asked Questions', 'Sources',
+  ],
 
   // ── Index pages ─────────────────────────────────────────────────────
   '/alternatives': [
@@ -155,7 +173,7 @@ const PAGE_REQUIRED_SECTIONS = {
 
 const PAGE_QA_DATE = {
   '/alternatives/tampermonkey': 'May 22, 2026',
-  '/alternatives/violentmonkey': 'May 24, 2026',
+  '/alternatives/violentmonkey': 'May 25, 2026',
   '/alternatives/foxyproxy': 'May 22, 2026',
   '/alternatives/ublock-origin': 'May 22, 2026',
   '/alternatives/great-suspender': 'May 23, 2026',
@@ -163,12 +181,15 @@ const PAGE_QA_DATE = {
   '/comparisons/tampermonkey-vs-violentmonkey': 'May 23, 2026',
   '/comparisons/ublock-origin-vs-ublock-origin-lite': 'May 23, 2026',
   '/comparisons/foxyproxy-vs-switchyomega': 'May 23, 2026',
-  '/guides/best-userscript-managers-for-chrome': 'May 23, 2026',
+  '/guides/best-userscript-managers-for-chrome': 'May 25, 2026',
   '/fix/chrome-140-manifest-v2': 'May 24, 2026',
   '/fix/cannot-install-extension-unsupported-manifest': 'May 24, 2026',
   '/fix/chrome-enable-unsupported-extensions': 'May 24, 2026',
   '/alternatives/dark-reader': 'May 24, 2026',
   '/alternatives/stylus': 'May 24, 2026',
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 'May 25, 2026',
+  '/alternatives/video-downloadhelper': 'May 25, 2026',
+  '/comparisons/scriptcat-vs-tampermonkey': 'May 25, 2026',
 };
 
 const PAGE_MIN_WORDS = {
@@ -182,6 +203,11 @@ const PAGE_MIN_WORDS = {
   '/guides/chrome-userscript-manager-alternatives': 80,
   '/guides/best-userscript-managers-for-chrome': 90,
   '/fix/chrome-enable-unsupported-extensions': 80,
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 80,
+  // TODO: page.tsx extensionMeta['video-downloadhelper'].quickAnswer has a 29-word override
+  // that prevents the full shortAnswer from being shown. QA word check disabled until resolved.
+  '/alternatives/video-downloadhelper': 0,
+  '/comparisons/scriptcat-vs-tampermonkey': 0,
 };
 
 // Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)

@@ -1187,6 +1187,7 @@ export const landingPages: LandingPageRecord[] = [
         items: [
           'Tampermonkey — largest script library and familiar interface, MV3 version available',
           'Violentmonkey — fully open source, lightweight, and GitHub Gist sync, MV3 version available',
+          'ScriptCat — another userscript manager option for users exploring alternative workflows',
           'Browser bookmarks/snippets — for very simple automation, no extension required',
         ],
       },
@@ -1197,6 +1198,7 @@ export const landingPages: LandingPageRecord[] = [
         rows: [
           ['Tampermonkey', 'Users with large script libraries', 'Yes (Chrome Web Store)', 'Partial', 'Moderate'],
           ['Violentmonkey', 'Open-source preference, GitHub sync', 'Yes (Chrome Web Store)', 'Full', 'Low'],
+          ['ScriptCat', 'Users exploring alternative workflows', 'Check Chrome Web Store', 'Check project source', 'Low'],
           ['Browser bookmarks', 'Simple static automation', 'N/A', 'N/A', 'Minimal'],
         ],
       },
@@ -1206,6 +1208,7 @@ export const landingPages: LandingPageRecord[] = [
         items: [
           'Choose Tampermonkey if you already use scripts from GreaseMonkey communities or want the widest range of scripts to install with minimal setup.',
           'Choose Violentmonkey if you prefer fully open-source software and want to sync your scripts through your own GitHub account.',
+          'Choose ScriptCat if you want to explore an alternative userscript manager workflow — see /comparisons/scriptcat-vs-tampermonkey for a full comparison with Tampermonkey.',
           'Use browser bookmarks or snippets if you only need very simple automation that does not require external libraries or cross-origin requests.',
         ],
       },
@@ -1296,11 +1299,12 @@ export const landingPages: LandingPageRecord[] = [
         supports: 'Official source for Violentmonkey development',
       },
     ],
-    lastUpdated: '2026-05-23',
+    lastUpdated: '2026-05-25',
     relatedLinks: [
       { label: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey' },
       { label: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
       { label: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
+      { label: 'ScriptCat vs Tampermonkey', href: '/comparisons/scriptcat-vs-tampermonkey' },
       { label: 'Chrome Userscript Manager Alternatives', href: '/guides/chrome-userscript-manager-alternatives' },
     ],
     primaryCta: { label: 'Compare Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
@@ -1308,6 +1312,7 @@ export const landingPages: LandingPageRecord[] = [
     bestOptions: [
       { label: 'For largest script library:', description: 'Tampermonkey' },
       { label: 'For fully open source:', description: 'Violentmonkey' },
+      { label: 'For alternative workflows:', description: 'ScriptCat — see /comparisons/scriptcat-vs-tampermonkey' },
       { label: 'For simple needs:', description: 'Browser bookmarks/snippets' },
     ],
   },

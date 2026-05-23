@@ -962,6 +962,156 @@ export const errors: ErrorRecord[] = [
       },
     ],
   },
+  {
+    slug: 'this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+    title: 'This Extension Was Disabled Due to Malware, Suspicious Behavior, or a Policy Violation',
+    aliases: [
+      'this extension was disabled due to malware suspicious behavior or a policy violation',
+      'chrome extension disabled due to malware',
+      'chrome extension suspicious behavior',
+      'chrome extension policy violation',
+      'chrome disabled extension malware',
+      'extension disabled policy violation',
+      'chrome extensions disabled malware',
+    ],
+    shortAnswer:
+      'Chrome may disable an extension when it detects malware, suspicious behavior, a Chrome Web Store policy violation, or a serious security concern. If you see this warning, do not try to force the same extension back into Chrome or download an old CRX copy from an unofficial source. Extensions can request broad access to pages you visit, so a policy-disabled extension should be treated as unsafe until the developer provides a clear, maintained update. The safer path is to remove the extension, check for an official update, and use a maintained alternative from a trusted source.',
+    whyItHappens: [
+      'Chrome detected that the extension contains malware, a virus, or unwanted software.',
+      'The extension performed suspicious behavior such as modifying browser settings without consent.',
+      'The extension violated Chrome Web Store policies on data collection, advertising, or user consent.',
+      'Google proactively disabled the extension due to detected security concerns.',
+      'The extension was flagged by Safe Browsing or other Chrome security systems.',
+      'The extension was reported and reviewed as violating developer program policies.',
+    ],
+    whatYouCanDo: [
+      'Open chrome://extensions and read the exact warning shown by Chrome.',
+      'Identify the extension name and developer from the warning message.',
+      'Check the Chrome Web Store listing for updated versions or official developer statements.',
+      'Remove the extension from Chrome if it is flagged as malware or suspicious.',
+      'Search Extension Fixes for a maintained alternative to your affected extension.',
+      'Report the extension if you believe it was incorrectly flagged or if you found genuine malware.',
+      'Review extension permissions before installing any replacement.',
+    ],
+    whatNotToDo: [
+      'Do not try to force the same extension back into Chrome using Developer Mode.',
+      'Do not download the same extension from an unofficial mirror or CRX download site.',
+      'Do not reinstall the extension and ignore the warning because it used to work.',
+      'Do not install a lookalike extension from a different developer without verifying credentials.',
+      'Do not keep the disabled extension installed while searching for a workaround.',
+    ],
+    relatedExtensionSlugs: ['great-suspender'],
+    faqs: [
+      {
+        question: 'Why did Chrome disable my extension for malware or suspicious behavior?',
+        answer:
+          'Chrome disables extensions when its security systems detect malware, unwanted software, policy violations, or suspicious behavior. This can happen when an extension is updated with malicious code, when it was originally published with deceptive practices, or when it manipulates browser settings without consent. The warning is designed to protect users from potentially harmful software.',
+      },
+      {
+        question: 'Can I re-enable an extension disabled for a policy violation?',
+        answer:
+          'Generally no. Extensions disabled for malware, suspicious behavior, or policy violations should not be re-enabled. Even if the developer later releases an update, reinstall the extension only after verifying the update is legitimate and the developer identity matches the original trusted source.',
+      },
+      {
+        question: 'Is it safe to download the old CRX file?',
+        answer:
+          'No. Downloading old CRX files from unofficial mirrors is not safe. These packages may contain the same malicious code that caused the original disablement, may be modified by third parties, or may lack security updates. Always use the official Chrome Web Store or the developer\'s verified release page.',
+      },
+      {
+        question: 'What should I do if I still need the extension?',
+        answer:
+          'First, verify the developer\'s official website or Chrome Web Store listing for an official update that resolves the issue. If a legitimate update is available, install it from the official source. If no update exists, search Extension Fixes for a maintained alternative. Avoid unofficial copies or lookalike extensions from unknown developers.',
+      },
+      {
+        question: 'Can a Chrome extension read pages I visit?',
+        answer:
+          'Yes. Extensions can request permission to access pages you visit. When an extension is flagged for malware or suspicious behavior, this permission access is a significant concern. Do not re-enable or reinstall suspicious extensions, and review the permissions of any replacement extension before installing.',
+      },
+      {
+        question: 'How do I check whether a replacement extension is trustworthy?',
+        answer:
+          'Verify the extension is listed in the official Chrome Web Store, check the developer name and verify it matches expected credentials, read recent user reviews, review the permissions the extension requests, and check whether the extension is actively maintained.',
+      },
+      {
+        question: 'Is this the same as the "no longer supported" warning?',
+        answer:
+          'No. The "no longer supported" warning typically means an extension uses deprecated APIs. The "disabled due to malware, suspicious behavior, or policy violation" warning means Chrome detected a more serious security or policy concern. Both require action, but the malware/policy warning is a higher-severity signal.',
+      },
+      {
+        question: 'Should I remove the disabled extension?',
+        answer:
+          'Yes. If Chrome shows a malware, suspicious behavior, or policy violation warning, remove the extension from Chrome. Do not keep it installed while looking for workarounds. Extensions flagged for these reasons can continue to access pages you visit while installed, even if they are disabled.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Chrome Web Store Program Policies',
+        url: 'https://developer.chrome.com/docs/webstore/program-policies/policies',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Chrome Web Store policy rules that extensions must follow and what triggers policy violations',
+      },
+      {
+        title: 'Chrome Extension Safety',
+        url: 'https://developer.chrome.com/docs/extensions/safety/',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'How Chrome detects unsafe extensions and what happens when an extension is flagged',
+      },
+      {
+        title: 'Chrome Extension Permissions',
+        url: 'https://developer.chrome.com/docs/extensions/mv3/permissions-overview/',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'secondary',
+        supports: 'What extension permissions mean and why they matter for user security',
+      },
+    ],
+    lastUpdated: '2026-05-25',
+    keyTakeaways: [
+      'Chrome can disable extensions for malware, suspicious behavior, or policy violations.',
+      'Policy-disabled extensions should not be forced back into Chrome.',
+      'Old CRX copies from mirror sites can be modified or unsafe.',
+      'Users should check whether the developer has published a maintained update.',
+      'The safer path is to remove the extension and use a trusted alternative.',
+    ],
+    currentStatus: [
+      { label: 'Chrome status', value: 'Policy-disabled extensions may be blocked', variant: 'bad' },
+      { label: 'User control', value: 'Ordinary users should not force suspicious extensions back on', variant: 'bad' },
+      { label: 'Security note', value: 'Extensions can access browsing data depending on permissions', variant: 'bad' },
+      { label: 'Recommended path', value: 'Remove the extension and use maintained alternatives', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 25, 2026', variant: 'neutral' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Download the same extension from an unofficial mirror',
+        whyItFails: 'Mirror copies may contain the same malicious code, be modified by third parties, or lack security updates. Chrome may also block loading extensions from unofficial sources.',
+        saferAlternative: 'Remove the extension and use an official update or a maintained alternative from the Chrome Web Store.',
+      },
+      {
+        tried: 'Enable Developer Mode to load a disabled extension package',
+        whyItFails: 'Developer Mode does not remove the malware, suspicious behavior, or policy violation detection. Re-enabling a flagged extension keeps it active in Chrome with its original permissions.',
+        saferAlternative: 'Remove the extension and verify with an official developer source before reinstalling.',
+      },
+      {
+        tried: 'Ignore the warning because the extension used to work',
+        whyItFails: 'Extensions can be updated with malicious code after installation. Chrome detects changes after the fact. An extension that worked previously may have been modified.',
+        saferAlternative: 'Treat the warning as a legitimate security signal and remove the extension.',
+      },
+      {
+        tried: 'Install a lookalike extension without checking publisher and reviews',
+        whyItFails: 'Scammers create extensions with similar names to popular extensions. Without verifying the developer identity, you may install a different and potentially harmful extension.',
+        saferAlternative: 'Verify the developer name, read reviews, and check the extension\'s listing carefully before installing any replacement.',
+      },
+      {
+        tried: 'Keep the disabled extension installed while searching for a fix',
+        whyItFails: 'Disabled extensions may still retain some level of access depending on Chrome\'s implementation. If the extension was flagged for malware or policy violations, keeping it installed is not recommended.',
+        saferAlternative: 'Remove the extension first, then research alternatives before installing any replacement.',
+      },
+    ],
+  },
 ];
 
 export function getErrorBySlug(slug: string): ErrorRecord | undefined {

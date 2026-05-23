@@ -1542,6 +1542,11 @@ export const extensions: ExtensionRecord[] = [
           'ScriptCat is another userscript manager option available in the Chrome Web Store. It is a separate project from both Tampermonkey and Violentmonkey, with its own development community. Users who are choosing between userscript managers may consider ScriptCat as an additional option alongside Tampermonkey and Violentmonkey, though the right choice depends on individual script compatibility, interface preferences, and specific feature needs.',
       },
       {
+        question: 'Should I compare ScriptCat, Tampermonkey, and Violentmonkey before switching?',
+        answer:
+          'Yes. If you are choosing between userscript managers, it is worth comparing ScriptCat, Tampermonkey, and Violentmonkey before committing to one. Each has a different ecosystem size, interface design, and community. The Extension Fixes comparison page at /comparisons/scriptcat-vs-tampermonkey covers ScriptCat vs Tampermonkey. Violentmonkey vs Tampermonkey is covered at /comparisons/tampermonkey-vs-violentmonkey. Script compatibility depends on the specific scripts you use, their permissions, and how they behave with different managers — test important scripts before fully migrating.',
+      },
+      {
         question: 'Should I switch from Violentmonkey to Tampermonkey?',
         answer:
           'Whether to switch depends on your specific needs. Both Violentmonkey and Tampermonkey support Manifest V3 and work in current Chrome. Tampermonkey has a larger built-in feature set and script library, while Violentmonkey is more lightweight and fully open source. Userscript compatibility depends on the specific scripts you use, their permissions, and how they behave with different managers. If your current scripts work well in Violentmonkey, there is no urgent reason to switch.',
@@ -1564,8 +1569,16 @@ export const extensions: ExtensionRecord[] = [
         reliability: 'secondary',
         supports: 'Open-source code transparency and development status',
       },
+      {
+        title: 'ScriptCat vs Tampermonkey',
+        url: '/comparisons/scriptcat-vs-tampermonkey',
+        publisher: 'Extension Fixes',
+        sourceType: 'alternative-directory',
+        reliability: 'discovery',
+        supports: 'ScriptCat comparison with Tampermonkey, relevant for users choosing between userscript managers',
+      },
     ],
-    lastUpdated: '2026-05-24',
+    lastUpdated: '2026-05-25',
     keyTakeaways: [
       'Violentmonkey is actively maintained as an MV3-compatible userscript manager.',
       'Tampermonkey is the most widely-used alternative with a larger script ecosystem.',
@@ -1575,10 +1588,10 @@ export const extensions: ExtensionRecord[] = [
       'Userscripts run on pages you visit and can access page content ? review permissions.',
     ],
     currentStatus: [
-      { label: 'Violentmonkey', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
-      { label: 'Tampermonkey', value: 'Active MV3 extension ? most widely-used userscript manager', variant: 'good' },
+      { label: 'Violentmonkey', value: 'Active MV3 extension — works in current Chrome', variant: 'good' },
+      { label: 'Tampermonkey', value: 'Active MV3 extension — most widely-used userscript manager', variant: 'good' },
       { label: 'Chrome userscript support', value: 'Both managers work in Chrome 138+ via MV3 versions', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 25, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {
@@ -1643,6 +1656,245 @@ export const extensions: ExtensionRecord[] = [
         tried: 'Assume all userscript managers behave identically',
         whyItFails: 'Violentmonkey and Tampermonkey have different interfaces, update mechanisms, and some feature differences. Scripts may behave slightly differently between managers.',
         saferAlternative: 'Test scripts after switching managers to verify expected behavior.',
+      },
+    ],
+  },
+  {
+    slug: 'video-downloadhelper',
+    name: 'Video DownloadHelper',
+    aliases: [
+      'Video DownloadHelper',
+      'video downloadhelper',
+      'video download helper',
+      'video downloader helper',
+      'downloadhelper alternative',
+    ],
+    category: 'Download Manager',
+    summary:
+      'A video downloading extension for Chrome that detects and downloads videos from web pages.',
+    status: 'affected_by_mv2',
+    riskLevel: 'medium',
+    issueSummary:
+      'Video DownloadHelper may be affected by Chrome Manifest V2 deprecation in Chrome 138 and later. The extension developer has been transitioning to MV3-compatible versions.',
+    shortAnswer:
+      'Video DownloadHelper is a browser extension used by some users to save videos from supported websites, but Chrome users may look for alternatives because of compatibility, browser changes, or workflow preferences. The right option depends on whether the website explicitly allows downloads, whether you are saving your own content, and whether the tool is actively maintained. Avoid extensions that promise to bypass paywalls, DRM, or platform restrictions. For safer use, choose maintained tools, review permissions, and respect the terms and rights of the websites and creators involved.',
+    whatHappened: [
+      'Chrome 138 disabled all Manifest V2 extensions by default.',
+      'Video DownloadHelper has been transitioning to MV3-compatible versions.',
+      'Some older versions of the extension may no longer function in Chrome 138 and later.',
+      'The developer has released updates addressing MV3 compatibility.',
+    ],
+    migrationSteps: [
+      'Update Video DownloadHelper to the latest version from the Chrome Web Store.',
+      'If the extension no longer works, look for the latest MV3-compatible version.',
+      'Test the updated extension with common video sources.',
+      'For unsupported sites, consider desktop video download tools.',
+    ],
+    safetyNotes: [
+      'Only install Video DownloadHelper from the official Chrome Web Store.',
+      'Be aware that downloading copyrighted content may violate terms of service or laws.',
+      'Review permissions before installation.',
+    ],
+    alternatives: [
+      {
+        name: 'Chrono Download Manager',
+        slug: 'chrono-download-manager',
+        bestFor: 'Users wanting a general-purpose download manager with broad site support',
+        status: 'active_mv3',
+        chromeStoreUrl:
+          'https://chromewebstore.google.com/detail/chrono-download-manager/mciogjhjfcciiohedkfgkfpcarpddoii',
+        pros: [
+          'Download scheduling capabilities',
+          'Automatic filename patterns',
+          'Folder organization features',
+        ],
+        cons: [
+          'May not support all video sites',
+          'Different workflow than Video DownloadHelper',
+        ],
+        note: 'Chrono Download Manager offers comprehensive download management for various file types.',
+      },
+      {
+        name: 'Browser Native Downloads',
+        slug: 'browser-native-downloads',
+        bestFor: 'Users preferring simplicity without extension overhead',
+        status: 'active_mv3',
+        pros: [
+          'Built into Chrome, no extension needed',
+          'Reliable and straightforward',
+          'Integrated with browser UI',
+        ],
+        cons: [
+          'Limited batch download features',
+          'No video detection',
+        ],
+        note: 'Chrome native downloads are reliable for direct video links, though they do not detect videos on pages like dedicated download extensions.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is Video DownloadHelper still working in Chrome?',
+        answer:
+          'The latest version of Video DownloadHelper supports Manifest V3 and works in current Chrome versions. If you are using an older version, update from the Chrome Web Store.',
+      },
+      {
+        question: 'Can Video DownloadHelper download from all websites?',
+        answer:
+          'Video DownloadHelper can download videos from many sites, but some websites use streaming protocols or encryption that prevent downloading. Support varies by site.',
+      },
+      {
+        question: 'Is it legal to use video downloader extensions?',
+        answer:
+          'The legality of video downloading depends on the content, your jurisdiction, and the website\'s terms of service. Downloading your own content, content you have explicit permission to save, or content that a website explicitly allows downloading is generally considered acceptable. Downloading content protected by copyright or DRM without authorization may be illegal. Respect the terms and rights of the websites and creators involved.',
+      },
+      {
+        question: 'Can video downloader extensions bypass DRM?',
+        answer:
+          'Reputable video downloader tools do not bypass DRM. Legitimate downloader tools work with content that is not DRM-protected or where you have authorized access. Tools that promise to bypass DRM or restriction are not recommended and may be illegal in some jurisdictions.',
+      },
+      {
+        question: 'What should I use for my own videos?',
+        answer:
+          'For your own videos, the best option is usually the download or save feature provided by the platform where you uploaded them. Many platforms include built-in download options for creator content. If no official option exists, check whether the platform\'s terms allow third-party downloading before using any tool.',
+      },
+      {
+        question: 'Are video downloader extensions safe?',
+        answer:
+          'Video downloader extensions from the official Chrome Web Store are generally safe, but permissions matter. Downloader tools often need permission to access page content to detect and save media. Review what permissions an extension requests before installing, and avoid extensions from unknown developers or that promise unrealistic capabilities.',
+      },
+      {
+        question: 'Can downloader extensions read pages I visit?',
+        answer:
+          'Yes. Video downloader extensions typically need permission to access content on websites where you want to save videos. This means the extension can see page content on sites where it is active. Review permissions before installing and remove extensions you no longer use.',
+      },
+      {
+        question: 'What should I avoid when choosing a video downloader extension?',
+        answer:
+          'Avoid extensions that promise to bypass paywalls, DRM, or platform restrictions. Avoid extensions from unknown developers with minimal reviews or very few users. Avoid extensions requesting overly broad permissions for their stated purpose. Avoid tools marketed as able to download any video from any site — this is not realistic and often indicates a low-quality or potentially harmful product.',
+      },
+    ],
+    sources: [
+      {
+        title: 'Video DownloadHelper Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/video-downloadhelper/lmegbjnfcocmkpcgfleegnjjhhcoiocj',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Video DownloadHelper MV3 availability, listing status, and publisher identity',
+      },
+      {
+        title: 'Video DownloadHelper Official Website',
+        url: 'https://www.downloadhelper.net/',
+        publisher: 'ACLAP (DownloadHelper)',
+        sourceType: 'official-website',
+        reliability: 'secondary',
+        supports: 'Video DownloadHelper developer information and feature documentation',
+      },
+      {
+        title: 'Chrome Manifest V2 Deprecation Timeline',
+        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
+        publisher: 'Google Chrome Developers',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Official Chrome MV2 deprecation timeline — Video DownloadHelper was updated to MV3',
+      },
+    ],
+    lastUpdated: '2026-05-25',
+    keyTakeaways: [
+      'Video downloader extensions can have legal and platform-policy limits.',
+      'Users should only download content they own, have permission to save, or that the site allows.',
+      'Avoid tools that promise to bypass DRM, paywall, or restriction bypassing.',
+      'Extension permissions matter because download tools may inspect page media.',
+      'Maintained alternatives and official download options are preferable.',
+    ],
+    currentStatus: [
+      { label: 'Tool type', value: 'Video download extension / helper tool', variant: 'neutral' },
+      { label: 'Chrome status', value: 'Check Chrome Web Store for current MV3 version', variant: 'neutral' },
+      { label: 'Main risk', value: 'Copyright, platform terms, and broad permissions', variant: 'bad' },
+      { label: 'Best practice', value: 'Use site-provided download options when available', variant: 'good' },
+      { label: 'Last reviewed', value: 'May 25, 2026', variant: 'neutral' },
+    ],
+    comparisonTable: [
+      {
+        option: 'Video DownloadHelper',
+        bestFor: 'Users already familiar with the workflow and saving permitted content',
+        mv3Support: 'Check current Chrome Web Store listing',
+        cost: 'Free / Freemium',
+        openSource: 'Partial',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Compatibility can vary by website and Chrome version',
+      },
+      {
+        option: 'Site-provided download buttons',
+        bestFor: 'Creator-owned or explicitly permitted downloads',
+        mv3Support: 'N/A — platform feature',
+        cost: 'Free',
+        openSource: 'N/A',
+        setupDifficulty: 'None',
+        mainTradeoff: 'Not available on every website',
+      },
+      {
+        option: 'Desktop downloader tools',
+        bestFor: 'User-owned or permitted media workflows',
+        mv3Support: 'N/A — outside Chrome',
+        cost: 'Free / Paid',
+        openSource: 'Varies',
+        setupDifficulty: 'Moderate',
+        mainTradeoff: 'Requires separate app installation',
+      },
+      {
+        option: 'Unknown video downloader extensions',
+        bestFor: 'Not recommended for any use case',
+        mv3Support: 'Unknown',
+        cost: 'Unknown',
+        openSource: 'Unknown',
+        setupDifficulty: 'Unknown',
+        mainTradeoff: 'Permission, malware, and policy risk',
+      },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Video DownloadHelper',
+        when: 'You are saving your own content or content you have permission to download, and the site is supported.',
+      },
+      {
+        choose: 'Site-provided download options',
+        when: 'The website offers an official download or save feature for your content.',
+      },
+      {
+        choose: 'Desktop downloader tools',
+        when: 'You have regular download workflows for user-owned or permitted media and prefer keeping tools outside the browser.',
+      },
+      {
+        choose: 'Avoid unknown video downloader extensions',
+        when: 'You see tools with broad permissions, unrealistic claims, or promises to bypass platform restrictions.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install unknown video downloader extensions from mirror sites',
+        whyItFails: 'Unknown extensions from unofficial sources may have excessive permissions, contain modified code, or violate Chrome Web Store policies. They may access page content beyond what a video downloader needs.',
+        saferAlternative: 'Install extensions only from the official Chrome Web Store and verify the developer before installing.',
+      },
+      {
+        tried: 'Use tools that promise to bypass DRM or platform restrictions',
+        whyItFails: 'Tools designed to bypass DRM or platform restrictions may be illegal in some jurisdictions, violate terms of service, or contain malware. They can also expose users to legal risk.',
+        saferAlternative: 'Only use tools for content you own or have explicit permission to download.',
+      },
+      {
+        tried: 'Grant broad permissions without reviewing the extension',
+        whyItFails: 'Video downloader extensions may request permission to access all websites and page content. Without reviewing these permissions, you may be granting more access than intended.',
+        saferAlternative: 'Review extension permissions before installing and understand what access you are granting.',
+      },
+      {
+        tried: 'Install multiple downloader extensions at once',
+        whyItFails: 'Multiple video downloader extensions can conflict with each other, cause duplicate requests to the same sites, and multiply your browser permission exposure unnecessarily.',
+        saferAlternative: 'Use one maintained tool at a time and remove extensions you no longer need.',
+      },
+      {
+        tried: 'Assume every website permits downloading',
+        whyItFails: 'Many websites embed videos that are not intended for download — either due to copyright, platform terms, or creator preferences. Downloading such content may violate terms of service or copyright law.',
+        saferAlternative: 'Check whether the platform allows downloading before using any downloader tool.',
       },
     ],
   },
@@ -2739,118 +2991,6 @@ export const extensions: ExtensionRecord[] = [
         title: 'OneTab Official Website',
         url: 'https://www.one-tab.com/',
         publisher: 'OneTab',
-      },
-    ],
-    lastUpdated: '2026-05-21',
-  },
-  {
-    slug: 'video-downloadhelper',
-    name: 'Video DownloadHelper',
-    aliases: [
-      'Video DownloadHelper',
-      'video downloader',
-      'download videos',
-      'video helper',
-      'net-downloadHelper',
-    ],
-    category: 'Download Manager',
-    summary:
-      'A video downloading extension for Chrome that detects and downloads videos from web pages.',
-    status: 'affected_by_mv2',
-    riskLevel: 'medium',
-    issueSummary:
-      'Video DownloadHelper may be affected by Chrome Manifest V2 deprecation in Chrome 138 and later. The extension developer has been transitioning to MV3-compatible versions.',
-    shortAnswer:
-      'Video DownloadHelper is being affected by Chrome MV2 deprecation. The developer has released MV3-compatible updates. Users should ensure they have the latest version from the Chrome Web Store. Alternatives include browser-native download features and desktop video tools.',
-    whatHappened: [
-      'Chrome 138 disabled all Manifest V2 extensions by default.',
-      'Video DownloadHelper has been transitioning to MV3-compatible versions.',
-      'Some older versions of the extension may no longer function in Chrome 138 and later.',
-      'The developer has released updates addressing MV3 compatibility.',
-    ],
-    migrationSteps: [
-      'Update Video DownloadHelper to the latest version from the Chrome Web Store.',
-      'If the extension no longer works, look for the latest MV3-compatible version.',
-      'Test the updated extension with common video sources.',
-      'For unsupported sites, consider desktop video download tools.',
-    ],
-    safetyNotes: [
-      'Only install Video DownloadHelper from the official Chrome Web Store.',
-      'Be aware that downloading copyrighted content may violate terms of service or laws.',
-      'Review permissions before installation.',
-    ],
-    alternatives: [
-      {
-        name: 'Chrono Download Manager',
-        slug: 'chrono-download-manager',
-        bestFor: 'Users wanting a general-purpose download manager with broad site support',
-        status: 'active_mv3',
-        chromeStoreUrl:
-          'https://chromewebstore.google.com/detail/chrono-download-manager/mciogjhjfcciiohedkfgkfpcarpddoii',
-        pros: [
-          'Download scheduling capabilities',
-          'Automatic filename patterns',
-          'Folder organization features',
-        ],
-        cons: [
-          'May not support all video sites',
-          'Different workflow than Video DownloadHelper',
-        ],
-        note: 'Chrono Download Manager offers comprehensive download management for various file types.',
-      },
-      {
-        name: 'Browser Native Downloads',
-        slug: 'browser-native-downloads',
-        bestFor: 'Users preferring simplicity without extension overhead',
-        status: 'active_mv3',
-        pros: [
-          'Built into Chrome, no extension needed',
-          'Reliable and straightforward',
-          'Integrated with browser UI',
-        ],
-        cons: [
-          'Limited batch download features',
-          'No video detection',
-        ],
-        note: 'Chrome native downloads are reliable for direct video links, though they do not detect videos on pages like dedicated download extensions.',
-      },
-    ],
-    faqs: [
-      {
-        question: 'Is Video DownloadHelper still working in Chrome?',
-        answer:
-          'The latest version of Video DownloadHelper supports Manifest V3 and works in current Chrome versions. If you are using an older version, update from the Chrome Web Store.',
-      },
-      {
-        question: 'Can Video DownloadHelper download from all websites?',
-        answer:
-          'Video DownloadHelper can download videos from many sites, but some websites use streaming protocols or encryption that prevent downloading. Support varies by site.',
-      },
-    ],
-    sources: [
-      {
-        title: 'Video DownloadHelper Chrome Web Store',
-        url: 'https://chromewebstore.google.com/detail/video-downloadhelper/lmegbjnfcocmkpcgfleegnjjhhcoiocj',
-        publisher: 'Chrome Web Store',
-        sourceType: 'chrome-web-store',
-        reliability: 'primary',
-        supports: 'Video DownloadHelper MV3 availability, listing status, and publisher identity',
-      },
-      {
-        title: 'Video DownloadHelper Official Website',
-        url: 'https://www.downloadhelper.net/',
-        publisher: 'ACLAP (DownloadHelper)',
-        sourceType: 'official-website',
-        reliability: 'secondary',
-        supports: 'Video DownloadHelper developer information and feature documentation',
-      },
-      {
-        title: 'Chrome Manifest V2 Deprecation Timeline',
-        url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline',
-        publisher: 'Google Chrome Developers',
-        sourceType: 'chrome-developers',
-        reliability: 'primary',
-        supports: 'Official Chrome MV2 deprecation timeline ? Video DownloadHelper was updated to MV3',
       },
     ],
     lastUpdated: '2026-05-21',

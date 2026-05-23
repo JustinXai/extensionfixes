@@ -367,6 +367,130 @@ export const comparisons: ComparisonRecord[] = [
     ],
     lastUpdated: '2026-05-23',
   },
+  {
+    templateType: 'comparison',
+    slug: 'scriptcat-vs-tampermonkey',
+    title: 'ScriptCat vs Tampermonkey',
+    metaTitle: 'ScriptCat vs Tampermonkey: Which Userscript Manager Should You Use?',
+    metaDescription:
+      'Compare ScriptCat and Tampermonkey for userscript management. Learn the workflow differences, migration notes, and safer script testing tips.',
+    quickAnswer:
+      'ScriptCat and Tampermonkey are both userscript manager options, but they may appeal to different users depending on workflow, script compatibility, browser support, and how much control the user wants over script execution. Tampermonkey is widely known and has a large ecosystem, while ScriptCat may be considered by users exploring alternative userscript workflows. Neither option makes unknown scripts safe by default. Users should review script sources, inspect @match and @grant permissions, and test scripts on non-sensitive pages before using them on important accounts.',
+    comparedItems: ['ScriptCat', 'Tampermonkey', 'Violentmonkey'],
+    verdict:
+      'Balanced. Tampermonkey is the practical choice for users who need the widest script library and familiar workflow. ScriptCat may suit users exploring alternative userscript manager workflows. Neither is a universally better option — the right choice depends on your existing scripts, compatibility needs, and interface preferences.',
+    keyDifferences: [
+      'Userscript workflow — Tampermonkey has an established workflow with a large user base; ScriptCat offers a different interface design.',
+      'Script compatibility — Both support similar userscript formats, but testing is recommended when switching managers.',
+      'Browser support — Tampermonkey has wider browser availability; ScriptCat support depends on its current development status.',
+      'Permission review — Both managers require users to review @match and @grant rules in installed scripts regardless of brand.',
+      'Migration effort — Migrating scripts between managers should be done carefully, testing each script individually.',
+    ],
+    comparisonTable: [
+      { option: 'Tampermonkey', bestFor: 'Users who need broad userscript compatibility and a familiar workflow', mv3Support: 'Available (MV3)', cost: 'Free / Donationware', openSource: 'Partial (core is open source)', setupDifficulty: 'Easy', mainTradeoff: 'Larger resource usage but more features and a wider script library' },
+      { option: 'ScriptCat', bestFor: 'Users exploring alternative userscript manager workflows', mv3Support: 'Check Chrome Web Store listing', cost: 'Free', openSource: 'Check project source', setupDifficulty: 'Easy', mainTradeoff: 'Smaller ecosystem; testing recommended when switching from Tampermonkey' },
+      { option: 'Violentmonkey', bestFor: 'Users who prefer open-source tooling and GitHub Gist sync', mv3Support: 'Available (MV3)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Minimal interface and fewer built-in features' },
+      { option: 'Browser bookmarks', bestFor: 'Very simple scripts that do not require external libraries', mv3Support: 'N/A', cost: 'Free', openSource: 'N/A', setupDifficulty: 'Easy', mainTradeoff: 'Very limited — no GM_* APIs, no persistent config' },
+      { option: 'Random script mirrors', bestFor: 'Not recommended for any use case', mv3Support: 'Unknown', cost: 'Unknown', openSource: 'Unknown', setupDifficulty: 'N/A', mainTradeoff: 'Security, permission, and policy risk' },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Tampermonkey',
+        when: 'You need broad userscript compatibility, a familiar workflow, and the widest available script library.',
+        href: '/alternatives/tampermonkey',
+      },
+      {
+        choose: 'ScriptCat',
+        when: 'You are exploring alternative userscript manager workflows and want to test a different option.',
+      },
+      {
+        choose: 'Violentmonkey',
+        when: 'You prefer open-source software and want to sync scripts directly through your own GitHub account.',
+        href: '/alternatives/violentmonkey',
+      },
+      {
+        choose: 'Avoid unknown script mirrors',
+        when: 'You are considering unofficial downloads of scripts or managers from unknown sources.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Import every script at once without review',
+        whyItFails: 'Migrating a large batch of scripts without individual testing means you cannot identify which script causes problems if something goes wrong.',
+        saferAlternative: 'Test scripts one at a time after switching managers to verify expected behavior.',
+      },
+      {
+        tried: 'Assume all userscript managers behave identically',
+        whyItFails: 'Different managers handle script execution, permissions, and sync differently. Some scripts may behave unexpectedly after switching managers.',
+        saferAlternative: 'Review @match and @grant rules for each script, and test on non-sensitive pages first.',
+      },
+      {
+        tried: 'Ignore @match and @grant permissions',
+        whyItFails: 'These rules control where scripts run and what access they have. Ignoring them means you do not know which sites your scripts are active on or what data they can access.',
+        saferAlternative: 'Review permissions for each script before and after switching managers.',
+      },
+      {
+        tried: 'Install scripts from unknown mirrors',
+        whyItFails: 'Scripts from unknown sources can be modified to include tracking, data collection, or unwanted behavior. Userscripts run with significant browser access.',
+        saferAlternative: 'Only install scripts from known repositories like Greasy Fork or OpenUserJS, or scripts whose code you have personally reviewed.',
+      },
+      {
+        tried: 'Keep multiple managers enabled with overlapping scripts',
+        whyItFails: 'Running two userscript managers simultaneously causes scripts to run twice on the same pages, leading to conflicts, duplicate behavior, and unexpected results.',
+        saferAlternative: 'Use one manager at a time. Export scripts from the old manager before switching, and remove the old manager after confirming the new setup works.',
+      },
+    ],
+    relatedPages: [
+      { title: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey', description: 'Current status, migration options, and alternatives for Tampermonkey users.' },
+      { title: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey', description: 'Current status, migration options, and alternatives for Violentmonkey users.' },
+      { title: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey', description: 'Comparison of the two most established userscript managers.' },
+      { title: 'Best Userscript Managers for Chrome', href: '/guides/best-userscript-managers-for-chrome', description: 'A practical guide to choosing and setting up a userscript manager in Chrome.' },
+    ],
+    faqs: [
+      {
+        question: 'Is ScriptCat a Tampermonkey alternative?',
+        answer:
+          'Yes. ScriptCat is another userscript manager option that Chrome users may consider. It is a separate project from Tampermonkey with its own development community. Users who are exploring alternative workflows may find ScriptCat worth testing alongside Tampermonkey and Violentmonkey.',
+      },
+      {
+        question: 'Is ScriptCat better than Tampermonkey?',
+        answer:
+          'Neither is objectively better. Tampermonkey has a larger established ecosystem and wider community. ScriptCat may suit users who want to explore a different workflow. The right choice depends on your existing script library, compatibility needs, and interface preferences. Test important scripts before committing to a switch.',
+      },
+      {
+        question: 'Can I migrate scripts from Tampermonkey to ScriptCat?',
+        answer:
+          'Migrating scripts between userscript managers is possible but should be done carefully. Export your scripts from Tampermonkey, install ScriptCat from the official Chrome Web Store, and import scripts one at a time. Review @match and @grant permissions for each imported script, and test on non-sensitive pages before enabling them broadly.',
+      },
+      {
+        question: 'Are userscript managers safe?',
+        answer:
+          'Userscript managers installed from the official Chrome Web Store are generally safe. However, userscript managers can run powerful code on websites you visit, so the manager brand matters less than script trust. Always review script sources, inspect @match and @grant permissions, and test scripts on non-sensitive pages before using them on important accounts.',
+      },
+      {
+        question: 'Can userscripts read pages I visit?',
+        answer:
+          'Yes. Userscripts run on the web pages where they are active and can read page content, interact with page elements, and make network requests. This is their intended purpose. Before installing any userscript, review what permissions it requests, where it will run, and whether those permissions match its stated functionality.',
+      },
+      {
+        question: 'Should I use ScriptCat, Tampermonkey, or Violentmonkey?',
+        answer:
+          'Tampermonkey is the practical choice for users who need the widest script library and familiar workflow. Violentmonkey is the practical choice for users who prefer open-source tooling. ScriptCat may be worth testing for users exploring alternative workflows. Avoid unknown script mirrors regardless of which manager you use.',
+      },
+      {
+        question: 'What is the recommended way to test userscripts?',
+        answer:
+          'Review the script code before installing it — look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. If a script requests permissions that seem excessive for its stated purpose, do not install it. After switching managers, re-review scripts since behavior can differ.',
+      },
+    ],
+    sources: [
+      { title: 'ScriptCat GitHub Repository', url: 'https://github.com/scriptcat-org/scriptcat', publisher: 'ScriptCat', reliability: 'primary', supports: 'Official source for ScriptCat development and availability' },
+      { title: 'Tampermonkey GitHub Repository', url: 'https://github.com/Tampermonkey/tampermonkey', publisher: 'Tampermonkey', reliability: 'primary', supports: 'Official source for Tampermonkey development' },
+      { title: 'Violentmonkey GitHub Repository', url: 'https://github.com/violentmonkey/violentmonkey', publisher: 'Violentmonkey', reliability: 'primary', supports: 'Official source for Violentmonkey development' },
+      { title: 'Chrome Extension Permissions Overview', url: 'https://developer.chrome.com/docs/extensions/mv3/permissions-overview/', publisher: 'Google Chrome Developers', reliability: 'secondary', supports: 'Understanding userscript permission implications' },
+    ],
+    lastUpdated: '2026-05-25',
+  },
 ];
 
 export function getComparisonBySlug(slug: string): ComparisonRecord | undefined {
