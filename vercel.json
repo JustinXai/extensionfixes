@@ -20,6 +20,16 @@
       ],
       "destination": "https://extensionfixes.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/fix/extension-removed-from-chrome-web-store",
+      "destination": "/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation",
+      "permanent": true
+    },
+    {
+      "source": "/alternatives/proxy-switchyomega",
+      "destination": "/comparisons/foxyproxy-vs-switchyomega",
+      "permanent": true
     }
   ]
 }

@@ -49,6 +49,9 @@ const PAGES = [
   '/alternatives/stylus/',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation/',
+  // Legacy 404 redirects (GSC cleanup — verified via 308 response)
+  '/fix/extension-removed-from-chrome-web-store',
+  '/alternatives/proxy-switchyomega',
   '/alternatives/video-downloadhelper',
   '/alternatives/video-downloadhelper/',
   '/comparisons/scriptcat-vs-tampermonkey',
@@ -231,7 +234,15 @@ const PAGE_MIN_WORDS = {
   '/guides/best-custom-css-and-dark-mode-extensions': 80,
 };
 
-// Template-type → default required sections (used when page not in PAGE_REQUIRED_SECTIONS above)
+// Legacy 404 → redirect-only pages (skip content/section checks in local mode)
+// These pages are redirected in production via vercel.json; locally Next.js
+// serves them from the catch-all [slug] route without proper sections.
+const LEGACY_REDIRECT_PAGES = [
+  '/fix/extension-removed-from-chrome-web-store',
+  '/fix/extension-removed-from-chrome-web-store/',
+  '/alternatives/proxy-switchyomega',
+  '/alternatives/proxy-switchyomega/',
+];
 // To add a new page, either:
 //   a) Add an explicit entry to PAGE_REQUIRED_SECTIONS above (overrides), OR
 //   b) Ensure its URL path correctly maps to a templateType below, then it will use these defaults.
@@ -408,6 +419,17 @@ async function checkPage(page, source) {
   }
 
   const stripped = htmlData.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+
+  // Legacy redirect-only pages — no real content to validate
+  if (LEGACY_REDIRECT_PAGES.includes(page)) {
+    return {
+      label: sourceLabel,
+      pass: 0,
+      fail: 0,
+      skipped: true,
+      reason: 'Legacy redirect page — validated via check:prod:text 308 response',
+    };
+  }
 
   // Binary .rsc files return near-empty stripped text — skip content checks
   if (stripped.trim().length === 0) {
