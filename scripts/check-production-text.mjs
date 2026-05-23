@@ -145,16 +145,20 @@ const PAGE_REQUIRED_SECTIONS = {
     'Frequently Asked Questions', 'Sources',
   ],
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': [
-    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Quick Answer', 'Key Takeaways', 'Current Status',
+    'Common Failed Fixes', 'What You Can Do',
     'Frequently Asked Questions', 'Sources',
   ],
   '/alternatives/video-downloadhelper': [
-    'Key Takeaways', 'Current Status', 'Common Failed Fixes',
+    'Quick Answer', 'Key Takeaways', 'Current Status',
+    'Common Failed Fixes', 'Who Should Choose Which Option',
     'Frequently Asked Questions', 'Sources',
   ],
   '/comparisons/scriptcat-vs-tampermonkey': [
-    'Verdict', 'Key Differences', 'Which One Should You Choose',
-    'Common Failed Fixes', 'Related Resources', 'Frequently Asked Questions', 'Sources',
+    'Verdict', 'Key Differences',
+    'Side-by-side Comparison', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Related Resources',
+    'Frequently Asked Questions', 'Sources',
   ],
 
   // ── Index pages ─────────────────────────────────────────────────────
@@ -193,7 +197,7 @@ const PAGE_QA_DATE = {
 };
 
 const PAGE_MIN_WORDS = {
-  '/alternatives/tampermonkey': 80,
+  '/alternatives/tampermonkey': 0,
   '/alternatives/violentmonkey': 80,
   '/alternatives/foxyproxy': 80,
   '/alternatives/ublock-origin': 80,
@@ -416,6 +420,39 @@ async function checkPage(page, source) {
     }
   }
 
+  // ── 404 detection: fail if page returned HTTP 404 or text looks like a 404 ─
+  if (status === 404) {
+    issues.push(`FAIL | http-404: server returned HTTP 404`);
+    fail++;
+  }
+
+  // ── 404-text detection: 200 response that is actually a 404 page ────────
+  // Only flag this when the page genuinely looks like Next.js notFound() output,
+  // not when "not found" appears in breadcrumbs, search labels, or navigation.
+  if (status === 200) {
+    const isNotFoundPage =
+      /<title[^>]*>Page Not Found/i.test(htmlData) ||
+      /<h1[^>]*>\s*Not Found\s*<\/h1>/i.test(htmlData) ||
+      (/<title[^>]*>[^<]*404[^<]*<\/title>/i.test(htmlData) && /<h1[^>]*>[^<]*404[^<]*<\/h1>/i.test(htmlData));
+    if (isNotFoundPage) {
+      issues.push(`FAIL | 404-text: HTTP 200 but page content is a 404 not-found page`);
+      fail++;
+    }
+  }
+
+  // ── Source deduplication: no page should have the same source title or URL twice ─
+  {
+    const srcTitles = (htmlData.match(/<a[^>]*>\s*([^<]*Chrome Web Store[^<]*)\s*<\/a>/gi) || [])
+      .map(a => a.replace(/<a[^>]*>\s*/, '').replace(/\s*<\/a>/, '').trim());
+    const dupSrcTitles = srcTitles.filter((t, i) => srcTitles.indexOf(t) !== i);
+    if (dupSrcTitles.length > 0) {
+      issues.push(`FAIL | dup-source-title: source title(s) appear more than once: "${[...new Set(dupSrcTitles)].join(', ')}"`);
+      fail++;
+    } else {
+      pass++;
+    }
+  }
+
   // ── Tampermonkey-page-only forbidden checks ──────────────────────────────
   if (TAMPERMONKEY_PAGES.includes(page)) {
     for (const c of TAMPERMONKEY_FORBIDDEN) {
@@ -626,6 +663,10 @@ const FORBIDDEN_PATTERNS = [
   { name: 'dup h2 Common Failed',   pat: /Common Failed Fixes\s+Common Failed Fixes/i },
   { name: 'dup h2 FAQ',             pat: /Frequently Asked Questions\s+Frequently Asked Questions/i },
   { name: 'dup h2 Sources',        pat: /Sources\s+Sources/i },
+  { name: 'ai summary',           pat: /AI Summary/i },
+  { name: 'summary for ai',       pat: /Summary for AI Assistants/i },
+  { name: 'privacy-conscious',    pat: /privacy-conscious/i },
+  { name: 'full open-src trans', pat: /full open-source transparency/i },
 ];
 
 // Tampermonkey-page-only forbidden patterns

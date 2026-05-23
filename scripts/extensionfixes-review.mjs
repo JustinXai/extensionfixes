@@ -660,6 +660,123 @@ checkDuplicateH2(path.join(ROOT, 'src', 'app', 'alternatives', '[slug]', 'page.t
 checkDuplicateH2(path.join(ROOT, 'src', 'app', 'fix', '[slug]', 'page.tsx'));
 checkDuplicateH2(path.join(ROOT, 'src', 'app', 'guides', '[slug]', 'page.tsx'));
 
+// ── 17. Dynamic route wiring: generateStaticParams must cover all data slugs ─────
+// Ensures every slug in data files has a corresponding static route.
+// Rule: comparison / fix / alternative dynamic routes must generate params from the
+// corresponding data array, not from a hardcoded whitelist.
+function checkDynamicRouteWiring() {
+  const checks = [
+    {
+      routeFile: path.join(ROOT, 'src', 'app', 'comparisons', '[slug]', 'page.tsx'),
+      dataFile: path.join(ROOT, 'src', 'data', 'comparisons.ts'),
+      dataLabel: 'comparisons',
+      routeLabel: '/comparisons/[slug]',
+    },
+    {
+      routeFile: path.join(ROOT, 'src', 'app', 'fix', '[slug]', 'page.tsx'),
+      dataFile: path.join(ROOT, 'src', 'data', 'errors.ts'),
+      dataLabel: 'errors',
+      routeLabel: '/fix/[slug]',
+    },
+    {
+      routeFile: path.join(ROOT, 'src', 'app', 'alternatives', '[slug]', 'page.tsx'),
+      dataFile: path.join(ROOT, 'src', 'data', 'extensions.ts'),
+      dataLabel: 'extensions',
+      routeLabel: '/alternatives/[slug]',
+    },
+  ];
+
+  for (const check of checks) {
+    if (!fs.existsSync(check.routeFile)) {
+      errors.push(`Dynamic route [${check.routeLabel}]: page.tsx not found`);
+      continue;
+    }
+    if (!fs.existsSync(check.dataFile)) {
+      errors.push(`Dynamic route [${check.routeLabel}]: data file not found at ${check.dataLabel}`);
+      continue;
+    }
+
+    const routeContent = fs.readFileSync(check.routeFile, 'utf8');
+    const dataContent = fs.readFileSync(check.dataFile, 'utf8');
+
+    // Extract all slugs from data file
+    const dataSlugPattern = /^    slug:\s*['"]([^'"]+)['"]/gm;
+    const dataSlugs = [];
+    let m;
+    while ((m = dataSlugPattern.exec(dataContent)) !== null) {
+      dataSlugs.push(m[1]);
+    }
+
+    // Check: generateStaticParams must exist and use .map() over the data array
+    if (!/generateStaticParams\s*[=(]/.test(routeContent)) {
+      errors.push(`Dynamic route [${check.routeLabel}]: missing generateStaticParams`);
+      continue;
+    }
+    // Match: variable = array.map() OR return array.map() — use [\s\S] to cross newlines
+    if (!/\b(?:const\s+\w+\s*=\s*)?\w+[\s\S]*?\.map\s*\(/.test(routeContent)) {
+      errors.push(`Dynamic route [${check.routeLabel}]: generateStaticParams does not use data array .map() — possible hardcoded whitelist`);
+    }
+
+    // Check for hardcoded whitelist patterns (literal slug strings inside generateStaticParams)
+    let hardcodedSlugCount = 0;
+    const staticParamsBlock = routeContent.match(/generateStaticParams[^{]*\{[\s\S]*?return\s*\[[\s\S]*?\]\s*\}/);
+    if (staticParamsBlock) {
+      const block = staticParamsBlock[0];
+      hardcodedSlugCount = (block.match(/['"`]slug['"`]\s*:/g) || []).length;
+      if (hardcodedSlugCount > 0 && block.includes('.map')) {
+        // This is fine — .map over data array with explicit slug field is OK
+      } else if (hardcodedSlugCount > 10) {
+        errors.push(`Dynamic route [${check.routeLabel}]: generateStaticParams appears to use a hardcoded whitelist (${hardcodedSlugCount} explicit slug entries) — should use .map() over data array`);
+      }
+    }
+
+    // Check that every data slug would have a route
+    if (dataSlugs.length === 0) {
+      warnings.push(`Dynamic route [${check.routeLabel}]: no slugs found in ${check.dataLabel} data file`);
+    } else {
+      console.log(`  Dynamic route [${check.routeLabel}]: ${dataSlugs.length} slugs in data, ${hardcodedSlugCount > 0 ? 'hardcoded' : 'dynamically wired'}`);
+    }
+  }
+}
+checkDynamicRouteWiring();
+
+// ── 18. Sitemap coverage: every data slug must appear in sitemap.ts output ─────────
+function checkSitemapCoverage() {
+  const sitemapFile = path.join(ROOT, 'src', 'app', 'sitemap.ts');
+  if (!fs.existsSync(sitemapFile)) {
+    warnings.push('sitemap.ts not found — skipping sitemap coverage check');
+    return;
+  }
+  const sitemapContent = fs.readFileSync(sitemapFile, 'utf8');
+
+  const dataSources = [
+    { file: path.join(ROOT, 'src', 'data', 'comparisons.ts'), label: 'comparisons', mapFn: '.map' },
+    { file: path.join(ROOT, 'src', 'data', 'errors.ts'), label: 'errors', mapFn: '.map' },
+    { file: path.join(ROOT, 'src', 'data', 'extensions.ts'), label: 'extensions', mapFn: '.map' },
+  ];
+
+  for (const src of dataSources) {
+    if (!fs.existsSync(src.file)) {
+      warnings.push(`Sitemap coverage [${src.label}]: data file not found`);
+      continue;
+    }
+    const dataContent = fs.readFileSync(src.file, 'utf8');
+    const slugPattern = /^    slug:\s*['"]([^'"]+)['"]/gm;
+    const slugs = [];
+    let m;
+    while ((m = slugPattern.exec(dataContent)) !== null) {
+      slugs.push(m[1]);
+    }
+    const dataVar = src.label; // 'comparisons', 'errors', 'extensions'
+    if (sitemapContent.includes(`${dataVar}.map`)) {
+      console.log(`  Sitemap coverage [${src.label}]: ${slugs.length} slugs — covered by .map() in sitemap.ts`);
+    } else if (slugs.length > 0) {
+      warnings.push(`Sitemap coverage [${src.label}]: ${slugs.length} slugs found but sitemap.ts does not use ${dataVar}.map()`);
+    }
+  }
+}
+checkSitemapCoverage();
+
 // ── Output ───────────────────────────────────────────────────────────────────
 console.log('\nExtensionFixes Review');
 console.log('====================');

@@ -37,62 +37,6 @@ const extensionMeta: Record<string, { title: string; description: string; quickA
       'The original Great Suspender was removed from the Chrome Web Store after a malicious version incident in 2021, and Chrome proactively disabled it for installed users. Users should avoid reinstalling old CRX copies from mirror sites because modified versions can contain unwanted code. For most Chrome users, Chrome Memory Saver is the simplest built-in replacement for tab suspension. Auto Tab Discard is a practical extension alternative for automatic tab unloading, while OneTab is better for manual tab consolidation and Workona is more focused on workspace management. The best option depends on whether you want automatic suspension, simple memory savings, or session organization.',
   },
   modheader: {
-    title: 'ModHeader Alternatives for Chrome',
-    description:
-      'ModHeader is still active in Chrome. Compare alternatives like Requestly and Header Editor for HTTP header modification needs.',
-    quickAnswer:
-      'ModHeader remains active in Chrome as an MV3 extension. If you need alternatives, Requestly and Header Editor offer similar HTTP header modification capabilities with MV3 support.',
-  },
-  downthemall: {
-    title: 'DownThemAll Alternatives for Chrome',
-    description:
-      'DownThemAll remains active in Chrome. Compare download manager alternatives like Chrono and browser-native options.',
-    quickAnswer:
-      'DownThemAll remains active in Chrome. If you need alternatives, Chrono Download Manager and native browser download features offer similar capabilities for managing multiple file downloads.',
-  },
-  tampermonkey: {
-    title: 'Tampermonkey Alternatives for Chrome Users',
-    description:
-      'Compare Tampermonkey, Violentmonkey, and other userscript manager options for Chrome. Learn what to use, what to avoid, and how to migrate safely.',
-    quickAnswer:
-      'Tampermonkey is one of the most widely used userscript managers for Chrome, but some users look for alternatives because they prefer open-source tooling, want a different permission model, or need to test script compatibility in another manager. Violentmonkey is the most common alternative for users who want an open-source userscript workflow, while simple browser bookmarks or snippets may be enough for very small personal scripts. Userscript managers can run powerful code on pages you visit, so the main decision is not only which extension to install, but also which scripts you trust and how carefully you review permissions.',
-  },
-  violentmonkey: {
-    title: 'Violentmonkey Alternatives for Chrome Users',
-    description:
-      'Compare Violentmonkey, Tampermonkey, and userscript manager options for Chrome. Learn what to use, what to avoid, and how to migrate safely.',
-    quickAnswer:
-      'Violentmonkey is an open-source userscript manager used to run custom browser scripts on websites you visit. If you need a Violentmonkey alternative for Chrome, Tampermonkey is the most widely known option, while Violentmonkey remains a practical choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permission expectations, browser support, and how much control you want over imported scripts. Userscript managers can run powerful code on pages you visit, so avoid random script mirrors, review script permissions, and only install scripts from sources you trust.',
-  },
-  'auto-tab-discard': {
-    title: 'Auto Tab Discard Alternatives for Chrome',
-    description:
-      'Auto Tab Discard is actively maintained in Chrome. Compare alternatives like Chrome Memory Saver and OneTab for tab management.',
-    quickAnswer:
-      'Auto Tab Discard is an actively maintained MV3 extension for suspending inactive tabs. Chrome Memory Saver is the built-in alternative. OneTab offers manual tab consolidation.',
-  },
-  foxyproxy: {
-    title: 'FoxyProxy Alternatives for Chrome',
-    description:
-      'Compare FoxyProxy, ZeroOmega, and other proxy manager options for Chrome. Learn which is best for profile-based switching or SwitchyOmega migration.',
-    quickAnswer:
-      'FoxyProxy remains a practical Chrome proxy manager for users who need multiple proxy profiles, pattern-based switching, and quick control over browser proxy settings. If you are migrating from SwitchyOmega, ZeroOmega may feel more familiar because it is a community fork designed for modern Manifest V3 browsers. FoxyProxy is a better fit when you want an established proxy manager with long-running Chrome and Firefox support. The best choice depends on whether you need SwitchyOmega-style rules, FoxyProxy-style profiles, or a simpler one-click proxy switcher.',
-  },
-  'session-buddy': {
-    title: 'OneTab Alternatives for Chrome',
-    description:
-      'OneTab is actively maintained in Chrome. Compare alternatives like Auto Tab Discard and Session Buddy for tab management.',
-    quickAnswer:
-      'OneTab is an actively maintained MV3 extension for consolidating open tabs into a list. Auto Tab Discard offers automatic tab suspension. Session Buddy provides session management.',
-  },
-  'video-downloadhelper': {
-    title: 'Video DownloadHelper Alternatives for Chrome',
-    description:
-      'Video DownloadHelper may be affected by Chrome MV2 deprecation. Learn about MV3-compatible versions and alternatives.',
-    quickAnswer:
-      'Video DownloadHelper is being updated for MV3 compatibility. The latest version from the Chrome Web Store should work in Chrome 138+. Chrono Download Manager is an alternative download manager.',
-  },
-  'user-agent-switcher': {
     title: 'User-Agent Switcher Alternatives for Chrome',
     description:
       'User-Agent Switcher and alternatives for Chrome. Compare Chrome DevTools and Requestly for developer testing needs.',

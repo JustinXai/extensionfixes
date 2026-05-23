@@ -1,4 +1,4 @@
-// /comparisons/[slug] page — scaffold only, no active routes yet.
+// /comparisons/[slug] page
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { comparisons, getComparisonBySlug } from '@/data/comparisons';
