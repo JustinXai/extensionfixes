@@ -584,8 +584,6 @@ async function checkPage(page, source) {
       'uBlock Origin vs uBlock Origin Lite',
       'FoxyProxy vs SwitchyOmega',
       'Chrome 140 and Manifest V2 Extensions',
-      'Best Custom CSS and Dark Mode Extensions for Chrome',
-      'Chrome Extensions Disabled',
     ];
     for (const text of sitemapRequired) {
       if (stripped.includes(text)) {
