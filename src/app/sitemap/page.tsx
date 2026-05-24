@@ -271,10 +271,12 @@ export default function SitemapPage() {
                   </svg>
                 </div>
               </Link>
-              {landingPages.slice(0, 3).map((page) => (
-                <Link
-                  key={page.slug}
-                  href={`/${page.slug}`}
+              {landingPages
+                .filter((page) => page.templateType === 'guide' || page.templateType === 'collection')
+                .map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/guides/${page.slug}`}
                   className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-gray-300 hover:shadow-sm transition-all"
                 >
                   <div className="flex items-start justify-between gap-3">

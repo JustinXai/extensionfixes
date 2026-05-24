@@ -62,6 +62,8 @@ const PAGES = [
   '/comparisons/scriptcat-vs-tampermonkey/',
   '/sitemap',
   '/sitemap/',
+  '/guides',
+  '/guides/',
   '/fix/chrome-extensions-disabled',
   '/fix/chrome-extensions-disabled/',
   '/guides/best-custom-css-and-dark-mode-extensions',
@@ -672,6 +674,40 @@ async function checkPage(page, source) {
         pass++;
       } else {
         issues.push(`FAIL | comparisons-missing: /comparisons page does not contain "${text}"`);
+        fail++;
+      }
+    }
+  }
+
+  // ── Guides index page content checks ──────────────────────────────────
+  if (page === '/guides' || page === '/guides/') {
+    const guidesRequired = [
+      'Chrome Extension Manifest V2 and V3 Explained',
+      'Best Custom CSS and Dark Mode Extensions',
+      'Best Tab Suspender Extensions for Chrome',
+      'Best Userscript Managers for Chrome',
+    ];
+    for (const text of guidesRequired) {
+      if (stripped.includes(text)) {
+        pass++;
+      } else {
+        issues.push(`FAIL | guides-missing: /guides page does not contain "${text}"`);
+        fail++;
+      }
+    }
+  }
+
+  // ── Sitemap page content checks ─────────────────────────────────────
+  if (page === '/sitemap' || page === '/sitemap/') {
+    const sitemapRequired = [
+      'Chrome Extension Manifest V2 and V3 Explained',
+      'Violentmonkey vs ScriptCat',
+    ];
+    for (const text of sitemapRequired) {
+      if (stripped.includes(text)) {
+        pass++;
+      } else {
+        issues.push(`FAIL | sitemap-missing: /sitemap page does not contain "${text}"`);
         fail++;
       }
     }

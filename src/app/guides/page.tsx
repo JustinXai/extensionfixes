@@ -19,19 +19,8 @@ function getRelatedExtensions(slugs: string[]) {
 }
 
 export default function GuidesPage() {
-  const additionalGuides = landingPages.filter((page) =>
-    [
-      'chrome-extension-error-messages',
-      'this-extension-was-turned-off-because-it-is-no-longer-supported',
-      'foxyproxy-alternative-for-chrome',
-      'the-great-suspender-malware',
-      'switchyomega-not-working',
-      'switchyomega-alternative',
-      'ublock-origin-no-longer-supported',
-      'ublock-origin-lite-vs-ublock-origin',
-      'this-extension-may-soon-no-longer-be-supported',
-      'chrome-userscript-manager-alternatives',
-    ].includes(page.slug)
+  const additionalGuides = landingPages.filter(
+    (page) => page.templateType === 'guide' || page.templateType === 'collection'
   );
 
   return (
@@ -116,8 +105,8 @@ export default function GuidesPage() {
               <Link
                 key={page.slug}
                 href={
-                  page.slug === 'chrome-userscript-manager-alternatives'
-                    ? '/guides/chrome-userscript-manager-alternatives'
+                  page.templateType === 'guide' || page.templateType === 'collection'
+                    ? `/guides/${page.slug}`
                     : `/${page.slug}`
                 }
                 className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"

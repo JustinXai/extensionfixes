@@ -535,7 +535,7 @@ export const comparisons: ComparisonRecord[] = [
       'Violentmonkey and ScriptCat are both userscript manager options, but they may fit different users depending on browser support, script compatibility, permissions, and workflow preferences. Violentmonkey is commonly chosen by users who prefer open-source userscript tooling and a familiar lightweight workflow. ScriptCat may appeal to users testing alternative userscript manager behavior or more advanced script workflows. Neither option makes unknown scripts safe by default. Users should review script sources, inspect @match and @grant rules, and test important scripts on non-sensitive pages before switching managers.',
     comparedItems: ['Violentmonkey', 'ScriptCat', 'Tampermonkey (related)'],
     verdict:
-      'Violentmonkey is a practical choice for users who prefer fully open-source userscript tooling and a familiar lightweight workflow. ScriptCat is a practical choice for users who want to test alternative userscript manager behavior or explore a different development community. Neither is universally better — the right choice depends on your existing script library, browser version, and workflow preferences. Test important scripts before committing to either option.',
+      'Violentmonkey is a practical choice for users who prefer open-source userscript tooling and a familiar lightweight workflow. ScriptCat is a practical choice for users who want to test alternative userscript manager behavior or explore a different development community. Neither is universally better — the right choice depends on your existing script library, browser version, and workflow preferences. Test important scripts before committing to either option.',
     keyDifferences: [
       'Violentmonkey has a longer track record and a well-established open-source community; ScriptCat is a more recently active project.',
       'Both support the standard userscript API, but script compatibility may vary depending on specific @grant and @match rules.',
@@ -551,7 +551,7 @@ export const comparisons: ComparisonRecord[] = [
     decisionGuide: [
       {
         choose: 'Violentmonkey',
-        when: 'You prefer fully open-source userscript tooling, a lightweight interface, and a familiar workflow.',
+        when: 'You prefer open-source userscript tooling, a lightweight interface, and a familiar workflow.',
         href: '/alternatives/violentmonkey',
       },
       {
