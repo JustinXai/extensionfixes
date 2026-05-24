@@ -1081,6 +1081,21 @@ export const errors: ErrorRecord[] = [
         answer:
           'Yes. If Chrome shows a malware, suspicious behavior, or policy violation warning, remove the extension from Chrome. Do not keep it installed while looking for workarounds. Extensions flagged for these reasons can continue to access pages you visit while installed, even if they are disabled.',
       },
+      {
+        question: 'Was The Great Suspender disabled because of malware or suspicious behavior?',
+        answer:
+          'The Great Suspender was removed and disabled because the new owner (who took over in late 2020) introduced code that security researchers flagged as problematic. Google proactively disabled the extension to protect users. The removal was a policy and security action. This is relevant because The Great Suspender is one of the most commonly affected extensions on ExtensionFixes.',
+      },
+      {
+        question: 'Should I reinstall an extension removed from the Chrome Web Store?',
+        answer:
+          'Generally no. Extensions removed from the Chrome Web Store are no longer available for new installation. If you already had the extension installed, Chrome may have disabled it for a reason. Do not try to reinstall removed extensions from unofficial mirror sites or CRX downloads. Use a maintained alternative from the official Chrome Web Store instead.',
+      },
+      {
+        question: 'What should I do if an extension I trusted was later removed?',
+        answer:
+          'If an extension you trusted was later removed or disabled, first remove it from Chrome. Search ExtensionFixes for a verified alternative to your affected extension. Check whether the developer has published a maintained update on the official Chrome Web Store. Avoid unofficial mirror sites, CRX downloads, or lookalike extensions from unknown developers.',
+      },
     ],
     sources: [
       {
@@ -1108,7 +1123,12 @@ export const errors: ErrorRecord[] = [
         supports: 'What extension permissions mean and why they matter for user security',
       },
     ],
-    lastUpdated: '2026-05-25',
+    lastUpdated: '2026-05-27',
+    relatedPages: [
+      '/alternatives/great-suspender',
+      '/alternatives/auto-tab-discard',
+      '/guides/best-tab-suspender-extensions-chrome',
+    ],
     keyTakeaways: [
       'Chrome can disable extensions for malware, suspicious behavior, or policy violations.',
       'Policy-disabled extensions should not be forced back into Chrome.',

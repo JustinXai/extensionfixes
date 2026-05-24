@@ -615,6 +615,31 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'Yes. Chrome Memory Saver is built into Chrome. Auto Tab Discard is a well-maintained alternative on the Chrome Web Store. Both are safe options for managing tab memory usage.',
       },
+      {
+        question: 'What replaced The Great Suspender?',
+        answer:
+          'There is no direct replacement for The Great Suspender. Chrome Memory Saver is the closest built-in option for automatic tab discarding. Auto Tab Discard is the most feature-rich extension alternative for automatic tab suspension. OneTab handles manual tab consolidation differently. No current tool replicates every feature of the original Great Suspender.',
+      },
+      {
+        question: 'Is Auto Tab Discard a Great Suspender alternative?',
+        answer:
+          'Auto Tab Discard is a practical alternative for users looking for automatic tab suspension. It offers customizable discard rules, can exclude specific domains, and is actively maintained. It is not a feature-identical replacement but serves the same core purpose of reducing memory usage from inactive tabs.',
+      },
+      {
+        question: 'Is Chrome Memory Saver enough after The Great Suspender?',
+        answer:
+          'For most users, Chrome Memory Saver covers the basic need of discarding inactive tabs to save memory. It requires no setup and works automatically. If you need more granular control over which tabs are discarded or want to exclude specific sites, Auto Tab Discard provides those options as an extension.',
+      },
+      {
+        question: 'Should I use OneTab or Auto Tab Discard?',
+        answer:
+          'Choose Auto Tab Discard if you want tabs to automatically suspend based on activity without manual intervention. Choose OneTab if you prefer to manually decide which tabs to save into a list, share tab collections, or consolidate tabs at specific moments. Auto Tab Discard is closer to The Great Suspender in its automatic behavior.',
+      },
+      {
+        question: 'Was The Great Suspender removed because of malware?',
+        answer:
+          'The original Great Suspender was removed because the new owner after the 2020 ownership transfer introduced code that security researchers flagged as problematic. Google proactively disabled the extension to protect users. The original developer had no involvement with the problematic version. The removal was not due to a technical issue — it was a security and trust concern.',
+      },
     ],
     sources: [
       {
@@ -658,7 +683,6 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Session Buddy MV3 availability and active maintenance status',
       },
     ],
-    lastUpdated: '2026-05-23',
     atAGlance: {
       originalExtension: 'The Great Suspender',
       currentStatus: 'Removed from Chrome Web Store ? disabled by Google due to malware concerns',
@@ -762,6 +786,12 @@ export const extensions: ExtensionRecord[] = [
         doesNotWork: 'Great Suspender will not return to the Chrome Web Store',
       },
     ],
+    relatedPages: [
+      '/alternatives/auto-tab-discard',
+      '/guides/best-tab-suspender-extensions-chrome',
+      '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+    ],
+    lastUpdated: '2026-05-27',
   },
   {
     slug: 'modheader',
@@ -1939,7 +1969,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Auto Tab Discard is actively maintained as an MV3 extension. It is one of the most popular tab management alternatives for Chrome.',
     shortAnswer:
-      'Auto Tab Discard is an actively maintained MV3 extension that suspends inactive tabs to save memory. It offers customizable discard rules and is available on the Chrome Web Store. Chrome built-in Memory Saver is a no-extension alternative.',
+      'Auto Tab Discard is a Chrome extension used to reduce memory usage by unloading inactive tabs. If you are looking for an Auto Tab Discard alternative, Chrome Memory Saver is the simplest built-in option for many users, while OneTab is better for manually saving groups of tabs and Workona is more focused on workspace organization. Users coming from The Great Suspender should avoid old CRX copies and choose maintained options. The best choice depends on whether you want automatic tab unloading, manual tab saving, or full workspace management.',
     whatHappened: [
       'Auto Tab Discard was updated to support Manifest V3.',
       'The extension remains actively maintained with new features.',
@@ -1991,6 +2021,24 @@ export const extensions: ExtensionRecord[] = [
         ],
         note: 'OneTab provides a simple way to manage open tabs without automatic suspension.',
       },
+      {
+        name: 'Workona',
+        slug: 'workona',
+        bestFor: 'Users needing workspace organization with session management',
+        status: 'active_mv3',
+        chromeStoreUrl:
+          'https://chromewebstore.google.com/detail/workona/ailiggmclmgkjkkkjpdagfknmgogfopb',
+        pros: [
+          'Workspace-based tab organization',
+          'Session saving and restoration',
+          'Cross-device sync capabilities',
+        ],
+        cons: [
+          'More complex than simple tab suspension',
+          'May require creating an account for full features',
+        ],
+        note: 'Workona offers comprehensive workspace management beyond basic tab suspension.',
+      },
     ],
     faqs: [
       {
@@ -2006,22 +2054,171 @@ export const extensions: ExtensionRecord[] = [
       {
         question: 'Is Auto Tab Discard safe?',
         answer:
-          'Yes. Auto Tab Discard is a well-maintained open-source extension available on the Chrome Web Store. It only manages tab resource usage and does not access your browsing data.',
+          'Yes. Auto Tab Discard is a well-maintained open-source extension available on the Chrome Web Store. It only manages tab resource usage and does not access your browsing data beyond what is needed to detect tab activity.',
       },
+      {
+        question: 'What is the best Auto Tab Discard alternative?',
+        answer:
+          'Chrome Memory Saver is the simplest built-in alternative with no installation needed. OneTab is better for manual tab consolidation. Workona is more suited for workspace and project organization. The best choice depends on whether you want automatic suspension, manual saving, or full session management.',
+      },
+      {
+        question: 'Is Chrome Memory Saver enough for most users?',
+        answer:
+          'For most users, Chrome Memory Saver covers basic tab discarding needs. It turns off inactive tabs automatically without any configuration. If you need more control over which tabs are discarded, Auto Tab Discard offers finer-grained options.',
+      },
+      {
+        question: 'Is Auto Tab Discard a Great Suspender alternative?',
+        answer:
+          'Auto Tab Discard is a practical tab management option for users who need automatic tab unloading controls. It is not a feature-identical replacement for The Great Suspender but serves a similar purpose of reducing memory usage from inactive tabs.',
+      },
+      {
+        question: 'Should I use OneTab or Auto Tab Discard?',
+        answer:
+          'Choose Auto Tab Discard if you want tabs to suspend automatically based on activity. Choose OneTab if you prefer to manually save groups of tabs into lists, share them, or consolidate them at specific moments.',
+      },
+      {
+        question: 'Can tab suspension extensions lose tabs?',
+        answer:
+          'Tabs that are suspended or discarded can be recovered by clicking them — they reload automatically. However, if an extension is uninstalled or disabled, suspended sessions may not persist. Always export important tabs before switching tools.',
+      },
+      {
+        question: 'Is it safe to install old Great Suspender CRX files?',
+        answer:
+          'No. Old CRX copies of The Great Suspender or similar tab suspenders from mirror sites can contain unwanted code, may be modified by third parties, and lack security updates. Use maintained options like Chrome Memory Saver or Auto Tab Discard instead.',
+      },
+      {
+        question: 'What should I use for workspace organization?',
+        answer:
+          'Workona is designed for workspace and project-based tab management. It lets you save sessions, organize tabs by project, and sync across devices. If you only need basic tab discarding, Auto Tab Discard or Chrome Memory Saver are lighter-weight options.',
+      },
+    ],
+    keyTakeaways: [
+      'Auto Tab Discard is used for automatic tab unloading to reduce memory usage.',
+      'Chrome Memory Saver is the simplest built-in memory-saving option.',
+      'OneTab is better for manual tab consolidation and sharing tab lists.',
+      'Workona is better for workspace and project organization.',
+      'Users should avoid old CRX copies of discontinued tab suspender extensions.',
+      'Auto Tab Discard requires minimal permissions for tab management.',
+    ],
+    currentStatus: [
+      { label: 'Auto Tab Discard status', value: 'Actively maintained MV3 extension on Chrome Web Store', variant: 'good' },
+      { label: 'Chrome Memory Saver', value: 'Built into Chrome — no extension needed', variant: 'good' },
+      { label: 'Main risk', value: 'Old tab suspender CRX files from mirror sites', variant: 'bad' },
+      { label: 'Best practice', value: 'Export important sessions before switching tools', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 27, 2026', variant: 'neutral' },
+    ],
+    decisionGuide: [
+      { choose: 'Auto Tab Discard', when: 'You want automatic tab unloading with configurable discard rules.' },
+      { choose: 'Chrome Memory Saver', when: 'You want the simplest built-in option without installing another extension.' },
+      { choose: 'OneTab', when: 'You prefer manually saving groups of tabs into lists.' },
+      { choose: 'Workona', when: 'You manage tabs across projects or workspaces and need session organization.' },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Install old Great Suspender CRX files from mirror sites',
+        whyItFails: 'Old tab suspender packages may contain unwanted code, may be modified by third parties, and lack security updates.',
+        saferAlternative: 'Use Chrome Memory Saver or Auto Tab Discard from the official Chrome Web Store.',
+      },
+      {
+        tried: 'Assume every tab suspender behaves the same as The Great Suspender',
+        whyItFails: 'Each tool has different automation levels, configuration options, and session recovery capabilities.',
+        saferAlternative: 'Test each option with your actual workflow before committing to one.',
+      },
+      {
+        tried: 'Use multiple tab suspension extensions at once',
+        whyItFails: 'Running two tab suspenders simultaneously can cause conflicts, unexpected tab unloading, or data loss.',
+        saferAlternative: 'Use only one tab management tool at a time.',
+      },
+      {
+        tried: 'Forget to export important sessions before switching',
+        whyItFails: 'Some tab management tools do not persist sessions across uninstalls or browser resets.',
+        saferAlternative: 'Export or bookmark important tab groups before installing a new tool.',
+      },
+      {
+        tried: 'Disable Chrome Memory Saver without testing alternatives',
+        whyItFails: 'Built-in Memory Saver covers most basic tab discarding needs for typical users.',
+        saferAlternative: 'Test Auto Tab Discard with your actual workflow before disabling the built-in option.',
+      },
+    ],
+    comparisonTable: [
+      {
+        option: 'Auto Tab Discard',
+        bestFor: 'Automatic tab unloading with fine-grained controls',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Yes',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Requires extension permissions — more configurable than Memory Saver',
+      },
+      {
+        option: 'Chrome Memory Saver',
+        bestFor: 'Simple built-in memory saving with zero setup',
+        mv3Support: 'Built-in (N/A)',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'None',
+        mainTradeoff: 'Minimal customization — on/off toggle only',
+      },
+      {
+        option: 'OneTab',
+        bestFor: 'Manual tab consolidation and tab list sharing',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Not automatic suspension — requires manual action to save and restore',
+      },
+      {
+        option: 'Workona',
+        bestFor: 'Workspace and project-based session organization',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'No',
+        setupDifficulty: 'Medium',
+        mainTradeoff: 'More features than basic tab suspension — steeper learning curve',
+      },
+    ],
+    relatedPages: [
+      '/alternatives/great-suspender',
+      '/guides/best-tab-suspender-extensions-chrome',
+      '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
+      '/alternatives',
     ],
     sources: [
       {
         title: 'Auto Tab Discard Chrome Web Store',
         url: 'https://chromewebstore.google.com/detail/auto-tab-discard-suspend/jhnleheckmknfcgijgkadoemagpecfol',
         publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Auto Tab Discard MV3 availability, active maintenance, and developer identity',
       },
       {
-        title: 'Auto Tab Discard ? WebExtensions.org Listing',
-        url: 'https://webextension.org/listing/tab-discard.html',
-        publisher: 'WebExtensions.org',
+        title: 'Chrome Performance > Memory Saver',
+        url: 'https://support.google.com/chrome/answer/12929950',
+        publisher: 'Google Chrome Help',
+        sourceType: 'chrome-developers',
+        reliability: 'primary',
+        supports: 'Chrome built-in Memory Saver feature and how it works',
+      },
+      {
+        title: 'OneTab Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'OneTab MV3 availability and active maintenance',
+      },
+      {
+        title: 'Workona Chrome Web Store',
+        url: 'https://chromewebstore.google.com/detail/workona/ailiggmclmgkjkkkjpdagfknmgogfopb',
+        publisher: 'Chrome Web Store',
+        sourceType: 'chrome-web-store',
+        reliability: 'primary',
+        supports: 'Workona MV3 availability and workspace organization features',
       },
     ],
-    lastUpdated: '2026-05-22',
+    lastUpdated: '2026-05-27',
   },
   {
     slug: 'foxyproxy',

@@ -49,6 +49,10 @@ const PAGES = [
   '/alternatives/stylus/',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation/',
+  '/alternatives/auto-tab-discard',
+  '/alternatives/auto-tab-discard/',
+  '/guides/best-tab-suspender-extensions-chrome',
+  '/guides/best-tab-suspender-extensions-chrome/',
   // Legacy 404 redirects (GSC cleanup — verified via 308 response)
   '/fix/extension-removed-from-chrome-web-store',
   '/alternatives/proxy-switchyomega',
@@ -156,6 +160,16 @@ const PAGE_REQUIRED_SECTIONS = {
     'Common Failed Fixes', 'What You Can Do',
     'Frequently Asked Questions', 'Sources',
   ],
+  '/alternatives/auto-tab-discard': [
+    'Key Takeaways', 'Current Status',
+    'Common Failed Fixes', 'Frequently Asked Questions', 'Sources',
+  ],
+  '/guides/best-tab-suspender-extensions-chrome': [
+    'Why Tab Suspension Matters', 'Selection Criteria',
+    'Tab Suspender Options Comparison',
+    'Decision Guide',
+    'Frequently Asked Questions', 'Sources',
+  ],
   '/alternatives/video-downloadhelper': [
     'Quick Answer', 'Key Takeaways', 'Current Status',
     'Common Failed Fixes', 'Who Should Choose Which Option',
@@ -196,7 +210,7 @@ const PAGE_QA_DATE = {
   '/alternatives/violentmonkey': 'May 26, 2026',
   '/alternatives/foxyproxy': 'May 22, 2026',
   '/alternatives/ublock-origin': 'May 22, 2026',
-  '/alternatives/great-suspender': 'May 23, 2026',
+  '/alternatives/great-suspender': 'May 27, 2026',
   '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
   '/comparisons/tampermonkey-vs-violentmonkey': 'May 23, 2026',
   '/comparisons/ublock-origin-vs-ublock-origin-lite': 'May 23, 2026',
@@ -207,7 +221,9 @@ const PAGE_QA_DATE = {
   '/fix/chrome-enable-unsupported-extensions': 'May 26, 2026',
   '/alternatives/dark-reader': 'May 26, 2026',
   '/alternatives/stylus': 'May 24, 2026',
-  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 'May 25, 2026',
+  '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 'May 27, 2026',
+  '/alternatives/auto-tab-discard': 'May 27, 2026',
+  '/guides/best-tab-suspender-extensions-chrome': 'May 27, 2026',
   '/alternatives/video-downloadhelper': 'May 25, 2026',
   '/comparisons/scriptcat-vs-tampermonkey': 'May 25, 2026',
   '/fix/chrome-extensions-disabled': 'May 26, 2026',
@@ -226,6 +242,8 @@ const PAGE_MIN_WORDS = {
   '/guides/best-userscript-managers-for-chrome': 90,
   '/fix/chrome-enable-unsupported-extensions': 80,
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 80,
+  '/alternatives/auto-tab-discard': 80,
+  '/guides/best-tab-suspender-extensions-chrome': 80,
   // TODO: page.tsx extensionMeta['video-downloadhelper'].quickAnswer has a 29-word override
   // that prevents the full shortAnswer from being shown. QA word check disabled until resolved.
   '/alternatives/video-downloadhelper': 0,
@@ -642,10 +660,10 @@ async function checkPage(page, source) {
     } else {
       pass++;
     }
-    if (stripped.includes('Last updated: May 23, 2026')) {
+    if (stripped.includes('Last updated: May 27, 2026')) {
       pass++;
     } else {
-      issues.push('FAIL | great-suspender-date: expected "Last updated: May 23, 2026" not found');
+      issues.push('FAIL | great-suspender-date: expected "Last updated: May 27, 2026" not found');
       fail++;
     }
   }
