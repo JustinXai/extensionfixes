@@ -1029,6 +1029,7 @@ export const landingPages: LandingPageRecord[] = [
   },
   {
     slug: 'chrome-userscript-manager-alternatives',
+    templateType: 'guide',
     title: 'Chrome Userscript Manager Alternatives: Tampermonkey vs Violentmonkey',
     description:
       'Compare Chrome userscript manager options including Tampermonkey and Violentmonkey. Learn how to choose, migrate, and avoid unsafe scripts.',
@@ -1162,6 +1163,7 @@ export const landingPages: LandingPageRecord[] = [
   },
   {
     slug: 'best-custom-css-and-dark-mode-extensions',
+    templateType: 'guide',
     title: 'Best Custom CSS and Dark Mode Extensions for Chrome',
     description:
       'Compare Dark Reader, Stylus, and other Chrome appearance tools for dark mode, custom CSS, and userstyle workflows.',
@@ -1328,6 +1330,7 @@ export const landingPages: LandingPageRecord[] = [
   },
   {
     slug: 'best-userscript-managers-for-chrome',
+    templateType: 'guide',
     title: 'Best Userscript Managers for Chrome: Tampermonkey, Violentmonkey, and More',
     description:
       'Compare practical userscript manager options for Chrome, including Tampermonkey and Violentmonkey, plus safety tips for choosing scripts.',
@@ -1484,6 +1487,7 @@ export const landingPages: LandingPageRecord[] = [
   },
   {
     slug: 'best-tab-suspender-extensions-chrome',
+    templateType: 'guide',
     title: 'Best Tab Suspender Extensions for Chrome: Memory Saver, Auto Tab Discard, OneTab',
     description:
       'Compare Chrome Memory Saver, Auto Tab Discard, OneTab, and Workona for tab suspension, memory saving, and session organization.',
@@ -1660,6 +1664,160 @@ export const landingPages: LandingPageRecord[] = [
     bestOptions: [
       { label: 'For simplest use:', description: 'Chrome Memory Saver (built-in)' },
       { label: 'For most control:', description: 'Auto Tab Discard' },
+    ],
+  },
+  {
+    slug: 'chrome-extension-manifest-v2-v3-explained',
+    templateType: 'guide',
+    title: 'Chrome Extension Manifest V2 and V3 Explained for Chrome Users',
+    description:
+      'Learn what Chrome extension manifest versions mean, why Manifest V2 extensions stopped working, and what unsupported manifest errors usually mean.',
+    h1: 'Chrome Extension Manifest V2 and V3 Explained',
+    shortAnswer:
+      'A Chrome extension manifest is the configuration file that tells Chrome what an extension is allowed to do, which APIs it uses, and how it should run. Manifest V2 and Manifest V3 are different extension platform versions. Many older Chrome extensions stopped working because Chrome phased out ordinary-user support for Manifest V2. If Chrome says an extension uses an unsupported manifest version, changing the manifest number alone usually does not fix the problem because the extension may depend on APIs that no longer work in modern Chrome. A practical path is to check for a maintained MV3 update, find an alternative extension, or use a browser that still supports MV2.',
+    aliases: [
+      'chrome manifest',
+      'chrome manifest v2',
+      'chrome v2 manifest',
+      'manifest v2',
+      'manifest v2 extensions',
+      'chrome extension manifest',
+      'unsupported manifest version chrome extension',
+      'chrome extension manifest unknown keys ignored applications gecko',
+      'manifest v3',
+      'manifest v3 chrome',
+      'chrome manifest v3',
+      'mv2 mv3 chrome',
+    ],
+    sections: [
+      {
+        type: 'text',
+        title: 'What Is a Chrome Extension Manifest?',
+        content:
+          'Every Chrome extension includes a file called manifest.json. This file tells Chrome the extension\'s name, version, what permissions it needs, which scripts to run, and which websites it can interact with. The manifest version field tells Chrome which extension platform version the extension was built for. Manifest V2 and Manifest V3 are the two major platform versions, and they have important differences in how extensions run.',
+      },
+      {
+        type: 'text',
+        title: 'Manifest V2 vs Manifest V3: What Changed?',
+        content:
+          'Manifest V2 (MV2) is the older Chrome extension platform. Manifest V3 (MV3) is the current platform that Chrome has been transitioning toward. The main differences are in background scripts, API capabilities, and permission handling. MV3 uses service workers instead of persistent background pages, changes how network requests are handled, and introduces a different permissions model. These changes affect how developers build extensions and how those extensions behave in Chrome.',
+      },
+      {
+        type: 'list',
+        title: 'Key Takeaways',
+        items: [
+          'The manifest file defines how a Chrome extension works, including its permissions and API usage.',
+          'Manifest V2 and Manifest V3 are different Chrome extension platform versions with different API models.',
+          'Many MV2 extensions stopped working because Chrome phased out ordinary-user support for MV2.',
+          'Unsupported manifest errors usually require a real extension update, not just editing manifest.json.',
+          'Firefox or Gecko-specific manifest keys may be ignored by Chrome and do not fix compatibility issues.',
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Current Status (as of May 2026)',
+        items: [
+          'Chrome status: Manifest V3 is the current Chrome extension platform path for ordinary users.',
+          'MV2 status: Ordinary-user MV2 support has been phased out in modern Chrome versions.',
+          'Developer note: Extensions need real API migration, not only manifest version edits, to work on MV3.',
+          'User note: Maintained updates or alternatives are the practical path forward for users.',
+          'Last reviewed: May 28, 2026.',
+        ],
+      },
+      {
+        type: 'table',
+        title: 'Manifest V2 vs Manifest V3 Comparison',
+        columns: ['Topic', 'Manifest V2', 'Manifest V3', 'What it means for you'],
+        rows: [
+          ['Platform status', 'Older Chrome extension platform', 'Current Chrome extension platform path', 'Old extensions may need migration to continue working'],
+          ['User impact', 'Some MV2 extensions stopped working', 'Maintained extensions use MV3-compatible design', 'Users need updates or alternatives for discontinued extensions'],
+          ['Developer work', 'Older APIs and persistent background pages', 'Service workers and different permissions model', 'Code changes are required beyond just editing manifest_version'],
+          ['Common error', 'Unsupported manifest version', 'Extension may need MV3 update', 'Editing manifest.json alone is usually not enough to fix the problem'],
+        ],
+      },
+      {
+        type: 'list',
+        title: 'How to Handle Unsupported Manifest Errors',
+        items: [
+          'Check whether the developer has released a maintained MV3 version of the extension.',
+          'Search the Chrome Web Store for a similar extension that is actively maintained.',
+          'If you are a developer, review which APIs and background behavior must be migrated to MV3.',
+          'If Chrome mentions applications or gecko keys in the error, understand those are usually Firefox-related metadata that Chrome ignores.',
+          'Avoid old CRX packages from unofficial sources — they can contain unwanted code.',
+        ],
+      },
+      {
+        type: 'text',
+        title: 'Why Firefox or Gecko Keys Do Not Fix Chrome Errors',
+        content:
+          'You may see Chrome warnings mentioning "applications" or "gecko" in manifest errors. These keys are Firefox-specific metadata used by Gecko-based browsers and are ignored by Chrome. Adding or modifying these fields in manifest.json does not make an extension compatible with Chrome and may not resolve any errors.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a Chrome extension manifest?',
+        answer:
+          'A Chrome extension manifest is a JSON file named manifest.json that is included in every Chrome extension package. It tells Chrome the extension\'s name, version, permissions, background scripts, content scripts, and which websites the extension can access. The manifest_version field specifies which Chrome extension platform version the extension targets.',
+      },
+      {
+        question: 'What is Manifest V2?',
+        answer:
+          'Manifest V2 (MV2) is the older Chrome extension platform version. Extensions targeting MV2 use persistent background pages and older extension APIs. Chrome has phased out MV2 support for ordinary users, which means many older MV2 extensions stopped working in recent Chrome versions.',
+      },
+      {
+        question: 'What is Manifest V3?',
+        answer:
+          'Manifest V3 (MV3) is the current Chrome extension platform version. MV3 extensions use service workers instead of persistent background pages, have a different permissions model, and use updated APIs. All maintained Chrome extensions should target MV3.',
+      },
+      {
+        question: 'Why did Manifest V2 extensions stop working?',
+        answer:
+          'Chrome phased out MV2 support for ordinary users as part of its platform modernization plan. This means extensions built for MV2 no longer load in regular Chrome, even if they are installed. Extensions need to be updated to MV3 by their developers to continue working.',
+      },
+      {
+        question: 'Can I change manifest_version from 2 to 3 myself?',
+        answer:
+          'Simply changing manifest_version in manifest.json from 2 to 3 does not make an extension work. MV3 extensions may use different APIs and require different background script behavior. An extension that only has its manifest version changed without corresponding code updates will likely still fail or behave incorrectly.',
+      },
+      {
+        question: 'What does "unsupported manifest version" mean?',
+        answer:
+          'Chrome shows this error when an extension is built for a manifest version that Chrome no longer supports for that user. This most commonly happens with MV2 extensions in modern Chrome. The fix requires a real extension update from the developer, not a manual manifest edit.',
+      },
+      {
+        question: 'What does "manifest unknown keys ignored: applications" mean?',
+        answer:
+          'This message means Chrome found keys in manifest.json that it does not recognize or use. The "applications" key and related "gecko" keys are Firefox-specific metadata. Chrome ignores these keys, which does not make the extension compatible with Chrome and does not fix manifest errors.',
+      },
+      {
+        question: 'Is this related to Firefox or Gecko extension metadata?',
+        answer:
+          'Partially. Some extensions that were originally built for Firefox may include Firefox-specific manifest keys that Chrome ignores. These keys do not indicate Chrome compatibility and do not resolve manifest version errors. For Chrome, extensions need to be specifically built or updated for Chrome MV3.',
+      },
+      {
+        question: 'What is the practical path forward for users with MV2 extensions?',
+        answer:
+          'The practical path is to check for a maintained MV3 version in the Chrome Web Store, find a similar actively maintained extension, or use a browser that still supports MV2. Unofficially modified CRX files from mirror sites are not recommended because they can contain unwanted code.',
+      },
+    ],
+    sources: [
+      { title: 'Chrome Extensions Manifest V3', url: 'https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3', publisher: 'Google Chrome Developers', reliability: 'primary', supports: 'Official Chrome MV3 documentation and migration overview' },
+      { title: 'Chrome Manifest V2 Deprecation', url: 'https://developer.chrome.com/docs/extensions/develop/migrateMV2', publisher: 'Google Chrome Developers', reliability: 'primary', supports: 'Chrome MV2 deprecation timeline and user guidance' },
+      { title: 'Chrome Extension Manifest Documentation', url: 'https://developer.chrome.com/docs/extensions/develop/migrate/manifest-v3', publisher: 'Google Chrome Developers', reliability: 'primary', supports: 'Chrome extension manifest.json reference documentation' },
+      { title: 'Chrome Extensions Architecture Overview', url: 'https://developer.chrome.com/docs/extensions/develop/concepts/how-extensions-work', publisher: 'Google Chrome Developers', reliability: 'secondary', supports: 'Understanding how Chrome extensions work and how manifest versions affect them' },
+    ],
+    lastUpdated: '2026-05-28',
+    relatedLinks: [
+      { label: 'Unsupported Manifest Version Fix', href: '/fix/cannot-install-extension-unsupported-manifest' },
+      { label: 'Manifest V2 Disabled Fix', href: '/fix/manifest-v2-disabled' },
+      { label: 'Chrome Extensions Disabled Fix', href: '/fix/chrome-extensions-disabled' },
+      { label: 'Browse All Alternatives', href: '/alternatives' },
+    ],
+    primaryCta: { label: 'View Fix for Unsupported Manifest Version', href: '/fix/cannot-install-extension-unsupported-manifest' },
+    secondaryCta: { label: 'Browse Extension Alternatives', href: '/alternatives' },
+    bestOptions: [
+      { label: 'For maintained extensions:', description: 'Check for MV3 update in the Chrome Web Store' },
+      { label: 'For alternatives:', description: 'Find similar actively maintained extensions' },
     ],
   },
 ];

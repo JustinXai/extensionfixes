@@ -215,6 +215,8 @@ export interface LandingPageRecord {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   bestOptions?: { label: string; description: string }[];
+  // Allows landing page records to be categorized as guide/collection for route wiring
+  templateType?: 'guide' | 'collection';
 }
 
 export interface BreadcrumbItem {

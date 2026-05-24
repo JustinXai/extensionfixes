@@ -66,6 +66,10 @@ const PAGES = [
   '/fix/chrome-extensions-disabled/',
   '/guides/best-custom-css-and-dark-mode-extensions',
   '/guides/best-custom-css-and-dark-mode-extensions/',
+  '/comparisons/violentmonkey-vs-scriptcat',
+  '/comparisons/violentmonkey-vs-scriptcat/',
+  '/guides/chrome-extension-manifest-v2-v3-explained',
+  '/guides/chrome-extension-manifest-v2-v3-explained/',
 ];
 
 // Required sections per page (label → section heading text)
@@ -181,6 +185,12 @@ const PAGE_REQUIRED_SECTIONS = {
     'Common Failed Fixes', 'Related Resources',
     'Frequently Asked Questions', 'Sources',
   ],
+  '/comparisons/violentmonkey-vs-scriptcat': [
+    'Verdict', 'Key Differences',
+    'Side-by-side Comparison', 'Which One Should You Choose',
+    'Common Failed Fixes', 'Related Resources',
+    'Frequently Asked Questions', 'Sources',
+  ],
 
   '/fix/chrome-extensions-disabled': [
     'Key Takeaways', 'Current Status', 'Common Failed Fixes',
@@ -189,6 +199,17 @@ const PAGE_REQUIRED_SECTIONS = {
   '/guides/best-custom-css-and-dark-mode-extensions': [
     'Best Options at a Glance', 'Safety Checklist',
     'Frequently Asked Questions', 'Sources',
+  ],
+  '/guides/chrome-extension-manifest-v2-v3-explained': [
+    'What Is a Chrome Extension Manifest?',
+    'Manifest V2 vs Manifest V3: What Changed?',
+    'Key Takeaways',
+    'Current Status (as of May 2026)',
+    'Manifest V2 vs Manifest V3 Comparison',
+    'How to Handle Unsupported Manifest Errors',
+    'Why Firefox or Gecko Keys Do Not Fix Chrome Errors',
+    'Frequently Asked Questions',
+    'Sources',
   ],
 
   // ── Index pages ─────────────────────────────────────────────────────
@@ -212,12 +233,12 @@ const PAGE_QA_DATE = {
   '/alternatives/ublock-origin': 'May 22, 2026',
   '/alternatives/great-suspender': 'May 27, 2026',
   '/guides/chrome-userscript-manager-alternatives': 'May 22, 2026',
-  '/comparisons/tampermonkey-vs-violentmonkey': 'May 23, 2026',
+  '/comparisons/tampermonkey-vs-violentmonkey': 'May 28, 2026',
   '/comparisons/ublock-origin-vs-ublock-origin-lite': 'May 23, 2026',
   '/comparisons/foxyproxy-vs-switchyomega': 'May 23, 2026',
   '/guides/best-userscript-managers-for-chrome': 'May 25, 2026',
   '/fix/chrome-140-manifest-v2': 'May 24, 2026',
-  '/fix/cannot-install-extension-unsupported-manifest': 'May 26, 2026',
+  '/fix/cannot-install-extension-unsupported-manifest': 'May 28, 2026',
   '/fix/chrome-enable-unsupported-extensions': 'May 26, 2026',
   '/alternatives/dark-reader': 'May 26, 2026',
   '/alternatives/stylus': 'May 24, 2026',
@@ -225,9 +246,11 @@ const PAGE_QA_DATE = {
   '/alternatives/auto-tab-discard': 'May 27, 2026',
   '/guides/best-tab-suspender-extensions-chrome': 'May 27, 2026',
   '/alternatives/video-downloadhelper': 'May 25, 2026',
-  '/comparisons/scriptcat-vs-tampermonkey': 'May 25, 2026',
-  '/fix/chrome-extensions-disabled': 'May 26, 2026',
+  '/comparisons/scriptcat-vs-tampermonkey': 'May 28, 2026',
+  '/fix/chrome-extensions-disabled': 'May 28, 2026',
   '/guides/best-custom-css-and-dark-mode-extensions': 'May 26, 2026',
+  '/comparisons/violentmonkey-vs-scriptcat': 'May 28, 2026',
+  '/guides/chrome-extension-manifest-v2-v3-explained': 'May 28, 2026',
 };
 
 const PAGE_MIN_WORDS = {
@@ -248,8 +271,10 @@ const PAGE_MIN_WORDS = {
   // that prevents the full shortAnswer from being shown. QA word check disabled until resolved.
   '/alternatives/video-downloadhelper': 0,
   '/comparisons/scriptcat-vs-tampermonkey': 0,
+  '/comparisons/violentmonkey-vs-scriptcat': 0,
   '/fix/chrome-extensions-disabled': 80,
   '/guides/best-custom-css-and-dark-mode-extensions': 80,
+  '/guides/chrome-extension-manifest-v2-v3-explained': 80,
 };
 
 // Legacy 404 → redirect-only pages (skip content/section checks in local mode)

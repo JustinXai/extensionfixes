@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const landingPagesList: MetadataRoute.Sitemap = landingPages.map((page) => {
-    const isGuidePage = page.slug === 'chrome-userscript-manager-alternatives' || page.slug === 'best-userscript-managers-for-chrome' || page.slug === 'best-tab-suspender-extensions-chrome';
+    const isGuidePage = page.templateType === 'guide' || page.templateType === 'collection';
     return {
       url: isGuidePage ? `${baseUrl}/guides/${page.slug}` : `${baseUrl}/${page.slug}`,
       lastModified: new Date(page.lastUpdated),

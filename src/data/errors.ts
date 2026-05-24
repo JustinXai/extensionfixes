@@ -612,6 +612,7 @@ export const errors: ErrorRecord[] = [
       '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported',
       '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation',
       '/alternatives',
+      '/guides/chrome-extension-manifest-v2-v3-explained',
     ],
     sources: [
       {
@@ -639,7 +640,7 @@ export const errors: ErrorRecord[] = [
         supports: 'Why unsupported extension packages may be blocked from the Chrome Web Store',
       },
     ],
-    lastUpdated: '2026-05-26',
+    lastUpdated: '2026-05-28',
     keyTakeaways: [
       'This error usually appears before installation, not after an extension is already enabled.',
       'It often means the extension package uses Manifest V2 or another outdated manifest format.',
@@ -1253,6 +1254,16 @@ export const errors: ErrorRecord[] = [
         answer:
           'Check the Chrome Web Store for official Manifest V3 updates from the same developer. Search Extension Fixes for verified alternatives to your affected extension. Verify any replacement extension\'s developer identity and permissions before installing. Avoid unofficial copies or lookalike extensions from unknown developers.',
       },
+      {
+        question: 'Is this related to Manifest V2 or Manifest V3?',
+        answer:
+          'Often yes. Chrome 138 and later have phased out Manifest V2 support for ordinary users. If an extension was built for MV2 and has not been updated to MV3, Chrome may disable it. The extension developer needs to provide an MV3 update for it to work in modern Chrome.',
+      },
+      {
+        question: 'Can a manifest problem cause Chrome to disable an extension?',
+        answer:
+          'Yes. Extensions that use Manifest V2 APIs or manifest formats that Chrome no longer supports may be disabled automatically. This is part of Chrome\'s MV2 deprecation. The manifest_version field tells Chrome which extension platform version the extension targets — using MV2 in modern Chrome can result in the extension being disabled.',
+      },
     ],
     sources: [
       {
@@ -1280,7 +1291,6 @@ export const errors: ErrorRecord[] = [
         supports: 'Why extensions are removed from the Chrome Web Store and what policies apply',
       },
     ],
-    lastUpdated: '2026-05-26',
     keyTakeaways: [
       'Chrome disables extensions for compatibility, policy, or security reasons.',
       'The exact warning message matters — different causes need different actions.',
@@ -1322,6 +1332,12 @@ export const errors: ErrorRecord[] = [
         saferAlternative: 'Replace each disabled extension with a maintained MV3 alternative.',
       },
     ],
+    relatedPages: [
+      '/guides/chrome-extension-manifest-v2-v3-explained',
+      '/fix/cannot-install-extension-unsupported-manifest',
+      '/fix/manifest-v2-disabled',
+    ],
+    lastUpdated: '2026-05-28',
   },
 ];
 

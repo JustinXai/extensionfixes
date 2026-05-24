@@ -3,27 +3,20 @@ import { notFound } from 'next/navigation';
 import { landingPages } from '@/data/landingPages';
 import { LandingPageTemplate } from '@/components/LandingPageTemplate';
 
-// Only slugs that belong under /guides/ (not / or /alternatives/)
-const GUIDE_SLUGS = [
-  'chrome-userscript-manager-alternatives',
-  'best-userscript-managers-for-chrome',
-  'best-custom-css-and-dark-mode-extensions',
-  'best-tab-suspender-extensions-chrome',
-];
+// Auto-detect guide/collection landing pages from landingPages data
+const GUIDE_PAGE_SLUGS = landingPages
+  .filter((page) => page.templateType === 'guide' || page.templateType === 'collection')
+  .map((page) => page.slug);
 
 export async function generateStaticParams() {
-  return landingPages
-    .filter((page) => GUIDE_SLUGS.includes(page.slug))
-    .map((page) => ({
-      slug: page.slug,
-    }));
+  return GUIDE_PAGE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const page = landingPages.find((p) => p.slug === slug);
 
-  if (!page || !GUIDE_SLUGS.includes(slug)) {
+  if (!page || page.templateType !== 'guide' && page.templateType !== 'collection') {
     return {
       title: 'Guide Not Found',
       description: 'The requested guide could not be found.',
@@ -59,7 +52,7 @@ export default async function GuidePageRoute({ params }: { params: Promise<{ slu
   const { slug } = await params;
   const page = landingPages.find((p) => p.slug === slug);
 
-  if (!page || !GUIDE_SLUGS.includes(slug)) {
+  if (!page || page.templateType !== 'guide' && page.templateType !== 'collection') {
     notFound();
     return null;
   }

@@ -71,6 +71,8 @@ export const comparisons: ComparisonRecord[] = [
     relatedPages: [
       { title: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey', description: 'Current status, migration options, and alternatives for Tampermonkey users.' },
       { title: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey', description: 'Current status, migration options, and alternatives for Violentmonkey users.' },
+      { title: 'Violentmonkey vs ScriptCat', href: '/comparisons/violentmonkey-vs-scriptcat', description: 'Compare Violentmonkey and ScriptCat for userscript management.' },
+      { title: 'ScriptCat vs Tampermonkey', href: '/comparisons/scriptcat-vs-tampermonkey', description: 'Compare ScriptCat and Tampermonkey for userscript management.' },
       { title: 'Best Userscript Managers for Chrome', href: '/guides/best-userscript-managers-for-chrome', description: 'A practical guide to choosing and setting up a userscript manager in Chrome.' },
       { title: 'Chrome Userscript Manager Alternatives', href: '/guides/chrome-userscript-manager-alternatives', description: 'Overview of userscript manager options available for Chrome.' },
     ],
@@ -105,6 +107,21 @@ export const comparisons: ComparisonRecord[] = [
         answer:
           'Yes. Violentmonkey is fully open source under an MIT license, and its source code is available on GitHub. Tampermonkey has a partially open-source model where the core is open source but some components are not.',
       },
+      {
+        question: 'Is Violentmonkey an open-source alternative to Tampermonkey?',
+        answer:
+          'Violentmonkey is a fully open-source userscript manager, while Tampermonkey is partially open source. Both support the standard userscript API and work well in Chrome. Violentmonkey may appeal to users who prefer fully open-source tooling.',
+      },
+      {
+        question: 'Should I compare ScriptCat too?',
+        answer:
+          'Yes. ScriptCat is another userscript manager option worth comparing alongside Tampermonkey and Violentmonkey. It has its own development community and may suit users exploring alternative workflows. See our Violentmonkey vs ScriptCat and ScriptCat vs Tampermonkey comparisons for more detail.',
+      },
+      {
+        question: 'Does Violentmonkey support Manifest V3?',
+        answer:
+          'Yes. Violentmonkey is available as a Manifest V3 extension in the Chrome Web Store and continues to work in Chrome 138 and later.',
+      },
     ],
     sources: [
       { title: 'Tampermonkey GitHub Repository', url: 'https://github.com/Tampermonkey/tampermonkey', publisher: 'Tampermonkey', reliability: 'primary', supports: 'Official source for Tampermonkey development' },
@@ -112,7 +129,7 @@ export const comparisons: ComparisonRecord[] = [
       { title: 'Tampermonkey — Chrome Web Store', url: 'https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo', publisher: 'Chrome Web Store', reliability: 'primary', supports: 'Official Chrome Web Store listing for Tampermonkey' },
       { title: 'Violentmonkey — Chrome Web Store', url: 'https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnfnfdma', publisher: 'Chrome Web Store', reliability: 'primary', supports: 'Official Chrome Web Store listing for Violentmonkey' },
     ],
-    lastUpdated: '2026-05-23',
+    lastUpdated: '2026-05-28',
   },
   {
     templateType: 'comparison',
@@ -440,12 +457,6 @@ export const comparisons: ComparisonRecord[] = [
         saferAlternative: 'Use one manager at a time. Export scripts from the old manager before switching, and remove the old manager after confirming the new setup works.',
       },
     ],
-    relatedPages: [
-      { title: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey', description: 'Current status, migration options, and alternatives for Tampermonkey users.' },
-      { title: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey', description: 'Current status, migration options, and alternatives for Violentmonkey users.' },
-      { title: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey', description: 'Comparison of the two most established userscript managers.' },
-      { title: 'Best Userscript Managers for Chrome', href: '/guides/best-userscript-managers-for-chrome', description: 'A practical guide to choosing and setting up a userscript manager in Chrome.' },
-    ],
     faqs: [
       {
         question: 'Is ScriptCat a Tampermonkey alternative?',
@@ -482,6 +493,28 @@ export const comparisons: ComparisonRecord[] = [
         answer:
           'Review the script code before installing it — look at what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. If a script requests permissions that seem excessive for its stated purpose, do not install it. After switching managers, re-review scripts since behavior can differ.',
       },
+      {
+        question: 'Should I also compare ScriptCat with Violentmonkey?',
+        answer:
+          'Yes. Comparing ScriptCat, Violentmonkey, and Tampermonkey together gives a fuller picture of available userscript manager options. Our Violentmonkey vs ScriptCat comparison covers the differences between those two options specifically.',
+      },
+      {
+        question: 'Is ScriptCat better than Violentmonkey?',
+        answer:
+          'Neither is objectively better. Violentmonkey has a longer track record and a well-established open-source community. ScriptCat may suit users who want to test a different workflow. Test important scripts before committing to either option.',
+      },
+      {
+        question: 'Is ScriptCat a userscript manager alternative for Chrome?',
+        answer:
+          'Yes. ScriptCat is a userscript manager option available for Chrome as a Manifest V3 extension. It supports the standard userscript API and can be used alongside or instead of Tampermonkey and Violentmonkey.',
+      },
+    ],
+    relatedPages: [
+      { title: 'Tampermonkey Alternatives', href: '/alternatives/tampermonkey', description: 'Current status, migration options, and alternatives for Tampermonkey users.' },
+      { title: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey', description: 'Current status, migration options, and alternatives for Violentmonkey users.' },
+      { title: 'Violentmonkey vs ScriptCat', href: '/comparisons/violentmonkey-vs-scriptcat', description: 'Compare Violentmonkey and ScriptCat for userscript management.' },
+      { title: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey', description: 'Compare Tampermonkey and Violentmonkey for Chrome userscript management.' },
+      { title: 'Best Userscript Managers for Chrome', href: '/guides/best-userscript-managers-for-chrome', description: 'A practical guide to choosing and setting up a userscript manager in Chrome.' },
     ],
     sources: [
       { title: 'ScriptCat GitHub Repository', url: 'https://github.com/scriptcat-org/scriptcat', publisher: 'ScriptCat', reliability: 'primary', supports: 'Official source for ScriptCat development and availability' },
@@ -489,7 +522,131 @@ export const comparisons: ComparisonRecord[] = [
       { title: 'Violentmonkey GitHub Repository', url: 'https://github.com/violentmonkey/violentmonkey', publisher: 'Violentmonkey', reliability: 'primary', supports: 'Official source for Violentmonkey development' },
       { title: 'Chrome Extension Permissions Overview', url: 'https://developer.chrome.com/docs/extensions/mv3/permissions-overview/', publisher: 'Google Chrome Developers', reliability: 'secondary', supports: 'Understanding userscript permission implications' },
     ],
-    lastUpdated: '2026-05-25',
+    lastUpdated: '2026-05-28',
+  },
+  {
+    templateType: 'comparison',
+    slug: 'violentmonkey-vs-scriptcat',
+    title: 'Violentmonkey vs ScriptCat',
+    metaTitle: 'Violentmonkey vs ScriptCat: Which Userscript Manager Should You Use?',
+    metaDescription:
+      'Compare Violentmonkey and ScriptCat for userscript management. Learn workflow differences, MV3 notes, migration tips, and safer script testing practices.',
+    quickAnswer:
+      'Violentmonkey and ScriptCat are both userscript manager options, but they may fit different users depending on browser support, script compatibility, permissions, and workflow preferences. Violentmonkey is commonly chosen by users who prefer open-source userscript tooling and a familiar lightweight workflow. ScriptCat may appeal to users testing alternative userscript manager behavior or more advanced script workflows. Neither option makes unknown scripts safe by default. Users should review script sources, inspect @match and @grant rules, and test important scripts on non-sensitive pages before switching managers.',
+    comparedItems: ['Violentmonkey', 'ScriptCat', 'Tampermonkey (related)'],
+    verdict:
+      'Violentmonkey is a practical choice for users who prefer fully open-source userscript tooling and a familiar lightweight workflow. ScriptCat is a practical choice for users who want to test alternative userscript manager behavior or explore a different development community. Neither is universally better — the right choice depends on your existing script library, browser version, and workflow preferences. Test important scripts before committing to either option.',
+    keyDifferences: [
+      'Violentmonkey has a longer track record and a well-established open-source community; ScriptCat is a more recently active project.',
+      'Both support the standard userscript API, but script compatibility may vary depending on specific @grant and @match rules.',
+      'Violentmonkey is widely available in the Chrome Web Store as an MV3 extension; ScriptCat availability varies across browser versions.',
+      'Both require users to review script permissions — the specific @match domains and GM_* API usage matters more than the manager brand.',
+      'Migration effort between them is moderate — scripts are generally compatible, but testing each script individually is recommended.',
+    ],
+    comparisonTable: [
+      { option: 'Violentmonkey', bestFor: 'Users who prefer open-source userscript tooling and a familiar lightweight workflow', mv3Support: 'Available (MV3)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Minimal interface, smaller community than Tampermonkey' },
+      { option: 'ScriptCat', bestFor: 'Users testing alternative userscript manager workflows or advanced script behavior', mv3Support: 'Available (MV3)', cost: 'Free', openSource: 'Open source', setupDifficulty: 'Easy', mainTradeoff: 'Different community and update cadence than Violentmonkey' },
+      { option: 'Tampermonkey (related)', bestFor: 'Users who need the widest script library and most established ecosystem', mv3Support: 'Available (MV3)', cost: 'Free / Donationware', openSource: 'Partial', setupDifficulty: 'Easy', mainTradeoff: 'Larger resource usage but more built-in features' },
+    ],
+    decisionGuide: [
+      {
+        choose: 'Violentmonkey',
+        when: 'You prefer fully open-source userscript tooling, a lightweight interface, and a familiar workflow.',
+        href: '/alternatives/violentmonkey',
+      },
+      {
+        choose: 'ScriptCat',
+        when: 'You are testing alternative userscript manager behavior or want to explore a different script workflow community.',
+        href: '/comparisons/scriptcat-vs-tampermonkey',
+      },
+      {
+        choose: 'Tampermonkey',
+        when: 'You need broad userscript compatibility, the largest established ecosystem, and a familiar interface.',
+        href: '/comparisons/scriptcat-vs-tampermonkey',
+      },
+      {
+        choose: 'Avoid unknown scripts',
+        when: 'You encounter scripts from random mirrors or sources you cannot verify. Script trust matters more than the manager brand.',
+      },
+    ],
+    commonFailedFixes: [
+      {
+        tried: 'Import every script at once without reviewing @match and @grant rules',
+        whyItFails: 'Scripts may request permissions or access domains that behave differently under a different manager. Each script may need individual review.',
+        saferAlternative: 'Import and test scripts one at a time on non-sensitive pages before enabling them site-wide.',
+      },
+      {
+        tried: 'Assume Violentmonkey and ScriptCat behave identically for all scripts',
+        whyItFails: 'Both support the standard userscript API but implementation details and permission handling may differ. Some scripts with advanced GM_* calls may not work the same way.',
+        saferAlternative: 'Check the specific script documentation and test on a non-sensitive page after switching managers.',
+      },
+      {
+        tried: 'Ignore @match and @grant permissions in scripts',
+        whyItFails: 'Permissions define what a script can access. Reviewing them is the most important safety step regardless of which manager you use.',
+        saferAlternative: 'Read the @match domains and @grant rules in each script before installing, especially for scripts from third-party sources.',
+      },
+      {
+        tried: 'Install scripts from unknown mirrors or third-party download sites',
+        whyItFails: 'Scripts bundled with unwanted code from unofficial sources can read page content and track browsing. Use the official userscript registry or the developer\'s own site.',
+        saferAlternative: 'Install scripts from the original developer or known userscript library. Verify the source before installing.',
+      },
+      {
+        tried: 'Keep multiple managers enabled with overlapping scripts',
+        whyItFails: 'Running Violentmonkey, ScriptCat, and Tampermonkey at the same time can cause scripts to run twice, create conflicts, or behave unexpectedly.',
+        saferAlternative: 'Choose one primary manager and import scripts carefully into that one.',
+      },
+    ],
+    relatedPages: [
+      { title: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey', description: 'Current status, migration options, and alternatives for Violentmonkey users.' },
+      { title: 'ScriptCat vs Tampermonkey', href: '/comparisons/scriptcat-vs-tampermonkey', description: 'Compare ScriptCat and Tampermonkey for userscript management.' },
+      { title: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey', description: 'Compare Tampermonkey and Violentmonkey for Chrome userscript management.' },
+      { title: 'Best Userscript Managers for Chrome', href: '/guides/best-userscript-managers-for-chrome', description: 'A practical guide to choosing and setting up a userscript manager in Chrome.' },
+      { title: 'Chrome Userscript Manager Alternatives', href: '/guides/chrome-userscript-manager-alternatives', description: 'Overview of userscript manager options available for Chrome.' },
+    ],
+    faqs: [
+      {
+        question: 'Is ScriptCat a Violentmonkey alternative?',
+        answer:
+          'Yes. ScriptCat is another userscript manager option available for Chrome. It supports the standard userscript API and may appeal to users exploring alternative workflows. Violentmonkey and ScriptCat have different development communities and update schedules.',
+      },
+      {
+        question: 'Is Violentmonkey better than ScriptCat?',
+        answer:
+          'Neither is objectively better. Violentmonkey has a longer track record and is widely used by users who prefer its minimal interface and open-source workflow. ScriptCat may suit users who want to test a different community or workflow. Test important scripts before committing to either option.',
+      },
+      {
+        question: 'Does Violentmonkey support Manifest V3?',
+        answer:
+          'Yes. Violentmonkey is available as a Manifest V3 extension in the Chrome Web Store and continues to work in Chrome 138 and later versions.',
+      },
+      {
+        question: 'Can I migrate scripts from Violentmonkey to ScriptCat?',
+        answer:
+          'Yes. Scripts written for the standard userscript API generally work in both managers. Export scripts from Violentmonkey and import them into ScriptCat using the built-in import feature. Test scripts individually after migration.',
+      },
+      {
+        question: 'Are userscript managers safe?',
+        answer:
+          'Userscript managers run code on websites you visit, so safety depends on the scripts you install rather than the manager itself. Both Violentmonkey and ScriptCat can run scripts that have broad access to page content. Only install scripts from sources you trust, and review @match and @grant permissions before installing.',
+      },
+      {
+        question: 'Can userscripts read pages I visit?',
+        answer:
+          'Yes. Userscripts can access and modify the content of pages they are permitted to run on, based on their @match rules. This is why reviewing script sources and their declared permissions before installing is important.',
+      },
+      {
+        question: 'Should I compare Violentmonkey, ScriptCat, and Tampermonkey before switching?',
+        answer:
+          'Yes. All three are active userscript manager options for Chrome. Comparing them helps you choose based on script compatibility, open-source preferences, ecosystem size, and interface familiarity. Violentmonkey and ScriptCat are both fully open source, while Tampermonkey has a larger established ecosystem.',
+      },
+    ],
+    sources: [
+      { title: 'Violentmonkey Official Site', url: 'https://violentmonkey.top/', publisher: 'Violentmonkey', reliability: 'primary', supports: 'Official Violentmonkey site and download information' },
+      { title: 'Violentmonkey GitHub Repository', url: 'https://github.com/violentmonkey/violentmonkey', publisher: 'Violentmonkey', reliability: 'primary', supports: 'Official source for Violentmonkey development and MV3 status' },
+      { title: 'ScriptCat GitHub Repository', url: 'https://github.com/scriptcat-org/scriptcat', publisher: 'ScriptCat', reliability: 'primary', supports: 'Official source for ScriptCat development and availability' },
+      { title: 'Chrome Extension Permissions Overview', url: 'https://developer.chrome.com/docs/extensions/mv3/permissions-overview/', publisher: 'Google Chrome Developers', reliability: 'secondary', supports: 'Understanding userscript permission implications' },
+    ],
+    lastUpdated: '2026-05-28',
   },
 ];
 
