@@ -1,5 +1,5 @@
 // ComparisonPageTemplate
-// Used by /comparisons/[slug] pages (future routes).
+// Used by /comparisons/[slug] pages.
 // Defines the structure for A vs B comparison pages.
 import Link from 'next/link';
 import type { ComparisonTemplateData } from '@/lib/contentTypes';
@@ -15,6 +15,7 @@ import { ComparisonTable } from './ComparisonTable';
 import { DecisionGuide } from './DecisionGuide';
 import { RelatedPages } from './RelatedPages';
 import { IndependentNotice } from './IndependentNotice';
+import { QuickAnswer } from './QuickAnswer';
 
 interface ComparisonPageTemplateProps {
   verdict: string;
@@ -27,6 +28,8 @@ interface ComparisonPageTemplateProps {
   sources?: ComparisonTemplateData['sources'];
   lastUpdated: string;
   faqSchemaData?: ReturnType<typeof createFAQSchema>;
+  quickAnswer?: string;
+  breadcrumbTitle?: string;
 }
 
 export function ComparisonPageTemplate(props: ComparisonPageTemplateProps) {
@@ -41,6 +44,8 @@ export function ComparisonPageTemplate(props: ComparisonPageTemplateProps) {
     sources,
     lastUpdated,
     faqSchemaData,
+    quickAnswer,
+    breadcrumbTitle,
   } = props;
 
   return (
@@ -52,13 +57,19 @@ export function ComparisonPageTemplate(props: ComparisonPageTemplateProps) {
           <ol className="flex items-center gap-2 text-slate-500">
             <li><Link href="/" className="hover:text-slate-900">Home</Link></li>
             <li aria-hidden="true">/</li>
-            <li><Link href="/guides" className="hover:text-slate-900">Guides</Link></li>
+            <li><Link href="/comparisons" className="hover:text-slate-900">Comparisons</Link></li>
             <li aria-hidden="true">/</li>
-            <li className="text-slate-900" aria-current="page">Comparison</li>
+            <li className="text-slate-900" aria-current="page">{breadcrumbTitle ?? 'Comparison'}</li>
           </ol>
         </nav>
 
         <article className="pb-16">
+          {quickAnswer && (
+            <div className="mb-10">
+              <QuickAnswer answer={quickAnswer} />
+            </div>
+          )}
+
           <Section id="verdict-heading" heading="Verdict">
             <p className="text-slate-700 leading-relaxed">{verdict}</p>
           </Section>

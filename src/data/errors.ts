@@ -509,11 +509,18 @@ export const errors: ErrorRecord[] = [
     slug: 'cannot-install-extension-unsupported-manifest',
     title: 'Cannot Install Extension Because It Uses an Unsupported Manifest Version',
     aliases: [
+      'cannot install extension because it uses an unsupported manifest version',
+      'cannot install extension because it uses an unsupported manifest version could not load manifest',
       'cannot install extension unsupported manifest',
       'unsupported manifest version chrome extension',
       'this extension is not supported because it uses an unsupported manifest version',
       'chrome cannot install extension manifest v2',
       'extension uses an unsupported manifest version',
+      'chrome enable unsupported extensions',
+      'chrome manifest v2',
+      'manifest v2 chrome',
+      'could not load manifest',
+      'chrome cannot install extension unsupported manifest',
     ],
     shortAnswer:
       'Chrome shows an unsupported manifest version error when an extension package uses an older extension format that modern Chrome no longer accepts, most commonly Manifest V2. In current Chrome versions, ordinary users generally cannot fix this by changing a simple setting. Reinstalling the same extension, downloading random CRX files, or disabling security protections can create privacy and malware risks. The safer path is to check whether the developer provides a Manifest V3 version, install a maintained alternative from the Chrome Web Store, or use a browser that still supports the extension you need.',

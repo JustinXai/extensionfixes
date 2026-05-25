@@ -39,5 +39,10 @@ export default async function ComparisonPage({ params }: PageProps) {
   const record = getComparisonBySlug(slug);
   if (!record) { notFound(); return null; }
 
-  return <ComparisonPageTemplate {...record} />;
+  return (
+    <ComparisonPageTemplate
+      {...record}
+      breadcrumbTitle={record.title}
+    />
+  );
 }

@@ -2851,6 +2851,13 @@ export const extensions: ExtensionRecord[] = [
       'dark theme',
       'website dark mode',
       'dark mode extension',
+      'dark reader alternative',
+      'dark reader alternative chrome',
+      'dark reader alternatives',
+      'dark reader extension alternative',
+      'dark reader not working chrome',
+      'dark reader alternatives for chrome',
+      'chrome dark mode extension',
     ],
     category: 'Accessibility',
     summary:
@@ -2874,7 +2881,14 @@ export const extensions: ExtensionRecord[] = [
     safetyNotes: [
       'Only install Dark Reader from the official Chrome Web Store.',
       'Dark Reader is open source, allowing code review.',
-      'Review permissions ? the extension needs access to modify page appearance.',
+      'Review permissions — the extension needs access to modify page appearance.',
+    ],
+    whatNotToDo: [
+      'Do not install random dark mode CRX files from unknown sites.',
+      'Do not install multiple dark mode or appearance extensions simultaneously.',
+      'Do not grant broad permissions to unknown dark mode extensions.',
+      'Do not assume an extension is safe just because the name looks familiar.',
+      'Do not keep using an abandoned dark mode extension that no longer receives updates.',
     ],
     alternatives: [
       {
@@ -2934,11 +2948,6 @@ export const extensions: ExtensionRecord[] = [
         question: 'What is the best Dark Reader alternative for Chrome?',
         answer:
           'The best alternative depends on your needs. Chrome built-in appearance settings work for basic browser theming. Stylus is better if you want custom CSS and are comfortable reviewing styles. Night Eye offers multiple dark mode algorithms. For most users, trying the built-in settings first is the practical starting point.',
-      },
-      {
-        question: 'Is Stylus a Dark Reader alternative?',
-        answer:
-          'Stylus is not a direct Dark Reader alternative — it is a custom CSS manager rather than an automatic dark mode tool. Stylus lets you apply custom CSS to websites, which can include dark mode styles, but you need to find or write the styles yourself. Dark Reader automatically detects and applies dark mode across many sites.',
       },
       {
         question: 'Can Chrome use dark mode without an extension?',
@@ -3025,7 +3034,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline — Dark Reader was updated to MV3',
       },
     ],
-    lastUpdated: '2026-05-26',
+    lastUpdated: '2026-05-25',
     keyTakeaways: [
       'Dark Reader is widely used for automatic dark mode on websites.',
       'Built-in browser appearance settings may be enough for simple needs.',
@@ -3039,7 +3048,7 @@ export const extensions: ExtensionRecord[] = [
       { label: 'Main alternatives', value: 'Browser settings, Stylus, Night Eye, maintained dark mode tools', variant: 'neutral' },
       { label: 'Main risk', value: 'Broad site access permissions', variant: 'bad' },
       { label: 'Best practice', value: 'Use maintained extensions and review permissions', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 26, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 25, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {

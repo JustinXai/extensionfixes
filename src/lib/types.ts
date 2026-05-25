@@ -113,6 +113,7 @@ export interface ExtensionRecord {
   whatHappened: string[];
   migrationSteps: string[];
   safetyNotes: string[];
+  whatNotToDo?: string[];
   alternatives: AlternativeRecord[];
   faqs: FAQItem[];
   sources: SourceItem[];
