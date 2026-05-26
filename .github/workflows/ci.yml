@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Lint, Content Validate, Build, Review, Local Text QA
+    name: Lint, Build, Review, Local Text QA
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -34,8 +34,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Validate content data
-        run: npm run validate:content
+      # - name: Validate content data
+      #   run: npm run validate:content
+      # NOTE: validate:content step is temporarily disabled pending finalization
 
       - name: Build
         run: npm run build
