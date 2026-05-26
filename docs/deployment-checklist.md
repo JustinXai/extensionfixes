@@ -89,3 +89,5 @@ Only submit to Google Search Console **after** production verification PASSES:
 > Local build passing + GitHub push confirmed = Vercel production may still be stale.
 
 Always run the production verification curl before reporting success.
+
+Last automatic deployment test: 2026-05-26
