@@ -1,0 +1,64 @@
+---
+description: ExtensionFixes content safety workflow
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+Rules:
+
+1. For daily content sprints, do not modify:
+- src/app/**/page.tsx
+- src/components/templates/**
+- src/components/**
+- src/lib/contentTypes.ts
+- src/lib/templateTypes.ts
+
+unless the user explicitly says "upgrade template" or "modify route".
+
+2. New content pages should only modify:
+- src/data/extensions.ts
+- src/data/errors.ts
+- src/data/landingPages.ts
+- src/data/comparisons.ts
+- scripts/check-production-text.mjs for URL/date/required-section config
+
+3. Before adding a new page, output a plan:
+- URL
+- templateType
+- data file
+- target query
+- related pages
+- sources
+- risk level
+- whether route/template changes are needed
+
+4. If route/template changes are needed, stop and ask before editing.
+
+5. Every new page must satisfy:
+- quickAnswer or shortAnswer >= 80 words
+- sources >= 2
+- faqs >= 5
+- lastUpdated set
+- required sections for templateType
+- no forbidden claims
+
+6. Always run before final report:
+- npm run lint
+- npm run validate:content
+- npm run build
+- npm run review
+- npm run check:local:text
+
+7. Do not recommend GSC submission until production QA is 0 FAIL.
+
+8. Forbidden claims:
+- official successor
+- safest
+- guaranteed fix
+- feature parity
+- fully equivalent
+- equivalent replacement
+- privacy-conscious
+- full open-source transparency
+- random CRX as a recommended step

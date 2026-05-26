@@ -17,6 +17,7 @@ pull_request to main → GitHub Actions CI → all checks pass → merge allowed
 | Step | Command | Purpose |
 |------|---------|---------|
 | Lint | `npm run lint` | ESLint — catches syntax and style errors |
+| Content validation | `npm run validate:content` | Validates data quality: word counts, uniqueness, forbidden claims |
 | Build | `npm run build` | Next.js static build + HTML conflict cleanup |
 | Content review | `npm run review` | Custom extensionfixes-review script |
 | Local text QA | `npm run check:local:text` | Text consistency checks against local build |
@@ -47,6 +48,7 @@ Before pushing, run the same checks locally:
 
 ```powershell
 npm run lint
+npm run validate:content
 npm run build
 npm run review
 npm run check:local:text

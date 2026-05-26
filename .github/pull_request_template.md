@@ -65,6 +65,13 @@ List the Google Search Console query or cluster that triggered this change:
 ## 8. Required Local Checks
 
 - [ ] npm run lint
+- [ ] npm run validate:content
+- [ ] I used an existing templateType
+- [ ] I did not modify page.tsx or template components
+- [ ] If I modified page.tsx/template components, I explained why
+- [ ] New page was created from scaffold or follows required schema
+- [ ] New URLs were added to check-production-text config if needed
+- [ ] Production QA will be run after deployment before GSC submission
 - [ ] npm run build
 - [ ] npm run review
 - [ ] npm run check:local:text

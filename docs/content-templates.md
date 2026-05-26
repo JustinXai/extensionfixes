@@ -188,18 +188,80 @@ These section titles are legacy and must not be used in new templates:
 
 ---
 
+## Content Safety Workflow
+
+### Starting a New Content Page
+
+Always use the scaffold script to generate a draft:
+
+```bash
+npm run new:content -- --type <alternative|fix|comparison|collection|guide> --slug <slug>
+```
+
+This creates `drafts/<slug>.draft.ts` with all required fields as TODO placeholders.
+
+### Filling the Draft
+
+Fill every TODO field in the draft before copying it into a data file. Key requirements:
+
+- `quickAnswer` or `shortAnswer` — at least **80 words**
+- `faqs` — at least **5** items
+- `sources` — at least **2** items, unique titles and URLs
+- `lastUpdated` — today's date in `YYYY-MM-DD` format
+- No forbidden claims in any field
+- All `relatedPages[].href` must start with `/`
+
+### Copying into the Data File
+
+After filling the draft, copy the record into the correct file:
+
+| templateType | Data file |
+|---|---|
+| `alternative` | `src/data/extensions.ts` |
+| `fix` | `src/data/errors.ts` |
+| `guide` | `src/data/landingPages.ts` |
+| `collection` | `src/data/landingPages.ts` (set `templateType: 'collection'`) |
+| `comparison` | `src/data/comparisons.ts` |
+
+### Running Validations
+
+```bash
+npm run validate:content   # Check data quality (word counts, uniqueness, forbidden claims)
+npm run lint               # ESLint
+npm run build              # Next.js build
+npm run review             # Custom review script
+npm run check:local:text   # Text consistency checks
+```
+
+Fix all errors before proceeding. Warnings are informational only.
+
+### Deploying
+
+Only deploy after local checks pass:
+
+```bash
+vercel --prod
+```
+
+### Production QA
+
+```bash
+npm run check:prod:text
+```
+
+Submit to GSC only after production QA shows **0 FAIL**.
+
+### Template Changes
+
+Daily content sprints **must not** modify `page.tsx` or template components. If a template change is needed, create a separate "Template Patch" task.
+
+---
+
 ## Cursor Daily Content Workflow
 
-When adding daily content:
+When adding daily content, use the Content Safety Workflow above. The key principle: **never modify `page.tsx` or template components in a content sprint**. Route files delegate to templates and should not need changes.
 
-1. Pick the correct `templateType` for the page.
-2. Add one record to the correct data file (`extensions.ts`, `errors.ts`, `landingPages.ts`, or `comparisons.ts`).
-3. **Do not modify route files** (`src/app/alternatives/[slug]/page.tsx`, etc.) — route files delegate to templates and should not need changes.
-4. If a new page needs special metadata, add an entry to the page-level `meta` config (e.g., `extensionMeta` in `alternatives/[slug]/page.tsx`).
-5. Run: `npm run lint && npm run build && npm run review && npm run check:local:text`
-6. Deploy: `vercel --prod`
-7. Run: `npm run check:prod:text`
-8. Submit in GSC only after 0 FAIL.
+If route or template changes are required, stop and create a separate "Template Patch" task.
 
 ---
 
