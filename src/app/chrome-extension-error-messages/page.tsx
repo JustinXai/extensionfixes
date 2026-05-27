@@ -100,15 +100,15 @@ const whatNotToDoItems = [
 
 const relatedGuides = [
   { label: 'Extension Search', href: '/tools/extension-search' },
-  { label: 'Extension Was Turned Off', href: '/this-extension-was-turned-off-because-it-is-no-longer-supported' },
+  { label: 'Extension Was Turned Off', href: '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported' },
   { label: 'Extension May Soon Be Unsupported', href: '/this-extension-may-soon-no-longer-be-supported' },
   { label: 'Manifest V2 Disabled', href: '/fix/manifest-v2-disabled' },
   { label: 'Extension Removed from Web Store', href: '/fix/extension-removed-from-chrome-web-store' },
   { label: 'Chrome Disabled Extension', href: '/fix/chrome-disabled-extension' },
-  { label: 'SwitchyOmega Not Working', href: '/switchyomega-not-working' },
-  { label: 'FoxyProxy Alternatives', href: '/foxyproxy-alternative-for-chrome' },
-  { label: 'Great Suspender History', href: '/the-great-suspender-malware' },
-  { label: 'uBlock Origin No Longer Supported', href: '/ublock-origin-no-longer-supported' },
+  { label: 'SwitchyOmega Not Working', href: '/alternatives/switchyomega' },
+  { label: 'FoxyProxy Alternatives', href: '/alternatives/foxyproxy' },
+  { label: 'Great Suspender History', href: '/alternatives/great-suspender' },
+  { label: 'uBlock Origin No Longer Supported', href: '/alternatives/ublock-origin' },
 ];
 
 const faqs = [

@@ -130,7 +130,7 @@ export default function AlternativesPage() {
                 desc: 'What happened and safer tab management options',
               },
               {
-                href: '/switchyomega-not-working',
+                href: '/alternatives/switchyomega',
                 label: 'SwitchyOmega stopped working in Chrome',
                 desc: 'Why it stopped and how to migrate your proxy profiles',
               },

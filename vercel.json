@@ -40,6 +40,41 @@
       "source": "/fix/this-extension-turned-off-landing",
       "destination": "/fix/this-extension-was-turned-off-because-it-is-no-longer-supported",
       "permanent": true
+    },
+    {
+      "source": "/foxyproxy-alternative-for-chrome",
+      "destination": "/alternatives/foxyproxy",
+      "permanent": true
+    },
+    {
+      "source": "/switchyomega-alternative",
+      "destination": "/alternatives/switchyomega",
+      "permanent": true
+    },
+    {
+      "source": "/switchyomega-not-working",
+      "destination": "/alternatives/switchyomega",
+      "permanent": true
+    },
+    {
+      "source": "/ublock-origin-no-longer-supported",
+      "destination": "/alternatives/ublock-origin",
+      "permanent": true
+    },
+    {
+      "source": "/ublock-origin-lite-vs-ublock-origin",
+      "destination": "/comparisons/ublock-origin-vs-ublock-origin-lite",
+      "permanent": true
+    },
+    {
+      "source": "/the-great-suspender-malware",
+      "destination": "/alternatives/great-suspender",
+      "permanent": true
+    },
+    {
+      "source": "/this-extension-was-turned-off-because-it-is-no-longer-supported",
+      "destination": "/fix/this-extension-was-turned-off-because-it-is-no-longer-supported",
+      "permanent": true
     }
   ]
 }

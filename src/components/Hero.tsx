@@ -3,8 +3,8 @@ import { siteConfig } from '@/data/site';
 import { CommonSearches } from './CommonSearches';
 
 const commonSearches = [
-  { label: 'SwitchyOmega not working', href: '/switchyomega-not-working' },
-  { label: 'uBlock Origin no longer supported', href: '/ublock-origin-no-longer-supported' },
+  { label: 'SwitchyOmega not working', href: '/alternatives/switchyomega' },
+  { label: 'uBlock Origin no longer supported', href: '/alternatives/ublock-origin' },
   { label: 'Manifest V2 disabled', href: '/fix/manifest-v2-disabled' },
   { label: 'Chrome disabled my extension', href: '/fix/chrome-disabled-extension' },
   { label: 'This extension may soon no longer be supported', href: '/this-extension-may-soon-no-longer-be-supported' },

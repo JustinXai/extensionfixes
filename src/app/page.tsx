@@ -451,7 +451,7 @@ export default function HomePage() {
               </p>
             </Link>
             <Link
-              href="/foxyproxy-alternative-for-chrome"
+              href="/alternatives/foxyproxy"
               className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
             >
               <h3 className="font-semibold text-slate-900">FoxyProxy Alternatives</h3>
@@ -460,7 +460,7 @@ export default function HomePage() {
               </p>
             </Link>
             <Link
-              href="/the-great-suspender-malware"
+              href="/alternatives/great-suspender"
               className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
             >
               <h3 className="font-semibold text-slate-900">The Great Suspender History</h3>
