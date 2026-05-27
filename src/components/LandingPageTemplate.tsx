@@ -254,7 +254,7 @@ export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTempla
       name: item.label,
       url: item.href
         ? `https://extensionfixes.com${item.href}`
-        : 'https://extensionfixes.com',
+        : pageUrl,
     }))
   );
 
