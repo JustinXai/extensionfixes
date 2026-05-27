@@ -10,6 +10,8 @@ export const extensions: ExtensionRecord[] = [
       'Switchy Omega',
       'ZeroOmega migration',
       'proxy switcher',
+      'switchyomega alternatives',
+      'proxy switchyomega alternative',
     ],
     category: 'Proxy Manager',
     summary:
@@ -92,6 +94,66 @@ export const extensions: ExtensionRecord[] = [
         note: 'A simpler alternative for users who need basic proxy switching functionality.',
       },
     ],
+    decisionGuide: [
+      {
+        choose: 'ZeroOmega',
+        when: 'You are migrating from SwitchyOmega and want direct profile import and a familiar interface with MV3 support.',
+      },
+      {
+        choose: 'FoxyProxy Standard',
+        when: 'You need an established proxy manager with multi-profile management and pattern-based switching.',
+      },
+      {
+        choose: 'Proxy Switcher and Manager',
+        when: 'You need straightforward proxy switching without advanced pattern-matching features.',
+      },
+    ],
+    comparisonTable: [
+      {
+        option: 'ZeroOmega',
+        bestFor: 'SwitchyOmega users migrating to MV3 with direct profile import',
+        mv3Support: 'Yes (MV3)',
+        cost: 'Free / Open source',
+        openSource: 'Fully open source',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Community fork — verify source before installing',
+      },
+      {
+        option: 'FoxyProxy Standard',
+        bestFor: 'Users wanting an established proxy manager with multi-profile support',
+        mv3Support: 'Yes',
+        cost: 'Free / Paid tiers',
+        openSource: 'Partial',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'Some advanced features require premium; interface differs from SwitchyOmega',
+      },
+      {
+        option: 'Proxy Switcher and Manager',
+        bestFor: 'Users wanting simple proxy switching without advanced features',
+        mv3Support: 'Yes',
+        cost: 'Free',
+        openSource: 'Unknown',
+        setupDifficulty: 'Easy',
+        mainTradeoff: 'May lack advanced auto-switch and pattern-based routing',
+      },
+    ],
+    commonMistakes: [
+      {
+        doNot: 'Do not install old SwitchyOmega CRX files from random mirror sites',
+        instead:
+          'Old CRX files may be outdated or modified. Use ZeroOmega from the Chrome Web Store, which supports direct import of SwitchyOmega profiles.',
+      },
+      {
+        doNot: 'Do not route sensitive traffic through unknown or free proxy servers',
+        instead:
+          'Proxy providers can see your browsing metadata. Use a trusted proxy provider and verify your connection is encrypted with HTTPS.',
+      },
+      {
+        doNot: 'Do not install multiple proxy extensions at the same time',
+        instead:
+          'Running two proxy extensions simultaneously causes conflicts and unpredictable routing. Only one should control proxy settings at a time.',
+      },
+    ],
     faqs: [
       {
         question: 'Why did Proxy SwitchyOmega stop working in Chrome?',
@@ -118,6 +180,25 @@ export const extensions: ExtensionRecord[] = [
         answer:
           'Most alternatives support proxy authentication, but you may need to re-enter credentials. Always verify your authentication settings work correctly after migration.',
       },
+      {
+        question: 'What is the difference between FoxyProxy and SwitchyOmega?',
+        answer:
+          'FoxyProxy and SwitchyOmega use different switching models. FoxyProxy is profile-based with pattern rules and is available as an MV3 extension in the Chrome Web Store. SwitchyOmega used switch rules and profile-based switching, but its MV2 version no longer works in Chrome 138. ZeroOmega is a community fork of SwitchyOmega designed for MV3 browsers. See our comparison page for a detailed side-by-side look.',
+      },
+      {
+        question: 'Is there a direct SwitchyOmega replacement for Chrome?',
+        answer:
+          'There is no official SwitchyOmega replacement, but ZeroOmega is a community-maintained MV3 fork that can import SwitchyOmega profiles directly. FoxyProxy is another established option with MV3 support. Both are available on the Chrome Web Store.',
+      },
+      {
+        question: 'Are proxy extensions safe to use?',
+        answer:
+          'Proxy extensions route your browser traffic through the configured proxy server, which means the proxy operator can see metadata about your browsing. Only install proxy managers from the official Chrome Web Store, verify the developer, and use trusted proxy providers with HTTPS connections.',
+      },
+    ],
+    relatedPages: [
+      '/alternatives/foxyproxy',
+      '/comparisons/foxyproxy-vs-switchyomega',
     ],
     sources: [
       {
@@ -153,7 +234,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'FoxyProxy MV3 availability, listing status, and publisher identity',
       },
     ],
-    lastUpdated: '2026-05-19',
+    lastUpdated: '2026-05-27',
   },
   {
     slug: 'ublock-origin',
@@ -2230,6 +2311,10 @@ export const extensions: ExtensionRecord[] = [
       'foxyproxy chrome',
       'foxyproxy mv3',
       'proxy manager chrome',
+      'foxyproxy alternative',
+      'foxyproxy alternatives',
+      'foxy proxy alternative',
+      'foxyproxy alternative for chrome',
     ],
     category: 'Proxy Manager',
     summary:
@@ -2256,10 +2341,10 @@ export const extensions: ExtensionRecord[] = [
     ],
     safetyNotes: [
       'Only install FoxyProxy from the official Chrome Web Store.',
-      'Review permissions ? proxy extensions need network modification access.',
+      'Review permissions carefully — proxy extensions need network modification access.',
       'Verify the developer identity before installing.',
       'Avoid unofficial CRX copies of old proxy extensions.',
-      'Proxy extensions can affect all browsing traffic ? remove unused extensions.',
+      'Proxy extensions can affect all browsing traffic — remove unused extensions.',
     ],
     alternatives: [
       {
@@ -2460,8 +2545,8 @@ export const extensions: ExtensionRecord[] = [
     ],
     currentStatus: [
       { label: 'FoxyProxy', value: 'Active MV3 extension ? works in current Chrome', variant: 'good' },
-      { label: 'ZeroOmega', value: 'Active MV3 community fork ? direct SwitchyOmega profile import', variant: 'good' },
-      { label: 'Chrome system proxy', value: 'Built-in ? no extension needed', variant: 'neutral' },
+      { label: 'ZeroOmega', value: 'Active MV3 community fork — direct SwitchyOmega profile import', variant: 'good' },
+      { label: 'Chrome system proxy', value: 'Built-in — no extension needed', variant: 'neutral' },
     ],
     commonFailedFixes: [
       {
@@ -2479,6 +2564,10 @@ export const extensions: ExtensionRecord[] = [
         whyItFails: 'Proxy extensions route your browsing traffic through a server. An untrustworthy proxy provider can see your browsing metadata.',
         saferAlternative: 'Use a reputable proxy service and HTTPS sites to reduce exposure.',
       },
+    ],
+    relatedPages: [
+      '/alternatives/switchyomega',
+      '/comparisons/foxyproxy-vs-switchyomega',
     ],
   },
   {
