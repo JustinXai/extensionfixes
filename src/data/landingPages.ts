@@ -1030,9 +1030,9 @@ export const landingPages: LandingPageRecord[] = [
   {
     slug: 'chrome-userscript-manager-alternatives',
     templateType: 'guide',
-    title: 'Chrome Userscript Manager Alternatives: Tampermonkey vs Violentmonkey',
+    title: 'Chrome Userscript Manager Alternatives: Tampermonkey, Violentmonkey, ScriptCat',
     description:
-      'Compare Chrome userscript manager options including Tampermonkey and Violentmonkey. Learn how to choose, migrate, and avoid unsafe scripts.',
+      'Compare Chrome userscript manager options with a decision guide, safety checklist, and migration steps for Tampermonkey, Violentmonkey, ScriptCat, and similar tools.',
     h1: 'Chrome Userscript Manager Alternatives',
     shortAnswer:
       'The main Chrome userscript manager options are Tampermonkey and Violentmonkey. Tampermonkey is widely used and has a large userscript ecosystem, while Violentmonkey is a common choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permissions, sync needs, and how much control you want over imported scripts. Userscript managers can run code on websites you visit, so choosing the extension is only part of the decision. You should also review script sources, inspect permissions, test scripts on non-sensitive pages, and remove old scripts you no longer use.',
@@ -1152,8 +1152,11 @@ export const landingPages: LandingPageRecord[] = [
       { label: 'Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
       { label: 'Chrome Extension Alternatives', href: '/alternatives' },
       { label: 'Unsupported Extension Fix', href: '/fix/cannot-install-extension-unsupported-manifest' },
+      { label: 'Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
+      { label: 'ScriptCat vs Tampermonkey', href: '/comparisons/scriptcat-vs-tampermonkey' },
+      { label: 'Violentmonkey vs ScriptCat', href: '/comparisons/violentmonkey-vs-scriptcat' },
     ],
-    primaryCta: { label: 'Compare Tampermonkey vs Violentmonkey', href: '/alternatives/tampermonkey' },
+    primaryCta: { label: 'Compare Tampermonkey vs Violentmonkey', href: '/comparisons/tampermonkey-vs-violentmonkey' },
     secondaryCta: { label: 'View Violentmonkey Alternatives', href: '/alternatives/violentmonkey' },
     bestOptions: [
       { label: 'For script ecosystem:', description: 'Tampermonkey (largest community)' },
