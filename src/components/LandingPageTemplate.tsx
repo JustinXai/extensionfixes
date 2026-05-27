@@ -241,7 +241,13 @@ function BestOption({ title, options }: { title: string; options: { label: strin
 }
 
 export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTemplateProps) {
-  const pageUrl = `https://extensionfixes.com/${page.slug}`;
+  const routePrefix =
+    page.templateType === 'guide' || page.templateType === 'collection'
+      ? '/guides'
+      : page.templateType === 'comparison'
+        ? '/comparisons'
+        : '/';
+  const pageUrl = `https://extensionfixes.com${routePrefix}/${page.slug}`;
   const techArticleSchema = createTechArticleSchema({
     title: page.title,
     description: page.description,
