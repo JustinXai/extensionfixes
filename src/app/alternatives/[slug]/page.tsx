@@ -3,6 +3,7 @@
 // Route layer handles: generateStaticParams, generateMetadata, params.
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import type { RelatedPage } from '@/lib/contentTypes';
 import { getExtensionBySlug, extensions } from '@/data/extensions';
 import { AlternativePageTemplate } from '@/components/templates/AlternativePageTemplate';
 
@@ -114,10 +115,15 @@ export default async function AlternativePage({ params }: PageProps) {
   if (!extension) { notFound(); return null; }
 
   const meta = extensionMeta[slug];
+  const relatedPages: RelatedPage[] = extension.relatedPages?.map((href: string) => ({
+    title: href.includes('comparisons') ? 'Comparison' : 'Extension',
+    href,
+  })) ?? [];
   return (
     <AlternativePageTemplate
       extension={extension}
       meta={meta}
+      relatedPages={relatedPages.length > 0 ? relatedPages : undefined}
     />
   );
 }
