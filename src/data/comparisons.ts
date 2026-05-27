@@ -315,7 +315,7 @@ export const comparisons: ComparisonRecord[] = [
       'Proxy providers carry risk — using unknown or free proxy servers can expose browsing data regardless of which extension you use.',
     ],
     comparisonTable: [
-      { option: 'FoxyProxy', bestFor: 'Multiple proxy profiles and pattern-based switching in modern Chrome', mv3Support: 'Available (Chrome Web Store)', cost: 'Free / Paid tiers', openSource: 'Partial', setupDifficulty: 'Easy', mainTradeoff: 'Requires rule recreation if migrating from SwitchyOmega' },
+      { option: 'FoxyProxy', bestFor: 'Multiple proxy profiles and pattern-based switching in modern Chrome', mv3Support: 'Available (Chrome Web Store)', cost: 'Free / Paid tiers', openSource: 'No / proprietary', setupDifficulty: 'Easy', mainTradeoff: 'Requires rule recreation if migrating from SwitchyOmega' },
       { option: 'SwitchyOmega', bestFor: 'Existing users with working configurations on older Chrome', mv3Support: 'Check Chrome Web Store listing', cost: 'Free', openSource: 'Open source', setupDifficulty: 'Moderate', mainTradeoff: 'May need migration or alternative on modern Chrome' },
       { option: 'ZeroOmega', bestFor: 'SwitchyOmega users migrating to MV3-compatible Chrome', mv3Support: 'Yes (MV3)', cost: 'Free / Open source', openSource: 'Fully open source', setupDifficulty: 'Easy', mainTradeoff: 'Community fork — verify source before installing' },
       { option: 'Chrome system proxy', bestFor: 'Simple single-proxy use with no profile switching needed', mv3Support: 'N/A (browser setting)', cost: 'Free', openSource: 'N/A', setupDifficulty: 'Easy', mainTradeoff: 'No profile switching or automatic rules' },
