@@ -252,7 +252,9 @@ export function LandingPageTemplate({ page, breadcrumbItems }: LandingPageTempla
   const breadcrumbSchema = createBreadcrumbSchema(
     breadcrumbItems.map((item) => ({
       name: item.label,
-      url: item.href || 'https://extensionfixes.com',
+      url: item.href
+        ? `https://extensionfixes.com${item.href}`
+        : 'https://extensionfixes.com',
     }))
   );
 
