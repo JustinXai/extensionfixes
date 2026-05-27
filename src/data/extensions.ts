@@ -123,7 +123,7 @@ export const extensions: ExtensionRecord[] = [
         bestFor: 'Users wanting an established proxy manager with multi-profile support',
         mv3Support: 'Yes',
         cost: 'Free / Paid tiers',
-        openSource: 'Partial',
+        openSource: 'No / proprietary',
         setupDifficulty: 'Easy',
         mainTradeoff: 'Some advanced features require premium; interface differs from SwitchyOmega',
       },

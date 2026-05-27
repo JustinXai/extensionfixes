@@ -115,10 +115,19 @@ export default async function AlternativePage({ params }: PageProps) {
   if (!extension) { notFound(); return null; }
 
   const meta = extensionMeta[slug];
-  const relatedPages: RelatedPage[] = extension.relatedPages?.map((href: string) => ({
-    title: href.includes('comparisons') ? 'Comparison' : 'Extension',
-    href,
-  })) ?? [];
+  const slugLabelMap: Record<string, string> = {
+    'foxyproxy': 'FoxyProxy Alternatives',
+    'switchyomega': 'SwitchyOmega Alternatives',
+    'foxyproxy-vs-switchyomega': 'FoxyProxy vs SwitchyOmega',
+  };
+  const relatedPages: RelatedPage[] = extension.relatedPages?.map((href: string) => {
+    const match = href.match(/\/alternatives\/([^/]+)|\/\w+\/([^/]+)/);
+    const key = match?.[1] || match?.[2] || '';
+    return {
+      title: slugLabelMap[key] || (href.includes('comparisons') ? 'Comparison' : 'Extension'),
+      href,
+    };
+  }) ?? [];
   return (
     <AlternativePageTemplate
       extension={extension}
