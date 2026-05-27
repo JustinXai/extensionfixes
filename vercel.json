@@ -30,6 +30,16 @@
       "source": "/alternatives/proxy-switchyomega",
       "destination": "/comparisons/foxyproxy-vs-switchyomega",
       "permanent": true
+    },
+    {
+      "source": "/fix-this-extension-turned-off-landing",
+      "destination": "/fix/this-extension-was-turned-off-because-it-is-no-longer-supported",
+      "permanent": true
+    },
+    {
+      "source": "/fix/this-extension-turned-off-landing",
+      "destination": "/fix/this-extension-was-turned-off-because-it-is-no-longer-supported",
+      "permanent": true
     }
   ]
 }
