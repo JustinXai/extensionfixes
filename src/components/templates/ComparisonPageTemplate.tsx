@@ -63,6 +63,10 @@ export function ComparisonPageTemplate(props: ComparisonPageTemplateProps) {
           </ol>
         </nav>
 
+        <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl leading-tight mb-6">
+          {breadcrumbTitle ?? 'Comparison'}
+        </h1>
+
         <article className="pb-16">
           {quickAnswer && (
             <div className="mb-10">
