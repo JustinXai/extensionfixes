@@ -9,24 +9,21 @@ export function RelatedPages({ pages }: RelatedPagesProps) {
   if (!pages || pages.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap gap-4 text-sm">
+    <div className="flex flex-wrap gap-3">
       {pages.map((page) => {
         // Only render internal links (href starts with /)
         const isInternal = page.href && page.href.startsWith('/');
         const content = (
-          <span
-            className={
-              isInternal
-                ? 'text-blue-600 hover:text-blue-800 hover:underline'
-                : 'text-blue-600 hover:text-blue-800 hover:underline'
-            }
-          >
+          <span className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
             {page.title}
           </span>
         );
 
         return (
-          <div key={page.href + page.title}>
+          <div
+            key={page.href + page.title}
+            className="flex items-center rounded-lg border border-slate-200 bg-white px-3 py-2 hover:border-blue-200 hover:bg-blue-50/30 transition-colors"
+          >
             {isInternal ? (
               <Link href={page.href}>{content}</Link>
             ) : (

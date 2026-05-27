@@ -20,7 +20,7 @@ export function FAQ({ faqs, skipHeading = false, className = '' }: FAQProps) {
       {!skipHeading && (
         <h2 className="text-xl font-semibold text-gray-900">Frequently Asked Questions</h2>
       )}
-      <div className="divide-y divide-gray-200 rounded-xl border border-gray-200">
+      <div className="divide-y divide-slate-200 rounded-xl border border-slate-200">
         {faqs.map((faq, index) => {
           const isOpen = openIndex === index;
           const contentId = `faq-content-${index}`;
@@ -34,11 +34,15 @@ export function FAQ({ faqs, skipHeading = false, className = '' }: FAQProps) {
                 aria-expanded={isOpen}
                 aria-controls={contentId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between py-4 px-5 text-left hover:bg-gray-50 transition-colors"
+                className={`flex w-full items-center justify-between py-4 px-5 text-left transition-colors ${
+                  isOpen
+                    ? 'border-l-2 border-blue-500 pl-4 bg-blue-50/50'
+                    : 'hover:bg-gray-50'
+                }`}
               >
-                <span className="font-medium text-gray-900">{faq.question}</span>
+                <span className="font-medium text-gray-900 pr-4">{faq.question}</span>
                 <svg
-                  className={`h-5 w-5 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                  className={`h-5 w-5 flex-shrink-0 text-gray-500 transition-transform duration-200 ease-in-out ${isOpen ? 'rotate-180' : ''}`}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true"
@@ -55,7 +59,7 @@ export function FAQ({ faqs, skipHeading = false, className = '' }: FAQProps) {
                   id={contentId}
                   role="region"
                   aria-labelledby={triggerId}
-                  className="px-5 pb-4 text-gray-600"
+                  className="px-5 pb-4 text-gray-600 leading-relaxed text-sm"
                 >
                   {faq.answer}
                 </div>

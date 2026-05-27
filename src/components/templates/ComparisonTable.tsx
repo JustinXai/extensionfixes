@@ -27,10 +27,17 @@ function Mv3Badge({ value }: { value: string }) {
 }
 
 function BoolBadge({ value }: { value: string }) {
+  const lower = value.toLowerCase();
+  const isGreen = lower === 'yes' || lower === 'open source' || lower === 'fully open source';
+  const isAmber = lower.includes('partial');
   return (
     <span
       className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
-        value === 'Yes' ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-600'
+        isGreen
+          ? 'bg-green-50 text-green-700'
+          : isAmber
+          ? 'bg-amber-50 text-amber-700'
+          : 'bg-gray-100 text-gray-600'
       }`}
     >
       {value}
@@ -44,12 +51,12 @@ export function ComparisonTable({ rows, columns = DEFAULT_COLUMNS, className = '
   return (
     <div className={`overflow-x-auto rounded-xl border border-gray-200 ${className}`}>
       <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+        <thead className="bg-slate-50 border-b border-slate-200">
           <tr>
             {columns.map((col) => (
               <th
                 key={col}
-                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-6"
+                className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 sm:px-6"
               >
                 {col}
               </th>
@@ -58,7 +65,7 @@ export function ComparisonTable({ rows, columns = DEFAULT_COLUMNS, className = '
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
           {rows.map((row, i) => (
-            <tr key={i} className="hover:bg-gray-50">
+            <tr key={i} className={i % 2 === 1 ? 'bg-slate-50 hover:bg-slate-100' : 'hover:bg-gray-50'}>
               <td className="px-4 py-4 text-sm font-medium text-gray-900 sm:px-6">{row.option}</td>
               <td className="px-4 py-4 text-sm text-gray-600 sm:px-6">{row.bestFor}</td>
               <td className="px-4 py-4 text-sm sm:px-6">

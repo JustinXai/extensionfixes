@@ -15,8 +15,8 @@ interface SectionProps {
  */
 export function Section({ id, heading, className = '', children }: SectionProps) {
   return (
-    <section id={id} className={`mb-10 ${className}`}>
-      <h2 className="text-xl font-semibold text-slate-900 mb-4">{heading}</h2>
+    <section id={id} className={`mb-12 scroll-mt-4 ${className}`}>
+      <h2 className="text-2xl font-semibold text-slate-900 border-l-4 border-blue-500 pl-4 mb-4">{heading}</h2>
       {children}
     </section>
   );
