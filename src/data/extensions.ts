@@ -1357,7 +1357,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Tampermonkey is actively maintained and available as an MV3 extension. Users may seek alternatives for specific workflow needs.',
     metaDescription:
-      'Compare Tampermonkey alternatives for Chrome MV3, including Violentmonkey and other userscript managers. Review open-source status, permissions, migration steps, and safety notes.',
+      'Compare Tampermonkey alternatives for Chrome MV3, including Violentmonkey, migration steps, permissions, and safety notes.',
     shortAnswer:
       'Tampermonkey is actively maintained and works in modern Chrome as an MV3-compatible extension. It is the most widely used userscript manager. Violentmonkey is a lightweight alternative with a simpler interface.',
     whatHappened: [
@@ -1548,7 +1548,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Violentmonkey is an actively maintained MV3-compatible userscript manager. Users compare it with Tampermonkey for feature and interface preferences.',
     metaDescription:
-      'Compare Violentmonkey alternatives for Chrome MV3, including Tampermonkey and ScriptCat. Review open-source status, permissions, script compatibility, and safety notes.',
+      'Compare Violentmonkey alternatives for Chrome MV3, including Tampermonkey, ScriptCat, permissions, compatibility, and safety notes.',
     shortAnswer:
       'Violentmonkey is an open-source userscript manager used to run custom browser scripts on websites you visit. If you need a Violentmonkey alternative for Chrome, Tampermonkey is the most widely known option, while Violentmonkey remains a practical choice for users who prefer an open-source workflow. The right choice depends on script compatibility, permission expectations, browser support, and how much control you want over imported scripts. Userscript managers can run powerful code on pages you visit, so avoid random script mirrors, review script permissions, and only install scripts from sources you trust. The Violentmonkey page on Extension Fixes compares both options with migration steps, safety notes, and a full comparison table.',
     whatHappened: [

@@ -11,10 +11,10 @@ export const comparisons: ComparisonRecord[] = [
   {
     templateType: 'comparison',
     slug: 'tampermonkey-vs-violentmonkey',
-    title: 'Tampermonkey vs Violentmonkey',
-    metaTitle: 'Tampermonkey vs Violentmonkey: Which Userscript Manager Should You Use?',
+    title: 'Tampermonkey vs Violentmonkey for Chrome',
+    metaTitle: 'Tampermonkey vs Violentmonkey for Chrome',
     metaDescription:
-      'Compare Violentmonkey and Tampermonkey for Chrome, including open-source status, Manifest V3 support, script compatibility, permissions, sync behavior, and safety tips.',
+      'Compare Tampermonkey and Violentmonkey for Chrome MV3, including permissions, open source status, sync, compatibility, and safety tips.',
     quickAnswer:
       'Tampermonkey is the more widely known userscript manager with a large ecosystem and familiar workflow, while Violentmonkey is a common choice for users who prefer open-source tooling and more transparent script management. For most users, the better choice depends on script compatibility, sync needs, permissions, and whether important scripts run correctly after migration. Neither option makes untrusted scripts safe by default, so users should review script sources, check @match and @grant rules, and test scripts on non-sensitive pages before using them on important accounts.',
     comparedItems: ['Tampermonkey', 'Violentmonkey'],
