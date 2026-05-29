@@ -109,6 +109,7 @@ export interface ExtensionRecord {
   officialUrl?: string;
   githubUrl?: string;
   issueSummary: string;
+  metaDescription?: string;
   shortAnswer: string;
   whatHappened: string[];
   migrationSteps: string[];

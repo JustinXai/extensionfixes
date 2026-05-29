@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const customMeta = extensionMeta[slug] || {
     title: `Best ${extension.name} Alternatives for Chrome MV3`,
-    description: extension.shortAnswer,
+    description: extension.metaDescription ?? extension.shortAnswer,
     quickAnswer: extension.shortAnswer,
   };
   const canonical = `https://extensionfixes.com/alternatives/${slug}`;
