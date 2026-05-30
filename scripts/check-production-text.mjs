@@ -243,7 +243,7 @@ const PAGE_QA_DATE = {
   '/fix/cannot-install-extension-unsupported-manifest': 'May 28, 2026',
   '/fix/chrome-enable-unsupported-extensions': 'May 26, 2026',
   '/alternatives/dark-reader': 'May 25, 2026',
-  '/alternatives/stylus': 'May 24, 2026',
+  '/alternatives/stylus': 'May 30, 2026',
   '/fix/this-extension-was-disabled-due-to-malware-suspicious-behavior-policy-violation': 'May 27, 2026',
   '/alternatives/auto-tab-discard': 'May 27, 2026',
   '/guides/best-tab-suspender-extensions-chrome': 'May 27, 2026',

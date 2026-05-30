@@ -2694,7 +2694,7 @@ export const extensions: ExtensionRecord[] = [
     issueSummary:
       'Stylus is actively maintained as an MV3 extension. It is widely considered the safer and community-maintained successor to the deprecated Stylish extension.',
     shortAnswer:
-      'Stylus is a Chrome extension for applying custom CSS and userstyles to websites. If you need a Stylus alternative, the right option depends on whether you want full custom CSS control, simple dark mode, or only small personal tweaks. Dark Reader is better for automatic dark mode, while browser bookmarks or snippets may work for very simple personal styles. Custom CSS tools can change how pages look and behave, so users should review style sources, avoid unknown mirrors, and disable styles they no longer use.',
+      'Stylus is a Chrome extension available on the Chrome Web Store for applying custom CSS and userstyles to websites. It is actively maintained as an MV3 extension. If you need a Stylus alternative, the right option depends on whether you want full custom CSS control, simple dark mode, or only small personal tweaks. Dark Reader is better for automatic dark mode, while browser bookmarks or snippets may work for very simple personal styles. Custom CSS tools can change how pages look and behave, so users should review style sources before installing, avoid unknown mirrors, and disable styles they no longer use.',
     whatHappened: [
       'Stylus emerged as the community-maintained alternative to the deprecated Stylish extension.',
       'The original Stylish was removed from the Chrome Web Store due to privacy concerns with its data collection.',
@@ -2709,7 +2709,7 @@ export const extensions: ExtensionRecord[] = [
     ],
     safetyNotes: [
       'Only install Stylus from the official Chrome Web Store.',
-      'Review styles before installing ? they run CSS on web pages.',
+      'Review styles before installing — they run CSS on web pages.',
       'Be cautious with styles requesting access to all websites.',
       'Stylus is open source and does not collect user data unlike its predecessor.',
     ],
@@ -2840,7 +2840,7 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Dark Reader MV3 availability and listing status',
       },
     ],
-    lastUpdated: '2026-05-24',
+    lastUpdated: '2026-05-30',
     keyTakeaways: [
       'Stylus is mainly for custom CSS and userstyles.',
       'Dark Reader is better for automatic dark mode, not full CSS workflow.',
