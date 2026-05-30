@@ -2693,6 +2693,8 @@ export const extensions: ExtensionRecord[] = [
     riskLevel: 'low',
     issueSummary:
       'Stylus is actively maintained as an MV3 extension. It is widely considered the safer and community-maintained successor to the deprecated Stylish extension.',
+    metaDescription:
+      'Compare Stylus alternatives for Chrome MV3, including custom CSS tools, userstyles, Dark Reader, permissions, and safety notes.',
     shortAnswer:
       'Stylus is a Chrome extension available on the Chrome Web Store for applying custom CSS and userstyles to websites. It is actively maintained as an MV3 extension. If you need a Stylus alternative, the right option depends on whether you want full custom CSS control, simple dark mode, or only small personal tweaks. Dark Reader is better for automatic dark mode, while browser bookmarks or snippets may work for very simple personal styles. Custom CSS tools can change how pages look and behave, so users should review style sources before installing, avoid unknown mirrors, and disable styles they no longer use.',
     whatHappened: [
