@@ -2853,7 +2853,7 @@ export const extensions: ExtensionRecord[] = [
       { label: 'Main alternative', value: 'Dark Reader for automatic dark mode', variant: 'neutral' },
       { label: 'Main risk', value: 'Unreviewed styles can affect website UI', variant: 'bad' },
       { label: 'Best practice', value: 'Use trusted styles and review site matches', variant: 'good' },
-      { label: 'Last reviewed', value: 'May 24, 2026', variant: 'neutral' },
+      { label: 'Last reviewed', value: 'May 30, 2026', variant: 'neutral' },
     ],
     comparisonTable: [
       {
