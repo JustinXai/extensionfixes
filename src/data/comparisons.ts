@@ -176,7 +176,7 @@ export const comparisons: ComparisonRecord[] = [
     templateType: 'comparison',
     slug: 'ublock-origin-vs-ublock-origin-lite',
     title: 'uBlock Origin vs uBlock Origin Lite',
-    metaTitle: 'uBlock Origin vs uBlock Origin Lite: What Chrome Users Should Know',
+    metaTitle: 'uBlock Origin vs uBlock Origin Lite for Chrome',
     metaDescription:
       'Compare uBlock Origin and uBlock Origin Lite for Chrome users after Manifest V2. Learn what changed, what to use, and what to avoid.',
     quickAnswer:

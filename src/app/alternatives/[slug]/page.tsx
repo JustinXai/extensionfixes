@@ -24,7 +24,7 @@ const extensionMeta: Record<string, { title: string; description: string; quickA
       'SwitchyOmega stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. The best path forward is to export your proxy profiles and migrate to ZeroOmega, a community-maintained MV3 fork that can import your existing SwitchyOmega settings directly.',
   },
   'ublock-origin': {
-    title: 'uBlock Origin No Longer Supported in Chrome: Best Alternatives',
+    title: 'uBlock Origin No Longer Supported? Chrome Alternatives',
     description:
       'Learn why classic uBlock Origin stopped working in Chrome, how uBlock Origin Lite differs, and which alternatives are available.',
     quickAnswer:
