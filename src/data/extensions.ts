@@ -257,6 +257,7 @@ export const extensions: ExtensionRecord[] = [
       'Classic uBlock Origin stopped working in Chrome 138+ because Chrome disabled Manifest V2 extensions. For many Chrome users, uBlock Origin Lite is the closest MV3-compatible option from the same developer, but it does not replicate every feature of the original extension. Firefox remains a practical option for users who need full classic uBlock Origin functionality, since Firefox still supports MV2 extensions. Avoid installing random CRX copies of classic uBlock Origin from unofficial sources, because modified extensions can create privacy and security risks. The MV3-compatible ad blocker space is actively developed, and other options like AdGuard AdBlocker and Adblock Plus are available in the Chrome Web Store.',
     whatHappened: [
       'Chrome 138 disabled all Manifest V2 extensions, including classic uBlock Origin.',
+      'Chrome users may see messages such as "This extension is no longer supported" for classic uBlock Origin as Manifest V2 support is phased out.',
       'uBlock Origin Lite was released by the same developer as an MV3-compatible version.',
       'The author noted that MV3 limitations prevent a feature-identical replacement.',
       'Firefox continues to support Manifest V2, allowing classic uBlock Origin to work there.',
@@ -271,6 +272,7 @@ export const extensions: ExtensionRecord[] = [
     safetyNotes: [
       'uBlock Origin Lite is the MV3 version from the original uBlock Origin developer.',
       'Only download from the official Chrome Web Store or uBlock Origin GitHub.',
+      'Do not download classic uBlock Origin CRX files from search results, file mirrors, or unknown third-party sites. Use trusted browser stores and verify the publisher before installing any replacement.',
       'uBlock Origin Lite has limited permissions compared to classic uBlock Origin.',
       'Review extension permissions to ensure they match the stated functionality.',
     ],
@@ -404,6 +406,11 @@ export const extensions: ExtensionRecord[] = [
           'Install uBlock Origin Lite from the official Chrome Web Store ? it is the MV3-compatible version developed by the same author. If uBlock Origin Lite does not meet your needs, other MV3 ad blockers like AdGuard or AdBlock are available. Firefox with classic uBlock Origin remains an option for users who need full MV2 features.',
       },
       {
+        question: 'Can I use my uBlock Origin filter lists in uBlock Origin Lite?',
+        answer:
+          'uBO Lite includes default rulesets and lets users enable additional rulesets, but it is not a full drop-in replacement for uBlock Origin\'s advanced filter-list and custom-rule workflow. If your setup depends on custom lists, dynamic filtering, or advanced rules, compare the options carefully before switching. Avoid downloading CRX files or unofficial builds just to preserve an old setup.',
+      },
+      {
         question: 'Does Chrome 140 support classic uBlock Origin?',
         answer:
           'No. Chrome 140 does not restore classic Manifest V2 extension support. Chrome disabled MV2 extensions earlier in the Chrome MV2 phase-out. Users should use MV3-compatible alternatives or a browser that still supports the classic extension behavior.',
@@ -435,10 +442,10 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline and what extensions are affected',
       },
     ],
-    lastUpdated: '2026-05-22',
+    lastUpdated: '2026-06-02',
     atAGlance: {
       originalExtension: 'Classic uBlock Origin',
-      currentStatus: 'Affected by Chrome 138 MV2 disable ? no longer works in Chrome',
+      currentStatus: 'Affected by Chrome 138 MV2 disable — no longer works in Chrome',
       bestPracticalOption: 'uBlock Origin Lite (by the same developer)',
       bestForAdvancedUsers: 'Firefox with classic uBlock Origin (full MV2 feature set)',
       mainCaution: 'uBlock Origin Lite has reduced dynamic filtering compared to classic uBlock Origin due to MV3 limitations',

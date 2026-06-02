@@ -286,6 +286,26 @@ export const comparisons: ComparisonRecord[] = [
         answer:
           'For most users, yes. uBlock Origin Lite blocks ads and trackers effectively using the MV3 declarative filtering model. If you rely on advanced dynamic rules or specific scriptlet injections, test uBlock Origin Lite on your most-visited sites before switching.',
       },
+      {
+        question: 'What is uBO Lite?',
+        answer:
+          'uBO Lite is the Manifest V3-compatible Lite version of uBlock Origin for browsers such as Chrome. It uses MV3-compatible rulesets and is designed as a lighter, more constrained option rather than a full replacement for classic uBlock Origin.',
+      },
+      {
+        question: 'Is uBlock Origin Lite the same as uBlock Origin?',
+        answer:
+          'No. uBlock Origin Lite is related to uBlock Origin, but it is not the same full extension. Classic uBlock Origin relies on Manifest V2 capabilities, while uBO Lite is built for Manifest V3 and has a more limited filtering model.',
+      },
+      {
+        question: 'What uBlock Origin features are limited in uBlock Origin Lite?',
+        answer:
+          'Advanced uBlock Origin workflows such as dynamic filtering, fine-grained custom rules, external subscriptions, and some filter-list behavior may be limited or handled differently in uBO Lite because of Manifest V3 constraints. For most Chrome users, uBO Lite may be a practical choice, but advanced users should review the trade-offs.',
+      },
+      {
+        question: 'Which browser is best for uBlock Origin users?',
+        answer:
+          'Chrome users usually need to compare Manifest V3-compatible options such as uBO Lite. Users who specifically want the classic uBlock Origin experience may prefer browsers that still support the full extension. Avoid old CRX files, unknown mirrors, or outdated browser builds as a workaround.',
+      },
     ],
     sources: [
       { title: 'Chrome Manifest V2 Deprecation Timeline', url: 'https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline', publisher: 'Google Chrome Developers', reliability: 'primary', supports: 'Chrome MV2 deprecation schedule and affected extensions' },
@@ -293,7 +313,7 @@ export const comparisons: ComparisonRecord[] = [
       { title: 'uBlock Origin GitHub Repository', url: 'https://github.com/gorhill/uBlock', publisher: 'Raymond Hill', reliability: 'primary', supports: 'Official source for uBlock Origin and uBlock Origin Lite development' },
       { title: 'uBlock Origin Lite — Firefox Add-ons', url: 'https://addons.mozilla.org/firefox/addon/ublock-origin-lite/', publisher: 'Mozilla', reliability: 'primary', supports: 'uBlock Origin Lite availability for Firefox' },
     ],
-    lastUpdated: '2026-05-23',
+    lastUpdated: '2026-06-02',
   },
   {
     templateType: 'comparison',
