@@ -442,6 +442,11 @@ export const extensions: ExtensionRecord[] = [
         supports: 'Official Chrome MV2 deprecation timeline and what extensions are affected',
       },
     ],
+    relatedPages: [
+      '/comparisons/ublock-origin-vs-ublock-origin-lite',
+      '/fix/manifest-v2-disabled',
+      '/fix/this-extension-was-turned-off-because-it-is-no-longer-supported',
+    ],
     lastUpdated: '2026-06-02',
     atAGlance: {
       originalExtension: 'Classic uBlock Origin',
@@ -1454,6 +1459,11 @@ export const extensions: ExtensionRecord[] = [
           'Review the script code before installing it ? check what URLs it will run on and what permissions it requests. Install scripts one at a time and test on a non-critical site first. Use the manager to temporarily disable scripts you are not actively using.',
       },
     ],
+    relatedPages: [
+      '/alternatives/violentmonkey',
+      '/comparisons/tampermonkey-vs-violentmonkey',
+      '/guides/chrome-userscript-manager-alternatives',
+    ],
     sources: [
       {
         title: 'Tampermonkey Chrome Web Store',
@@ -1720,6 +1730,7 @@ export const extensions: ExtensionRecord[] = [
       '/comparisons/tampermonkey-vs-violentmonkey',
       '/comparisons/scriptcat-vs-tampermonkey',
       '/guides/best-userscript-managers-for-chrome',
+      '/guides/chrome-userscript-manager-alternatives',
       '/alternatives',
     ],
     lastUpdated: '2026-05-26',

@@ -119,6 +119,14 @@ export default async function AlternativePage({ params }: PageProps) {
     'foxyproxy': 'FoxyProxy Alternatives',
     'switchyomega': 'SwitchyOmega Alternatives',
     'foxyproxy-vs-switchyomega': 'FoxyProxy vs SwitchyOmega',
+    'ublock-origin-vs-ublock-origin-lite': 'uBlock Origin vs uBlock Origin Lite',
+    'manifest-v2-disabled': 'Manifest V2 Disabled in Chrome',
+    'this-extension-was-turned-off-because-it-is-no-longer-supported': 'This Extension Was Turned Off',
+    'violentmonkey': 'Violentmonkey Alternatives',
+    'tampermonkey': 'Tampermonkey Alternatives',
+    'tampermonkey-vs-violentmonkey': 'Tampermonkey vs Violentmonkey',
+    'chrome-userscript-manager-alternatives': 'Chrome Userscript Manager Alternatives',
+    'ublock-origin': 'uBlock Origin Alternatives',
   };
   const relatedPages: RelatedPage[] = extension.relatedPages?.map((href: string) => {
     const match = href.match(/\/alternatives\/([^/]+)|\/\w+\/([^/]+)/);

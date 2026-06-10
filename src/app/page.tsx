@@ -360,6 +360,62 @@ export default function HomePage() {
         </section>
 
         <section className="py-16 border-t border-gray-200">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Compare Extension Options</h2>
+            <p className="mt-2 text-slate-600">
+              Head-to-head comparisons to help you choose the right extension for your workflow.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Link
+              href="/comparisons/ublock-origin-vs-ublock-origin-lite"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">uBlock Origin vs uBlock Origin Lite</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Compare the classic uBlock Origin with its MV3-compatible Lite version.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read comparison
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/comparisons/tampermonkey-vs-violentmonkey"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">Tampermonkey vs Violentmonkey</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Compare the two most popular userscript managers for Chrome MV3.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read comparison
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              href="/guides/chrome-userscript-manager-alternatives"
+              className="rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 hover:shadow-md"
+            >
+              <h3 className="font-semibold text-slate-900">Chrome Userscript Manager Alternatives</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Learn about the best options for managing custom browser scripts in Chrome.
+              </p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium text-blue-600">
+                Read guide
+                <svg className="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-gray-200">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">
               How Extension Fixes Works
